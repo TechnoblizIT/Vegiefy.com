@@ -240,13 +240,13 @@ a.google{
             </div>
             <div class="form-content">
                 <h2>LOGIN</h2>
-                <form action="#">
+                <form action="/user/login" method="post">
                     <div class="input-field">
-                        <input type="text" required>
+                        <input type="text" name="email" required>
                         <label>Email</label>
                     </div>
                     <div class="input-field">
-                        <input type="password" required>
+                        <input type="password" name="password" required>
                         <label>Password</label>
                     </div>
                     <a href="#" class="forgot-pass-link">Forgot password?</a>
@@ -273,17 +273,17 @@ a.google{
             </div>
             <div class="form-content">
                 <h2>SIGNUP</h2>
-                <form action="#">
+                <form action="/user/create" method="post">
                     <div class="input-field">
-                        <input type="text" required>
+                        <input type="text" name="name" required>
                         <label>Enter your Name</label>
                     </div>
                     <div class="input-field">
-                        <input type="text" required>
+                        <input type="email" name="email" required>
                         <label>Enter your email</label>
                     </div>
                     <div class="input-field">
-                        <input type="password" required>
+                        <input type="password" name="password" required>
                         <label>Create password</label>
                     </div>
                     <div class="policy-text">
