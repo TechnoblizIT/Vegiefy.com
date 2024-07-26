@@ -30,7 +30,11 @@
               <li><a href="blogs.html"  >blog</a></li>
               <li><a href="contact.html">contact</a></li>
           </ul>
+          <% if (!req.user) {%>
           <a href="/login"><button class="login-btn">LOG IN</button></a>
+          <%}else{ %>
+            <h3><a href="/user/logout" style="color: red; text-decoration: none;">Logout</a></h3>
+          <%}%>
       </nav>
   </header>
 

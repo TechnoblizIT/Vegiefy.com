@@ -1,6 +1,7 @@
 const userModel=require('../models/user-model')
 const bcrypt = require('bcrypt');
-const {genrateToken }=require("../utils/generateToken")
+const {genrateToken }=require("../utils/generateToken");
+const { model } = require('mongoose');
 
 module.exports.registerUser =  async function(req,res){
    try{ let { name , email, password} = req.body;
@@ -22,7 +23,7 @@ module.exports.registerUser =  async function(req,res){
     })
     }
     else{
-        res.status(400).send('User already exists')
+        
         res.redirect("/login")
     }
 }
@@ -47,9 +48,13 @@ module.exports.loginUser = async function (req, res) {
 
     const tokken = genrateToken(user);
     res.cookie("tokken", tokken);
-    // console.log(tokken);
     res.redirect("/")
 }
 catch(e){ 
     console.log(e.message)}
   };
+
+  module.exports.logoutUser = async function (req, res) {
+    res.cookie("tokken","")
+    res.redirect("/")
+  }
