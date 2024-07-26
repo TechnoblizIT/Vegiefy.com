@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link href='https://fonts.googleapis.com/css?family=Afacad' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0">
+
+
+    <style>
+           * {
+    margin: 0;
+    box-sizing: border-box;
+  }
+  body {
+    position: relative; 
+    font-family: 'Afacad';
+    background-color:  #ecf7f0;
+    line-height: 1.6;
+
+  }
+  header {
+  position: fixed;
+  top: 0;
+  left : 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #0f5256;
+  line-height: 1.5;
+}
+
+.navbar {
+  display: flex;
+  padding: 10px 0;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+.navbar .hamburger-btn {
+  display: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.navbar .logo {
+  gap: 10px;
+  display: flex;
+  align-items: center;
+
+}
+
+.navbar .logo img {
+  width: 190px;
+
+}
+
+
+.navbar .links {
+  display: flex;
+  gap: 35px;
+  list-style: none;
+  align-items: center;
+  
+  
+}
+
+.navbar .close-btn {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  display: none;
+  color: #000;
+  cursor: pointer;
+}
+
+.navbar .links a {
+  color: #fff;
+  font-size: 20px;
+  text-decoration: none;
+  transition: 0.1s ease;
+  text-transform: capitalize;
+ 
+}
+.navbar .links a.active,
+.navbar .links a:hover {
+  color: #69ba6b;
+}
+
+.navbar .login-btn {
+  border: none;
+  outline: none;
+  background: white;
+  color: #275360;
+  font-size: 15px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.navbar .login-btn:hover {
+  background: black;
+  color: white;
+}
+
+
+@media (max-width: 950px) {
+  .navbar :is(.hamburger-btn, .close-btn) {
+      display: block;
+      font-size: 30px;
+      color: white;
+      margin-left: 20px;
+  }
+
+  .navbar {
+      padding: 15px 0;
+  }
+
+  .navbar .logo img {
+      display: flex;
+  }
+
+  .navbar .logo h2 {
+      font-size: 1.4rem;
+  }
+
+  .navbar .links {
+      position: fixed;
+      top: 0;
+      z-index: 10;
+      left: -100%;
+      display: block;
+      height: 100vh;
+      width: 100%;
+      padding-top: 60px;
+      text-align: center;
+      background: #0f5256;
+      color: white;
+      transition: 0.2s ease;
+  }
+
+  .navbar .links.show-menu {
+      left: 0;
+  }
+
+  .navbar .links a {
+      display: inline-flex;
+      margin: 20px 0;
+      font-size: 1.2rem;
+      color: white;
+  }
+
+  .navbar .links a:hover {
+      color: #09343c;
+  }
+
+  .navbar .login-btn {
+      font-size: 0.9rem;
+      padding: 7px 10px;
+      margin-right: 10px;
+  }
+}
+
+
+
+        /* Product Styles */
+        
+   .products h2{
+    text-align: center;
+    margin-top: 120px;
+  
+    
+   }  
+    .product-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .product-category {
+    margin-bottom: 40px;
+    
+  }
+  .product-category h3 {
+    margin-bottom: 20px;
+    
+  }
+  .prdcts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+   
+  }
+  .product {
+    width: 300px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    transition: transform 0.3s;
+  }
+  .product img {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  .product h4 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  .product p {
+    color: #888;
+    margin-bottom: 10px;
+  }
+  .product:hover {
+    transform: translateY(-5px);
+  }
+  .button-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.button-container button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  background-color: #0f5256;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button-container button:hover {
+  background-color: white;
+  color:#0f5256;
+}
+
+.button-container button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* footer section */
+
+/* css for footer */
+footer {
+  position: relative;
+  /* background: linear-gradient(135deg, #27ae60, #145214); */
+  background-image: url(../images/assest/background2.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #fff;
+  padding: 40px 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  margin-top: 100px;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 15px; 
+  background: #0f5256;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-section {
+  flex: 1;
+  padding: 20px;
+  min-width: 250px;
+}
+
+.logo-text {
+  font-size: 28px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+ 
+ 
+}
+
+.footer-section h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  position: relative;
+  display: inline-block;
+  color: #fff;
+}
+
+.footer-section h2::after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 3px;
+  background: #fff;
+  bottom: -5px;
+  left: 0;
+}
+
+.footer-section p {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.contact span, .socials a {
+  display: block;
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.socials a {
+  color: #fff;
+  margin-right: 15px;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.socials a:hover {
+  color: #d4d4d4;
+}
+
+.footer-section.links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section.links ul a {
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 10px;
+  display: block;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+.footer-section.links ul a:hover {
+  text-decoration: underline;
+  color: #d4d4d4;
+}
+
+.contact-form .text-input {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.contact-form .btn {
+  display: inline-block;
+  padding: 15px 30px;
+  background: #fff;
+  color: #0f5256;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: 0.3s, color 0.3s;
+}
+
+.contact-form .btn:hover {
+  background: #0f5256;
+  color: #fff;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 15px;
+  background: #0f5256;
+  font-size: 18px;
+ 
+ 
+ 
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  footer{
+    margin-top: 100px;
+  }
+  .footer-content {
+      flex-direction: column;
+      align-items: center;
+      padding: 0 10px;
+  }
+
+  .footer-section {
+      padding: 10px;
+      min-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  footer{
+    margin-top: 100px;
+  }
+  .logo-text {
+      font-size: 24px;
+  }
+
+  .footer-section h2 {
+      font-size: 18px;
+  }
+
+  .footer-section p, .contact span, .socials a, .footer-section.links ul a {
+      font-size: 14px;
+  }
+
+  .contact-form .text-input, .contact-form .btn {
+      font-size: 14px;
+      padding: 10px;
+  }
+
+ 
+}
+    </style>
+</head>
+<body>
+    <!-- header section -->
+    <header>
+      <nav class="navbar">
+          <span class="hamburger-btn material-symbols-rounded">menu</span>
+          <a href="#" class="logo">
+              <img src="../images/assest/logo3.png" alt="logo">
+             
+          </a>
+          <ul class="links">
+              <span class="close-btn material-symbols-rounded">close</span>
+              <li><a href="/" >home</a></li>
+              <li><a href="/#about-us">about</a></li>
+              <li><a href="product.html" class="active">products</a></li>
+              <li><a href="delivery.html">delivery</a></li>
+              <li><a href="blogs.html" >blog</a></li>
+              <li><a href="contact.html">contact</a></li>
+          </ul>
+          <% if (!req.user) {%>
+            <a href="/login"><button class="login-btn">LOG IN</button></a>
+            <%}else{ %>
+              <h3><a href="/user/profile" style="color: white; text-decoration: none;">Profile</a></h3>
+              <h3><a href="/user/logout" style="color: red; text-decoration: none;">Logout</a></h3>
+            <%}%>
+      </nav>
+  </header>
+
+  
+      <section class="products">
+        <div class="product-container">
+          <h2>Our Products</h2>
+          <div class="product-category" id="leafyGreens">
+            <h3>Leafy Greens</h3>
+            <div class="prdcts">
+                <!-- Leafy greens products here -->
+                <div class="product">
+                  <img src="../images/assest/products/leafy-green/spinach.png" alt="Leafy Green 1">
+                  <h4>Spinach</h4>
+                  <p>Rich in iron and vitamins, our spinach is perfect for salads and smoothies.</p>
+                  <p><strong>Price:</strong> ₹199 per bunch</p>
+                </div>
+                <div class="product">
+                  <img src="../images/assest/products/leafy-green/kale.jpg" alt="Leafy Green 2">
+                  <h4>Kale</h4>
+                  <p>Packed with antioxidants, our kale adds a nutritional boost to any meal.</p>
+                  <p><strong>Price:</strong> ₹229 per bunch</p>
+                </div>
+                <div class="product">
+                  <img src="../images/assest/products/leafy-green/cabbage.jpg" alt="Leafy Green 3">
+                  <h4>Cabbage</h4>
+                  <p>Cabbage is a nutritious leafy green vegetable that is rich in antioxidants and fiber.</p>
+                  <p><strong>Price:</strong> ₹229 per bunch</p>
+                </div>
+                <div class="product">
+                  <img src="../images/assest/products/leafy-green/coriander.jpg" alt="Leafy Green 4">
+                  <h4>Coriander</h4>
+                  <p>Coriander, also known as cilantro, is a versatile herb that adds a fresh and citrusy flavor to dishes.</p>
+                  <p><strong>Price:</strong> ₹229 per bunch</p>
+                </div>
+                <div class="product">
+                  <img src="../images/assest/products/leafy-green/red spinach1.jpg" alt="Leafy Green 5">
+                  <h4>Red-Spinach</h4>
+                  <p>Red spinach is a nutrient-rich leafy green vegetable that adds color and flavor to salads and cooked dishes.</p>
+                  <p><strong>Price:</strong> ₹229 per bunch</p>
+                </div>
+                <div class="product">
+                  <img src="../images/assest/products/leafy-green/Beet Greens.jpg" alt="Leafy Green 6">
+                  <h4>Beet Green</h4>
+                  <p>Beet greens are the leafy tops of beetroot plants and are rich in nutrients like vitamins A and K.</p>
+                  <p><strong>Price:</strong> ₹229 per bunch</p>
+                </div>
+              </div>
+          </div>
+          <div class="product-category" id="crops" style="display: none;">
+            <h3>Crops</h3>
+            <div class="prdcts">
+                <!-- Crops products here -->
+                <div class="product">
+                  <img src="../images/assest/products/crops/tomatoes.jpg" alt="Crop 1">
+                  <h4>Tomatoes</h4>
+                  <p>Our organic tomatoes are bursting with flavor and nutrients. From juicy heirloom varieties to classic beefsteak, 
+                    our tomatoes are perfect for salads, sauces, and snacking.</p>
+                  <p><strong>Price:</strong> ₹199 per kg</p>
+                </div>
+                <div class="product">
+                  <img src="../images/assest/products/crops/cucumber.jpg" alt="Crop 2">
+                  <h4>Cucumbers</h4>
+                  <p>Crisp and refreshing, our organic cucumbers are perfect for salads, pickling, or simply snacking. 
+                    Grown with care, they're a delicious addition to your table.</p>
+                  <p><strong>Price:</strong> ₹159 per kg</p>
+                </div>
+                <div class="product">
+                  <img src="../images/assest/products/crops/potatoes.jpg" alt="Crop 3">
+                  <h4>Potatoes</h4>
+                  <p>From creamy Yukon Golds to versatile russets, our organic potatoes are a staple in any kitchen. 
+                    Perfect for mashing, roasting, or frying, they're a comfort food favorite.</p>
+                  <p><strong>Price:</strong> ₹129 per kg</p>
+                </div>
+                <div class="product">
+                  <img src="../images/assest/products/crops/corn.jpg" alt="Crop 4">
+                  <h4>Corn</h4>
+                  <p>Our sweet corn is a summer favorite, known for its juiciness and flavor. 
+                    Whether grilled, steamed, or roasted, it's a delicious and healthy side dish.</p>
+                  <p><strong>Price:</strong> ₹269 per kg</p>
+                </div>
+                <div class="product">
+                  <img src="../images/assest/products/crops/onions.jpg" alt="Crop 5">
+                  <h4>Onions</h4>
+                  <p>Our onions come in a variety of colors and flavors, from mild to pungent. Perfect for adding depth to soups, stews, and sauces, they're a kitchen essential.</p>
+                  <p><strong>Price:</strong> ₹99 per kg</p>
+                </div>
+                <div class="product">
+                  <img src="../images/assest/products/crops/pumpkins.jpg" alt="Crop 6">
+                  <h4>Pumpkins</h4>
+                  <p>Our pumpkins are perfect for both decoration and cooking. Whether you're making pumpkin pie or carving jack-o'-lanterns, our pumpkins are a seasonal favorite.</p>
+                  <p><strong>Price:</strong> ₹199 per kg</p>
+                </div>
+              </div>
+              
+          </div>
+       
+        
+        <div class="product-category" id="fruits" style="display: none;">
+            <h3>Fruits</h3>
+            <div class="prdcts">
+                <!-- Fruit products here -->
+                <div class="product">
+                  <img src="../images/assest/products/fruits/banana.jpg" alt="Fruit 1">
+                  <h4>Bananas</h4>
+                  <p>Bananas are creamy and sweet fruits that are rich in potassium and vitamins. 
+                    They are a convenient and nutritious snack for all ages.</p>
+                  <p><strong>Price:</strong> ₹10 each</p>
+                </div>
+                <div class="product">
+                  <img src="../images/assest/products/fruits/grapes.jpg" alt="Fruit 2">
+                  <h4>Grapes</h4>
+                  <p>Grapes are small, round fruits that grow in clusters. They come in various colors, 
+                    including green, red, and purple, and are often eaten fresh or used in salads and desserts.</p>
+                  <p><strong>Price:</strong> ₹399 per kg</p>
+                </div>
+                <div class="product">
+                  <img src="../images/assest/products/fruits/mango.jpg" alt="Fruit 3">
+                  <h4>Mango</h4>
+                  <p>Mango is a tropical fruit with a sweet, juicy flesh and a distinctive flavor. 
+                    It is high in vitamin C and A and is often eaten fresh or used in smoothies and salads.</p>
+                  <p><strong>Price:</strong> ₹89 each</p>
+                </div>
+                <div class="product">
+                  <img src="../images/assest/products/fruits/orange.jpg" alt="Fruit 4">
+                  <h4>Oranges</h4>
+                  <p>Oranges are round citrus fruits with a bright orange skin and juicy flesh. 
+                    They are high in vitamin C and are commonly juiced or eaten fresh.</p>
+                  <p><strong>Price:</strong> ₹10 each</p>
+                </div>
+                <div class="product">
+                  <img src="../images/assest/products/fruits/chikoos.jpg" alt="Fruit 5">
+                  <h4>Chikoo</h4>
+                  <p>Chikoo, or Sapodilla, is a sweet tropical fruit with a grainy texture and a flavor reminiscent of pear and brown sugar. 
+                    It's rich in fiber, vitamins A and C, and minerals like potassium.</p>
+                  <p><strong>Price:</strong> ₹50 each</p>
+                </div>
+                <div class="product">
+                  <img src="../images/assest/products/fruits/muskmelon.jpg" alt="Fruit 6">
+                  <h4>Muskmelon</h4>
+                  <p>Muskmelon, also known as cantaloupe, is a juicy and sweet fruit with a netted or smooth rind and orange, sweet flesh. 
+                    It is rich in vitamin C, vitamin A, and antioxidants, making it a refreshing and nutritious snack.</p>
+                  <p><strong>Price:</strong> ₹80 each</p>
+                </div>
+              </div>
+        </div>
+       
+      </section>
+      <div class="button-container">
+        <button id="prevBtn" onclick="prevCategory()">&#8249; Prev</button>
+        <button id="nextBtn" onclick="nextCategory()">Next &#8250;</button>
+      </div>
+
+     
+
+      <!-- footer section -->
+      <footer>
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h2 class="logo-text">Suryakanta Organics</h2>
+                <p>Sustainable and fresh hydroponically grown produce delivered straight to your table.</p>
+                <div class="contact">
+                    <span><i class="fas fa-phone"></i> &nbsp; +91-1234567890</span>
+                    <span><i class="fas fa-envelope"></i> &nbsp; info@suryakantaorganics.com</span>
+                    <span><i class="fas fa-map-marker-alt"></i> &nbsp; Suryakanta Ambule House, Murri, Gondia, 441601</span>
+                </div>
+                <div class="socials">
+                    <a href="#"><i class="fab fa-facebook"></i>&nbsp; Facebook</a>
+                    <a href="#"><i class="fab fa-twitter"></i>&nbsp; Twitter</a>
+                    <a href="#"><i class="fab fa-instagram"></i>&nbsp; Instagram</a>
+                    <a href="#"><i class="fab fa-linkedin"></i>&nbsp; Linkedin</a>
+                </div>
+            </div>
+            <div class="footer-section links">
+                <h2>Quick Links</h2>
+                <ul>
+                  <a href="index.html#about-us"><li>About Us</li></a>
+                  <a href="product.html"><li>Products</li></a>
+                  <a href="blogs.html"><li>Blog/News</li></a>
+                  <a href="delivery.html"><li>Delivery</li></a>
+                  <a href="contact.html"><li>Contact Us</li></a>
+                  <a href="delivery.html#faq"><li>FAQs</li></a>
+                </ul>
+            </div>
+            <div class="footer-section contact-form">
+                <h2>Contact Us</h2>
+                <form action="index.html" method="post">
+                    <input type="email" name="email" class="text-input contact-input" placeholder="Your email address...">
+                    <textarea name="message" class="text-input contact-input" placeholder="Your message..."></textarea>
+                    <button type="submit" class="btn btn-big contact-btn">
+                        <i class="fas fa-envelope"></i>
+                        Send
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; suryakantaorganics.com | Designed by Sakshi
+        </div>
+    </footer>
+      
+
+   <!-- javascript part -->
+   <script>
+       // js for navbar
+const navbarMenu = document.querySelector(".navbar .links");
+const hamburgerBtn = document.querySelector(".hamburger-btn");
+const hideMenuBtn = navbarMenu.querySelector(".close-btn");
+const showPopupBtn = document.querySelector(".login-btn");
+
+// Show mobile menu
+hamburgerBtn.addEventListener("click", () => {
+    navbarMenu.classList.toggle("show-menu");
+});
+
+// Hide mobile menu
+hideMenuBtn.addEventListener("click", () =>  hamburgerBtn.click());
+
+        // for products
+        let currentCategory = "leafyGreens";
+
+        function showCategory(category) {
+          const categories = document.querySelectorAll(".product-category");
+          categories.forEach((cat) => (cat.style.display = "none"));
+
+          document.getElementById(category).style.display = "block";
+        }
+
+        function nextCategory() {
+          if (currentCategory === "leafyGreens") {
+            currentCategory = "crops";
+          } else if (currentCategory === "crops") {
+            currentCategory = "fruits";
+          } else {
+            currentCategory = "leafyGreens";
+          }
+          showCategory(currentCategory);
+        }
+
+        function prevCategory() {
+          if (currentCategory === "leafyGreens") {
+            currentCategory = "fruits";
+          } else if (currentCategory === "crops") {
+            currentCategory = "leafyGreens";
+          } else {
+            currentCategory = "crops";
+          }
+          showCategory(currentCategory);
+        }
+
+        showCategory(currentCategory);
+
+        // js for footer section
+document.addEventListener("DOMContentLoaded", function() {
+   const btn = document.querySelector('.contact-btn');
+
+   btn.addEventListener('click', function(e) {
+       e.preventDefault();
+       alert('Your message has been sent!');
+   });
+});
+
+
+  
+
+  
+
+
+
+      </script>
+      
+   
+
+</body>
+</html>

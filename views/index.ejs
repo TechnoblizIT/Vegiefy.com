@@ -23,16 +23,17 @@
           </a>
           <ul class="links">
               <span class="close-btn material-symbols-rounded">close</span>
-              <li><a href="index.html" class="active">home</a></li>
-              <li><a href="index.html#about-us">about</a></li>
-              <li><a href="product.html">products</a></li>
+              <li><a href="/" class="active">home</a></li>
+              <li><a href="/#about-us">about</a></li>
+              <li><a href="/product">products</a></li>
               <li><a href="delivery.html">delivery</a></li>
               <li><a href="blogs.html"  >blog</a></li>
-              <li><a href="contact.html">contact</a></li>
+              <li><a href="/contact">contact</a></li>
           </ul>
           <% if (!req.user) {%>
           <a href="/login"><button class="login-btn">LOG IN</button></a>
           <%}else{ %>
+            <h3><a href="/user/profile" style="color: white; text-decoration: none;">Profile</a></h3>
             <h3><a href="/user/logout" style="color: red; text-decoration: none;">Logout</a></h3>
           <%}%>
       </nav>

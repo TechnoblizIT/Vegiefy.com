@@ -17,7 +17,7 @@ module.exports.registerUser =  async function(req,res){
         )
         console.log(newUser);
         await newUser.save();
-        const tokken = genrateToken(user);
+        const tokken = genrateToken(newUser);
         res.cookie("tokken", tokken);
         res.redirect("/")
     })

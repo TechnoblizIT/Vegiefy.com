@@ -13,5 +13,13 @@ router.get('/login', function(req, res) {
     res.render('login')
  });
 
+ router.get('/product', checkuser ,function(req, res) {
+   res.render('product',{req})
+});
+
+router.get('/contact', checkuser ,function(req, res) {
+   res.render('contact',{req})
+});
+
 
 module.exports = router;
