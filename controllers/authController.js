@@ -23,7 +23,7 @@ module.exports.registerUser =  async function(req,res){
     })
     }
     else{
-        
+        req.flash("error", "Email already registered")
         res.redirect("/login")
     }
 }
@@ -37,13 +37,15 @@ module.exports.loginUser = async function (req, res) {
     const user = await userModel.findOne({ email: email });
 
     if (!user) {
-      return res.status(401).json({ message: "User not found" });
+      req.flash("error","Email or password incorrect")
+      res.redirect("/login")
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      return res.status(401).json({ message: "Invalid password" });
+      req.flash("error","Email or password incorrect")
+      res.redirect("/login")
     }
 
     const tokken = genrateToken(user);

@@ -10,7 +10,8 @@ router.get('/',checkuser ,function(req, res) {
 });
 
 router.get('/login', function(req, res) {
-    res.render('login')
+   const errors=req.flash("error")
+    res.render('login',{errors})
  });
 
  router.get('/product', checkuser ,function(req, res) {

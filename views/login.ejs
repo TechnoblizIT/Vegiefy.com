@@ -241,6 +241,9 @@ a.google{
             <div class="form-content">
                 <h2>LOGIN</h2>
                 <form action="/user/login" method="post">
+                  <% if (errors) { %>
+                    <h4 style="color: red;"><%=errors%></h4>
+                    <% }%>                    
                     <div class="input-field">
                         <input type="text" name="email" required>
                         <label>Email</label>
@@ -274,6 +277,10 @@ a.google{
             <div class="form-content">
                 <h2>SIGNUP</h2>
                 <form action="/user/create" method="post">
+                  <% if (errors) { %>
+                    <h4 style="color: red;"><%=errors%></h4>
+
+                  <% }%> 
                     <div class="input-field">
                         <input type="text" name="name" required>
                         <label>Enter your Name</label>
