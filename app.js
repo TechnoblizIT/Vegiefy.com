@@ -3,6 +3,7 @@ const path = require('path')
 const app = express()
 const indexRouter = require('./routes/indexRoutes')
 const userRouter = require('./routes/userRoutes')
+const adminRouter = require('./routes/adminRoutes')
 const checkUser=require("./middlewares/checkUser")
 const dbConnect = require('./configs/mongoose-connection')
 const cookieParser = require('cookie-parser');
@@ -23,6 +24,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname,"public")));
 app.use("/",indexRouter)
 app.use("/user",userRouter)
+app.use("/admin",adminRouter)
 
 
 app.listen(process.env.PORT)

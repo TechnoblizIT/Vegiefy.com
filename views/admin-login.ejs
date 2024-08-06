@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Suryakanta Organics Hydroponics</title>
+    <link href='https://fonts.googleapis.com/css?family=Afacad' rel='stylesheet'>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('../images/assest/login-back2.jpg') no-repeat center center/cover;
+            font-family: 'Afacad';
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(10px);
+        }
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 40px;
+            box-shadow: 0 10px 20px rgba(251, 253, 253, 0.3);
+            border-radius: 10px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .login-box h2 {
+            margin-bottom: 20px;
+            color: #0f5256;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .user-box {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .user-box input {
+            width: 100%;
+            padding: 10px 0;
+            background: none;
+            border: none;
+            border-bottom: 1px solid #333;
+            outline: none;
+            color: #0f5256;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .user-box input:focus {
+            border-bottom: 1px solid #0f5256;
+        }
+
+        .user-box label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #0f5256;
+            pointer-events: none;
+            transition: all 0.5s ease;
+        }
+
+        .user-box input:focus ~ label,
+        .user-box input:valid ~ label {
+            top: -20px;
+            left: 0;
+            color: #0f5256;
+            font-size: 12px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #0f5256, #09343c);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #ffffff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #09343c, #0f5256);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .forgot-password {
+            margin-top: 20px;
+        }
+
+        .forgot-password a {
+            color: #09343c;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password a:hover {
+            color: #0f5256;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .login-box {
+                padding: 20px;
+                width: 90%;
+            }
+
+            .login-box h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <h2>Login</h2>
+            <form id="loginForm" action="/admin/login" method="post">
+                <div class="user-box">
+                    <input type="email" name="email" required>
+                    <label>Email</label>
+                </div>
+                <div class="user-box">
+                    <input type="password" name="password" required>
+                    <label>Password</label>
+                </div>
+                <button type="submit">Login</button>
+                <div class="forgot-password">
+                    <a href="#">Forgot Password?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+       
+    </script>
+</body>
+</html>

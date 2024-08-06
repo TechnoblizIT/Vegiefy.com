@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping-cart</title>
+      <link href='https://fonts.googleapis.com/css?family=Afacad' rel='stylesheet'>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Afacad';
+            background-color:  #ecf7f0;
+        }
+
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 50px;
+        }
+
+        .product {
+            background-color: #fff;
+            margin: 10px;
+            padding-top: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 12px 0 rgba(0, 0, 0, 0.19);
+            text-align: center;
+            max-width: 300px;
+            flex: 1 1 calc(33.333% - 40px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-image {
+            width: 80%;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .product:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-name {
+            font-size: 1.5em;
+            margin: 10px 0;
+            transition: color 0.3s ease;
+        }
+
+        .product:hover .product-name {
+            color:#0f5256 ;
+        }
+
+        .product-description {
+            font-size: 1em;
+            color: #888;
+            margin: 10px 0;
+        }
+
+        .product-price {
+            font-size: 1.2em;
+            color: #888;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        /* Responsive Styles */
+       
+
+        @media (max-width: 768px) {
+            .product {
+                flex: 1 1 calc(100% - 40px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product {
+                flex: 1 1 100%;
+                max-width: 85%;
+                margin: 10px 0;
+            }
+
+            .product-container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="product-container">
+        <% user.cart.forEach(items => {%>
+        <div class="product">
+            <img src="../images/uploads/<%=items.image%>" alt="Product Image 1" class="product-image">
+            <h2 class="product-name"><%=items.name%></h2>
+            <p class="product-description"><%= items.description %>.</p>
+            <p class="product-price"><%=items.price%></p>
+            <a style="color: red; text-decoration: none;" href="/user/removeitem/:<%=items._id%>">Remove</a>
+        </div>
+        <%})%>
+      
+    </div>
+</body>
+</html>
