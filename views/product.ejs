@@ -790,13 +790,13 @@ footer::before {
         </a>
         <ul class="links">
             <span class="close-btn material-symbols-rounded">close</span>
-            <li><a href="index.html" >home</a></li>
-            <li><a href="index.html#about-us">about</a></li>
-            <li><a href="product.html" class="active">products</a></li>
+            <li><a href="/" >home</a></li>
+            <li><a href="/#about-us">about</a></li>
+            <li><a href="/product" class="active">products</a></li>
             <li><a href="/cart">Cart</a></li>
             <li><a href="delivery.html" >delivery</a></li>
             <li><a href="blogs.html"  >blog</a></li>
-            <li><a href="contact.html">contact</a></li>
+            <li><a href="/contact">contact</a></li>
         </ul>
         <% if (!req.user) {%>
           <a href="/login"><button class="login-btn">LOG IN</button></a>
@@ -809,7 +809,7 @@ footer::before {
 </header>
 
     <main style="padding-top: 7%;">
-      <% if(products){ %>
+     
       <% products.forEach(product => {%>
       <div class="product-list" id="product-list">
        <div class="product-box">
@@ -821,11 +821,7 @@ footer::before {
        </div>
       </div>
       <% })%>
-     <%}else{ %>
-      <div class="product-list" id="product-list">
-        <h1>No Products....!</h1>
-        </div>
-      <%} %>
+     
     </main>
      <!-- footer section -->
      <footer>
