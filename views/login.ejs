@@ -127,15 +127,6 @@ form .input-field input {
   
 }
 
-.input-field input:is(:focus, :valid) {
-  padding: 16px 15px 0;
-}
-
-.input-field input:is(:focus, :valid)~label {
-  transform: translateY(-120%);
-  color: white;
-  font-size: 0.75rem;
-}
 .form-box a {
   color: #248388;
   text-decoration: none;
@@ -245,12 +236,10 @@ a.google{
                     <h4 style="color: red;"><%=errors%></h4>
                     <% }%>                    
                     <div class="input-field">
-                        <input type="text" name="email" required>
-                        <label>Email</label>
+                        <input type="text" placeholder="Email" name="email" required>
                     </div>
                     <div class="input-field">
-                        <input type="password" name="password" required>
-                        <label>Password</label>
+                        <input type="password" placeholder="Password" name="password" required>
                     </div>
                     <a href="#" class="forgot-pass-link">Forgot password?</a>
                     <button type="submit">Log In</button>
@@ -282,16 +271,16 @@ a.google{
 
                   <% }%> 
                     <div class="input-field">
-                        <input type="text" name="name" required>
-                        <label>Enter your Name</label>
+                        <input type="text" name="name" placeholder="Enter your Name" required>
+                       
                     </div>
                     <div class="input-field">
-                        <input type="email" name="email" required>
-                        <label>Enter your email</label>
+                        <input type="email" name="email" placeholder="Enter your Email" required>
+                        
                     </div>
                     <div class="input-field">
-                        <input type="password" name="password" required>
-                        <label>Create password</label>
+                        <input type="password" name="password" placeholder="Create password" required>
+                      
                     </div>
                     <div class="policy-text">
                         <input type="checkbox" id="policy">

@@ -20,7 +20,8 @@
     line-height: 1.6;
 
   }
-  header {
+   /* css for navigation bar  */
+   header {
   position: fixed;
   top: 0;
   left : 0;
@@ -69,12 +70,9 @@
 }
 
 .navbar .close-btn {
-  position: absolute;
-  right: 20px;
-  top: 20px;
+ 
   display: none;
-  color: #000;
-  cursor: pointer;
+ 
 }
 
 .navbar .links a {
@@ -103,19 +101,55 @@
 }
 
 .navbar .login-btn:hover {
-  background: black;
+  background-color: #69ba6b;
   color: white;
+}
+.profile-loginout-container {
+  display: flex;      
+  align-items: center; 
+  gap: 10px;         
+}
+.profile-img {
+  width: 20px;   
+  height: 20px;
+  object-fit: cover; 
+  margin-top: 10px;
+}
+
+.logout-btn{
+  border: none;
+  outline: none;
+  background: white;
+  color: #275360;
+  font-size: 15px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: 0.15s ease;
+  text-decoration: none;
+}
+
+.logout-btn:hover{
+  background-color: #ffefef; 
+  color: #d9534f;
 }
 
 
-@media (max-width: 950px) {
+@media (max-width: 768px) {
   .navbar :is(.hamburger-btn, .close-btn) {
       display: block;
       font-size: 30px;
       color: white;
       margin-left: 20px;
   }
-
+  .navbar .close-btn {
+    position: absolute;
+      left: 0; 
+      top: 35px;
+      display: block;
+      color: #fff;
+      cursor: pointer;
+}
   .navbar {
       padding: 15px 0;
   }
@@ -136,9 +170,11 @@
       display: block;
       height: 100vh;
       width: 100%;
+      padding: 20px;
       padding-top: 60px;
-      text-align: center;
+      text-align: left;
       background: #0f5256;
+      opacity: 0.9;
       color: white;
       transition: 0.2s ease;
   }
@@ -149,8 +185,8 @@
 
   .navbar .links a {
       display: inline-flex;
-      margin: 20px 0;
-      font-size: 1.2rem;
+      margin: 10px 0;
+      font-size: 25px;
       color: white;
   }
 
@@ -163,12 +199,12 @@
       padding: 7px 10px;
       margin-right: 10px;
   }
+  .profile-loginout-container {
+    margin-right: 10px;
+  }
 }
 
-
-
-  
-  /* css for contact */
+/* css for contact */
   .contact {
         /* background-color: #f9f9f9; */
         /* padding: 50px 0; */
@@ -235,8 +271,11 @@
     background-color: #09343c;
     }
    
-
-    /* footer section */
+    @media (max-width: 768px) {
+      .contact-container {
+        padding: 10px;
+      }
+    }
     
 /* css for footer */
 footer {
@@ -448,12 +487,16 @@ footer::before {
                 <li><a href="blogs.html">blog</a></li>
                 <li><a href="/contact"  class="active">contact</a></li>
             </ul>
-            <% if (!req.user) {%>
-                <a href="/login"><button class="login-btn">LOG IN</button></a>
-                <%}else{ %>
-                  <h3><a href="/user/profile" style="color: white; text-decoration: none;">Profile</a></h3>
-                  <h3><a href="/user/logout" style="color: red; text-decoration: none;">Logout</a></h3>
-                <%}%>
+            <div class="profile-loginout-container">
+              <% if (!req.user) {%>
+                  <a href="/login"><button class="login-btn">LOG IN</button></a>
+                  <%}else{ %>
+                      <a class="profile-btn" href="/user/profile" style="text-decoration: none;">
+                          <img src="./images/assest/profile-img.png" alt="User Profile" class="profile-img">
+                        </a>
+                      <h3><a class="logout-btn"  href="/user/logout" >Logout</a></h3>
+                    <%}%>
+                  </div>
         </nav>
     </header>
   
@@ -545,7 +588,7 @@ footer::before {
             </div>
         </div>
         <div class="footer-bottom">
-            &copy; suryakantaorganics.com | Designed by Sakshi
+            &copy; suryakantaorganics.com
         </div>
     </footer>
       

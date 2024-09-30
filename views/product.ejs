@@ -19,7 +19,8 @@
     line-height: 1.6;
 
   }
-  header {
+   /* css for navigation bar  */
+   header {
   position: fixed;
   top: 0;
   left : 0;
@@ -68,12 +69,9 @@
 }
 
 .navbar .close-btn {
-  position: absolute;
-  right: 20px;
-  top: 20px;
+ 
   display: none;
-  color: #000;
-  cursor: pointer;
+ 
 }
 
 .navbar .links a {
@@ -99,22 +97,57 @@
   border-radius: 3px;
   cursor: pointer;
   transition: 0.15s ease;
+  
 }
 
 .navbar .login-btn:hover {
-  background: black;
+  background-color: #69ba6b;
   color: white;
 }
+.profile-loginout-container {
+  display: flex;      
+  align-items: center; 
+  gap: 10px;         
+}
+.profile-img {
+  width: 20px;   
+  height: 20px;
+  object-fit: cover; 
+  margin-top: 10px;
+}
+.logout-btn{
+  border: none;
+  outline: none;
+  background: white;
+  color: #275360;
+  font-size: 15px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: 0.15s ease;
+  text-decoration: none;
+}
 
+.logout-btn:hover{
+  background-color: #ffefef; 
+  color: #d9534f;
+}
 
-@media (max-width: 950px) {
+@media (max-width: 768px) {
   .navbar :is(.hamburger-btn, .close-btn) {
       display: block;
       font-size: 30px;
       color: white;
       margin-left: 20px;
   }
-
+  .navbar .close-btn {
+    position: absolute;
+      left: 0; 
+      top: 35px;
+      display: block;
+      color: #fff;
+      cursor: pointer;
+}
   .navbar {
       padding: 15px 0;
   }
@@ -135,9 +168,11 @@
       display: block;
       height: 100vh;
       width: 100%;
+      padding: 20px;
       padding-top: 60px;
-      text-align: center;
+      text-align: left;
       background: #0f5256;
+      opacity: 0.9;
       color: white;
       transition: 0.2s ease;
   }
@@ -148,8 +183,8 @@
 
   .navbar .links a {
       display: inline-flex;
-      margin: 20px 0;
-      font-size: 1.2rem;
+      margin: 10px 0;
+      font-size: 25px;
       color: white;
   }
 
@@ -162,432 +197,112 @@
       padding: 7px 10px;
       margin-right: 10px;
   }
+  .profile-loginout-container {
+    margin-right: 10px;
+  }
 }
 
-/* css for products */
-.button-container {
+/* css for product */
+main {
+    padding: 20px;
     display: flex;
     justify-content: center;
+    margin-top: 50px;
+}
+
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    grid-auto-rows: auto;
     gap: 1rem;
-    margin-bottom: 1rem;
-    margin-top: 130px;
-    border: none;
-    border-bottom: 3px solid #ecf7f0;
-    box-shadow: 2px 2px 2px rgba(90, 89, 89, 0.4);
-    padding-bottom: 30px;
-   
-}
-
-.button-container button {
-    padding: 10px 20px;
-    font-size: 15px;
-    /* background: linear-gradient(135deg, #0f5256, #09343c); */
-    /* color: #fff; */
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 12px 0 rgba(0, 0, 0, 0.19);
-   
-}
-
-.button-container button:hover {
-    background: linear-gradient(135deg, #09343c, #0f5256);
-    color: #fff;
-}
-        main {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .product-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            width: 100%;
-            max-width: 1000px;
-        }
-
-        .product-box {
-            background-color: #fff;
-            border: 1px solid #ddd; 
-            border-radius: 5px; 
-            padding: 10px; 
-            margin: 10px; 
-            width: 280px; 
-            text-align: left; 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
-        }
-
-       .product-box img {
-           width: 100%; 
-           height: auto; 
-        }
-
-       .product-box h2 {
-           font-size: 24px;
-           margin: 10px 0;
-           color: #333;
-        }
-
-        .product-box p {
-            font-size: 16px;
-            margin: 10px 0;
-            color: #888;
-        }
-        .product-box button {
-            padding: 0.5rem 1rem;
-            background-color:  #0f5256;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .product-box button:hover {
-            background-color: #09343c;
-        }
-
-       /* Shopping Cart Styles */
-.cart {
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 1.5rem;
     width: 100%;
-    max-width: 700px;
+    max-width: 1000px;
+    justify-items: center; 
+}
+
+/* Animation for product box */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.product-box {
     background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 2rem auto;
-    
+    border: 1px solid #ddd; 
+    border-radius: 5px; 
+    padding: 10px; 
+    margin: 10px; 
+    width: 280px; 
+    text-align: left; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+    animation: fadeIn 0.6s ease-in-out; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.cart h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-    color: #0f5256;
-    border-bottom: 2px solid #0f5256;
-    padding-bottom: 0.5rem;
+.product-box:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
 }
 
-.cart .cart-items {
-    max-height: 400px;
-    overflow-y: auto;
-    margin-bottom: 1rem;
+.product-box img {
+    width: 100%; 
+    height: auto; 
 }
 
-.cart-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.8rem 0;
-    border-bottom: 1px solid #eee;
-}
-
-.cart-item:last-child {
-    border-bottom: none;
-}
-
-.cart-item p {
-    margin: 0;
-    color: #555;
-}
-
-.cart-item .quantity {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.cart-item .quantity button {
-    padding: 0.4rem 0.8rem;
-    background-color: #0f5256;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.cart-item .quantity button:hover {
-    background-color: #09343c;
-}
-
-.cart-item .quantity span {
-    font-size: 1rem;
+.product-box h2 {
+    font-size: 24px;
+    margin: 10px 0;
     color: #333;
 }
 
-.total-price {
-    font-size: 1.4rem;
-    font-weight: bold;
-    text-align: right;
-    margin-top: 1rem;
-    color: #0f5256;
+.product-box p {
+    font-size: 16px;
+    margin: 10px 0;
+    color: #888;
 }
 
-.checkout {
-    padding: 0.7rem 1.5rem;
-    background-color: #0f5256;
+.product-box button {
+    padding: 0.5rem 1rem;
+    background-color:  #0f5256;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    display: block;
-    width: 100%;
-    text-align: center;
 }
 
-.checkout:hover {
+.product-box button:hover {
     background-color: #09343c;
 }
 
-.clear-cart {
-    padding: 0.7rem 1.5rem;
-    background: linear-gradient(135deg, #0f5256, #09343c);
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    display: block;
-    width: 100%;
-    text-align: center;
-    margin-bottom: 1rem;
-}
-
-.clear-cart:hover {
-    background: linear-gradient(135deg, #09343c, #0f5256);
-   
-}
-.place-order{
-    background-color: #09343c;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    padding: 10px;
-    margin-left: 43%;
-    
-}
-.place-order:hover{
-    background-color: #fff;
-    color: #09343c;
-    box-shadow: 2px 2px 2px rgba(90, 89, 89, 0.4);
-}
-.remove-btn{
-    color: white;
-    background-color: #0f5256;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    padding: 5px;
-}
-.quantity-btn{
-    color: white;
-    background-color: #0f5256;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    padding: 5px 10 5px 10;
-}
-        
-
-        .product-box img {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-}  
-/* Container Styles */
-.container {
-    display: none;
-    width: 90%;
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Order Options Styles */
-.order-options {
-    display: none;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-.option-btn {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    background-color: #0f5256;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.option-btn:hover {
-    background-color: #fff;
-    color: #09343c;
-    box-shadow: 2px 2px 2px rgba(90, 89, 89, 0.4);
-}
-
-/* Order Message Styles */
-.order-message {
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f8f9fa;
-    color: #333;
-    font-size: 16px;
-    text-align: center;
-}
-
-/* Delivery Form Styles */
-/* Delivery Form Styles */
-.delivery-form {
-    display: none; /* Hidden initially */
-    flex-direction: column;
-    gap: 5px;
-}
-
-.delivery-form label {
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.delivery-form input,
-.delivery-form select {
-    padding: 5px;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.delivery-form select {
-    cursor: pointer;
-}
-
-.submit-btn {
-    padding: 10px;
-    background: linear-gradient(135deg, #0f5256, #09343c);
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.submit-btn:hover {
-  background: linear-gradient(135deg, #09343c, #0f5256);
-}
-/* Table Styles */
-.cart-table-container {
-    width: 100%;
-    overflow: hidden;
-}
-
-.cart-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 1rem;
-    table-layout: fixed; 
-}
-
-.cart-table th, .cart-table td {
-    padding: 0.5rem;
-   
-    text-align: left;
-    word-wrap: break-word;
-} 
-
-.cart-table th {
-    font-size: 1.1rem;
-    border: 1px solid #ddd;
-    box-shadow: inset -5px -5px 10px white,inset 2px 2px 8px grey ;
-}
-
-.cart-table td {
-    font-size: 1rem;
-    box-shadow: -5px -5px 10px white,4px 4px 8px gray;
-  
-}
-
-.cart-table .remove-btn {
-    color: white;
-    background-color: #0f5256;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    padding: 5px;
-}
-
-
-@media (max-width: 480px) {
-    .cart-table th, .cart-table td {
-        font-size: 0.8rem;
-        padding: 0.4rem;
-    }
-   .quantity-btn{
-    padding: 5px;
-   }
-    .cart-table th:nth-child(5),
-    .cart-table td:nth-child(5) {
-        display: none; 
-    }
-}
-
-
-@media (max-width: 768px) {
-    .cart-table {
-        font-size: 0.8rem;
-    }
-
-    .cart-table th, .cart-table td {
-        padding: 0.6rem;
-    }
-}
 @media (max-width: 768px) {
             main {
-                padding: 1rem;
+                padding: 20px;
+                margin-top: 100px;
             }
 
             .product-list {
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             }
-
-            .cart {
+            .product-box{
+               
                 width: 100%;
-                padding: 0.5rem;
             }
+         
         }
 
         @media (max-width: 480px) {
-            .button-container {
-                flex-direction: column;
-                gap: 0.5rem;
-                margin-top: 128px;
-            }
-
-            .button-container button {
-                width: 30%;
-                margin: auto;
-            }
-
+          
             .product-list {
                 grid-template-columns: 1fr;
             }
-            .place-order{
-                margin-left: 36%;
-            }
+          
         }
 
 
@@ -798,31 +513,34 @@ footer::before {
             <li><a href="blogs.html"  >blog</a></li>
             <li><a href="/contact">contact</a></li>
         </ul>
-        <% if (!req.user) {%>
-          <a href="/login"><button class="login-btn">LOG IN</button></a>
-          <%}else{ %>
-            <h3><a href="/user/profile" style="color: white; text-decoration: none;">Profile</a></h3>
-            <h3><a href="/user/logout" style="color: red; text-decoration: none;">Logout</a></h3>
-          <%}%>
+        <div class="profile-loginout-container">
+          <% if (!req.user) {%>
+              <a href="/login"><button class="login-btn">LOG IN</button></a>
+              <%}else{ %>
+                  <a class="profile-btn" href="/user/profile" style="text-decoration: none;">
+                      <img src="./images/assest/profile-img.png" alt="User Profile" class="profile-img">
+                    </a>
+                  <h3><a class="logout-btn"  href="/user/logout" >Logout</a></h3>
+                <%}%>
+              </div>
       </nav>
     </nav>
 </header>
 
-    <main style="padding-top: 7%;">
-     
-      <% products.forEach(product => {%>
-      <div class="product-list" id="product-list">
-       <div class="product-box">
+<main style="padding-top: 7%;"> 
+  <div class="product-list" id="product-list">
+    <% products.forEach(product => { %>
+      <div class="product-box">
         <img src="../images/uploads/<%= product.image %>" alt="product.name">
-            <h2><%= product.name %></h2>
-            <p><%= product.description %></p>
-            <p>Price: <%=product.price%>/-</p>
-            <a href="/user/addtocart/<%= product._id %>"><button>Add to Cart</button></a>
-       </div>
+        <h2><%= product.name %></h2>
+        <p><%= product.description %></p>
+        <p>Price: <%=product.price%>/-</p>
+        <a href="/user/addtocart/<%= product._id %>"><button>Add to Cart</button></a>
       </div>
-      <% })%>
-     
-    </main>
+    <% }) %>
+  </div>
+</main>
+
      <!-- footer section -->
      <footer>
         <div class="footer-content">
@@ -877,25 +595,13 @@ footer::before {
           </div>
         </div>
         <div class="footer-bottom">
-          &copy; suryakantaorganics.com | Designed by Sakshi
+          &copy; suryakantaorganics.com 
         </div>
       </footer>
   
     <script>
 
-           
-
-
-
-
-
-
-
-
-
-
-
-//js for navbar
+    //js for navbar
     const navbarMenu = document.querySelector(".navbar .links");
 const hamburgerBtn = document.querySelector(".hamburger-btn");
 const hideMenuBtn = navbarMenu.querySelector(".close-btn");

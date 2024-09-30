@@ -31,12 +31,16 @@
               <li><a href="blogs.html"  >blog</a></li>
               <li><a href="/contact">contact</a></li>
           </ul>
-          <% if (!req.user) {%>
-          <a href="/login"><button class="login-btn">LOG IN</button></a>
-          <%}else{ %>
-            <h3><a href="/user/profile" style="color: white; text-decoration: none;">Profile</a></h3>
-            <h3><a href="/user/logout" style="color: red; text-decoration: none;">Logout</a></h3>
-          <%}%>
+          <div class="profile-loginout-container">
+            <% if (!req.user) {%>
+                <a href="/login"><button class="login-btn">LOG IN</button></a>
+                <%}else{ %>
+                    <a class="profile-btn" href="/user/profile" style="text-decoration: none;">
+                        <img src="./images/assest/profile-img.png" alt="User Profile" class="profile-img">
+                      </a>
+                    <h3><a class="logout-btn"  href="/user/logout" >Logout</a></h3>
+                  <%}%>
+                </div>
       </nav>
   </header>
 
@@ -381,7 +385,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            &copy; suryakantaorganics.com | Designed by Sakshi
+            &copy; suryakantaorganics.com 
         </div>
     </footer>
     
