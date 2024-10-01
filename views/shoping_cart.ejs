@@ -625,37 +625,38 @@ footer::before {
     </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <span class="hamburger-btn material-symbols-rounded">menu</span>
-            <a href="#" class="logo">
-                <img src="../images/assest/logo3.png" alt="logo">
-               
-            </a>
-            <ul class="links">
-                <span class="close-btn material-symbols-rounded">close</span>
-                <li><a href="/" >home</a></li>
-                <li><a href="/#about-us">about</a></li>
-                <li><a href="/product">products</a></li>
-                <li><a href="/cart"  class="active">Cart</a></li>
-                <li><a href="delivery.html">delivery</a></li>
-                <li><a href="blogs.html">blog</a></li>
-                <li><a href="/contact" >contact</a></li>
-            </ul>
-            <div class="profile-loginout-container">
-            <% if (!req.user) {%>
-                <a href="/login"><button class="login-btn">LOG IN</button></a>
-                <%}else{ %>
-                    <a class="profile-btn" href="/user/profile" style="text-decoration: none;">
-                        <img src="./images/assest/profile-img.png" alt="User Profile" class="profile-img">
-                      </a>
-                    <h3><a class="logout-btn"  href="/user/logout" >Logout</a></h3>
-                  <%}%>
-                </div>
-        </nav>
-    </header>
+  <header>
+    <nav class="navbar">
+        <span class="hamburger-btn material-symbols-rounded">menu</span>
+        <a href="#" class="logo">
+            <img src="../images/assest/logo3.png" alt="logo">
+           
+        </a>
+        <ul class="links">
+            <span class="close-btn material-symbols-rounded">close</span>
+            <li><a href="/" class="active">home</a></li>
+            <li><a href="/#about-us">about</a></li>
+            <li><a href="/product">products</a></li>
+            <li><a href="/cart">Cart</a></li>
+            <li><a href="/delivery">delivery</a></li>
+            <li><a href="/blog"  >blog</a></li>
+            <li><a href="/contact">contact</a></li>
+        </ul>
+        <div class="profile-loginout-container">
+          <% if (!req.user) {%>
+              <a href="/login"><button class="login-btn">LOG IN</button></a>
+              <%}else{ %>
+                  <a class="profile-btn" href="/user/profile" style="text-decoration: none;">
+                      <img src="./images/assest/profile-img.png" alt="User Profile" class="profile-img">
+                    </a>
+                  <h3><a class="logout-btn"  href="/user/logout" >Logout</a></h3>
+                <%}%>
+              </div>
+    </nav>
+</header>
     <div class="shopping-cart">
         <div class="product-container">
+        
             <% user.cart.forEach(items => {%>
             <div class="product">
                 <img src="../images/uploads/<%=items.image%>" alt="Product Image" class="product-image">
@@ -665,17 +666,18 @@ footer::before {
                 <a class="remove-btn" href="/user/removeitem/<%=items._id%>">Remove</a>
             </div>
             <% }) %>
+    
         </div>
     
         <div class="cart-summary">
             <h2>Cart Summary</h2>
     
             <div class="summary-details">
-                <p><i class="fas fa-box"></i> Total Items:3</p>
-                <p><i class="fas fa-money-bill-wave"></i> Subtotal: 45</p>
+                <p><i class="fas fa-box"></i> Total Items: <%=cartcount%></p>
+                <p><i class="fas fa-money-bill-wave"></i> Subtotal: ₹<%=carttotal%></p>
                 <p><i class="fas fa-percent"></i> Discount: 3%</p>
                 <p><i class="fas fa-truck"></i> Shipping:free</p>
-                <p><i class="fa-solid fa-indian-rupee-sign"></i> Total Price:135 </p>
+                <p><i class="fa-solid fa-indian-rupee-sign"></i> Total Price:₹<%=carttotal-carttotal/100*3%></p>
             </div>
         
             <!-- Promo code input -->

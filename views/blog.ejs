@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0">
+
+    <link href='https://fonts.googleapis.com/css?family=Afacad' rel='stylesheet'>
+
+    <style>
+        /* header Styles */
+        * {
+    margin: 0;
+    box-sizing: border-box;
+  }
+  body {
+    position: relative; 
+    font-family: 'Afacad';
+    background-color:  #ecf7f0;
+    line-height: 1.6;
+
+  }
+  header {
+  position: fixed;
+  top: 0;
+  left : 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #0f5256;
+  line-height: 1.5;
+}
+
+.navbar {
+  display: flex;
+  padding: 10px 0;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+.navbar .hamburger-btn {
+  display: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.navbar .logo {
+  gap: 10px;
+  display: flex;
+  align-items: center;
+
+}
+
+.navbar .logo img {
+  width: 190px;
+
+}
+
+
+.navbar .links {
+  display: flex;
+  gap: 35px;
+  list-style: none;
+  align-items: center;
+  
+  
+}
+
+.navbar .close-btn {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  display: none;
+  color: #000;
+  cursor: pointer;
+}
+
+.navbar .links a {
+  color: #fff;
+  font-size: 20px;
+  text-decoration: none;
+  transition: 0.1s ease;
+  text-transform: capitalize;
+ 
+}
+.navbar .links a.active,
+.navbar .links a:hover {
+  color: #69ba6b;
+}
+
+.navbar .login-btn {
+  border: none;
+  outline: none;
+  background: white;
+  color: #275360;
+  font-size: 15px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.navbar .login-btn:hover {
+  background: black;
+  color: white;
+}
+
+
+@media (max-width: 950px) {
+  .navbar :is(.hamburger-btn, .close-btn) {
+      display: block;
+      font-size: 30px;
+      color: white;
+      margin-left: 20px;
+  }
+
+  .navbar {
+      padding: 15px 0;
+  }
+
+  .navbar .logo img {
+      display: flex;
+  }
+
+  .navbar .logo h2 {
+      font-size: 1.4rem;
+  }
+
+  .navbar .links {
+      position: fixed;
+      top: 0;
+      z-index: 10;
+      left: -100%;
+      display: block;
+      height: 100vh;
+      width: 100%;
+      padding-top: 60px;
+      text-align: center;
+      background: #0f5256;
+      color: white;
+      transition: 0.2s ease;
+  }
+
+  .navbar .links.show-menu {
+      left: 0;
+  }
+
+  .navbar .links a {
+      display: inline-flex;
+      margin: 20px 0;
+      font-size: 1.2rem;
+      color: white;
+  }
+
+  .navbar .links a:hover {
+      color: #09343c;
+  }
+
+  .navbar .login-btn {
+      font-size: 0.9rem;
+      padding: 7px 10px;
+      margin-right: 10px;
+  }
+}
+
+
+
+        /* blog style */
+        .blog{
+            margin-top: 100px;
+        }
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            
+        }
+        .blog .blog-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+       
+        .blog-posts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .blog-post {
+            flex: 1 1 300px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+        }
+        .blog-post img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #ddd;
+            transition: transform 0.3s;
+        }
+        .blog-post img:hover {
+             transform: scale(1.1); 
+        }
+        .blog-post-content {
+            flex-grow: 1;
+            padding: 10px;
+            color: #888;
+        }
+        .blog-post-button {
+            padding: 10px;
+            background-color: #0f5256;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 0 0 5px 5px;
+            transition: background-color 0.3s;
+        }
+        .blog-post-button:hover {
+            background-color: #09343c;
+        }
+        .blog-post-button a{
+            color: white;
+            text-decoration: none;
+        }
+       
+/* footer section */
+
+/* css for footer */
+footer {
+  position: relative;
+ 
+  background-image: url(assest/background2.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #fff;
+  padding: 40px 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+margin-top: 100px;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 15px; 
+  background: #0f5256;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-section {
+  flex: 1;
+  padding: 20px;
+  min-width: 250px;
+}
+
+.logo-text {
+  font-size: 28px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+ 
+ 
+}
+
+.footer-section h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  position: relative;
+  display: inline-block;
+  color: #fff;
+}
+
+.footer-section h2::after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 3px;
+  background: #fff;
+  bottom: -5px;
+  left: 0;
+}
+
+.footer-section p {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.contact span, .socials a {
+  display: block;
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.socials a {
+  color: #fff;
+  margin-right: 15px;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.socials a:hover {
+  color: #d4d4d4;
+}
+
+.footer-section.links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section.links ul a {
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 10px;
+  display: block;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+.footer-section.links ul a:hover {
+  text-decoration: underline;
+  color: #d4d4d4;
+}
+
+.contact-form .text-input {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.contact-form .btn {
+  display: inline-block;
+  padding: 15px 30px;
+  background: #fff;
+  color: #0f5256;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition:  0.3s, color 0.3s;
+}
+
+.contact-form .btn:hover {
+  background: #0f5256;
+  color: #fff;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 15px;
+  background: #0f5256;
+  font-size: 18px;
+ 
+ 
+ 
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  footer{
+    margin-top: 100px;
+  }
+  .footer-content {
+      flex-direction: column;
+      align-items: center;
+      padding: 0 10px;
+  }
+
+  .footer-section {
+      padding: 10px;
+      min-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  footer{
+    margin-top: 100px;
+  }
+  .logo-text {
+      font-size: 24px;
+  }
+
+  .footer-section h2 {
+      font-size: 18px;
+  }
+
+  .footer-section p, .contact span, .socials a, .footer-section.links ul a {
+      font-size: 14px;
+  }
+
+  .contact-form .text-input, .contact-form .btn {
+      font-size: 14px;
+      padding: 10px;
+  }
+
+ 
+}
+
+    </style>
+</head>
+<body>
+
+    <!-- header section -->
+    <header>
+        <nav class="navbar">
+            <span class="hamburger-btn material-symbols-rounded">menu</span>
+            <a href="#" class="logo">
+                <img src="../images/assest/logo3.png" alt="logo">
+               
+            </a>
+            <ul class="links">
+                <span class="close-btn material-symbols-rounded">close</span>
+                <li><a href="/" >home</a></li>
+                <li><a href="/#about-us">about</a></li>
+                <li><a href="/product">products</a></li>
+                <li><a href="/cart"  class="active">Cart</a></li>
+                <li><a href="delivery.html">delivery</a></li>
+                <li><a href="/blog">blog</a></li>
+                <li><a href="/contact" >contact</a></li>
+            </ul>
+            <div class="profile-loginout-container">
+            <% if (!req.user) {%>
+                <a href="/login"><button class="login-btn">LOG IN</button></a>
+                <%}else{ %>
+                    <a class="profile-btn" href="/user/profile" style="text-decoration: none;">
+                        <img src="./images/assest/profile-img.png" alt="User Profile" class="profile-img">
+                      </a>
+                    <h3><a class="logout-btn"  href="/user/logout" >Logout</a></h3>
+                  <%}%>
+                </div>
+        </nav>
+    </header>
+  
+
+     <!-- blog section -->
+    <section class="blog">
+        <div class="blog-container">
+            <h2>Latest Blog Posts</h2>
+            <div class="blog-posts">
+                <div class="blog-post">
+                    <img src="assest/blogs/img-1.jpg" alt="Blog Post 1">
+                    <div class="blog-post-content">
+                        <h3>Hydroponic Gardening Tip</h3>
+                        <p>Learn how to start your own hydroponic garden at home with our expert tips.</p>
+                    </div>
+                    <div class="blog-post-button">
+                        <a href="blog-post2.html">Read more</a>
+                    </div>
+                </div>
+                <div class="blog-post">
+                    <img src="assest/blogs/img-2.jpg" alt="Blog Post 2">
+                    <div class="blog-post-content">
+                        <h3>Healthy Recipes Using Hydroponic Produce</h3>
+                        <p>Discover delicious and nutritious recipes made with hydroponically grown produce.</p>
+                    </div>
+                    <div class="blog-post-button">
+                        <a href="blog-post2.html">Read more</a>
+                    </div>
+                </div>
+                <div class="blog-post">
+                    <img src="assest/blogs/img-3.png" alt="Blog Post 2">
+                    <div class="blog-post-content">
+                        <h3>Hydroponic Farming vs. Traditional Farming: A Comparison</h3>
+                        <p>Compare and contrast hydroponic farming with traditional soil-based farming, 
+                            discussing the advantages and disadvantages of each method.</p>
+                      </div>
+                      <div class="blog-post-button">
+                        <a href="blog-post2.html">Read more</a>
+                    </div>
+                </div>
+                <div class="blog-post">
+                    <img src="assest/blogs/img-4.jpg" alt="Blog Post 2">
+                    <div class="blog-post-content">
+                        <h3>Innovative Hydroponic Techniques You Should Know</h3>
+                        <p>Introduce readers to advanced hydroponic techniques like aeroponics and aquaponics, 
+                            explaining how they work and their benefits.</p>
+                        
+                    </div>
+                    <div class="blog-post-button">
+                        <a href="blog-post2.html">Read more</a>
+                    </div>
+                </div>
+                <div class="blog-post">
+                    <img src="assest/blogs/img-5.jpg" alt="Blog Post 2">
+                    <div class="blog-post-content">
+                        <h3>How to Set Up a Basic Hydroponic System at Home</h3>
+                        <p>Provide a step-by-step guide to help beginners set up a simple hydroponic system in their homes.</p>
+                        
+                    </div>
+                    <div class="blog-post-button">
+                        <a href="blog-post2.html">Read more</a>
+                    </div>
+                </div>
+                <div class="blog-post">
+                    <img src="assest/blogs/img-6.jpg" alt="Blog Post 2">
+                    <div class="blog-post-content">
+                        <h3>Common Mistakes to Avoid in Hydroponic Gardening</h3>
+                        <p>Highlight mistakes that beginners often make and offer tips on how to avoid them for successful hydroponic gardening.</p>
+                        
+                    </div>
+                    <div class="blog-post-button">
+                        <a href="blog-post2.html">Read more</a>
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+    </section>
+
+    <!-- footer section -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h2 class="logo-text">Suryakanta Organics</h2>
+                <p>Sustainable and fresh hydroponically grown produce delivered straight to your table.</p>
+                <div class="contact">
+                    <span><i class="fas fa-phone"></i> &nbsp; +91-1234567890</span>
+                    <span><i class="fas fa-envelope"></i> &nbsp; info@suryakantaorganics.com</span>
+                    <span><i class="fas fa-map-marker-alt"></i> &nbsp; Suryakanta Ambule House, Murri, Gondia, 441601</span>
+                </div>
+                <div class="socials">
+                    <a href="#"><i class="fab fa-facebook"></i>&nbsp; Facebook</a>
+                    <a href="#"><i class="fab fa-twitter"></i>&nbsp; Twitter</a>
+                    <a href="#"><i class="fab fa-instagram"></i>&nbsp; Instagram</a>
+                    <a href="#"><i class="fab fa-linkedin"></i>&nbsp; Linkedin</a>
+                </div>
+            </div>
+            <div class="footer-section links">
+                <h2>Quick Links</h2>
+                <ul>
+                    <a href="index.html#about-us"><li>About Us</li></a>
+                    <a href="product.html"><li>Products</li></a>
+                    <a href="blogs.html"><li>Blog/News</li></a>
+                    <a href="delivery.html"><li>Delivery</li></a>
+                    <a href="contact.html"><li>Contact Us</li></a>
+                    <a href="delivery.html#faq"><li>FAQs</li></a>
+                </ul>
+            </div>
+            <div class="footer-section contact-form">
+                <h2>Contact Us</h2>
+                <form action="index.html" method="post">
+                    <input type="email" name="email" class="text-input contact-input" placeholder="Your email address...">
+                    <textarea name="message" class="text-input contact-input" placeholder="Your message..."></textarea>
+                    <button type="submit" class="btn btn-big contact-btn">
+                        <i class="fas fa-envelope"></i>
+                        Send
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; suryakantaorganics.com | Designed by Sakshi
+        </div>
+    </footer>
+      
+
+    <script>
+       // js for navbar
+const navbarMenu = document.querySelector(".navbar .links");
+const hamburgerBtn = document.querySelector(".hamburger-btn");
+const hideMenuBtn = navbarMenu.querySelector(".close-btn");
+const showPopupBtn = document.querySelector(".login-btn");
+
+// Show mobile menu
+hamburgerBtn.addEventListener("click", () => {
+    navbarMenu.classList.toggle("show-menu");
+});
+
+// Hide mobile menu
+hideMenuBtn.addEventListener("click", () =>  hamburgerBtn.click());
+
+
+
+        // js for footer section
+document.addEventListener("DOMContentLoaded", function() {
+   const btn = document.querySelector('.contact-btn');
+
+   btn.addEventListener('click', function(e) {
+       e.preventDefault();
+       alert('Your message has been sent!');
+   });
+});
+    </script>
+</body>
+</html>

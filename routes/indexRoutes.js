@@ -20,14 +20,27 @@ router.get('/login', function(req, res) {
    res.render('product',{products,req})}catch(err){ console.log(err.message) }
 });
 
+router.get('/blog',checkuser ,async function(req, res) {
+   res.render('blog',{req})
+ });
 
-router.get('/contact', checkuser ,function(req, res) {
+ router.get('/delivery', checkuser ,function(req, res) {
+   res.render('deliverypage',{req})
+});
+
+ router.get('/contact', checkuser ,function(req, res) {
    res.render('contact',{req})
 });
 
 router.get('/cart',  isloggedin,checkuser ,async function(req, res) {
    const user = await userModel.findOne({email:req.user.email}).populate("cart")
-   res.render('shoping_cart',{req,user})
+   var carttotal=0;
+   var cartcount=0
+   user.cart.forEach((item)=>{ carttotal+=item.price 
+      cartcount+=1
+   })
+   
+   res.render('shoping_cart',{req,user,carttotal,cartcount})
 });
 
 
