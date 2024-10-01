@@ -25,12 +25,13 @@ router.get("/addtocart/:productid",isloggedin, checkuser,async(req,res)=>{
     res.redirect("/product")
 });
 
-router.get("/removeitem/:productid",isloggedin, checkuser,async(req,res)=>{
-    const user=await userModel.findOne({email:req.user.email});
-    user.cart.pop(req.params.productid);
-    await user.save();
-    res.redirect("/cart")
+router.get("/removeitem/:productid", isloggedin, checkuser, async (req, res) => {
+    const user = await userModel.findOne({ email: req.user.email })
+    user.cart = user.cart.filter(item => item._id.toString() !== req.params.productid);
 
-})
+    await user.save();
+    res.redirect("/cart");
+});
+
 
 module.exports = router;
