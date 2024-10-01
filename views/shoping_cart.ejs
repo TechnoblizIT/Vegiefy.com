@@ -663,6 +663,7 @@ footer::before {
                 <h2 class="product-name"><%=items.name%></h2>
                 <p class="product-description"><%= items.description %>.</p>
                 <p class="product-price">₹<%=items.price%></p>
+                <p><%=items._id%></p>
                 <a class="remove-btn" href="/user/removeitem/<%=items._id%>">Remove</a>
             </div>
             <% }) %>
