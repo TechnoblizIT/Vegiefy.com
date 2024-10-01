@@ -20,153 +20,193 @@
     font-family: 'Afacad';
     background-color:  #ecf7f0;
     line-height: 1.6;
-
-  }
-  header {
-  position: fixed;
-  top: 0;
-  left : 0;
-  width: 100%;
-  z-index: 1000;
-  background-color: #0f5256;
-  line-height: 1.5;
-}
-
-.navbar {
-  display: flex;
-  padding: 10px 0;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  justify-content: space-between;
-}
-
-.navbar .hamburger-btn {
-  display: none;
-  color: #fff;
-  cursor: pointer;
-  font-size: 1.5rem;
-}
-
-.navbar .logo {
-  gap: 10px;
-  display: flex;
-  align-items: center;
-
-}
-
-.navbar .logo img {
-  width: 190px;
-
-}
-
-
-.navbar .links {
-  display: flex;
-  gap: 35px;
-  list-style: none;
-  align-items: center;
   
-  
-}
-
-.navbar .close-btn {
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  display: none;
-  color: #000;
-  cursor: pointer;
-}
-
-.navbar .links a {
-  color: #fff;
-  font-size: 20px;
-  text-decoration: none;
-  transition: 0.1s ease;
-  text-transform: capitalize;
- 
-}
-.navbar .links a.active,
-.navbar .links a:hover {
-  color: #69ba6b;
-}
-
-.navbar .login-btn {
-  border: none;
-  outline: none;
-  background: white;
-  color: #275360;
-  font-size: 15px;
-  padding: 5px 10px;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: 0.15s ease;
-}
-
-.navbar .login-btn:hover {
-  background: black;
-  color: white;
-}
-
-
-@media (max-width: 950px) {
-  .navbar :is(.hamburger-btn, .close-btn) {
-      display: block;
-      font-size: 30px;
-      color: white;
-      margin-left: 20px;
   }
-
-  .navbar {
-      padding: 15px 0;
-  }
-
-  .navbar .logo img {
-      display: flex;
-  }
-
-  .navbar .logo h2 {
-      font-size: 1.4rem;
-  }
-
-  .navbar .links {
+    /* css for navigation bar  */
+    header {
       position: fixed;
       top: 0;
-      z-index: 10;
-      left: -100%;
-      display: block;
-      height: 100vh;
+      left : 0;
       width: 100%;
-      padding-top: 60px;
-      text-align: center;
-      background: #0f5256;
+      z-index: 1000;
+      background-color: #0f5256;
+      line-height: 1.5;
+    }
+    
+    .navbar {
+      display: flex;
+      padding: 10px 0;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      justify-content: space-between;
+    }
+    
+    .navbar .hamburger-btn {
+      display: none;
+      color: #fff;
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+    
+    .navbar .logo {
+      gap: 10px;
+      display: flex;
+      align-items: center;
+    
+    }
+    
+    .navbar .logo img {
+      width: 110px;
+    
+    }
+    
+    
+    .navbar .links {
+      display: flex;
+      gap: 35px;
+      list-style: none;
+      align-items: center;
+      
+      
+    }
+    
+    .navbar .close-btn {
+     
+      display: none;
+     
+    }
+    
+    .navbar .links a {
+      color: #fff;
+      font-size: 20px;
+      text-decoration: none;
+      transition: 0.1s ease;
+      text-transform: capitalize;
+     
+    }
+    .navbar .links a.active,
+    .navbar .links a:hover {
+      color: #69ba6b;
+    }
+    
+    .navbar .login-btn {
+      border: none;
+      outline: none;
+      background: white;
+      color: #275360;
+      font-size: 15px;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: 0.15s ease;
+    }
+    
+    .navbar .login-btn:hover {
+      background-color: #69ba6b;
       color: white;
-      transition: 0.2s ease;
-  }
-
-  .navbar .links.show-menu {
-      left: 0;
-  }
-
-  .navbar .links a {
-      display: inline-flex;
-      margin: 20px 0;
-      font-size: 1.2rem;
-      color: white;
-  }
-
-  .navbar .links a:hover {
-      color: #09343c;
-  }
-
-  .navbar .login-btn {
-      font-size: 0.9rem;
-      padding: 7px 10px;
-      margin-right: 10px;
-  }
-}
-
+    }
+    .profile-loginout-container {
+      display: flex;      
+      align-items: center; 
+      gap: 10px;         
+    }
+    .profile-img {
+      width: 22px;   
+      height: 22px;
+      object-fit: cover; 
+      margin-top: 10px;
+    }
+   
+    .logout-btn{
+      border: none;
+      outline: none;
+      background: white;
+      color: #275360;
+      font-size: 15px;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: 0.15s ease;
+      text-decoration: none;
+    }
+    
+    .logout-btn:hover{
+      background-color: #ffefef; 
+      color: #d9534f;
+    }
+    
+    @media (max-width: 768px) {
+      .navbar :is(.hamburger-btn, .close-btn) {
+          display: block;
+          font-size: 30px;
+          color: white;
+          margin-left: 20px;
+      }
+      .navbar .close-btn {
+        position: absolute;
+          left: 0; 
+          top: 25px;
+          display: block;
+          color: #fff;
+          cursor: pointer;
+    }
+      .navbar {
+          padding: 15px 0;
+      }
+    
+      .navbar .logo img {
+        display: flex;
+      width: 130px;
+      margin-left: 40px;
+      }
+    
+      .navbar .logo h2 {
+          font-size: 1.4rem;
+      }
+    
+      .navbar .links {
+          position: fixed;
+          top: 0;
+          z-index: 10;
+          left: -100%;
+          display: block;
+          height: 100vh;
+          width: 100%;
+          padding: 20px;
+          padding-top: 60px;
+          text-align: left;
+          background: #0f5256;
+          opacity: 0.9;
+          color: white;
+          transition: 0.2s ease;
+      }
+    
+      .navbar .links.show-menu {
+          left: 0;
+      }
+    
+      .navbar .links a {
+          display: inline-flex;
+          margin: 10px 0;
+          font-size: 25px;
+          color: white;
+      }
+    
+      .navbar .links a:hover {
+          color: #09343c;
+      }
+    
+      .navbar .login-btn {
+          font-size: 0.9rem;
+          padding: 7px 10px;
+          margin-right: 10px;
+      }
+      .profile-loginout-container {
+        margin-right: 10px;
+      }
+    }
+    
 
 
         /* blog style */
@@ -235,8 +275,7 @@
 /* css for footer */
 footer {
   position: relative;
- 
-  background-image: url(assest/background2.jpg);
+  background-image: url(../images/assest/background2.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -428,33 +467,33 @@ footer::before {
 
     <!-- header section -->
     <header>
-        <nav class="navbar">
-            <span class="hamburger-btn material-symbols-rounded">menu</span>
-            <a href="#" class="logo">
-                <img src="../images/assest/logo3.png" alt="logo">
-               
-            </a>
-            <ul class="links">
-                <span class="close-btn material-symbols-rounded">close</span>
-                <li><a href="/" >home</a></li>
-                <li><a href="/#about-us">about</a></li>
-                <li><a href="/product">products</a></li>
-                <li><a href="/cart"  class="active">Cart</a></li>
-                <li><a href="delivery.html">delivery</a></li>
-                <li><a href="/blog">blog</a></li>
-                <li><a href="/contact" >contact</a></li>
-            </ul>
-            <div class="profile-loginout-container">
-            <% if (!req.user) {%>
-                <a href="/login"><button class="login-btn">LOG IN</button></a>
-                <%}else{ %>
-                    <a class="profile-btn" href="/user/profile" style="text-decoration: none;">
-                        <img src="./images/assest/profile-img.png" alt="User Profile" class="profile-img">
-                      </a>
-                    <h3><a class="logout-btn"  href="/user/logout" >Logout</a></h3>
-                  <%}%>
-                </div>
-        </nav>
+      <nav class="navbar">
+        <span class="hamburger-btn material-symbols-rounded">menu</span>
+        <a href="#" class="logo">
+            <img src="../images/assest/vegiefy-logo.png" alt="logo">
+           
+        </a>
+        <ul class="links">
+            <span class="close-btn material-symbols-rounded">close</span>
+            <li><a href="/" >home</a></li>
+            <li><a href="/#about-us">about</a></li>
+            <li><a href="/product">products</a></li>
+            <li><a href="/cart">Cart</a></li>
+            <li><a href="/delivery">delivery</a></li>
+            <li><a href="/blog" class="active">blog</a></li>
+            <li><a href="/contact"  >contact</a></li>
+        </ul>
+        <div class="profile-loginout-container">
+          <% if (!req.user) {%>
+              <a href="/login"><button class="login-btn">LOG IN</button></a>
+              <%}else{ %>
+                  <a class="profile-btn" href="/user/profile" style="text-decoration: none;">
+                      <img src="./images/assest/profile-img.png" alt="User Profile" class="profile-img">
+                    </a>
+                  <h3><a class="logout-btn"  href="/user/logout" >Logout</a></h3>
+                <%}%>
+              </div>
+    </nav>
     </header>
   
 
@@ -464,7 +503,7 @@ footer::before {
             <h2>Latest Blog Posts</h2>
             <div class="blog-posts">
                 <div class="blog-post">
-                    <img src="assest/blogs/img-1.jpg" alt="Blog Post 1">
+                    <img src="./images/assest/blogs/img-1.jpg" alt="Blog Post 1">
                     <div class="blog-post-content">
                         <h3>Hydroponic Gardening Tip</h3>
                         <p>Learn how to start your own hydroponic garden at home with our expert tips.</p>
@@ -474,7 +513,7 @@ footer::before {
                     </div>
                 </div>
                 <div class="blog-post">
-                    <img src="assest/blogs/img-2.jpg" alt="Blog Post 2">
+                    <img src="./images/assest/blogs/img-2.jpg" alt="Blog Post 2">
                     <div class="blog-post-content">
                         <h3>Healthy Recipes Using Hydroponic Produce</h3>
                         <p>Discover delicious and nutritious recipes made with hydroponically grown produce.</p>
@@ -484,7 +523,7 @@ footer::before {
                     </div>
                 </div>
                 <div class="blog-post">
-                    <img src="assest/blogs/img-3.png" alt="Blog Post 2">
+                    <img src="./images/assest/blogs/img-3.png" alt="Blog Post 2">
                     <div class="blog-post-content">
                         <h3>Hydroponic Farming vs. Traditional Farming: A Comparison</h3>
                         <p>Compare and contrast hydroponic farming with traditional soil-based farming, 
@@ -495,7 +534,7 @@ footer::before {
                     </div>
                 </div>
                 <div class="blog-post">
-                    <img src="assest/blogs/img-4.jpg" alt="Blog Post 2">
+                    <img src="./images/assest/blogs/img-4.jpg" alt="Blog Post 2">
                     <div class="blog-post-content">
                         <h3>Innovative Hydroponic Techniques You Should Know</h3>
                         <p>Introduce readers to advanced hydroponic techniques like aeroponics and aquaponics, 
@@ -507,7 +546,7 @@ footer::before {
                     </div>
                 </div>
                 <div class="blog-post">
-                    <img src="assest/blogs/img-5.jpg" alt="Blog Post 2">
+                    <img src="./images/assest/blogs/img-5.jpg" alt="Blog Post 2">
                     <div class="blog-post-content">
                         <h3>How to Set Up a Basic Hydroponic System at Home</h3>
                         <p>Provide a step-by-step guide to help beginners set up a simple hydroponic system in their homes.</p>
@@ -518,7 +557,7 @@ footer::before {
                     </div>
                 </div>
                 <div class="blog-post">
-                    <img src="assest/blogs/img-6.jpg" alt="Blog Post 2">
+                    <img src="./images/assest/blogs/img-6.jpg" alt="Blog Post 2">
                     <div class="blog-post-content">
                         <h3>Common Mistakes to Avoid in Hydroponic Gardening</h3>
                         <p>Highlight mistakes that beginners often make and offer tips on how to avoid them for successful hydroponic gardening.</p>
@@ -537,12 +576,12 @@ footer::before {
     <footer>
         <div class="footer-content">
             <div class="footer-section about">
-                <h2 class="logo-text">Suryakanta Organics</h2>
+                <h2 class="logo-text">Vegiefy Organics</h2>
                 <p>Sustainable and fresh hydroponically grown produce delivered straight to your table.</p>
                 <div class="contact">
                     <span><i class="fas fa-phone"></i> &nbsp; +91-1234567890</span>
-                    <span><i class="fas fa-envelope"></i> &nbsp; info@suryakantaorganics.com</span>
-                    <span><i class="fas fa-map-marker-alt"></i> &nbsp; Suryakanta Ambule House, Murri, Gondia, 441601</span>
+                    <span><i class="fas fa-envelope"></i> &nbsp; support@vegiefy.com</span>
+                    <span><i class="fas fa-map-marker-alt"></i> &nbsp; Chandrashekar Ward Gondia</span>
                 </div>
                 <div class="socials">
                     <a href="#"><i class="fab fa-facebook"></i>&nbsp; Facebook</a>
@@ -554,12 +593,13 @@ footer::before {
             <div class="footer-section links">
                 <h2>Quick Links</h2>
                 <ul>
-                    <a href="index.html#about-us"><li>About Us</li></a>
-                    <a href="product.html"><li>Products</li></a>
-                    <a href="blogs.html"><li>Blog/News</li></a>
-                    <a href="delivery.html"><li>Delivery</li></a>
-                    <a href="contact.html"><li>Contact Us</li></a>
-                    <a href="delivery.html#faq"><li>FAQs</li></a>
+                 
+                    <a href="/#about-us" ><li>About Us</li></a>
+                    <a href="/product"><li>Products</li></a>
+                    <a  href="/blog"><li>Blog/News</li></a>
+                    <a  href="/delivery"><li>Delivery</li></a>
+                    <a href="/contact" ><li>Contact Us</li></a>
+                    <a href="/delivery#faq"><li>FAQs</li></a>
                 </ul>
             </div>
             <div class="footer-section contact-form">
@@ -575,7 +615,7 @@ footer::before {
             </div>
         </div>
         <div class="footer-bottom">
-            &copy; suryakantaorganics.com | Designed by Sakshi
+            &copy; vegiefyorganics.com
         </div>
     </footer>
       

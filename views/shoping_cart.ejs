@@ -52,7 +52,7 @@
 }
 
 .navbar .logo img {
-  width: 190px;
+  width: 110px;
 
 }
 
@@ -140,7 +140,7 @@
   .navbar .close-btn {
     position: absolute;
       left: 0; 
-      top: 35px;
+      top: 25px;
       display: block;
       color: #fff;
       cursor: pointer;
@@ -151,6 +151,8 @@
 
   .navbar .logo img {
       display: flex;
+      width: 130px;
+      margin-left: 40px;
   }
 
   .navbar .logo h2 {
@@ -393,6 +395,7 @@
 
 
 /* Checkout button */
+
 .checkout-btn {
     width: 100%;
     padding: 15px;
@@ -411,8 +414,106 @@
     background-color: #09343c;
 }
 
+/* Checkout Form Styles */
+.form-checkout{
+  margin-bottom: 20px;
+}
+.checkout-form {
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    max-width: 500px;
+    margin: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
+.checkout-form h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #0f5256;
+    margin-bottom: 15px;
+    
+}
 
+.checkout-form label {
+    font-size: 16px;
+    font-weight: bold;
+    display: block;
+}
+
+.checkout-form input,
+.checkout-form select {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #fff;
+    box-sizing: border-box;
+    transition: border 0.3s ease;
+}
+
+.checkout-form input:focus,
+.checkout-form select:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+.checkout-form button {
+    width: 100%;
+    background: linear-gradient(135deg, #0f5256, #09343c);
+    color: white;
+    font-size: 18px;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-form button:hover {
+  background: linear-gradient(135deg, #09343c, #0f5256);
+}
+
+ /* Modal styles */
+ .modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px; 
+    border-radius: 10px;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
 /* Responsive Styles */
 @media (max-width: 768px) {
     .shopping-cart{
@@ -432,6 +533,13 @@
     .product {
         flex: 1 1 calc(100% - 40px);
     }
+    .form-checkout{
+      padding: 10px;
+    }
+    .modal-content{
+      margin-top: 150px;
+    }
+   
     
 }
 
@@ -441,7 +549,6 @@
       /* css for footer */
 footer {
   position: relative;
-  /* background: linear-gradient(135deg, #27ae60, #145214); */
   background-image: url(../images/assest/background2.jpg);
   background-size: cover;
   background-repeat: no-repeat;
@@ -629,15 +736,15 @@ footer::before {
     <nav class="navbar">
         <span class="hamburger-btn material-symbols-rounded">menu</span>
         <a href="#" class="logo">
-            <img src="../images/assest/logo3.png" alt="logo">
+          <img src="../images/assest/vegiefy-logo.png" alt="logo">
            
         </a>
         <ul class="links">
             <span class="close-btn material-symbols-rounded">close</span>
-            <li><a href="/" class="active">home</a></li>
+            <li><a href="/" >home</a></li>
             <li><a href="/#about-us">about</a></li>
             <li><a href="/product">products</a></li>
-            <li><a href="/cart">Cart</a></li>
+            <li><a href="/cart" class="active">Cart</a></li>
             <li><a href="/delivery">delivery</a></li>
             <li><a href="/blog"  >blog</a></li>
             <li><a href="/contact">contact</a></li>
@@ -687,22 +794,61 @@ footer::before {
             </div>
             <div class="divider"></div>
         
-            <button class="checkout-btn">Proceed to Checkout</button>
+            <button class="checkout-btn" onclick="showCheckoutForm()">Proceed to Checkout</button>
         </div>
         
     </div>
-    
+   
+   <!-- Checkout form -->
+   <div class="form-checkout">
+    <div class="checkout-form" id="checkoutForm" style="display: none;">
+        <h2>Checkout Form</h2>
+        <form onsubmit="return showSuccessMessage();">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required>
+            
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="paymentMode">Payment Mode:</label>
+            <select id="paymentMode" name="paymentMode" required>
+                <option value="creditCard">Credit Card</option>
+                <option value="debitCard">Debit Card</option>
+                <option value="netBanking">Net Banking</option>
+                <option value="upi">UPI</option>
+                <option value="cashOnDelivery">Cash on Delivery</option>
+            </select>
+            
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </div>
+</div>
+
+<!--  Modal -->
+<div id="successModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">X</span>
+        <h2>Your Order is Placed Successfully!</h2>
+    </div>
+</div>
+  
 
      <!-- footer section -->
      <footer>
         <div class="footer-content">
           <div class="footer-section about">
-            <h2 class="logo-text">Suryakanta Organics</h2>
+            <h2 class="logo-text">Vegiefy Organics</h2>
             <p>Sustainable and fresh hydroponically grown produce delivered straight to your table.</p>
             <div class="contact">
               <span><i class="fas fa-phone"></i> &nbsp; +91-1234567890</span>
-              <span><i class="fas fa-envelope"></i> &nbsp; info@suryakantaorganics.com</span>
-              <span><i class="fas fa-map-marker-alt"></i> &nbsp; Suryakanta Ambule House, Murri, Gondia, 441601</span>
+              <span><i class="fas fa-envelope"></i> &nbsp; support@vegiefy.com</span>
+              <span><i class="fas fa-map-marker-alt"></i> &nbsp; Chandrashekar Ward Gondia</span>
             </div>
             <div class="socials">
               <a href="#"><i class="fab fa-facebook"></i>&nbsp; Facebook</a>
@@ -714,24 +860,12 @@ footer::before {
           <div class="footer-section links">
             <h2>Quick Links</h2>
             <ul>
-              <a href="index.html#about-us">
-                <li>About Us</li>
-              </a>
-              <a href="product.html">
-                <li>Products</li>
-              </a>
-              <a href="blogs.html">
-                <li>Blog/News</li>
-              </a>
-              <a href="delivery.html">
-                <li>Delivery</li>
-              </a>
-              <a href="contact.html">
-                <li>Contact Us</li>
-              </a>
-              <a href="delivery.html#faq">
-                <li>FAQs</li>
-              </a>
+              <a href="/#about-us" ><li>About Us</li></a>
+              <a href="/product"><li>Products</li></a>
+              <a  href="/blog"><li>Blog/News</li></a>
+              <a  href="/delivery"><li>Delivery</li></a>
+              <a href="/contact" ><li>Contact Us</li></a>
+              <a href="/delivery#faq"><li>FAQs</li></a>
             </ul>
           </div>
           <div class="footer-section contact-form">
@@ -747,7 +881,7 @@ footer::before {
           </div>
         </div>
         <div class="footer-bottom">
-          &copy; suryakantaorganics.com 
+          &copy; vegiefyorganics.com 
         </div>
       </footer>
     <script>
@@ -765,9 +899,30 @@ hamburgerBtn.addEventListener("click", () => {
 
 // Hide mobile menu
 hideMenuBtn.addEventListener("click", () =>  hamburgerBtn.click());
+// -----------------------------------------------------------------------
+    // js for checkout form
+    function showCheckoutForm() {
+            var form = document.getElementById('checkoutForm');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
 
-    
-    
+        function showSuccessMessage() {
+            document.getElementById('successModal').style.display = 'block';
+            document.querySelector(".checkout-form form").reset();
+            document.getElementById('checkoutForm').style.display = 'none';
+            return false; 
+        }
+
+        function closeModal() {
+            document.getElementById('successModal').style.display = 'none';
+        }
+        window.onclick = function(event) {
+            var modal = document.getElementById('successModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    // -----------------------------------------------------------------------------------------------------
       // js for footer section
       document.addEventListener("DOMContentLoaded", function () {
                 const btn = document.querySelector('.contact-btn');
