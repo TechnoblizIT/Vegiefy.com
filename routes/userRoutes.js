@@ -4,7 +4,8 @@ const {registerUser,loginUser,logoutUser}=require("../controllers/authController
 const {checkuser}= require("../middlewares/checkUser")
 const{isloggedin}=require("../middlewares/isloggedin")
 const userModel=require("../models/user-model")
-
+const orderMoel=require("../models/orders-model")
+const nodemailer=require("nodemailer");
 // Define the routes
 
 
@@ -32,6 +33,107 @@ router.get("/removeitem/:productid", isloggedin, checkuser, async (req, res) => 
     await user.save();
     res.redirect("/cart");
 });
+router.post("/createOrder",isloggedin,checkuser, async function(req, res) {
+
+const user = await userModel.findOne({ email: req.user.email }).populate("cart")
+var carttotal=0;
+var cartcount=0
+const products=[]
+user.cart.forEach((item)=>{ carttotal+=item.price 
+   cartcount+=1
+   products.push(item.name)
+})
+const total_price=carttotal-cartcount/100*3
+const newOrder = new orderMoel({
+    Name: req.body.name,
+    Date: Date.now(),
+    Address: req.body.address,
+    Products: user.cart,
+    TotalPrice: total_price,
+    Phone: req.body.phone
+
+})
+await newOrder.save()
+user.cart=[]
+await user.save()
+console.log(newOrder)
+let transporter = nodemailer.createTransport({
+    host: 'smtpout.secureserver.net', 
+    port: 587, 
+    secure: false, 
+    auth: {
+        user: 'support@vegiefy.com', 
+        pass: 'Professor@420' 
+    }
+});
 
 
+let mailOptions = {
+    from: 'support@vegiefy.com',
+    to: req.body.email, 
+    subject: 'Order Confirmation - Vegiefy Organics Framing',
+    text: `Dear ${req.body.name},
+
+Thank you for your order with Vegiefy Organics Framing. We are pleased to inform you that your order has been successfully placed.
+
+Order Details:
+- Order ID: ${newOrder._id}
+- Total Amount: ₹${carttotal}
+- Products Ordered: ${products}
+- Delivery Time: Within 2-3 hours
+
+We will notify you once your order is out for delivery. Should you have any questions or need further assistance, please do not hesitate to contact our support team at support@vegiefy.com.
+
+Thank you for choosing Vegiefy Organics. We look forward to serving you again!
+
+Best regards,
+Vegiefy Organics Framing
+Customer Support Team
+`
+};
+
+let mailOptions2 = {
+    from: 'support@vegiefy.com',
+    to: 'support@vegiefy.com', 
+    subject: 'New Order Received - Order ID: ' + newOrder._id,
+    text: `Hello Support Team,
+
+A new order has been placed on Vegiefy Organics. Below are the details:
+
+Order Details:
+- Order ID: ${newOrder._id}
+- Customer Name: ${req.body.name}
+- Delivery Address: ${req.body.address}
+- Products Ordered: ${products}
+- Customer Mobile: ${req.body.phone}
+- Total Amount: ₹${carttotal}
+
+Please ensure timely processing and delivery of this order.
+
+Best regards,
+Vegiefy Organics Framing
+Order Management Team
+`
+};
+
+
+
+transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+        console.log('Error:', error);
+    } else {
+        console.log('Customer Email sent: ' + info.response);
+    }
+});
+
+
+transporter.sendMail(mailOptions2, function(error, info){
+    if (error) {
+        console.log('Error:', error);
+    } else {
+        console.log('Support Email sent: ' + info.response);
+    }
+});
+res.redirect("/")
+})
 module.exports = router;
