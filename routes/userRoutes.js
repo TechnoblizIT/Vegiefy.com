@@ -43,7 +43,7 @@ user.cart.forEach((item)=>{ carttotal+=item.price
    cartcount+=1
    products.push(item.name)
 })
-const total_price=carttotal-cartcount/100*3
+const total_price=carttotal-carttotal/100*3
 const newOrder = new orderMoel({
     Name: req.body.name,
     Date: Date.now(),
@@ -71,14 +71,14 @@ let transporter = nodemailer.createTransport({
 let mailOptions = {
     from: 'support@vegiefy.com',
     to: req.body.email, 
-    subject: 'Order Confirmation - Vegiefy Organics Framing',
+    subject: 'Order Confirmation - Vegiefy Organics Farming',
     text: `Dear ${req.body.name},
 
 Thank you for your order with Vegiefy Organics Framing. We are pleased to inform you that your order has been successfully placed.
 
 Order Details:
 - Order ID: ${newOrder._id}
-- Total Amount: ₹${carttotal}
+- Total Amount: ₹${total_price}
 - Products Ordered: ${products}
 - Delivery Time: Within 2-3 hours
 
@@ -87,7 +87,7 @@ We will notify you once your order is out for delivery. Should you have any ques
 Thank you for choosing Vegiefy Organics. We look forward to serving you again!
 
 Best regards,
-Vegiefy Organics Framing
+Vegiefy Organics Farming
 Customer Support Team
 `
 };
@@ -106,12 +106,12 @@ Order Details:
 - Delivery Address: ${req.body.address}
 - Products Ordered: ${products}
 - Customer Mobile: ${req.body.phone}
-- Total Amount: ₹${carttotal}
+- Total Amount: ₹${total_price}
 
 Please ensure timely processing and delivery of this order.
 
 Best regards,
-Vegiefy Organics Framing
+Vegiefy Organics Farming
 Order Management Team
 `
 };
@@ -134,6 +134,7 @@ transporter.sendMail(mailOptions2, function(error, info){
         console.log('Support Email sent: ' + info.response);
     }
 });
+
 res.redirect("/")
 })
 module.exports = router;
