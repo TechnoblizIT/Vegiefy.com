@@ -71,7 +71,7 @@ let transporter = nodemailer.createTransport({
 let mailOptions = {
     from: 'support@vegiefy.com',
     to: req.body.email, 
-    subject: 'Order Confirmation - Vegiefy Organics Framing',
+    subject: 'Order Confirmation - Vegiefy Organics Farming',
     text: `Dear ${req.body.name},
 
 Thank you for your order with Vegiefy Organics Framing. We are pleased to inform you that your order has been successfully placed.
@@ -87,7 +87,7 @@ We will notify you once your order is out for delivery. Should you have any ques
 Thank you for choosing Vegiefy Organics. We look forward to serving you again!
 
 Best regards,
-Vegiefy Organics Framing
+Vegiefy Organics Farming
 Customer Support Team
 `
 };
@@ -111,7 +111,7 @@ Order Details:
 Please ensure timely processing and delivery of this order.
 
 Best regards,
-Vegiefy Organics Framing
+Vegiefy Organics Farming
 Order Management Team
 `
 };
