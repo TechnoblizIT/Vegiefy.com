@@ -253,7 +253,7 @@
         .product-description {
             font-size: 1em;
             color: #888;
-            margin: 10px 0;
+            margin: 10px 5px;
         }
 
         .product-price {
@@ -804,7 +804,7 @@ footer::before {
    <div class="form-checkout">
     <div class="checkout-form" id="checkoutForm" style="display: none;">
         <h2>Checkout Form</h2>
-        <form onsubmit="return showSuccessMessage();">
+        <form id="myForm">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
             
@@ -819,10 +819,7 @@ footer::before {
             
             <label for="paymentMode">Payment Mode:</label>
             <select id="paymentMode" name="paymentMode" required>
-                <option value="creditCard">Credit Card</option>
-                <option value="debitCard">Debit Card</option>
-                <option value="netBanking">Net Banking</option>
-                <option value="upi">UPI</option>
+                
                 <option value="cashOnDelivery">Cash on Delivery</option>
             </select>
             
@@ -831,14 +828,7 @@ footer::before {
     </div>
 </div>
 
-<!--Modal -->
-<div id="successModal" class="modal">
-  <div class="modal-content">
-      <span class="close" onclick="closeModal()">X</span>
-      <h2>Your Order is Placed Successfully!</h2>
-  </div>
-</div>
-  
+
 
      <!-- footer section -->
      <footer>
@@ -903,30 +893,15 @@ hideMenuBtn.addEventListener("click", () =>  hamburgerBtn.click());
 // -----------------------------------------------------------------------
     // js for checkout form
     function showCheckoutForm() {
-  
     var form = document.getElementById('checkoutForm');
     form.style.display = 'block';
     form.scrollIntoView({ behavior: 'smooth' });
 }
 
-function showSuccessMessage() {
-    document.getElementById('successModal').style.display = 'block';
-    document.querySelector(".checkout-form form").reset();
-    document.getElementById('checkoutForm').style.display = 'none';
-    return false;
-}
-
-function closeModal() {
-    document.getElementById('successModal').style.display = 'none';
-}
-
-window.onclick = function(event) {
-    var modal = document.getElementById('successModal');
-    if (event.target === modal) {
-        closeModal();
-    }
-}
-
+document.getElementById('myForm').addEventListener('submit', function(event) {
+        
+        alert("Form is being submitted");
+    });
     // -----------------------------------------------------------------------------------------------------
       // js for footer section
       document.addEventListener("DOMContentLoaded", function () {
