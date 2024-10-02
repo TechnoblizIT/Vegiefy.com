@@ -770,7 +770,6 @@ footer::before {
                 <h2 class="product-name"><%=items.name%></h2>
                 <p class="product-description"><%= items.description %>.</p>
                 <p class="product-price">₹<%=items.price%></p>
-                <p><%=items._id%></p>
                 <a class="remove-btn" href="/user/removeitem/<%=items._id%>">Remove</a>
             </div>
             <% }) %>
@@ -800,43 +799,39 @@ footer::before {
         
     </div>
    
-   <!-- Checkout form -->
-   <div class="form-checkout">
-    <div class="checkout-form" id="checkoutForm" style="display: none;">
-        <h2>Checkout Form</h2>
-        <form onsubmit="return showSuccessMessage();">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-            
-            <label for="address">Address:</label>
-            <input type="text" id="address" name="address" required>
-            
-            <label for="phone">Phone:</label>
-            <input type="tel" id="phone" name="phone" required>
-            
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            
-            <label for="paymentMode">Payment Mode:</label>
-            <select id="paymentMode" name="paymentMode" required>
-                <option value="creditCard">Credit Card</option>
-                <option value="debitCard">Debit Card</option>
-                <option value="netBanking">Net Banking</option>
-                <option value="upi">UPI</option>
-                <option value="cashOnDelivery">Cash on Delivery</option>
-            </select>
-            
-            <button type="submit" class="submit-btn">Submit</button>
-        </form>
-    </div>
+  <!-- Checkout form -->
+<div class="form-checkout">
+  <div class="checkout-form" id="checkoutForm" style="display: none;">
+      <h2>Checkout Form</h2>
+      <form onsubmit="return showSuccessMessage();">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required>
+          
+          <label for="address">Address:</label>
+          <input type="text" id="address" name="address" required>
+          
+          <label for="phone">Phone:</label>
+          <input type="tel" id="phone" name="phone" required>
+          
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+          
+          <label for="paymentMode">Payment Mode:</label>
+          <select id="paymentMode" name="paymentMode" required>
+              <option value="cashOnDelivery">Cash on Delivery</option>
+          </select>
+          
+          <button type="submit" class="submit-btn">Submit</button>
+      </form>
+  </div>
 </div>
 
-<!--  Modal -->
+<!--Modal -->
 <div id="successModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">X</span>
-        <h2>Your Order is Placed Successfully!</h2>
-    </div>
+  <div class="modal-content">
+      <span class="close" onclick="closeModal()">X</span>
+      <h2>Your Order is Placed Successfully!</h2>
+  </div>
 </div>
   
 
@@ -903,26 +898,30 @@ hideMenuBtn.addEventListener("click", () =>  hamburgerBtn.click());
 // -----------------------------------------------------------------------
     // js for checkout form
     function showCheckoutForm() {
-            var form = document.getElementById('checkoutForm');
-            form.style.display = form.style.display === 'none' ? 'block' : 'none';
-        }
+  
+    var form = document.getElementById('checkoutForm');
+    form.style.display = 'block';
+    form.scrollIntoView({ behavior: 'smooth' });
+}
 
-        function showSuccessMessage() {
-            document.getElementById('successModal').style.display = 'block';
-            document.querySelector(".checkout-form form").reset();
-            document.getElementById('checkoutForm').style.display = 'none';
-            return false; 
-        }
+function showSuccessMessage() {
+    document.getElementById('successModal').style.display = 'block';
+    document.querySelector(".checkout-form form").reset();
+    document.getElementById('checkoutForm').style.display = 'none';
+    return false;
+}
 
-        function closeModal() {
-            document.getElementById('successModal').style.display = 'none';
-        }
-        window.onclick = function(event) {
-            var modal = document.getElementById('successModal');
-            if (event.target === modal) {
-                closeModal();
-            }
-        }
+function closeModal() {
+    document.getElementById('successModal').style.display = 'none';
+}
+
+window.onclick = function(event) {
+    var modal = document.getElementById('successModal');
+    if (event.target === modal) {
+        closeModal();
+    }
+}
+
     // -----------------------------------------------------------------------------------------------------
       // js for footer section
       document.addEventListener("DOMContentLoaded", function () {
