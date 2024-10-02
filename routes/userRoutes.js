@@ -6,6 +6,7 @@ const{isloggedin}=require("../middlewares/isloggedin")
 const userModel=require("../models/user-model")
 const orderMoel=require("../models/orders-model")
 const nodemailer=require("nodemailer");
+const queryModel=require("../models/user-query")
 // Define the routes
 
 
@@ -63,7 +64,7 @@ let transporter = nodemailer.createTransport({
     secure: false, 
     auth: {
         user: 'support@vegiefy.com', 
-        pass: 'Professor@420' 
+        pass: process.env.MAIL_PASS
     }
 });
 
@@ -135,6 +136,68 @@ transporter.sendMail(mailOptions2, function(error, info){
     }
 });
 
+res.redirect("/")
+})
+
+router.post("/contactus", async function(req, res){
+    console.log("heelp")
+    const newQuery = new queryModel({
+        name: req.body.name,
+        email: req.body.email,
+        subject: req.body.subject,
+        message: req.body.message,
+        date: Date.now()
+    })
+   await newQuery.save()
+   let transporter = nodemailer.createTransport({
+    host: 'smtpout.secureserver.net', 
+    port: 587, 
+    secure: false, 
+    auth: {
+        user: 'support@vegiefy.com', 
+        pass: process.env.MAIL_PASS
+    }
+});
+
+let mailOptions = {
+    from: 'support@vegiefy.com',
+    to: req.body.email, 
+    subject: 'Vegiefy Organics Farming - Query Received',
+    text: `Dear ${req.body.name},
+
+Thank you for reaching out to Vegiefy Organics Farming. We have received your query and will get back to you shortly.`
+}
+let mailOptions2 = {
+    from: 'support@vegiefy.com',
+    to: "support@vegiefy.com", 
+    subject: 'Vegiefy Organics Farming - Query',
+    text: `New Query Received:
+
+Name: ${req.body.name}
+Email: ${req.body.email}
+Subject: ${req.body.subject}
+Message: ${req.body.message}
+
+Please check our website for updates on our products and services.`
+}
+
+
+transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+        console.log('Error:', error);
+    } else {
+        console.log('Email sent: ', info.response);
+    }
+    
+})
+transporter.sendMail(mailOptions2, function(error, info){
+    if (error) {
+        console.log('Error:', error);
+    } else {
+        console.log('Support Email sent: ', info.response);
+    }
+
+})
 res.redirect("/")
 })
 module.exports = router;

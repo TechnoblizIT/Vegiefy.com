@@ -804,7 +804,7 @@ footer::before {
    <div class="form-checkout">
     <div class="checkout-form" id="checkoutForm" style="display: none;">
         <h2>Checkout Form</h2>
-        <form onsubmit="return showSuccessMessage();">
+        <form id="myForm" action="/user/createOrder" method="post">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" value="<%=user.name%>" required>
             
@@ -819,10 +819,6 @@ footer::before {
             
             <label for="paymentMode">Payment Mode:</label>
             <select id="paymentMode" name="paymentMode" required>
-                <option value="creditCard">Credit Card</option>
-                <option value="debitCard">Debit Card</option>
-                <option value="netBanking">Net Banking</option>
-                <option value="upi">UPI</option>
                 <option value="cashOnDelivery">Cash on Delivery</option>
             </select>
             
@@ -837,10 +833,10 @@ footer::before {
      <footer>
         <div class="footer-content">
           <div class="footer-section about">
-            <h2 class="logo-text">Vegiefy Organics</h2>
+            <h2 class="logo-text">Vegiefy Organics Farming</h2>
             <p>Sustainable and fresh hydroponically grown produce delivered straight to your table.</p>
             <div class="contact">
-              <span><i class="fas fa-phone"></i> &nbsp; +91-1234567890</span>
+              <span><i class="fas fa-phone"></i> &nbsp; +91-8698105221</span>
               <span><i class="fas fa-envelope"></i> &nbsp; support@vegiefy.com</span>
               <span><i class="fas fa-map-marker-alt"></i> &nbsp; Chandrashekar Ward Gondia</span>
             </div>
@@ -875,7 +871,7 @@ footer::before {
           </div>
         </div>
         <div class="footer-bottom">
-          &copy; vegiefyorganics.com 
+          &copy; www.vegiefy.com 
         </div>
       </footer>
     <script>
@@ -904,6 +900,7 @@ hideMenuBtn.addEventListener("click", () =>  hamburgerBtn.click());
 document.getElementById('myForm').addEventListener('submit', function(event) {
         
         alert("Form is being submitted");
+        document.getElementById('myForm').submit();
     });
     // -----------------------------------------------------------------------------------------------------
       // js for footer section

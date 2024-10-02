@@ -509,7 +509,7 @@ footer::before {
             <p>Feel free to reach out to us with any questions, feedback, or inquiries. We'll get back to you as soon as possible.</p>
             <div class="contact-forms">
                 <% if (!req.user) {%>
-                <form>
+                <form action="/user/contactus" method="post">
                     <input type="text" name="name" placeholder="Your Name" required>
                     <input type="email" name="email" placeholder="Your Email" required>
                     <input type="text" name="subject" placeholder="Subject" required>
@@ -525,7 +525,7 @@ footer::before {
                     <button type="submit" class="sub">Send Message</button>
                 </form>
                 <%}else{ %>
-                    <form>
+                  <form action="/user/contactus" method="post">
                     <input type="text" name="name" placeholder="Your Name" required value=<%=req.user.name %>>
                     <input type="email" name="email" placeholder="Your Email" required value=<%=req.user.email %>>
                     <input type="text" name="subject" placeholder="Subject" required>
@@ -551,10 +551,10 @@ footer::before {
     <footer>
         <div class="footer-content">
             <div class="footer-section about">
-                <h2 class="logo-text">Vegiefy Organics</h2>
+                <h2 class="logo-text">Vegiefy Organics Farming</h2>
                 <p>Sustainable and fresh hydroponically grown produce delivered straight to your table.</p>
                 <div class="contacts">
-                    <span><i class="fas fa-phone"></i> &nbsp; +91-1234567890</span>
+                    <span><i class="fas fa-phone"></i> &nbsp; +91-8698105221</span>
                     <span><i class="fas fa-envelope"></i> &nbsp; support@vegiefy.com</span>
                     <span><i class="fas fa-map-marker-alt"></i> &nbsp; Ambule House, Murri, Gondia, 441601</span>
                 </div>
@@ -589,7 +589,7 @@ footer::before {
             </div>
         </div>
         <div class="footer-bottom">
-            &copy; vegiefyorganics.com
+            &copy; www.vegiefy.com
         </div>
     </footer>
       
