@@ -7,119 +7,239 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <link href='https://fonts.googleapis.com/css?family=Afacad' rel='stylesheet'>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 
     <link rel="stylesheet" href="../stylesheet/index.css">
 </head>
 <body>
     <body>
-       <!-- header section -->
-     <header>
-      <nav class="navbar">
-          <span class="hamburger-btn material-symbols-rounded">menu</span>
-          <a href="#" class="logo">
-              <img src="../images/assest/vegiefy-logo.png" alt="logo">
-             
-          </a>
-          <ul class="links">
-              <span class="close-btn material-symbols-rounded">close</span>
-              <li><a href="/" class="active">home</a></li>
-              <li><a href="/#about-us">about</a></li>
-              <li><a href="/product">products</a></li>
-              <li><a href="/cart">Cart</a></li>
-              <li><a href="/delivery">delivery</a></li>
-              <li><a href="/blog"  >blog</a></li>
-              <li><a href="/contact">contact</a></li>
-          </ul>
-          <div class="profile-loginout-container">
-            <% if (!req.user) {%>
-                <a href="/login"><button class="login-btn">LOG IN</button></a>
-                <%}else{ %>
-                    <a class="profile-btn" href="/user/profile" style="text-decoration: none;">
-                        <img src="./images/assest/profile-img.png" alt="User Profile" class="profile-img">
-                      </a>
-                    <h3><a class="logout-btn"  href="/user/logout" >Logout</a></h3>
-                  <%}%>
-                </div>
-      </nav>
-  </header>
+      <!-- Header Section -->
+<header>
+  <nav class="navbar">
+    <div class="top-nav">
+     
+      <div class="logo-search-container">
+        <a href="#" class="logo">
+          <img src="../images/assest/vegiefy-logo.png" alt="Vegiefy Logo">
+        </a>
+        <div class="search-bar">
+          <input type="text" placeholder="Search for products...">
+          <button><i class="fas fa-search"></i></button>
+        </div>
+      </div>
+      
+      <div class="horizontal-line"></div>
+   
+      <div class="nav-icons">
+        <div class="hamburger-btn">
+          <i class="fas fa-bars"></i>
+        </div>
+        <a href="/cart" class="cart-icon">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count">0</span>
+        </a>
+        <a href="/user/profile" class="profile-icon">
+          <i class="fas fa-user"></i>
+        </a>
+        <a href="/login"><button class="login-btn">LOG IN</button></a>
 
-  
-          <!-- start html for hero image section -->
-       <section class="hero">
-        <div class="hero-text">
-          <h1>Welcome to</h1><span>Vegiefy Organic Farming</span>
-          <p>Discover the freshest hydroponically grown produce!</p><br>
-          <a href="/product" class="cta">Explore Products</a>
-          <a href="/delivery" class="cta">Place Order</a>
-        </div>
-     </section>
-     <!-- end html for hero image section -->
-      <section class="about" id="about-us">
-        <div class="about-container">
-          <h2>Why Choose the Vegiefy Organic Farming Approach?</h2>
-          <p>At <span>Vegiefy Organics Farming Hydroponics</span>, we are dedicated to <span>revolutionizing</span> the way fresh produce is grown and delivered. Our journey began with a passion for sustainable agriculture and a commitment to providing <span>nutrient-rich</span>, pesticide-free produce directly to consumers.</p>
-    
-           <p> Using cutting-edge hydroponic farming techniques, we grow a variety of <span>high-quality produce</span>, including leafy greens, herbs, and vegetables. Our process ensures optimal plant growth and minimizes environmental impact, leading to healthier crops and a more <span>sustainable future</span>.</p>
-    
-           <div class="hydroponic">
-            <div class="image">
-                <img src="../images/assest/support.jpg" alt="">
+        <!-- <a href="/user/logout" ><button class="logout-btn" >LOG OUT</button></a> -->
+      </div>
+    </div>
+
+    <!-- Bottom Navigation: Helpline & Links -->
+    <div class="bottom-nav">
+      <div class="helpline">
+        <a href="https://www.facebook.com" target="_blank"><i class="fa-brands fa-square-facebook"></i></i></a>
+    <!-- <a href="https://www.twitter.com" target="_blank"><i class="fa-brands fa-square-twitter"></i></i></a> -->
+    <a href="https://www.instagram.com" target="_blank"><i class="fa-brands fa-square-instagram"></i></i></a>
+    <!-- <a href="https://www.linkedin.com" target="_blank"><i class="fa-brands fa-linkedin"></i></a> -->
+    <i class="fa-solid fa-phone"></i><span>+91-8698105221</span>
+      </div>
+
+     <!-- Navigation Links -->
+      <ul class="nav-links">
+        <li><a href="/" class="nav-active">Home</a></li>
+              <li><a href="/#about-us">About</a></li>
+              <li><a href="/product">Products</a></li>
+              <li><a href="/cart">Cart</a></li>
+              <li><a href="/delivery">Delivery</a></li>
+              <li><a href="/blog"  >Blog</a></li>
+              <li><a href="/contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+
+
+          <!-- html for hero-slider -->
+          <section class="hero-slider">
+            <div class="hero-slide active">
+              <img src="./images/assest/pic-1.jpg" alt="Slide 1">
+              <div class="hero-text">
+                <h1>Welcome to</h1>
+                <span>Vegiefy Organic Farming</span>
+                <p>Discover the freshest hydroponically grown produce!</p>
+                <a href="/product" class="cta">Explore Products</a>
+                <a href="/delivery" class="cta">Place Order</a>
+              </div>
             </div>
-            <div class="content">
-                <p>Our state-of-the-art vertical hydroponic farming systems are soil-less and fully automated, making them adaptable to various locations such as warehouses, shipping containers, indoor spaces, rooftops, and open land.</p>
+            <div class="hero-slide">
+              <img src="./images/assest/support.jpg" alt="Slide 2">
+              <div class="hero-text">
+                <h1>Fresh, Organic & Healthy</h1>
+                <span>Vegiefy Vegetables</span>
+                <p>Experience our hand-picked, hydroponically grown veggies!</p>
+                <a href="/product" class="cta">Shop Now</a>
+              </div>
             </div>
-        </div>
+            <div class="hero-slide">
+              <img src="./images/assest/pic-4.jpg" alt="Slide 3">
+              <div class="hero-text">
+                <h1>Eco-Friendly</h1>
+                <span>Hydroponic Techniques</span>
+                <p>Grow sustainably with our eco-conscious farming practices!</p>
+                <a href="/delivery" class="cta">Learn More</a>
+              </div>
+            </div>
+                
+            <div class="hero-slide">
+              <img src="./images/assest/pic-3.jpg" alt="Slide 4">
+              <div class="hero-text">
+                <h1>Fast &amp; Fresh</h1>
+                <span>Direct Farm to Table</span>
+                <p>Get fresh produce delivered right to your doorstep!</p>
+                <a href="/delivery" class="cta">Order Now</a>
+              </div>
+              </div>
+            <div class="nav-arrows">
+              <div class="arrow left" onclick="prevSlide()">&#10094;</div>
+              <div class="arrow right" onclick="nextSlide()">&#10095;</div>
+            </div>
+          </section>
           
-      </section>
+          
+     <!-- end html for hero image section -->
+
+     <!--start  About Us Section HTML -->
+<section class="about-section" id="about-us">
+  <div class="about-container">
+    <h2>Why Choose the Vegiefy Organic Farming Approach?</h2>
+    <p>At <span>Vegiefy Organics Hydroponics</span>, we are dedicated to <span>revolutionizing</span> the way fresh produce is grown and delivered. Our journey began with a passion for sustainable agriculture and a commitment to providing <span>nutrient-rich</span>, pesticide-free produce directly to consumers.</p>
+
+    <p>Using cutting-edge hydroponic farming techniques, we grow a variety of <span>high-quality produce</span>, including leafy greens, herbs, and vegetables. Our process ensures optimal plant growth and minimizes environmental impact, leading to healthier crops and a more <span>sustainable future</span>.</p>
+
+    <div class="hydroponic">
+      <div class="image">
+        <img src="./images/assest/vegetables-752153.jpg" alt="Hydroponic Farming">
+      </div>
+      <div class="content">
+        <p>Our state-of-the-art vertical hydroponic farming systems are soil-less and fully automated, making them adaptable to various locations such as warehouses, shipping containers, indoor spaces, rooftops, and open land.</p>
+      </div>
+    </div>
+
+    
+    <div class="quote">
+      <p>"Revolutionizing agriculture for a <span>greener</span>, <span>healthier</span> future."</p>
+    </div>
+  </div>
+</section>
+
        
-      <!-- team section -->
-      <div class="team"><h2>meet the team behind our success</h2></div>
-      <section class="team-section">
-        
-        <div class="team-member">
-          <div class="team-member-img">
-            <img src="../images/assest/team/office-women.png" alt="Team Member 1">
+    <!-- Start product swiper section -->
+<section class="product-swiper">
+  <div class="swiper product-slider">
+      <div class="swiper-wrapper">
+          <div class="swiper-slide box">
+              <img src="./images/assest/products/crops/corn.jpg" alt="">
+              <h3>Corn</h3>
+              <div class="product-info">
+                <p class="price">50/-</p>
+                <a href="">
+                  <button class="add-to-cart">
+                    <i class="fa-solid fa-cart-shopping"></i> &nbsp; Add to Cart
+                  </button>
+                </a>
+              </div>
           </div>
-          <div class="team-member-info">
-            <h3>zannifer Doe</h3>
-            <p>Founder & CEO</p>
+
+          <div class="swiper-slide box">
+              <img src="./images/assest/products/crops/cucumber.jpg" alt="">
+              <h3>Cucumber</h3>
+              <div class="product-info">
+                <p class="price">30/-</p>
+                <a href="">
+                  <button class="add-to-cart">
+                    <i class="fa-solid fa-cart-shopping"></i> &nbsp; Add to Cart
+                  </button>
+                </a>
+              </div>
           </div>
-        </div>
-        <div class="team-member">
-          <div class="team-member-img">
-            <img src="../images/assest/team/office-men.png" alt="Team Member 2">
+
+          <div class="swiper-slide box">
+              <img src="./images/assest/products/crops/onions.jpg" alt="">
+              <h3>Onions</h3>
+              <div class="product-info">
+                <p class="price">50/-</p>
+                <a href="">
+                  <button class="add-to-cart">
+                    <i class="fa-solid fa-cart-shopping"></i> &nbsp; Add to Cart
+                  </button>
+                </a>
+              </div>
           </div>
-          <div class="team-member-info">
-            <h3>Jane Smith</h3>
-            <p>Head of Operations</p>
+
+          <div class="swiper-slide box">
+              <img src="./images/assest/products/crops/potatoes.jpg" alt="">
+              <h3>Potatoes</h3>
+              <div class="product-info">
+                <p class="price">40/-</p>
+                <a href="">
+                  <button class="add-to-cart">
+                    <i class="fa-solid fa-cart-shopping"></i> &nbsp; Add to Cart
+                  </button>
+                </a>
+              </div>
           </div>
-        </div>
-        <div class="team-member">
-          <div class="team-member-img">
-            <img src="../images/assest/team/office-women.png" alt="Team Member 3">
-          </div>
-          <div class="team-member-info">
-            <h3>Nancy Doe</h3>
-            <p>Head of Marketing</p>
-          </div>
-        </div>
-        <div class="team-member">
-            <div class="team-member-img">
-              <img src="../images/assest/team/office-men.png" alt="Team Member 3">
+          <div class="swiper-slide box">
+            <img src="./images/assest/products/crops/pumpkins.jpg" alt="">
+            <h3>Pumpkins</h3>
+            <div class="product-info">
+              <p class="price">30/-</p>
+              <a href="">
+                <button class="add-to-cart">
+                  <i class="fa-solid fa-cart-shopping"></i> &nbsp; Add to Cart
+                </button>
+              </a>
             </div>
-            <div class="team-member-info">
-              <h3>Michael Johnson</h3>
-              <p>Head of Marketing</p>
-            </div>
+        </div>
+        <div class="swiper-slide box">
+          <img src="./images/assest/products/crops/tomatoes.jpg" alt="">
+          <h3>Tomatoes</h3>
+          <div class="product-info">
+            <p class="price">30/-</p>
+            <a href="">
+              <button class="add-to-cart">
+                <i class="fa-solid fa-cart-shopping"></i> &nbsp; Add to Cart
+              </button>
+            </a>
           </div>
-        
-      </section>
-       
+      </div>
+      </div>
+      <!-- Navigation buttons -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+  </div>
+</section>
+
+
       <!-- our mission section -->
       <section class="mission">
         <div class="title">
-          <h2 class="section-heading">Our Mission</h2>
+          
           <p>To support and empower you inside and outside of your farm.</p>
         </div>
         <div class="row">
@@ -174,146 +294,148 @@
         </div>
       </section>
 
-      <!-- html for review section -->
 
-    <section class="review">
-      <div class="title">
-     <h2>Review</h2>
-      <p> "See what our customers are saying about our organic vegetables, fruits, and crops."</p>
+  <!-- html for review section -->
+
+  <section class="review">
+    <div class="title">
+      <h2>What Our Customers Say<span class="exclamation">!</span></h2>
+
+    <p> "Your feedback matters to us! Check out our customer reviews below."</p>
+   </div>
+   <div class="review-container">
+     <div class="review-card">
+       <div class="review-header">
+         <img src="../images/assest/review-img.jpg" alt="Reviewer Image" class="reviewer-img">
+         <div>
+           <h3>John Doe</h3>
+           <p><i class="fas fa-calendar-alt"></i> Jan 20, 2024</p>
+         </div>
+       </div>
+       <div class="review-body">
+           <p>I recently purchased some organic spinach and tomatoes from Vegiefy Organics Farming, 
+               and I am extremely satisfied with the quality. The vegetables were fresh, vibrant, 
+               and full of flavor. It's clear that they take great care in growing their produce. 
+               I'll definitely be a repeat customer!</p>
+         <div class="review-rating">
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star-half-alt"></i>
+         </div>
+       </div>
      </div>
-     <div class="review-container">
-       <div class="review-card">
-         <div class="review-header">
-           <img src="../images/assest/review-img.jpg" alt="Reviewer Image" class="reviewer-img">
-           <div>
-             <h3>John Doe</h3>
-             <p><i class="fas fa-calendar-alt"></i> Jan 20, 2024</p>
-           </div>
-         </div>
-         <div class="review-body">
-             <p>I recently purchased some organic spinach and tomatoes from Vegiefy Organics Farming, 
-                 and I am extremely satisfied with the quality. The vegetables were fresh, vibrant, 
-                 and full of flavor. It's clear that they take great care in growing their produce. 
-                 I'll definitely be a repeat customer!</p>
-           <div class="review-rating">
-             <i class="fas fa-star"></i>
-             <i class="fas fa-star"></i>
-             <i class="fas fa-star"></i>
-             <i class="fas fa-star"></i>
-             <i class="fas fa-star-half-alt"></i>
-           </div>
+
+     <div class="review-card">
+       <div class="review-header">
+         <img src="../images/assest/review-img.jpg" alt="Reviewer Image" class="reviewer-img">
+         <div>
+           <h3>Emma Johnson</h3>
+           <p><i class="fas fa-calendar-alt"></i> March 10, 2024</p>
          </div>
        </div>
- 
-       <div class="review-card">
-         <div class="review-header">
-           <img src="../images/assest/review-img.jpg" alt="Reviewer Image" class="reviewer-img">
-           <div>
-             <h3>Emma Johnson</h3>
-             <p><i class="fas fa-calendar-alt"></i> March 10, 2024</p>
-           </div>
-         </div>
-         <div class="review-body">
-             <p>Vegiefy Organics Farming has truly exceeded my expectations. The kale and bell peppers I received were crisp and fresh, with a taste that only organic farming can provide. 
-                 Their commitment to sustainable practices is evident in the quality of their products.</p>
-           <div class="review-rating">
-             <i class="fas fa-star"></i>
-             <i class="fas fa-star"></i>
-             <i class="fas fa-star"></i>
-             <i class="fas fa-star"></i>
-             <i class="fas fa-star-half-alt"></i>
-           </div>
+       <div class="review-body">
+           <p>Vegiefy Organics Farming has truly exceeded my expectations. The kale and bell peppers I received were crisp and fresh, with a taste that only organic farming can provide. 
+               Their commitment to sustainable practices is evident in the quality of their products.</p>
+         <div class="review-rating">
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star-half-alt"></i>
          </div>
        </div>
- 
-       <div class="review-card">
-         <div class="review-header">
-           <img src="../images/assest/review-img.jpg" alt="Reviewer Image" class="reviewer-img">
-           <div>
-             <h3>Mia Martin
-             </h3>
-             <p><i class="fas fa-calendar-alt"></i> April 11, 2024</p>
-           </div>
-         </div>
-         <div class="review-body">
-             <p>The fruits from Vegiefy Organics Farming are simply outstanding. I bought a batch of strawberries and they were the sweetest and juiciest I've ever had. 
-                 It's great to have a reliable source of organic produce that's both delicious and healthy.</p>
-           <div class="review-rating">
-             <i class="fas fa-star"></i>
-             <i class="fas fa-star"></i>
-             <i class="fas fa-star"></i>
-             <i class="fas fa-star"></i>
-             <i class="fas fa-star-half-alt"></i>
-           </div>
-         </div>
-       </div>
- 
-       <div class="review-card">
-         <div class="review-header">
-           <img src="../images/assest/review-img.jpg" alt="Reviewer Image" class="reviewer-img">
-           <div>
-             <h3>Sophia Anderson</h3>
-             <p><i class="fas fa-calendar-alt"></i> May 15, 2024</p>
-           </div>
-         </div>
-         <div class="review-body">
-             <p>I recently tried the organic mangoes from Vegiefy Organics Farming and they were divine. Sweet, juicy, and full of natural flavor, they were a hit with my entire family. 
-                 I appreciate their dedication to providing high-quality organic fruits.</p>
-           <div class="review-rating">
-             <i class="fas fa-star"></i>
-             <i class="fas fa-star"></i>
-             <i class="fas fa-star"></i>
-             <i class="fas fa-star"></i>
-             <i class="fas fa-star-half-alt"></i>
-           </div>
-         </div>
-       </div>
- 
-       <div class="review-card">
-         <div class="review-header">
-           <img src="../images/assest/review-img.jpg" alt="Reviewer Image" class="reviewer-img">
-           <div>
-             <h3>Ava Wilson</h3>
-             <p><i class="fas fa-calendar-alt"></i> June 10, 2024</p>
-           </div>
-         </div>
-         <div class="review-body">
-             <p>I've been buying my fruits and vegetables from Vegiefy Organics Farming for a while now, and I am always impressed with the quality. The tomatoes are plump and juicy, the carrots are sweet and crunchy, and everything is incredibly fresh. 
-                 I wouldn't shop anywhere else.</p>
-           <div class="review-rating">
-             <i class="fas fa-star"></i>
-             <i class="fas fa-star"></i>
-             <i class="fas fa-star"></i>
-             <i class="fas fa-star"></i>
-             <i class="fas fa-star-half-alt"></i>
-           </div>
-         </div>
-       </div>
- 
-       <div class="review-card">
-         <div class="review-header">
-           <img src="../images/assest/review-img.jpg" alt="Reviewer Image" class="reviewer-img">
-           <div>
-             <h3>Noah Davis</h3>
-             <p><i class="fas fa-calendar-alt"></i> June 20, 2024</p>
-           </div>
-         </div>
-         <div class="review-body">
-             <p>Vegiefy Organics Farming has become my go-to source for organic produce. The quality of their fruits and vegetables is unmatched. The freshness and flavor are outstanding,
-                  and I love knowing that I'm eating healthy, sustainably grown food.</p>
-           <div class="review-rating">
-             <i class="fas fa-star"></i>
-             <i class="fas fa-star"></i>
-             <i class="fas fa-star"></i>
-             <i class="fas fa-star"></i>
-             <i class="fas fa-star-half-alt"></i>
-           </div>
-         </div>
-       </div>
-       
      </div>
-    
- </section>
+
+     <div class="review-card">
+       <div class="review-header">
+         <img src="../images/assest/review-img.jpg" alt="Reviewer Image" class="reviewer-img">
+         <div>
+           <h3>Mia Martin
+           </h3>
+           <p><i class="fas fa-calendar-alt"></i> April 11, 2024</p>
+         </div>
+       </div>
+       <div class="review-body">
+           <p>The fruits from Vegiefy Organics Farming are simply outstanding. I bought a batch of strawberries and they were the sweetest and juiciest I've ever had. 
+               It's great to have a reliable source of organic produce that's both delicious and healthy.</p>
+         <div class="review-rating">
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star-half-alt"></i>
+         </div>
+       </div>
+     </div>
+
+     <div class="review-card">
+       <div class="review-header">
+         <img src="../images/assest/review-img.jpg" alt="Reviewer Image" class="reviewer-img">
+         <div>
+           <h3>Sophia Anderson</h3>
+           <p><i class="fas fa-calendar-alt"></i> May 15, 2024</p>
+         </div>
+       </div>
+       <div class="review-body">
+           <p>I recently tried the organic mangoes from Vegiefy Organics Farming and they were divine. Sweet, juicy, and full of natural flavor, they were a hit with my entire family. 
+               I appreciate their dedication to providing high-quality organic fruits.</p>
+         <div class="review-rating">
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star-half-alt"></i>
+         </div>
+       </div>
+     </div>
+
+     <div class="review-card">
+       <div class="review-header">
+         <img src="../images/assest/review-img.jpg" alt="Reviewer Image" class="reviewer-img">
+         <div>
+           <h3>Ava Wilson</h3>
+           <p><i class="fas fa-calendar-alt"></i> June 10, 2024</p>
+         </div>
+       </div>
+       <div class="review-body">
+           <p>I've been buying my fruits and vegetables from Vegiefy Organics Farming for a while now, and I am always impressed with the quality. The tomatoes are plump and juicy, the carrots are sweet and crunchy, and everything is incredibly fresh. 
+               I wouldn't shop anywhere else.</p>
+         <div class="review-rating">
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star-half-alt"></i>
+         </div>
+       </div>
+     </div>
+
+     <div class="review-card">
+       <div class="review-header">
+         <img src="../images/assest/review-img.jpg" alt="Reviewer Image" class="reviewer-img">
+         <div>
+           <h3>Noah Davis</h3>
+           <p><i class="fas fa-calendar-alt"></i> June 20, 2024</p>
+         </div>
+       </div>
+       <div class="review-body">
+           <p>Vegiefy Organics Farming has become my go-to source for organic produce. The quality of their fruits and vegetables is unmatched. The freshness and flavor are outstanding,
+                and I love knowing that I'm eating healthy, sustainably grown food.</p>
+         <div class="review-rating">
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star-half-alt"></i>
+         </div>
+       </div>
+     </div>
+     
+   </div>
+  
+</section>
    
       <!-- cultivated section -->
       <section class="grow">
@@ -336,7 +458,7 @@
        </div>
        </div>
        <div class="image">
-           <img src="../images/assest/grow.jpg" alt="">
+           <img src="./images/assest/grow.jpg" alt="">
        </div>
         </div>
        

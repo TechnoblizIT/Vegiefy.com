@@ -10,208 +10,278 @@
     <link href='https://fonts.googleapis.com/css?family=Afacad' rel='stylesheet'>
 
     <style>
-        /* header Styles */
-        * {
-    margin: 0;
-    box-sizing: border-box;
-  }
-  body {
-    position: relative; 
-    font-family: 'Afacad';
-    background-color:  #ecf7f0;
-    line-height: 1.6;
+      * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Afacad', sans-serif;
+  line-height: 1.6;
+}
+
+/* Header Styling */
+header {
+  background-color: #0f5256;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Top Nav (Logo, Search Bar, Icons) */
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
   
+}
+
+/* Logo and Search Container */
+.logo-search-container {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.logo img {
+  width: 110px;
+  margin-right: 10px; 
+}
+
+.search-bar {
+  display: flex;
+  flex-grow: 1;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 5px 0 0 5px;
+}
+
+.search-bar button {
+  background-color: #69ba6b;
+  border: none;
+  padding: 8px 15px;
+  color: white;
+  cursor: pointer;
+  border-radius: 0 5px 5px 0;
+}
+
+.nav-icons {
+  display: flex;
+  align-items: center;
+}
+.cart-icon,.profile-icon:hover{
+ color: rgb(184, 180, 180);
+}
+.nav-icons a,
+.hamburger-btn {
+  color: white;
+  font-size: 1.5rem;
+  margin-left: 20px;
+}
+
+.cart-icon {
+  display: flex;
+  align-items: center; 
+  position: relative; 
+}
+
+/* Cart Count Styles */
+.cart-icon .cart-count {
+  position: absolute;
+  top: -10px; 
+  right: -10px; 
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 3px 6px;
+  font-size: 0.8rem;
+}
+
+
+/* Login Button */
+.login-btn {
+  background-color: white;
+  color: #275360;
+  padding: 7px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 15px;
+  margin-left: 20px;
+  cursor: pointer;
+  border: none;
+ 
+  transition: 0.15s ease;
+}
+
+.login-btn:hover {
+  background-color: #bdfcbe;
+  color: #388e3c;
+  font-weight: bold;
+  box-shadow: 0px 0px 10px 2px rgba(255, 255, 255, 0.8); 
+}
+
+/* logout button */
+.logout-btn{
+  background-color: white;
+  color: #275360;
+  padding: 7px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 15px;
+  margin-left: 20px;
+  cursor: pointer;
+  border: none;
+}
+
+.logout-btn:hover{
+  background-color: rgb(248, 195, 195);
+  color: #d9534f;
+  font-weight: bold;
+  box-shadow: 0px 0px 10px 2px rgba(255, 255, 255, 0.8); 
+}
+/* Bottom Nav (Helpline and Links) */
+.bottom-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #09343c;
+  padding: 10px 20px;
+}
+
+.helpline {
+  color: #fff;
+  font-size: 20px;
+}
+.helpline a {
+  margin-right: 10px; 
+  text-decoration: none;
+}
+
+.helpline a i {
+  color: #fff;
+  font-size: 25px;
+}
+.helpline a i:hover{
+  color: rgb(184, 180, 180);
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+  transition: color 0.3s ease;
+}
+.nav-links a.nav-active {
+  color: #69ba6b; 
+  font-weight: bold;
+}
+.nav-links a:hover {
+  color: #69ba6b;
+}
+
+/* Hamburger Icon Styling */
+.hamburger-btn {
+  display: none;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+}
+
+
+/* Mobile Styling */
+@media (max-width: 768px) {
+
+  .top-nav {
+    flex-direction: column;
+    align-items: flex-start; 
   }
-    /* css for navigation bar  */
-    header {
-      position: fixed;
-      top: 0;
-      left : 0;
-      width: 100%;
-      z-index: 1000;
-      background-color: #0f5256;
-      line-height: 1.5;
-    }
-    
-    .navbar {
-      display: flex;
-      padding: 10px 0;
-      align-items: center;
-      max-width: 1200px;
-      margin: 0 auto;
-      justify-content: space-between;
-    }
-    
-    .navbar .hamburger-btn {
-      display: none;
-      color: #fff;
-      cursor: pointer;
-      font-size: 1.5rem;
-    }
-    
-    .navbar .logo {
-      gap: 10px;
-      display: flex;
-      align-items: center;
-    
-    }
-    
-    .navbar .logo img {
-      width: 110px;
-    
-    }
-    
-    
-    .navbar .links {
-      display: flex;
-      gap: 35px;
-      list-style: none;
-      align-items: center;
-      
-      
-    }
-    
-    .navbar .close-btn {
-     
-      display: none;
-     
-    }
-    
-    .navbar .links a {
-      color: #fff;
-      font-size: 20px;
-      text-decoration: none;
-      transition: 0.1s ease;
-      text-transform: capitalize;
-     
-    }
-    .navbar .links a.active,
-    .navbar .links a:hover {
-      color: #69ba6b;
-    }
-    
-    .navbar .login-btn {
-      border: none;
-      outline: none;
-      background: white;
-      color: #275360;
-      font-size: 15px;
-      padding: 5px 10px;
-      border-radius: 3px;
-      cursor: pointer;
-      transition: 0.15s ease;
-    }
-    
-    .navbar .login-btn:hover {
-      background-color: #69ba6b;
-      color: white;
-    }
-    .profile-loginout-container {
-      display: flex;      
-      align-items: center; 
-      gap: 10px;         
-    }
-    .profile-img {
-      width: 22px;   
-      height: 22px;
-      object-fit: cover; 
-      margin-top: 10px;
-    }
-   
-    .logout-btn{
-      border: none;
-      outline: none;
-      background: white;
-      color: #275360;
-      font-size: 15px;
-      padding: 5px 10px;
-      border-radius: 3px;
-      cursor: pointer;
-      transition: 0.15s ease;
-      text-decoration: none;
-    }
-    
-    .logout-btn:hover{
-      background-color: #ffefef; 
-      color: #d9534f;
-    }
-    
-    @media (max-width: 768px) {
-      .navbar :is(.hamburger-btn, .close-btn) {
-          display: block;
-          font-size: 30px;
-          color: white;
-          margin-left: 20px;
-      }
-      .navbar .close-btn {
-        position: absolute;
-          left: 0; 
-          top: 25px;
-          display: block;
-          color: #fff;
-          cursor: pointer;
-    }
-      .navbar {
-          padding: 15px 0;
-      }
-    
-      .navbar .logo img {
-        display: flex;
-      width: 130px;
-      margin-left: 40px;
-      }
-    
-      .navbar .logo h2 {
-          font-size: 1.4rem;
-      }
-    
-      .navbar .links {
-          position: fixed;
-          top: 0;
-          z-index: 10;
-          left: -100%;
-          display: block;
-          height: 100vh;
-          width: 100%;
-          padding: 20px;
-          padding-top: 60px;
-          text-align: left;
-          background: #0f5256;
-          opacity: 0.9;
-          color: white;
-          transition: 0.2s ease;
-      }
-    
-      .navbar .links.show-menu {
-          left: 0;
-      }
-    
-      .navbar .links a {
-          display: inline-flex;
-          margin: 10px 0;
-          font-size: 25px;
-          color: white;
-      }
-    
-      .navbar .links a:hover {
-          color: #09343c;
-      }
-    
-      .navbar .login-btn {
-          font-size: 0.9rem;
-          padding: 7px 10px;
-          margin-right: 10px;
-      }
-      .profile-loginout-container {
-        margin-right: 10px;
-      }
-    }
-    
+
+  .logo-search-container {
+    width: 100%;
+    justify-content: center; 
+  }
+
+  /* Search Bar Full Width */
+  .search-bar {
+    width: 80%; 
+    margin: 10px 0;
+  }
+  .helpline{
+    margin: auto;
+  }
+  
+  .nav-icons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; 
+  }
+
+  .hamburger-btn {
+    margin-right: auto; 
+  }
+  .login-btn{
+    margin: 0;
+  }
+ 
+  .hamburger-btn {
+    display: block;
+  }
+
+ 
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #0f5256;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+  }
+
+ 
+  .nav-links.show-menu {
+    display: flex;
+  }
+ 
+.horizontal-line {
+  width: 100%;
+  height: 1px; 
+  background-color: #69ba6b;
+  margin: 10px 0; 
+}
+
+hr {
+  width: 100%;
+  height: 1px; 
+  background-color: #69ba6b; 
+  border: none; 
+  margin: 10px 0; 
+}
+
+}
 
 
         /* blog style */
         .blog{
-            margin-top: 100px;
+            margin-top: 130px;
         }
         .blog-container {
             max-width: 1200px;
@@ -223,6 +293,9 @@
             text-align: center;
             margin-bottom: 30px;
             color: #333;
+            font-size: 45px;
+            font-weight: bold;
+
         }
        
         .blog-posts {
@@ -269,7 +342,14 @@
             color: white;
             text-decoration: none;
         }
-       
+        @media (max-width: 768px){
+          .blog-container{
+            margin-top: 170px;
+          }
+          .blog .blog-container h2{
+            font-size: 25px;
+          }
+        }
 /* footer section */
 
 /* css for footer */
@@ -465,36 +545,62 @@ footer::before {
 </head>
 <body>
 
-    <!-- header section -->
-    <header>
-      <nav class="navbar">
-        <span class="hamburger-btn material-symbols-rounded">menu</span>
+    <!-- Header Section -->
+<header>
+  <nav class="navbar">
+    <div class="top-nav">
+     
+      <div class="logo-search-container">
         <a href="#" class="logo">
-            <img src="../images/assest/vegiefy-logo.png" alt="logo">
-           
+          <img src="../images/assest/vegiefy-logo.png" alt="Vegiefy Logo">
         </a>
-        <ul class="links">
-            <span class="close-btn material-symbols-rounded">close</span>
-            <li><a href="/" >home</a></li>
-            <li><a href="/#about-us">about</a></li>
-            <li><a href="/product">products</a></li>
-            <li><a href="/cart">Cart</a></li>
-            <li><a href="/delivery">delivery</a></li>
-            <li><a href="/blog" class="active">blog</a></li>
-            <li><a href="/contact"  >contact</a></li>
-        </ul>
-        <div class="profile-loginout-container">
-          <% if (!req.user) {%>
-              <a href="/login"><button class="login-btn">LOG IN</button></a>
-              <%}else{ %>
-                  <a class="profile-btn" href="/user/profile" style="text-decoration: none;">
-                      <img src="./images/assest/profile-img.png" alt="User Profile" class="profile-img">
-                    </a>
-                  <h3><a class="logout-btn"  href="/user/logout" >Logout</a></h3>
-                <%}%>
-              </div>
-    </nav>
-    </header>
+        <div class="search-bar">
+          <input type="text" placeholder="Search for products...">
+          <button><i class="fas fa-search"></i></button>
+        </div>
+      </div>
+      
+      <div class="horizontal-line"></div>
+   
+      <div class="nav-icons">
+        <div class="hamburger-btn">
+          <i class="fas fa-bars"></i>
+        </div>
+        <a href="/cart" class="cart-icon">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count">0</span>
+        </a>
+        <a href="/user/profile" class="profile-icon">
+          <i class="fas fa-user"></i>
+        </a>
+        <a href="/login"><button class="login-btn">LOG IN</button></a>
+         <!-- <a href="/user/logout" ><button class="logout-btn" >LOG OUT</button></a> -->
+      </div>
+    </div>
+
+    <!-- Bottom Navigation: Helpline & Links -->
+    <div class="bottom-nav">
+      <div class="helpline">
+        <a href="https://www.facebook.com" target="_blank"><i class="fa-brands fa-square-facebook"></i></i></a>
+    <!-- <a href="https://www.twitter.com" target="_blank"><i class="fa-brands fa-square-twitter"></i></i></a> -->
+    <a href="https://www.instagram.com" target="_blank"><i class="fa-brands fa-square-instagram"></i></i></a>
+    <!-- <a href="https://www.linkedin.com" target="_blank"><i class="fa-brands fa-linkedin"></i></a> -->
+    <i class="fa-solid fa-phone"></i><span>+91-8698105221</span>
+      </div>
+
+     <!-- Navigation Links -->
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+              <li><a href="/#about-us">About</a></li>
+              <li><a href="/product">Products</a></li>
+              <li><a href="/cart">Cart</a></li>
+              <li><a href="/delivery">Delivery</a></li>
+              <li><a href="/blog"  class="nav-active" >Blog</a></li>
+              <li><a href="/contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
   
 
      <!-- blog section -->
@@ -621,19 +727,24 @@ footer::before {
       
 
     <script>
-       // js for navbar
-const navbarMenu = document.querySelector(".navbar .links");
-const hamburgerBtn = document.querySelector(".hamburger-btn");
-const hideMenuBtn = navbarMenu.querySelector(".close-btn");
-const showPopupBtn = document.querySelector(".login-btn");
-
-// Show mobile menu
-hamburgerBtn.addEventListener("click", () => {
-    navbarMenu.classList.toggle("show-menu");
-});
-
-// Hide mobile menu
-hideMenuBtn.addEventListener("click", () =>  hamburgerBtn.click());
+      // js for nav bar Mobile menu toggle
+ const hamburgerBtn = document.querySelector('.hamburger-btn');
+ const navbarMenu = document.querySelector('.nav-links');
+ 
+ hamburgerBtn.addEventListener('click', () => {
+   navbarMenu.classList.toggle('show-menu');
+ });
+ 
+ document.querySelectorAll('.nav-links a').forEach(link => {
+   link.addEventListener('click', function() {
+     // Remove active class from all links
+     document.querySelector('.nav-active')?.classList.remove('nav-active');
+     
+     // Add active class to the clicked link
+     this.classList.add('nav-active');
+   });
+ });
+ 
 
 
 
