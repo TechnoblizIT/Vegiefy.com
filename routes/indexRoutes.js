@@ -6,8 +6,9 @@ const productModel=require("../models/product-model")
 const userModel=require("../models/user-model")
 // Define the routes
 
-router.get('/',checkuser ,function(req, res) {
-   res.render('index',{req})
+router.get('/',checkuser ,async function(req, res) {
+   const products = await productModel.find()
+   res.render('index',{req,products})
 });
 
 router.get('/login', function(req, res) {

@@ -153,81 +153,20 @@
 <section class="product-swiper">
   <div class="swiper product-slider">
       <div class="swiper-wrapper">
+        <% products.forEach(product => { %>
           <div class="swiper-slide box">
-              <img src="./images/assest/products/crops/corn.jpg" alt="">
-              <h3>Corn</h3>
+              <img src="../images/uploads/<%= product.image %>" alt="">
+              <h3><%= product.name %></h3>
               <div class="product-info">
-                <p class="price">50/-</p>
-                <a href="">
+                <p class="price">₹ <%=product.price%>/-</p>
+                <a href="/user/addtocart/<%= product._id %>">
                   <button class="add-to-cart">
                     <i class="fa-solid fa-cart-shopping"></i> &nbsp; Add to Cart
                   </button>
                 </a>
               </div>
           </div>
-
-          <div class="swiper-slide box">
-              <img src="./images/assest/products/crops/cucumber.jpg" alt="">
-              <h3>Cucumber</h3>
-              <div class="product-info">
-                <p class="price">30/-</p>
-                <a href="">
-                  <button class="add-to-cart">
-                    <i class="fa-solid fa-cart-shopping"></i> &nbsp; Add to Cart
-                  </button>
-                </a>
-              </div>
-          </div>
-
-          <div class="swiper-slide box">
-              <img src="./images/assest/products/crops/onions.jpg" alt="">
-              <h3>Onions</h3>
-              <div class="product-info">
-                <p class="price">50/-</p>
-                <a href="">
-                  <button class="add-to-cart">
-                    <i class="fa-solid fa-cart-shopping"></i> &nbsp; Add to Cart
-                  </button>
-                </a>
-              </div>
-          </div>
-
-          <div class="swiper-slide box">
-              <img src="./images/assest/products/crops/potatoes.jpg" alt="">
-              <h3>Potatoes</h3>
-              <div class="product-info">
-                <p class="price">40/-</p>
-                <a href="">
-                  <button class="add-to-cart">
-                    <i class="fa-solid fa-cart-shopping"></i> &nbsp; Add to Cart
-                  </button>
-                </a>
-              </div>
-          </div>
-          <div class="swiper-slide box">
-            <img src="./images/assest/products/crops/pumpkins.jpg" alt="">
-            <h3>Pumpkins</h3>
-            <div class="product-info">
-              <p class="price">30/-</p>
-              <a href="">
-                <button class="add-to-cart">
-                  <i class="fa-solid fa-cart-shopping"></i> &nbsp; Add to Cart
-                </button>
-              </a>
-            </div>
-        </div>
-        <div class="swiper-slide box">
-          <img src="./images/assest/products/crops/tomatoes.jpg" alt="">
-          <h3>Tomatoes</h3>
-          <div class="product-info">
-            <p class="price">30/-</p>
-            <a href="">
-              <button class="add-to-cart">
-                <i class="fa-solid fa-cart-shopping"></i> &nbsp; Add to Cart
-              </button>
-            </a>
-          </div>
-      </div>
+          <% }) %>
       </div>
       <!-- Navigation buttons -->
       <div class="swiper-button-prev"></div>
