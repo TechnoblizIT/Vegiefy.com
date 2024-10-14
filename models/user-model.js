@@ -7,7 +7,8 @@ const userSchema=mongoose.Schema({
     mobile:String,
     address:String,
     cart:[{
-         type: mongoose.Schema.Types.ObjectId, ref: 'Products'
+        product: { type: mongoose.Schema.Types.ObjectId, ref: 'Products' },
+         quantity: { type: Number, default: 1 }
     }],
     orders:{
         typeof:Array,

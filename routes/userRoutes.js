@@ -20,9 +20,10 @@ router.get('/profile',checkuser,isloggedin, (req,res)=>{
     res.render("profile",{req})
 });
 
-router.get("/addtocart/:productid",isloggedin, checkuser,async(req,res)=>{
+router.post("/addtocart/:productid",isloggedin, checkuser,async(req,res)=>{
     const user=await userModel.findOne({email:req.user.email});
-    user.cart.push(req.params.productid); 
+    const quantity = req.body.quantity; 
+    user.cart.push({ product: req.params.productid, quantity: quantity });
     await user.save();
     res.redirect("/product")
 });
@@ -34,6 +35,67 @@ router.get("/removeitem/:productid", isloggedin, checkuser, async (req, res) => 
     await user.save();
     res.redirect("/cart");
 });
+router.get("/quantity/inc/:productid", isloggedin, checkuser, async (req, res)=>{
+ const user = await userModel.findOne({ email: req.user.email }).populate({
+    path: 'cart.product',  
+    model: 'Products'      
+  });
+
+ user.cart.forEach((item)=>{
+   if(item.product._id.toString()===req.params.productid){
+    if(item.quantity===0.5){
+        item.quantity=0.75
+        item.product.price=item.quantity*item.product.price
+    }
+    if(item.quantity===0.75){
+        item.quantity=1
+        item.product.price=item.quantity*item.product.price
+    }
+    if(item.quantity===1||item.quantity===2 || item.quantity===3 || item.quantity===4){
+        item.quantity+=1
+        item.product.price=item.quantity*item.product.price
+    }
+    if(item.quantity===5){
+        req.flash("limit","Maximum quantity is 5 Kg")
+    }
+   }
+ })
+ await user.save()
+
+ res.redirect("/cart")
+})
+router.get("/quantity/dec/:productid", isloggedin, checkuser, async (req, res)=>{
+    const user = await userModel.findOne({ email: req.user.email }).populate({
+       path: 'cart.product',  
+       model: 'Products'      
+     });
+   
+    user.cart.forEach((item)=>{
+      if(item.product._id.toString()===req.params.productid){
+       if(item.quantity===0.5){
+        req.flash("limit","Minimum quantity is 0.5 Kg")
+       }
+       if(item.quantity===0.75){
+           item.quantity=0.5
+           item.product.price=item.quantity*item.product.price
+       }
+       if(item.quantity===1){
+        item.quantity=0.75
+           item.product.price=item.quantity*item.product.price
+       }
+       if(item.quantity===2 || item.quantity===3 || item.quantity===4 || item.quantity===5){
+           item.quantity-=1
+           item.product.price=item.quantity*item.product.price
+       }
+      }
+    })
+    await user.save()
+   
+    res.redirect("/cart")
+   })
+   
+
+
 router.post("/createOrder",isloggedin,checkuser, async function(req, res) {
 
 const user = await userModel.findOne({ email: req.user.email }).populate("cart")
