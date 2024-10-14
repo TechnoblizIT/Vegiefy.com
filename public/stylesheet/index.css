@@ -498,7 +498,7 @@ hr {
   z-index: 1;
 }
 
-.about-section h2 {
+.about-container h2 {
   text-align: center;
   font-size: 40px;
   margin-bottom: 20px;
@@ -506,7 +506,12 @@ hr {
  
   position: relative;
 }
-
+.about-container h2 .question-mark{
+color: #ff5e57;
+font-size: 3rem;
+display: inline-block;
+transform: rotate(10deg);
+}
 .about-section p {
   font-size: 20px;
   margin-bottom: 20px;
@@ -574,10 +579,12 @@ hr {
     padding: 0 20px;
   }
 
-  .about-section h2 {
+  .about-container h2 {
     font-size: 25px;
   }
-
+  .about-container h2 .question-mark{
+    font-size: 25px;
+  }
   .hydroponic {
     flex-direction: column;
     text-align: center;
@@ -590,6 +597,7 @@ hr {
   .content p {
     font-size: 20px;
   }
+
 }
 
 @media (max-width: 480px) {
