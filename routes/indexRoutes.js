@@ -8,7 +8,14 @@ const userModel=require("../models/user-model")
 
 router.get('/',checkuser ,async function(req, res) {
    const products = await productModel.find()
-   res.render('index',{req,products})
+   const user = await userModel.findOne({ email: req.user.email })
+   .populate({
+     path: 'cart.product',  
+     model: 'Products'      
+   });
+   var cartcount=0
+   user.cart.forEach((item)=>{ cartcount+=1})
+   res.render('index',{req,products,cartcount})
 });
 
 router.get('/login', function(req, res) {
@@ -18,30 +25,64 @@ router.get('/login', function(req, res) {
 
  router.get('/product',checkuser ,async function(req, res) {
   try{ const products=await productModel.find()
-   res.render('product',{products,req})}catch(err){ console.log(err.message) }
+   const user = await userModel.findOne({ email: req.user.email })
+   .populate({
+     path: 'cart.product',  
+     model: 'Products'      
+   });
+   var cartcount=0
+   user.cart.forEach((item)=>{ cartcount+=1})
+   res.render('product',{products,req,cartcount})}catch(err){ console.log(err.message) }
 });
 
 router.get('/blog',checkuser ,async function(req, res) {
-   res.render('blog',{req})
+   const user = await userModel.findOne({ email: req.user.email })
+   .populate({
+     path: 'cart.product',  
+     model: 'Products'      
+   });
+   var cartcount=0
+   user.cart.forEach((item)=>{ cartcount+=1})
+   res.render('blog',{req,cartcount})
  });
 
- router.get('/delivery', checkuser ,function(req, res) {
-   res.render('deliverypage',{req})
+ router.get('/delivery', checkuser ,async function(req, res) {
+   const user = await userModel.findOne({ email: req.user.email })
+   .populate({
+     path: 'cart.product',  
+     model: 'Products'      
+   });
+   var cartcount=0
+   user.cart.forEach((item)=>{ cartcount+=1})
+   res.render('deliverypage',{req,cartcount})
 });
 
- router.get('/contact', checkuser ,function(req, res) {
-   res.render('contact',{req})
+ router.get('/contact', checkuser ,async function(req, res) {
+   const user = await userModel.findOne({ email: req.user.email })
+   .populate({
+     path: 'cart.product',  
+     model: 'Products'      
+   });
+   var cartcount=0
+   user.cart.forEach((item)=>{ cartcount+=1})
+   res.render('contact',{req,cartcount})
 });
 
 router.get('/cart',  isloggedin,checkuser ,async function(req, res) {
-   const user = await userModel.findOne({email:req.user.email}).populate("cart")
+   const user = await userModel.findOne({ email: req.user.email })
+   .populate({
+     path: 'cart.product',  
+     model: 'Products'      
+   });
+   const limit=req.flash("limit")
+  
    var carttotal=0;
    var cartcount=0
-   user.cart.forEach((item)=>{ carttotal+=item.price 
+   user.cart.forEach((item)=>{ carttotal+=item.product.price*item.quantity 
       cartcount+=1
    })
    
-   res.render('shoping_cart',{req,user,carttotal,cartcount})
+   res.render('shoping_cart',{req,user,carttotal,cartcount,limit})
 });
 
 

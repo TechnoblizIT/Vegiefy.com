@@ -579,13 +579,17 @@ footer::before {
         </div>
         <a href="/cart" class="cart-icon">
           <i class="fas fa-shopping-cart"></i>
-          <span class="cart-count">0</span>
+          <span class="cart-count"><%=cartcount%></span>
         </a>
         <a href="/user/profile" class="profile-icon">
           <i class="fas fa-user"></i>
         </a>
-        <a href="/login"><button class="login-btn">LOG IN</button></a>
-         <!-- <a href="/user/logout" ><button class="logout-btn" >LOG OUT</button></a> -->
+        <% if(req.user){ %>
+          <a href="/user/logout" ><button class="logout-btn" >LOG OUT</button></a>
+          <%}else{%>
+            <a href="/login"><button class="login-btn">LOG IN</button></a> 
+            
+          <%}%>
       </div>
     </div>
 
