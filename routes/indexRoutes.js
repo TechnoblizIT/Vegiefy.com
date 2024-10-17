@@ -57,7 +57,7 @@ router.get('/blog',checkuser ,async function(req, res) {
       model: 'Products'      
     });
     user.cart.forEach((item)=>{ cartcount+=1})
-    res.render('blog',{req})
+    res.render('blog',{req,cartcount})
     }else{
      res.render('blog',{req,cartcount})
     }
