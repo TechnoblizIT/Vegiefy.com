@@ -9,7 +9,6 @@ const userModel=require("../models/user-model")
 router.get('/',checkuser ,async function(req, res) {
    const products = await productModel.find()
    var cartcount=0
-
    if (req.user){
    const user = await userModel.findOne({ email: req.user.email })
    .populate({
@@ -17,7 +16,7 @@ router.get('/',checkuser ,async function(req, res) {
      model: 'Products'      
    });
    user.cart.forEach((item)=>{ cartcount+=1})
-   res.render('index',{req,products})
+   res.render('index',{req,products,cartcount})
    }else{
     res.render('index',{req,products,cartcount})
    }
