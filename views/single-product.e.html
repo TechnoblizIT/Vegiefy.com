@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0">
+    <link href='https://fonts.googleapis.com/css?family=Afacad' rel='stylesheet'>
+    <style>
+         * {
+    margin: 0;
+    box-sizing: border-box;
+  }
+  body {
+    position: relative; 
+    font-family: 'Afacad';
+    background-color:  #ecf7f0;
+    line-height: 1.6;
+
+  }
+/* Header Styling */
+header {
+  background-color: #0f5256;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Top Nav (Logo, Search Bar, Icons) */
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  
+}
+
+/* Logo and Search Container */
+.logo-search-container {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.logo img {
+  width: 110px;
+  margin-right: 10px; 
+}
+
+.search-bar {
+  display: flex;
+  flex-grow: 1;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 5px 0 0 5px;
+}
+
+.search-bar button {
+  background-color: #69ba6b;
+  border: none;
+  padding: 8px 15px;
+  color: white;
+  cursor: pointer;
+  border-radius: 0 5px 5px 0;
+}
+/* dropdown for search bar */
+.dropdown {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border-radius: 5px;
+    margin-top: 50px; 
+    z-index: 1000; 
+    width: 400px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.dropdown ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown li {
+  padding: 5px;
+  cursor: pointer;
+  color: black;
+}
+
+.dropdown li:hover {
+    background-color: #ecf7f0; 
+    border-radius: 5px;
+}
+
+.nav-icons {
+  display: flex;
+  align-items: center;
+}
+.cart-icon,.profile-icon:hover{
+ color: rgb(184, 180, 180);
+}
+.nav-icons a,
+.hamburger-btn {
+  color: white;
+  font-size: 1.5rem;
+  margin-left: 20px;
+}
+
+.cart-icon {
+  display: flex;
+  align-items: center; 
+  position: relative; 
+}
+
+/* Cart Count Styles */
+.cart-icon .cart-count {
+  position: absolute;
+  top: -10px; 
+  right: -10px; 
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 3px 6px;
+  font-size: 0.8rem;
+}
+
+
+/* Login Button */
+.login-btn {
+  background-color: white;
+  color: #275360;
+  padding: 7px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 15px;
+  margin-left: 20px;
+  cursor: pointer;
+  border: none;
+ 
+  transition: 0.15s ease;
+}
+
+.login-btn:hover {
+  background-color: #bdfcbe;
+  color: #388e3c;
+  font-weight: bold;
+  box-shadow: 0px 0px 10px 2px rgba(255, 255, 255, 0.8); 
+}
+
+/* logout button */
+.logout-btn{
+  background-color: white;
+  color: #275360;
+  padding: 7px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 15px;
+  margin-left: 20px;
+  cursor: pointer;
+  border: none;
+}
+
+.logout-btn:hover{
+  background-color: rgb(248, 195, 195);
+  color: #d9534f;
+  font-weight: bold;
+  box-shadow: 0px 0px 10px 2px rgba(255, 255, 255, 0.8); 
+}
+/* Bottom Nav (Helpline and Links) */
+.bottom-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #09343c;
+  padding: 10px 20px;
+}
+
+.helpline {
+  color: #fff;
+  font-size: 20px;
+}
+.helpline a {
+  margin-right: 10px; 
+  text-decoration: none;
+}
+
+.helpline a i {
+  color: #fff;
+  font-size: 25px;
+}
+.helpline a i:hover{
+  color: rgb(184, 180, 180);
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+  transition: color 0.3s ease;
+}
+.nav-links a.nav-active {
+  color: #69ba6b; 
+  font-weight: bold;
+}
+.nav-links a:hover {
+  color: #69ba6b;
+}
+
+/* Hamburger Icon Styling */
+.hamburger-btn {
+  display: none;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+}
+
+
+/* Mobile Styling */
+@media (max-width: 768px) {
+
+  .top-nav {
+    flex-direction: column;
+    align-items: flex-start; 
+  }
+
+  .logo-search-container {
+    width: 100%;
+    justify-content: center; 
+  }
+
+  /* Search Bar Full Width */
+  .search-bar {
+    width: 80%; 
+    margin: 10px 0;
+  }
+  .helpline{
+    margin: auto;
+  }
+  
+  .nav-icons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; 
+  }
+
+  .hamburger-btn {
+    margin-right: auto; 
+  }
+  .login-btn{
+    margin: 0;
+  }
+ 
+  .hamburger-btn {
+    display: block;
+  }
+
+ 
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #0f5256;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+  }
+
+ 
+  .nav-links.show-menu {
+    display: flex;
+  }
+ 
+.horizontal-line {
+  width: 100%;
+  height: 1px; 
+  background-color: #69ba6b;
+  margin: 10px 0; 
+}
+
+hr {
+  width: 100%;
+  height: 1px; 
+  background-color: #69ba6b; 
+  border: none; 
+  margin: 10px 0; 
+}
+
+}
+
+
+/* css for single product section */
+.single-product {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+  background-color: #fff;
+  margin-top: 100px;
+}
+
+.product-container {
+  display: flex;
+  max-width: 1400px;
+  width: 100%;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+.product-image-wrapper {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.product-image {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+}
+
+.product-img, .hover-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.hover-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.product-image-wrapper:hover .product-img {
+  opacity: 0;
+}
+
+.product-image-wrapper:hover .hover-img {
+  opacity: 1;
+}
+
+.product-info {
+  flex: 2;
+  padding-left: 20px;
+  border-left: 2px solid #e5e5e5;
+}
+
+.product-info h1 {
+  font-size: 35px;
+  color: #2c3e50;
+}
+
+.rating {
+  font-size: 18px;
+  color: #ff9800;
+  margin-bottom: 10px;
+}
+
+.price {
+  font-size: 30px;
+  color: #388e3c;
+  margin-bottom: 10px;
+}
+
+/* Offers Section */
+.offers {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.offers h2 {
+  font-size: 24px;
+  color: #2c3e50;
+}
+
+.offer-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.offer-list li {
+  display: flex;
+  align-items: center; 
+  margin-bottom: 10px;
+}
+
+.offer-icon {
+  width: 25px; 
+  margin-right: 10px; 
+}
+
+.offer-list li strong {
+  color: black;
+}
+.offer-list a {
+  color: #3498db;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.offer-list a:hover {
+  text-decoration: underline;
+}
+.divider {
+    display: none;
+    border: none; 
+    height: 1px; 
+    background-color: #e0e0e0; 
+    margin: 15px 0; 
+    width: 100%;
+}
+/* terms and condition */
+
+.modal {
+  display: none; 
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  cursor: pointer;
+}
+
+/* Add to Cart Button */
+.add-btn {
+  background-color: #388e3c;
+  color: white;
+  padding: 12px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 10px;
+}
+
+.add-btn:hover {
+  background-color: #a1f0a2;
+  color: #388e3c;
+  transform: scale(1.05);
+}
+
+.product-summary p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+/* Product Features */
+.product-description h2 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-top: 40px;
+}
+
+.product-description ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.product-description ul li {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+  .single-product {
+    padding: 20px;
+    margin-top: 50px;
+  }
+
+  .product-container {
+    flex-direction: column;
+    margin-top: 120px;
+  }
+
+  .product-image-wrapper {
+    padding-right: 0;
+  }
+
+  .product-info {
+    padding-left: 0;
+    border-left: none;
+    margin-top: 20px;
+  }
+  .divider {
+    display: block;
+   
+    }
+  .product-info h1, .product-description h2 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .modal-content {
+    margin: 250px auto;
+  }
+
+  .price, .rating {
+    text-align: center;
+  }
+
+  .add-btn {
+    display: block;
+    margin: 20px auto;
+    font-size: 16px;
+    padding: 10px 16px;
+  }
+
+ 
+  .offers {
+    padding: 10px; 
+  }
+
+  .offers h2 {
+    font-size: 25px; 
+    text-align: center;
+  }
+
+  .offer-list li {
+    justify-content: center; 
+    flex-direction: column;
+    text-align: center; 
+  }
+
+  .offer-icon {
+    margin-bottom: 5px; 
+  }
+
+  .offer-list a {
+    font-size: 14px; 
+  }
+}
+
+  
+  /* css for footer */
+  footer {
+  position: relative;
+  background-image: url(/public/images/assest/background2.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #fff;
+  padding: 40px 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  
+}
+
+footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 15px;
+  background: #0f5256;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-section {
+  flex: 1;
+  padding: 20px;
+  min-width: 250px;
+}
+
+.logo-text {
+  font-size: 28px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.footer-section h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  position: relative;
+  display: inline-block;
+  color: #fff;
+}
+
+.footer-section h2::after {
+  content: "";
+  position: absolute;
+  width: 50px;
+  height: 3px;
+  background: #fff;
+  bottom: -5px;
+  left: 0;
+}
+
+.footer-section p {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.contact span,
+.socials a {
+  display: block;
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.socials a {
+  color: #fff;
+  margin-right: 15px;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.socials a:hover {
+  color: #d4d4d4;
+}
+
+.footer-section.links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section.links ul a {
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 10px;
+  display: block;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+.footer-section.links ul a:hover {
+  text-decoration: underline;
+  color: #d4d4d4;
+}
+
+.contact-form .text-input {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.contact-form .btn {
+  display: inline-block;
+  padding: 15px 30px;
+  background: #fff;
+  color: #0f5256;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: 0.3s, color 0.3s;
+}
+
+.contact-form .btn:hover {
+  background: #0f5256;
+  color: #fff;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 15px;
+  background: #0f5256;
+  font-size: 18px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+
+
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 10px;
+  }
+
+  .footer-section {
+    padding: 10px;
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  
+  .logo-text {
+    font-size: 24px;
+  }
+
+  .footer-section h2 {
+    font-size: 18px;
+  }
+
+  .footer-section p,
+  .contact span,
+  .socials a,
+  .footer-section.links ul a {
+    font-size: 14px;
+  }
+
+  .contact-form .text-input,
+  .contact-form .btn {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+    </style>
+</head>
+<body>
+   <!-- Header Section -->
+<header>
+    <nav class="navbar">
+      <div class="top-nav">
+       
+        <div class="logo-search-container">
+          <a href="#" class="logo">
+            <img src="../public/images//assest/vegiefy-logo.png" alt="Vegiefy Logo">
+          </a>
+          <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search for products..." onfocus="showDropdown()" onblur="hideDropdown()">
+            <button><i class="fas fa-search"></i></button>
+            <div class="dropdown" id="dropdown">
+                <ul>
+                    <li>Banana</li>
+                    <li>Mango</li>
+                    <li>Spinach</li>
+                    <li>Coriander</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+        
+        <div class="horizontal-line"></div>
+     
+        <div class="nav-icons">
+          <div class="hamburger-btn">
+            <i class="fas fa-bars"></i>
+          </div>
+          <a href="/cart" class="cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count">0</span>
+          </a>
+          <a href="/user/profile" class="profile-icon">
+            <i class="fas fa-user"></i>
+          </a>
+          <!-- <% if(req.user){ %>
+            <a href="/user/logout" ><button class="logout-btn" >LOG OUT</button></a>
+            <%}else{%>
+              <a href="/login"><button class="login-btn">LOG IN</button></a> 
+              
+            <%}%> -->
+        </div>
+      </div>
+  
+      <!-- Bottom Navigation: Helpline & Links -->
+      <div class="bottom-nav">
+        <div class="helpline">
+          <a href="https://www.facebook.com" target="_blank"><i class="fa-brands fa-square-facebook"></i></i></a>
+      <!-- <a href="https://www.twitter.com" target="_blank"><i class="fa-brands fa-square-twitter"></i></i></a> -->
+      <a href="https://www.instagram.com" target="_blank"><i class="fa-brands fa-square-instagram"></i></i></a>
+      <!-- <a href="https://www.linkedin.com" target="_blank"><i class="fa-brands fa-linkedin"></i></a> -->
+      <i class="fa-solid fa-phone"></i><span>+91-8698105221</span>
+        </div>
+  
+       <!-- Navigation Links -->
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+                <li><a href="/#about-us">About</a></li>
+                <li><a href="/product" >Products</a></li>
+                <li><a href="/cart">Cart</a></li>
+                <li><a href="/delivery">Delivery</a></li>
+                <li><a href="/blog"  >Blog</a></li>
+                <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <section class="single-product">
+    <div class="product-container">
+  
+   
+      <div class="product-image-wrapper">
+        <div class="product-image">
+          <img class="product-img" src="/public/images/assest/single product/kale 1.jpg" alt="Organic Kale Image 1">
+          <img class="hover-img" src="/public/images/assest/single product/kale 2.jpg" alt="Organic Kale Image 2">
+        </div>
+      </div>
+  
+      <div class="product-info">
+        <h1>Organic Kale - Fresh & Nutritious</h1>
+        <div class="rating"> <i class="fas fa-star"></i>(5.0)</div>
+        <p class="price">₹280</p>
+  
+    
+        <hr class="divider"> 
+        <div class="offers">
+          <h2>Available Offers</h2>
+          <ul class="offer-list">
+            <li>
+                <img src="/public/images/assest/offer.png" alt="Offer icon" class="offer-icon">
+                <strong>Bank Offer</strong>: Avail 10% cashback on purchases using the VeggiePay Card 
+                &nbsp;<a href="#" class="openModal">T&C</a>
+            </li>
+            <li>
+                <img src="/public/images/assest/offer.png" alt="Offer icon" class="offer-icon">
+                <strong>Special Price</strong>: Get an additional 20% off on your first order of fresh organic veggies 
+                &nbsp;<a href="#" class="openModal">T&C</a>
+            </li>
+            <li>
+                <img src="/public/images/assest/offer.png" alt="Offer icon" class="offer-icon">
+                <strong>Partner Offer</strong>: Make a purchase and enjoy a surprise cashback/coupon that you can redeem later! 
+                &nbsp;<a href="#" class="openModal">T&C</a>
+            </li>
+        </ul>
+    
+<div id="termsModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Terms & Conditions</h2>
+    <p id="modalText">Please read the terms and conditions for this offer carefully.</p>
+  </div>
+</div>
+        </div>
+  
+        <!-- Product Summary -->
+        <div class="product-summary">
+          <p>Grown sustainably, this organic kale offers a nutrient-packed boost to your diet. Delivered fresh to ensure maximum taste and health benefits. Ideal for healthy meals.</p>
+          <p>Try it in salads, smoothies, or as a cooked side. Freshness guaranteed!</p>
+        </div>
+  
+        <button class="add-btn">Add to Cart</button>
+  
+        <!-- Product Features -->
+        <div class="product-description">
+          <h2>Product Features</h2>
+          <ul>
+            <li>Organically grown without pesticides, ensuring a clean and healthy product for your kitchen.</li>
+            <li>Rich in essential vitamins A, C, and K to boost your health and immune system naturally.</li>
+            <li>Perfect for salads, smoothies, and sautés, delivering a crisp taste with maximum freshness.</li>
+            <li>Sustainably harvested using eco-friendly farming practices that support the environment.</li>
+            <li>Delivered directly from farm to table, ensuring the best quality and flavor in every bite.</li>
+          </ul>
+        </div>
+      </div>
+  
+    </div>
+  </section>
+  
+  
+  
+  
+   <!-- footer section -->
+   <footer>
+    <div class="footer-content">
+        <div class="footer-section about">
+            <h2 class="logo-text">Vegiefy Organics Farming</h2>
+            <p>Sustainable and fresh hydroponically grown produce delivered straight to your table.</p>
+            <div class="contact">
+                <span><i class="fas fa-phone"></i> &nbsp; +91-8698105221</span>
+                <span><i class="fas fa-envelope"></i> &nbsp; support@vegiefy.com</span>
+                <span><i class="fas fa-map-marker-alt"></i> &nbsp; Chandrashekar Ward Gondia</span>
+            </div>
+            <div class="socials">
+                <a href="#"><i class="fab fa-facebook"></i>&nbsp; Facebook</a>
+                <a href="#"><i class="fab fa-twitter"></i>&nbsp; Twitter</a>
+                <a href="#"><i class="fab fa-instagram"></i>&nbsp; Instagram</a>
+                <a href="#"><i class="fab fa-linkedin"></i>&nbsp; Linkedin</a>
+            </div>
+        </div>
+        <div class="footer-section links">
+            <h2>Quick Links</h2>
+            <ul>
+               <a href="/#about-us" ><li>About Us</li></a>
+                <a href="/product"><li>Products</li></a>
+                <a  href="/blog"><li>Blog/News</li></a>
+                <a  href="/delivery"><li>Delivery</li></a>
+                <a href="/contact" ><li>Contact Us</li></a>
+                <a href="/delivery#faq"><li>FAQs</li></a>
+            </ul>
+        </div>
+        <div class="footer-section contact-form">
+            <h2>Contact Us</h2>
+            <form action="index.html" method="post">
+                <input type="email" name="email" class="text-input contact-input" placeholder="Your email address...">
+                <textarea name="message" class="text-input contact-input" placeholder="Your message..."></textarea>
+                <button type="submit" class="btn btn-big contact-btn">
+                    <i class="fas fa-envelope"></i>
+                    Send
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; www.vegiefy.com 
+    </div>
+</footer>
+
+  
+  
+  <script>
+       // js for nav bar Mobile menu toggle
+ const hamburgerBtn = document.querySelector('.hamburger-btn');
+ const navbarMenu = document.querySelector('.nav-links');
+ 
+ hamburgerBtn.addEventListener('click', () => {
+   navbarMenu.classList.toggle('show-menu');
+ });
+ 
+ document.querySelectorAll('.nav-links a').forEach(link => {
+   link.addEventListener('click', function() {
+     // Remove active class from all links
+     document.querySelector('.nav-active')?.classList.remove('nav-active');
+     
+     // Add active class to the clicked link
+     this.classList.add('nav-active');
+   });
+ });
+ 
+
+// js for search-dropdown======================================================================================================
+ const searchInput = document.getElementById('search-input');
+const dropdown = document.getElementById('dropdown');
+
+// Show dropdown when input is focused
+function showDropdown() {
+    dropdown.style.display = 'block';
+}
+
+// Hide dropdown when clicking outside
+function hideDropdown() {
+    setTimeout(() => {
+        if (!dropdown.contains(document.activeElement)) {
+            dropdown.style.display = 'none';
+        }
+    }, 100);
+}
+
+// Add event listeners to dropdown items
+document.querySelectorAll('.dropdown li').forEach(item => {
+    item.addEventListener('mousedown', function() {
+        searchInput.value = this.textContent; 
+        dropdown.style.display = 'none';
+    });
+});
+
+// Hide dropdown if clicked outside of the dropdown or input
+window.addEventListener('mousedown', function(event) {
+    if (!searchInput.contains(event.target) && !dropdown.contains(event.target)) {
+        dropdown.style.display = 'none';
+    }
+});
+
+// js for terms and conditions ==================================================================================
+var modal = document.getElementById("termsModal");
+
+var links = document.querySelectorAll(".openModal");
+
+var closeBtn = document.getElementsByClassName("close")[0];
+
+var modalText = document.getElementById("modalText");
+
+var termsConditions = [
+  "Bank Offer: Avail 10% cashback on purchases using the VeggiePay Card. This offer is valid for a limited time only and is subject to change.",
+  "Special Price: Get an additional 20% off on your first order of fresh organic veggies. Offer valid only for new customers.",
+  "Partner Offer: Make a purchase and enjoy a surprise cashback/coupon that you can redeem later. Terms apply."
+];
+
+links.forEach((link, index) => {
+  link.addEventListener("click", function(event) {
+    event.preventDefault(); 
+    modalText.innerHTML = termsConditions[index]; 
+    modal.style.display = "block"; 
+  });
+});
+
+closeBtn.onclick = function() {
+  modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+
+  </script>
+</body>
+</html>
