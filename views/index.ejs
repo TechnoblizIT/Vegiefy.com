@@ -162,11 +162,11 @@
               <h3><%= product.name %></h3>
               <div class="product-info">
                 <p class="price">₹ <%=product.price%>/-</p>
-                <a href="/user/addtocart/<%= product._id %>">
-                  <button class="add-to-cart">
+                <form action="/user/addtocart/<%=product._id%>" method="post">
+                  <button class="add-to-cart" type="submit">
                     <i class="fa-solid fa-cart-shopping"></i> &nbsp; Add to Cart
                   </button>
-                </a>
+                </form>
               </div>
           </div>
           <% }) %>
