@@ -587,7 +587,7 @@ hr {
   /* css for footer */
   footer {
   position: relative;
-  background-image: url(/public/images/assest/background2.jpg);
+  background-image: url(../images/assest/background2.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -778,20 +778,24 @@ footer::before {
        
         <div class="logo-search-container">
           <a href="#" class="logo">
-            <img src="../public/images//assest/vegiefy-logo.png" alt="Vegiefy Logo">
+            <img src="../images//assest/vegiefy-logo.png" alt="Vegiefy Logo">
           </a>
           <div class="search-bar">
-            <input type="text" id="search-input" placeholder="Search for products..." onfocus="showDropdown()" onblur="hideDropdown()">
+            <input 
+              type="text" 
+              id="search-input" 
+              placeholder="Search for products..." 
+              onfocus="showDropdown()" 
+              onkeyup="fetchProducts()" 
+            >
             <button><i class="fas fa-search"></i></button>
-            <div class="dropdown" id="dropdown">
-                <ul>
-                    <li>Banana</li>
-                    <li>Mango</li>
-                    <li>Spinach</li>
-                    <li>Coriander</li>
-                </ul>
+            <div class="dropdown" id="dropdown" style="display: none;">
+              <ul id="product-list">
+                <!-- Dynamic search results will be inserted here -->
+              </ul>
             </div>
-        </div>
+          </div>
+          
     </div>
         
         <div class="horizontal-line"></div>
@@ -807,12 +811,12 @@ footer::before {
           <a href="/user/profile" class="profile-icon">
             <i class="fas fa-user"></i>
           </a>
-          <!-- <% if(req.user){ %>
+          <% if(req.user){ %>
             <a href="/user/logout" ><button class="logout-btn" >LOG OUT</button></a>
             <%}else{%>
               <a href="/login"><button class="login-btn">LOG IN</button></a> 
               
-            <%}%> -->
+            <%}%>
         </div>
       </div>
   
@@ -845,15 +849,15 @@ footer::before {
    
       <div class="product-image-wrapper">
         <div class="product-image">
-          <img class="product-img" src="/public/images/assest/single product/kale 1.jpg" alt="Organic Kale Image 1">
-          <img class="hover-img" src="/public/images/assest/single product/kale 2.jpg" alt="Organic Kale Image 2">
+          <img class="product-img" src="../images/uploads/<%= product.image %>" alt="Organic Kale Image 1">
+         
         </div>
       </div>
   
       <div class="product-info">
-        <h1>Organic Kale - Fresh & Nutritious</h1>
+        <h1><%=product.name%></h1>
         <div class="rating"> <i class="fas fa-star"></i>(5.0)</div>
-        <p class="price">₹280</p>
+        <p class="price">₹<%=product.price%></p>
   
     
         <hr class="divider"> 
@@ -861,17 +865,17 @@ footer::before {
           <h2>Available Offers</h2>
           <ul class="offer-list">
             <li>
-                <img src="/public/images/assest/offer.png" alt="Offer icon" class="offer-icon">
+                <img src="../images/assest/offer.png" alt="Offer icon" class="offer-icon">
                 <strong>Bank Offer</strong>: Avail 10% cashback on purchases using the VeggiePay Card 
                 &nbsp;<a href="#" class="openModal">T&C</a>
             </li>
             <li>
-                <img src="/public/images/assest/offer.png" alt="Offer icon" class="offer-icon">
+                <img src="../images/assest/offer.png" alt="Offer icon" class="offer-icon">
                 <strong>Special Price</strong>: Get an additional 20% off on your first order of fresh organic veggies 
                 &nbsp;<a href="#" class="openModal">T&C</a>
             </li>
             <li>
-                <img src="/public/images/assest/offer.png" alt="Offer icon" class="offer-icon">
+                <img src="../images/assest/offer.png" alt="Offer icon" class="offer-icon">
                 <strong>Partner Offer</strong>: Make a purchase and enjoy a surprise cashback/coupon that you can redeem later! 
                 &nbsp;<a href="#" class="openModal">T&C</a>
             </li>
@@ -891,18 +895,16 @@ footer::before {
           <p>Grown sustainably, this organic kale offers a nutrient-packed boost to your diet. Delivered fresh to ensure maximum taste and health benefits. Ideal for healthy meals.</p>
           <p>Try it in salads, smoothies, or as a cooked side. Freshness guaranteed!</p>
         </div>
-  
-        <button class="add-btn">Add to Cart</button>
+        <form action="/user/addtocart/<%=product._id%>" method="post">
+        <button class="add-btn" type="submit">Add to Cart</button>
+      </form>
   
         <!-- Product Features -->
         <div class="product-description">
           <h2>Product Features</h2>
           <ul>
-            <li>Organically grown without pesticides, ensuring a clean and healthy product for your kitchen.</li>
-            <li>Rich in essential vitamins A, C, and K to boost your health and immune system naturally.</li>
-            <li>Perfect for salads, smoothies, and sautés, delivering a crisp taste with maximum freshness.</li>
-            <li>Sustainably harvested using eco-friendly farming practices that support the environment.</li>
-            <li>Delivered directly from farm to table, ensuring the best quality and flavor in every bite.</li>
+            <li><%=product.description%></li>
+            
           </ul>
         </div>
       </div>
@@ -1046,6 +1048,58 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
+// Function to show the dropdown
+function showDropdown() {
+  document.getElementById('dropdown').style.display = 'block';
+}
+
+// Function to fetch products based on search input
+async function fetchProducts() {
+  const input = document.getElementById('search-input').value.toLowerCase();
+
+  if (input.length === 0) {
+    document.getElementById('dropdown').style.display = 'none';
+    return; // Hide the dropdown if input is empty
+  } else {
+    document.getElementById('dropdown').style.display = 'block';
+  }
+
+  try {
+    // Fetch the search results from the backend API
+    const response = await fetch(`/search?q=${input}`);
+    const products = await response.json();
+
+    const productList = document.getElementById('product-list');
+    productList.innerHTML = ''; // Clear the previous results
+
+    if (products.length === 0) {
+      productList.innerHTML = '<li>No products found</li>';
+    } else {
+      // Populate the dropdown with search results
+      products.forEach(product => {
+        const li = document.createElement('li');
+        li.textContent = product.name;
+        li.addEventListener('click', () => {
+          window.location.href = `/productdetails/${product._id}`; // Redirect to product details page
+        });
+        productList.appendChild(li);
+      });
+    }
+
+  } catch (error) {
+    console.error('Error fetching products:', error);
+  }
+}
+
+// Hide the dropdown when clicking outside (optional)
+document.addEventListener('click', function(event) {
+  const dropdown = document.getElementById('dropdown');
+  const searchInput = document.getElementById('search-input');
+  if (!dropdown.contains(event.target) && event.target !== searchInput) {
+    dropdown.style.display = 'none';
+  }
+});
 
 
   </script>
