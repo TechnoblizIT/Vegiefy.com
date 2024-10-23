@@ -136,11 +136,11 @@ router.get('/cart',  isloggedin,checkuser ,async function(req, res) {
 router.get('/search', async (req, res) => {
   try {
     const query = req.query.q;
-    // Use a case-insensitive search with regular expressions
+   
     const products = await productModel.find({
       name: { $regex: query, $options: 'i' }
-    }).limit(10); // Optional: limit the results to 10
-    res.json(products); // Send the matching products back as JSON
+    }).limit(10); 
+    res.json(products);
   } catch (err) {
     res.status(500).send('Server error');
   }

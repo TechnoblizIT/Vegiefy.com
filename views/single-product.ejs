@@ -961,7 +961,8 @@ footer::before {
     </div>
 </footer>
 
-  
+<script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+
   
   <script>
        // js for nav bar Mobile menu toggle
@@ -1049,12 +1050,8 @@ window.onclick = function(event) {
   }
 }
 
-// Function to show the dropdown
-function showDropdown() {
-  document.getElementById('dropdown').style.display = 'block';
-}
+let fuse;
 
-// Function to fetch products based on search input
 async function fetchProducts() {
   const input = document.getElementById('search-input').value.toLowerCase();
 
@@ -1066,22 +1063,30 @@ async function fetchProducts() {
   }
 
   try {
-    // Fetch the search results from the backend API
-    const response = await fetch(`/search?q=${input}`);
+    // Fetch all products from the backend
+    const response = await fetch('/search?q=');
     const products = await response.json();
 
-    const productList = document.getElementById('product-list');
-    productList.innerHTML = ''; // Clear the previous results
+    
+    fuse = new Fuse(products, {
+      keys: ['name'], 
+      threshold: 0.4, 
+    });
 
-    if (products.length === 0) {
+   
+    const result = fuse.search(input);
+    const productList = document.getElementById('product-list');
+    productList.innerHTML = '';
+
+    if (result.length === 0) {
       productList.innerHTML = '<li>No products found</li>';
     } else {
-      // Populate the dropdown with search results
-      products.forEach(product => {
+      
+      result.forEach(({ item }) => {
         const li = document.createElement('li');
-        li.textContent = product.name;
+        li.textContent = item.name;
         li.addEventListener('click', () => {
-          window.location.href = `/productdetails/${product._id}`; // Redirect to product details page
+          window.location.href = `/productdetails/${item._id}`; 
         });
         productList.appendChild(li);
       });
@@ -1092,7 +1097,7 @@ async function fetchProducts() {
   }
 }
 
-// Hide the dropdown when clicking outside (optional)
+// Hide dropdown when clicking outside (optional)
 document.addEventListener('click', function(event) {
   const dropdown = document.getElementById('dropdown');
   const searchInput = document.getElementById('search-input');
