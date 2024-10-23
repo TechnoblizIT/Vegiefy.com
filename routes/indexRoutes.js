@@ -139,7 +139,7 @@ router.get('/search', async (req, res) => {
    
     const products = await productModel.find({
       name: { $regex: query, $options: 'i' }
-    }).limit(10); 
+    }).limit(20); 
     res.json(products);
   } catch (err) {
     res.status(500).send('Server error');

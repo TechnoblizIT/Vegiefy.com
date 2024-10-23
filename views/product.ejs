@@ -613,17 +613,20 @@ footer::before {
           <img src="../images/assest/vegiefy-logo.png" alt="Vegiefy Logo">
         </a>
         <div class="search-bar">
-          <input type="text" id="search-input" placeholder="Search for products..." onfocus="showDropdown()" onblur="hideDropdown()">
+          <input 
+            type="text" 
+            id="search-input" 
+            placeholder="Search for products..." 
+            onfocus="showDropdown()" 
+            onkeyup="fetchProducts()" 
+          >
           <button><i class="fas fa-search"></i></button>
-          <div class="dropdown" id="dropdown">
-              <ul>
-                  <li>Banana</li>
-                  <li>Mango</li>
-                  <li>Spinach</li>
-                  <li>Coriander</li>
-              </ul>
+          <div class="dropdown" id="dropdown" style="display: none;">
+            <ul id="product-list">
+              <!-- Dynamic search results will be inserted here -->
+            </ul>
           </div>
-      </div>
+        </div>
       </div>
       
       <div class="horizontal-line"></div>
@@ -744,6 +747,7 @@ footer::before {
           &copy; www.vegiefy.com 
         </div>
       </footer>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
   
     <script>
 
@@ -765,39 +769,63 @@ footer::before {
    });
  });
 
+ let fuse;
 
- // js for search-dropdown======================================================================================================
-const searchInput = document.getElementById('search-input');
-const dropdown = document.getElementById('dropdown');
+async function fetchProducts() {
+  const input = document.getElementById('search-input').value.toLowerCase();
 
-// Show dropdown when input is focused
-function showDropdown() {
-    dropdown.style.display = 'block';
-}
+  if (input.length === 0) {
+    document.getElementById('dropdown').style.display = 'none';
+    return; // Hide the dropdown if input is empty
+  } else {
+    document.getElementById('dropdown').style.display = 'block';
+  }
 
-// Hide dropdown when clicking outside
-function hideDropdown() {
-    setTimeout(() => {
-        if (!dropdown.contains(document.activeElement)) {
-            dropdown.style.display = 'none';
-        }
-    }, 100);
-}
+  try {
+    // Fetch all products from the backend
+    const response = await fetch('/search?q=');
+    const products = await response.json();
 
-// Add event listeners to dropdown items
-document.querySelectorAll('.dropdown li').forEach(item => {
-    item.addEventListener('mousedown', function() {
-        searchInput.value = this.textContent; 
-        dropdown.style.display = 'none';
+    
+    fuse = new Fuse(products, {
+      keys: ['name'], 
+      threshold: 0.4, 
     });
+
+   
+    const result = fuse.search(input);
+    const productList = document.getElementById('product-list');
+    productList.innerHTML = '';
+
+    if (result.length === 0) {
+      productList.innerHTML = '<li>No products found</li>';
+    } else {
+      
+      result.forEach(({ item }) => {
+        const li = document.createElement('li');
+        li.textContent = item.name;
+        li.addEventListener('click', () => {
+          window.location.href = `/productdetails/${item._id}`; 
+        });
+        productList.appendChild(li);
+      });
+    }
+
+  } catch (error) {
+    console.error('Error fetching products:', error);
+  }
+}
+
+// Hide dropdown when clicking outside (optional)
+document.addEventListener('click', function(event) {
+  const dropdown = document.getElementById('dropdown');
+  const searchInput = document.getElementById('search-input');
+  if (!dropdown.contains(event.target) && event.target !== searchInput) {
+    dropdown.style.display = 'none';
+  }
 });
 
-// Hide dropdown if clicked outside of the dropdown or input
-window.addEventListener('mousedown', function(event) {
-    if (!searchInput.contains(event.target) && !dropdown.contains(event.target)) {
-        dropdown.style.display = 'none';
-    }
-});
+ 
   // js for footer section
   document.addEventListener("DOMContentLoaded", function () {
             const btn = document.querySelector('.contact-btn');

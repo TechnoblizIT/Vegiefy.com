@@ -88,34 +88,3 @@
 });
 
 // js for search-dropdown======================================================================================================
-const searchInput = document.getElementById('search-input');
-const dropdown = document.getElementById('dropdown');
-
-// Show dropdown when input is focused
-function showDropdown() {
-    dropdown.style.display = 'block';
-}
-
-// Hide dropdown when clicking outside
-function hideDropdown() {
-    setTimeout(() => {
-        if (!dropdown.contains(document.activeElement)) {
-            dropdown.style.display = 'none';
-        }
-    }, 100);
-}
-
-// Add event listeners to dropdown items
-document.querySelectorAll('.dropdown li').forEach(item => {
-    item.addEventListener('mousedown', function() {
-        searchInput.value = this.textContent; 
-        dropdown.style.display = 'none';
-    });
-});
-
-// Hide dropdown if clicked outside of the dropdown or input
-window.addEventListener('mousedown', function(event) {
-    if (!searchInput.contains(event.target) && !dropdown.contains(event.target)) {
-        dropdown.style.display = 'none';
-    }
-});
