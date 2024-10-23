@@ -25,9 +25,17 @@
           <img src="../images/assest/vegiefy-logo.png" alt="Vegiefy Logo">
         </a>
         <div class="search-bar">
-          <input type="text" placeholder="Search for products...">
+          <input type="text" id="search-input" placeholder="Search for products..." onfocus="showDropdown()" onblur="hideDropdown()">
           <button><i class="fas fa-search"></i></button>
-        </div>
+          <div class="dropdown" id="dropdown">
+              <ul>
+                  <li>Banana</li>
+                  <li>Mango</li>
+                  <li>Spinach</li>
+                  <li>Coriander</li>
+              </ul>
+          </div>
+      </div>
       </div>
       
       <div class="horizontal-line"></div>

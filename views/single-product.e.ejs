@@ -1106,6 +1106,15 @@ document.addEventListener('click', function(event) {
   }
 });
 
+ // js for footer section
+ document.addEventListener("DOMContentLoaded", function () {
+            const btn = document.querySelector('.contact-btn');
+
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                alert('Your message has been sent!');
+            });
+        });
 
   </script>
 </body>

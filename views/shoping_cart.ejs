@@ -73,7 +73,34 @@ header {
   cursor: pointer;
   border-radius: 0 5px 5px 0;
 }
+/* dropdown for search bar */
+.dropdown {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border-radius: 5px;
+    margin-top: 50px; 
+    z-index: 1000; 
+    width: 400px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
 
+.dropdown ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown li {
+  padding: 5px;
+  cursor: pointer;
+  color: black;
+}
+
+.dropdown li:hover {
+    background-color: #ecf7f0; 
+    border-radius: 5px;
+}
 .nav-icons {
   display: flex;
   align-items: center;
@@ -865,9 +892,17 @@ footer::before {
           <img src="../images/assest/vegiefy-logo.png" alt="Vegiefy Logo">
         </a>
         <div class="search-bar">
-          <input type="text" placeholder="Search for products...">
+          <input type="text" id="search-input" placeholder="Search for products..." onfocus="showDropdown()" onblur="hideDropdown()">
           <button><i class="fas fa-search"></i></button>
-        </div>
+          <div class="dropdown" id="dropdown">
+              <ul>
+                  <li>Banana</li>
+                  <li>Mango</li>
+                  <li>Spinach</li>
+                  <li>Coriander</li>
+              </ul>
+          </div>
+      </div>
       </div>
       
       <div class="horizontal-line"></div>
@@ -1106,7 +1141,38 @@ document.getElementById('myForm').addEventListener('submit', function(event) {
         document.getElementById('myForm').submit();
     });
 
-   // Select all quantity containers
+   // js for search-dropdown======================================================================================================
+const searchInput = document.getElementById('search-input');
+const dropdown = document.getElementById('dropdown');
+
+// Show dropdown when input is focused
+function showDropdown() {
+    dropdown.style.display = 'block';
+}
+
+// Hide dropdown when clicking outside
+function hideDropdown() {
+    setTimeout(() => {
+        if (!dropdown.contains(document.activeElement)) {
+            dropdown.style.display = 'none';
+        }
+    }, 100);
+}
+
+// Add event listeners to dropdown items
+document.querySelectorAll('.dropdown li').forEach(item => {
+    item.addEventListener('mousedown', function() {
+        searchInput.value = this.textContent; 
+        dropdown.style.display = 'none';
+    });
+});
+
+// Hide dropdown if clicked outside of the dropdown or input
+window.addEventListener('mousedown', function(event) {
+    if (!searchInput.contains(event.target) && !dropdown.contains(event.target)) {
+        dropdown.style.display = 'none';
+    }
+});
 
     // -----------------------------------------------------------------------------------------------------
       // js for footer section

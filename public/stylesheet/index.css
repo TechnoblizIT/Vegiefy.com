@@ -65,7 +65,34 @@ header {
   cursor: pointer;
   border-radius: 0 5px 5px 0;
 }
+/* dropdown for search bar */
+.dropdown {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border-radius: 5px;
+  margin-top: 50px; 
+  z-index: 1000; 
+  width: 400px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
 
+.dropdown ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown li {
+padding: 5px;
+cursor: pointer;
+color: black;
+}
+
+.dropdown li:hover {
+  background-color: #ecf7f0; 
+  border-radius: 5px;
+}
 .nav-icons {
   display: flex;
   align-items: center;

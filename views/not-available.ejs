@@ -378,7 +378,7 @@ p {
   /* css for footer */
   footer {
   position: relative;
-  background-image: url(/public/images/assest/background2.jpg);
+  background-image: url(../images/assest/background2.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -751,6 +751,15 @@ window.addEventListener('mousedown', function(event) {
     }
 });
 
+ // js for footer section
+ document.addEventListener("DOMContentLoaded", function () {
+            const btn = document.querySelector('.contact-btn');
+
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                alert('Your message has been sent!');
+            });
+        });
 
   </script>
 </body>
