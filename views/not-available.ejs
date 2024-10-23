@@ -569,7 +569,7 @@ footer::before {
        
         <div class="logo-search-container">
           <a href="#" class="logo">
-            <img src="../public/images//assest/vegiefy-logo.png" alt="Vegiefy Logo">
+            <img src="../images//assest/vegiefy-logo.png" alt="Vegiefy Logo">
           </a>
           <div class="search-bar">
             <input type="text" id="search-input" placeholder="Search for products..." onfocus="showDropdown()" onblur="hideDropdown()">
@@ -593,17 +593,17 @@ footer::before {
           </div>
           <a href="/cart" class="cart-icon">
             <i class="fas fa-shopping-cart"></i>
-            <span class="cart-count">0</span>
+            <span class="cart-count"><%=cartcount%></span>
           </a>
           <a href="/user/profile" class="profile-icon">
             <i class="fas fa-user"></i>
           </a>
-          <!-- <% if(req.user){ %>
+          <% if(req.user){ %>
             <a href="/user/logout" ><button class="logout-btn" >LOG OUT</button></a>
             <%}else{%>
               <a href="/login"><button class="login-btn">LOG IN</button></a> 
               
-            <%}%> -->
+            <%}%>
         </div>
       </div>
   
@@ -639,7 +639,7 @@ footer::before {
 
     <!-- Message section -->
     <div class="sorry-message">
-        <img src="/public/images/assest/not available.jpg" alt="Service Not Available" class="not-available-img">
+        <img src="../images/assest/not available.jpg" alt="Service Not Available" class="not-available-img">
         <h1>We’re Sorry<span class="exclamation">!</span></h1>
         <p>We apologize for the inconvenience!<br>
         Currently, our delivery services don’t cover your area.<br>

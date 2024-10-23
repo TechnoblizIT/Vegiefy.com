@@ -640,11 +640,11 @@ footer::before {
 <main style="padding-top: 7%;"> 
   <div class="product-list" id="product-list">
     <% products.forEach(product => { %>
-      <div class="product-box">
+     <a style="text-decoration: none;" href="/productdetails/<%=product._id%>"><div class="product-box">
         <img src="../images/uploads/<%= product.image %>" alt="product.name">
         <h2><%= product.name %></h2>
         <p><%= product.description %></p>
-        <p style="font-weight: bolder;">Price: ₹ <%=product.price%>/-</p>
+        <p style="font-weight: bolder;">Price: ₹ <%=product.price%>/-</p> 
         <!-- Quantity Dropdown -->
         <form action="/user/addtocart/<%= product._id %>" method="POST">
           <select name="quantity" class="quantity-selecter">
@@ -659,6 +659,7 @@ footer::before {
           <button type="submit">Add to Cart</button>
         </form>
       </div>
+     </a>
     <% }) %>
   </div>
 </main>

@@ -95,6 +95,26 @@ router.get('/blog',checkuser ,async function(req, res) {
     }
 });
 
+router.get("/not-available" ,isloggedin,checkuser ,async function(req, res) {
+  var cartcount=0
+  if (req.user){
+    const user = await userModel.findOne({ email: req.user.email })
+    .populate({
+      path: 'cart.product',  
+      model: 'Products'      
+    });
+    user.cart.forEach((item)=>{ cartcount+=1})
+    res.render('not-available',{req,cartcount})
+    }else{
+     res.render('not-available',{req,cartcount})
+    }
+})
+
+router.get("/productdetails/:productid",checkuser,async function(req, res) {
+  const product = await productModel.findById(req.params.productid)
+  res.render('single-product',{product,req})
+})
+
 router.get('/cart',  isloggedin,checkuser ,async function(req, res) {
   var cartcount=0
    const user = await userModel.findOne({ email: req.user.email })
@@ -111,6 +131,19 @@ router.get('/cart',  isloggedin,checkuser ,async function(req, res) {
    })
    
    res.render('shoping_cart',{req,user,carttotal,cartcount,limit})
+});
+
+router.get('/search', async (req, res) => {
+  try {
+    const query = req.query.q;
+   
+    const products = await productModel.find({
+      name: { $regex: query, $options: 'i' }
+    }).limit(10); 
+    res.json(products);
+  } catch (err) {
+    res.status(500).send('Server error');
+  }
 });
 
 
