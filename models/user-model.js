@@ -6,6 +6,7 @@ const userSchema=mongoose.Schema({
     password:String,
     mobile:String,
     address:String,
+    googleid:String,
     cart:[{
         product: { type: mongoose.Schema.Types.ObjectId, ref: 'Products' },
          quantity: { type: Number, default: 1 }

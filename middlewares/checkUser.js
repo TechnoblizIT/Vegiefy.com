@@ -12,6 +12,11 @@ module.exports.checkuser=  function(req, res, next){
         return next()
       }
       const userdetail= await userModel.findOne({email:user}).select("-password")
+      if (!userdetail) {
+       const userdetail = await userModel.findOne({name:user}).select("-password")
+       req.user=userdetail
+       return next()
+      }
       req.user=userdetail;
       return next();
     });

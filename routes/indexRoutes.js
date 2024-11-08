@@ -4,6 +4,8 @@ const {isloggedin}= require("../middlewares/isloggedin")
 const {checkuser}=require("../middlewares/checkUser")
 const productModel=require("../models/product-model")
 const userModel=require("../models/user-model")
+const passport=require("passport")
+const GoogleStrategy = require('passport-google-oauth20');
 // Define the routes
 
 router.get('/',checkuser ,async function(req, res) {
@@ -145,6 +147,25 @@ router.get('/search', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
+const jwt = require('jsonwebtoken');
+router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
 
+router.get('/auth/google/callback', 
+  passport.authenticate('google',{ failureRedirect: '/login' ,session:false}),
+  async (req, res) => {
+    try {
+      console.log('Authenticated User:', req.user);
+      const token = jwt.sign(req.user.name, process.env.JWT_SECRET);
+
+      
+      res.cookie('tokken', token);
+
+      res.redirect('/');
+    } catch (error) {
+      console.error('Error generating JWT:', error);
+      res.redirect('/login');
+    }
+  }
+);
 
 module.exports = router;
