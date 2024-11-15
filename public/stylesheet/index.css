@@ -136,16 +136,14 @@ color: black;
   font-size: 15px;
   margin-left: 20px;
   cursor: pointer;
-  border: none;
- 
+  border: 1px solid #fff;
   transition: 0.15s ease;
 }
 
 .login-btn:hover {
-  background-color: #bdfcbe;
   color: #388e3c;
-  font-weight: bold;
-  box-shadow: 0px 0px 10px 2px rgba(255, 255, 255, 0.8); 
+  border: 1px solid #388e3c;
+  
 }
 
 /* logout button */
@@ -158,14 +156,12 @@ color: black;
   font-size: 15px;
   margin-left: 20px;
   cursor: pointer;
-  border: none;
+  border: 1px solid #fff;
 }
 
 .logout-btn:hover{
-  background-color: rgb(248, 195, 195);
   color: #d9534f;
-  font-weight: bold;
-  box-shadow: 0px 0px 10px 2px rgba(255, 255, 255, 0.8); 
+  border: 1px solid #d9534f ;
 }
 /* Bottom Nav (Helpline and Links) */
 .bottom-nav {
@@ -758,225 +754,7 @@ transform: rotate(10deg);
 
 /* end css for product-swiper */
 
-  /* Mission Styles for Shopping Page */
-.mission .title {
-  font-size: 40px;
-  text-align: center;
-  margin-top: 10px;
-  font-weight: bold;
-  color: #222;
-}
-
-.mission {
-  width: 100%;
-  padding: 50px 100px;
-}
-
-.mission .row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between; 
-  gap: 30px; 
-  row-gap: 50px; /* Added gap between rows */
-  margin-top: 80px;
-}
-
-.row .column {
-  flex: 0 0 calc(33.33% - 20px); 
-  max-width: calc(33.33% - 20px);
-  box-sizing: border-box; 
-}
-
-.card {
-  background-color: #ffffff;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: center;
-  height: 100%; 
-  position: relative;
-  display: flex;
-  flex-direction: column;
-}
-
-.card h3 {
-  font-size: 1.8rem;
-  color: #0f5256;
-  margin-bottom: 15px;
-  font-weight: 600;
-}
-
-.card p {
-  font-size: 1rem;
-  color: #7f8c8d;
-  line-height: 1.6;
-  margin-bottom: 1em;
-}
-
-.card i {
-  font-size: 24px;
-  color: #0f5256;
-  position: absolute;
-  top: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #ffffff;
-  border-radius: 50%;
-  padding: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-}
-
-.card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-}
-
-.card:hover h3 {
-  color: #388e3c;
-}
-
-.card:hover i {
-  background-color: #388e3c;
-  color: #fff;
-}
-
-@media screen and (max-width: 992px) {
-  .row .column {
-    flex: 0 0 calc(50% - 20px); 
-    max-width: calc(50% - 20px);
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .row .column {
-    flex: 0 0 100%; 
-    max-width: 100%;
-  }
-  .mission {
-    padding: 0;
-  }
-  .mission .title {
-    font-size: 25px;
-    margin-top: 50px;
-  }
-  .mission {
-    padding: 20px;
-  }
-}
-
-/* style for review section */
-  
-/* .review{
-  margin-top: 250px;
-} */
-.review .title h2{
-  font-size: 40px;
-  font-weight: bold;
-  color: #222;
-  text-align: center;
-}
-.review .title h2 .exclamation{
-  color: #ff5e57;
-  font-size: 3rem; 
-  display: inline-block;
-  transform: rotate(10deg);
-}
-.review .title p{
-  font-size: 20px;
-  text-align: center;
-}
-.review-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 20px;
-}
-
-.review-card {
-  background: white;
-  border-left: 30px solid #0f5256;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 40px;
-  padding: 20px;
-  width: 300px;
-  transition: transform 0.8s, border-color 0.8s, background-color 0.8s, color 0.8s;
-}
-
-.review-card:hover {
-  transform: scale(1);
-  border-left-color: black;
-  background-color: #0f5256; 
-  color: white;
-}
-
-.review-header {
-  display: flex;
-  align-items: center;
-}
-
-.reviewer-img {
-    width: 50px;
-  border-radius: 50% ;
-  margin-right: 15px;
-  transition: border-color 0.3s;
-  border: 2px solid #0f5256 ;
-}
-
-.review-card:hover .reviewer-img {
-  border: 2px solid white;
-}
-
-.review-body {
-  margin-top: 10px;
-}
-
-.review-rating i {
-  color: #ffcc00;
-  transition: color 0.3s;
-}
-
-.review-card:hover .review-rating i {
-  color: #ffd700; 
-}
-
-.load-more {
-  background-color: #0f5256;
-  border: none;
-  color: white;
-  cursor: pointer;
-  padding: 10px 20px;
-  margin: 20px;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
-
-.load-more:hover {
-  background-color: #09343c;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  /* .review{
-    margin-top: 1700px;
-  } */
-  .review .title h2{
-   
-      font-size: 25px;
-     letter-spacing: 1px; 
-  }
-  
-  .review .title p{
-    margin-top: 10px;
-    padding: 10px;
-  }
-  .review-card {
-    /* width: 90%; */
-    margin: 20px;
-  }
-}
-
+ 
   
   /* style for grow section */
 
@@ -987,7 +765,7 @@ transform: rotate(10deg);
 } 
 .grow .wrapper{
     padding:0px 60px;
-    
+    margin-top: 40px;
 }
 .grow .content{
     width: 60%;
@@ -999,6 +777,7 @@ transform: rotate(10deg);
     font-size: 40px;
     color:#222; 
     Letter-spacing: 1;
+    
 }
 .grow .content h3 .question-mark{
   color: #ff5e57;
@@ -1093,7 +872,7 @@ transform: rotate(10deg);
     color: #fff;
     padding: 40px 0;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    margin-top: 500px;
+    margin-top: 550px;
   }
   
   footer::before {
