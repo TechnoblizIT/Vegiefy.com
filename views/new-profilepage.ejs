@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+        background-color: #f4f4f9;
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+    }
+    .container {
+        display: flex;
+        width: 100%;
+    }
+    .nav-sidebar {
+        background-color: #4e73df;
+        color: white;
+        width: 200px;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 140px;
+        border-radius: 0 20px 20px 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+    .nav-item {
+        text-align: center;
+        margin: 20px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+    }
+    .nav-item i {
+        font-size: 28px;
+        margin-bottom: 6px;
+        color: #ffffff;
+        transition: color 0.3s ease;
+    }
+    .nav-item .nav-text {
+        font-size: 14px;
+        color: #ffffff;
+        transition: color 0.3s ease;
+    }
+    .nav-item:hover i {
+        color: #f39c12;
+    }
+
+    .nav-item:hover .nav-text {
+        color: #f39c12;
+    }
+
+    /* Main Content================================================================================== */
+    .content {
+        padding-bottom: 35px;
+        width: 100%;
+        margin-left: 200px;
+        margin-top: 30px;
+
+    }
+    .content h2{
+            font-size: 22px;
+            color: #34495e;
+            margin-top: 40px;
+            font-weight: 600;
+        }
+    /* Content Section */
+    .content-sections {
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        margin-top: 40px;
+    }
+    .settings-left, .settings-right {
+        width: 40%;
+        padding: 15px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Setting Row Styles */
+    .setting-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: 15px 0;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .setting-row i {
+        font-size: 24px; 
+        color: #3498db;
+        margin-right: 15px; 
+        flex: 0 0 40px;
+    }
+
+    .setting-text {
+        flex: 1;
+        margin-left: 15px; 
+    }
+
+    .setting-text h3 {
+        font-size: 18px;
+        color: #2c3e50;
+        margin-bottom: 5px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+
+    .setting-text p {
+        font-size: 14px;
+        color: #7f8c8d;
+        line-height: 1.6;
+    }
+     .setting-row img {
+        width: 25px; 
+        object-fit: cover;
+        cursor: pointer;
+        margin-left: 8px;
+        flex-shrink: 0;
+        transition: transform 0.4s ease;      
+    }
+    .setting-row img:hover {
+        transform: rotate(90deg) scale(1.2);
+    }
+    .settings-left h2,
+    .settings-right h2 {
+        font-size: 20px; 
+        color: #2c3e50;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+        
+   /* css for profile page===========================================================*/
+        .hidden { 
+            display: none; 
+        }
+        .back-button {
+            cursor: pointer;
+            font-size: 18px;
+            color: #3498db;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .back-button i {
+            margin-right: 8px;
+        }
+        .profile-container {
+            background-color: #fff;
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            margin: auto;
+            margin-top: 100px;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .profile-header h2 {
+            font-size: 24px;
+            color: #34495e;
+            margin: 0;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        .save-text {
+            font-size: 16px;
+            color: #3498db;
+            cursor: pointer;
+        }
+
+        /* Form Fields */
+        .profile-form label {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 6px;
+            display: block;
+            font-weight: 500;
+        }
+
+        .profile-form input[type="text"], .profile-form input[type="email"], .profile-form input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .profile-form input:focus {
+            border-color: #3498db;
+        }
+
+        /* css for notification page============================================================================== */
+
+        .notification-container {
+            background-color: #fff;
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: auto;
+            margin-top: 100px;
+        }
+        .notification-header {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .notification-title {
+            font-size: 20px;
+            color: #2c3e50;
+            font-weight: bold;
+           margin: auto;
+        }
+
+        .notification-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .notification-option:last-child {
+            border-bottom: none;
+        }
+
+        .notification-option label {
+            font-size: 16px;
+            font-weight: bold;
+            color: #34495e;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .notification-option p {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin: 0;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            left: 4px;
+            bottom: 2px;
+            background-color: white;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #f39c12;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+
+/* css for refer a friend page========================================================================== */
+       
+.refer-container {
+    background-color: #fff;
+    width: 100%;
+    max-width: 800px;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    margin-top: 100px;
+}
+.refer-header {
+    display: flex;
+    margin-bottom: 20px;
+}
+.refer-title {
+    font-size: 20px;
+    color: #2c3e50;
+    font-weight: bold;
+    margin: auto;
+}
+.refer-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.refer-left {
+    flex: 1;
+}
+
+.large-heading {
+    font-size: 24px;
+    color: #2c3e50;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.refer-description {
+    font-size: 16px;
+    color: #7f8c8d;
+    margin-bottom: 20px;
+}
+
+.share-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #f39c12;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.refer-right {
+    flex-shrink: 0;
+}
+
+.refer-image {
+    width: 200px;
+    height: auto;
+    border-radius: 8px;
+}
+
+/*css or rate-us page============================================================================ */
+.rate-us-container {
+    background-color: #fff;
+    width: 100%;
+    max-width: 600px;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    margin-top: 50px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.rate-us-container h2 {
+    font-size: 24px;
+        color: #333;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+}
+
+.description {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.star-rating {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.star {
+    font-size: 30px;
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.star:hover,
+.star.selected {
+    color: #f39c12;
+}
+
+.feedback-section h3 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+    }
+
+    .feedback-section textarea {
+        width: 80%;
+        padding: 12px;
+        font-size: 16px;
+        color: #333;
+        background-color: #f9f9f9;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        resize: vertical;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
+        outline: none;
+    }
+
+    .feedback-section textarea:focus {
+        border-color: #f39c12;
+        box-shadow: 0 4px 8px rgba(92, 107, 192, 0.3);
+    }
+
+    .feedback-section textarea::placeholder {
+        color: #aaa;
+        font-style: italic;
+    }
+
+    .feedback-section textarea:hover {
+        border-color: #f39c12;
+    }
+.submit-button {
+    padding: 12px 24px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #f39c12;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+  /* css for FAQs page====================================================================================*/
+  .faq-section {
+            max-width: 600px;
+            width: 100%;
+            background-color: #fff;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin: auto;
+            margin-top: 50px;
+        }
+
+        .faq-section.hidden {
+            display: none;
+        }
+        .faq-header {
+            display: flex;
+            margin-bottom: 20px;
+   
+        }
+        .faq-header .faq-title {
+            font-size: 20px;
+            color: #2c3e50;
+            font-weight: bold;
+            margin: auto;
+        }
+        .faq-section h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        .faq-box{
+            margin-top: 50px;
+        }
+        .faq-question {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background-color: #f1f1f1;
+        }
+
+        .faq-answer {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+            display: none;
+            padding: 10px 12px;
+            border-left: 3px solid #f39c12;
+            background-color: #f9f9ff;
+            margin-bottom: 15px;
+            border-radius: 0 0 8px 8px;
+        }
+
+/* css for log-out page============================================================================= */
+.logout-container {
+    padding: 30px;
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    max-width: 500px;
+    margin: 100px auto;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.logout-container h1{
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+    margin-top: 40px;
+}
+
+.logout-container p{
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+.logout-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.confirm-logout, .cancel-logout {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.confirm-logout {
+    background-color: #e63946;
+    color: #fff;
+}
+
+.cancel-logout {
+    background-color: #ccc;
+    color: #333;
+}
+
+.confirm-logout:hover {
+    background-color: #d62839;
+}
+
+.cancel-logout:hover {
+    background-color: #bbb;
+}
+  
+
+/* css for address page=========================================================================== */
+.address-page {
+    max-width: 600px;
+    margin: 0px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+}
+.address-header {
+    display: flex;
+    margin-bottom: 20px;
+}
+.address-title{
+    font-size: 24px;
+    text-align: center;
+    color: #333;
+    margin: auto;
+    font-weight: bold;
+}
+
+.address-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+}
+.address-form input[type="text"],
+.address-form input[type="tel"],
+.address-form textarea {
+   
+    outline: none;
+    transition: border-color 0.3s;
+   
+}
+
+.address-form input:focus,
+.address-form textarea:focus {
+    border-color: #3498db;
+}
+.location-block {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-size: 16px;
+    color: #0073e6;
+    cursor: pointer;
+    background-color: #e8f4fd;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+.location-block i {
+    margin-right: 8px;
+    font-size: 18px;
+}
+.input-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+.input-field {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+.input-block {
+    margin-bottom: 15px;
+}
+.textarea-field {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+.radio-group {
+    display: flex;
+    gap: 20px;
+    margin-top: 5px;
+}
+.radio-group label {
+    font-size: 14px;
+    color: #666;
+}
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.save-btn, .cancel-btn {
+    width: 48%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.save-btn {
+    background-color: #0073e6;
+    color: #fff;
+}
+.cancel-btn {
+    background-color: #f5f5f5;
+    color: #333;
+}
+.save-btn:hover {
+    background-color: #005bb5;
+}
+.cancel-btn:hover {
+    background-color: #e0e0e0;
+}
+.hidden {
+    display: none;
+}
+.add-new-address {
+    display: flex;
+    align-items: center;
+    color: #3498db;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 0;
+}
+.add-new-address i {
+    font-size: 20px;
+    margin-right: 8px;
+}
+.address-block {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 5px;
+}
+.address-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.address-type {
+    font-size: 16px;
+    font-weight: bold;
+    color: #005bb5;
+    flex-grow: 1;
+}
+
+.address-options {
+    position: relative;
+}
+
+.address-options i {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.options-menu {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.options-menu button {
+    background: none;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.options-menu button:hover {
+    color: #005bb5;
+}
+.address-content {
+    margin-top: 10px;
+}
+
+.name-mobile-row {
+    display: flex;
+    margin-bottom: 10px;
+}
+.name {
+    font-size: 14px;
+    color: #333;
+    font-weight: bold;
+    margin-right: 10px;
+}
+.mobile-no {
+    font-size: 14px;
+    color: #555;
+}
+.address-details p {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
+.address-options .hidden {
+    display: none;
+}
+
+.address-options i:hover + .options-menu,
+.options-menu:hover {
+    display: block;
+}
+
+/*css for Payment Page===================================================================== */
+.payment-page {
+    padding: 20px;
+    max-width: 500px;
+    margin: 0px auto;
+    background-color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+.payment-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.payment-header h2 {
+    font-size: 24px;
+    color: #34495e;
+    margin: auto;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+.payment-methods {
+    margin-top: 20px;
+}
+.payment-method {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.payment-method:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.08);
+}
+.payment-method label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #fff;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.method-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 16px;
+    color: #333;
+    font-weight: 500;
+    margin-left: 10px; 
+}
+.method-title img {
+    margin-left: auto; 
+    width: 45px; 
+  
+}
+.payment-method input[type="radio"]:checked + .method-title {
+    color: #f39c12;
+    font-weight: 600;
+}
+.method-details {
+    padding: 15px;
+    background-color: #3498db;
+    color: #ffffff;
+    border-radius: 8px;
+    margin-top: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.payment-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 12px;
+    background-color: #fafafa;
+}
+.payment-row {
+    display: flex;
+    justify-content: space-between;
+}
+.payment-row .payment-input {
+    width: 48%;
+}
+.button-group {
+    margin-top: 25px;
+    text-align: center;
+}
+.proceed-btn {
+    padding: 12px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #3498db;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.2s ease;
+}
+.proceed-btn:hover {
+    background-color: #f39c12;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+/* Responsive Styles */
+@media (max-width: 768px) {
+/* Sidebar at the bottom for mobile */
+         .nav-sidebar {
+            width: 100%;
+            height: 60px;
+            flex-direction: row;
+            justify-content: space-around;
+            padding-top: 0;
+            position: fixed;
+            bottom: 0;
+            top: auto;
+            border-radius: 0;
+            z-index: 1000;
+        }
+        .nav-item {
+            margin: 0;
+        }
+        .nav-item i {
+            font-size: 18px;
+        }
+        /* media queries for content */
+        .content{
+            margin-top: 0;
+            margin-left: 0;
+        }
+        .content h2{
+            margin-top: 0;
+        }
+        .content-sections {
+                flex-direction: column;
+                padding: 10px;
+                margin-top: 0;
+            }
+
+            .settings-left, .settings-right {
+                width: 100%;
+                margin-bottom: 20px;
+                background: none;
+                box-shadow: none;
+            }
+
+            .settings-left h2, .settings-right h2 {
+                font-size: 18px;
+            }
+
+            .setting-row {
+                padding: 7px 0;
+            }
+
+            .setting-text h3 {
+                font-size: 16px;
+            }
+
+            .setting-text p {
+                font-size: 12px;
+            }
+
+            /* media query for profile page */
+            .profile-container{
+                background: none;
+                box-shadow: none;
+                margin-top: 0;
+            }
+
+            /* media queries for notification page */
+            .notification-container{
+                background: none;
+                box-shadow: none;
+                margin-top: 0;
+            }
+
+             /* media queries for notification page */
+             .refer-container{
+                background: none;
+                box-shadow: none;
+                margin-top: 0;
+             }
+    .refer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .refer-right {
+        order: 1; 
+    }
+
+    .refer-left {
+        order: 2; 
+    }
+
+    .refer-image {
+        width: 100%;
+        max-width: 200px;
+        margin-bottom: 20px;
+        margin-top: 50px;
+    }
+
+    .large-heading {
+        font-size: 20px;
+    }
+
+    .refer-description {
+        font-size: 14px;
+    }
+
+    .share-button {
+        width: 100%;
+    }
+
+    /* media queries for rate-us========================= */
+    .rate-us-container{
+        background: none;
+        box-shadow: none;
+        margin-top: 0;
+    }
+
+    /* media queries for FAQ */
+    .faq-section{
+        background: none;
+        box-shadow: none;
+        margin-top: 0;
+    }
+
+    /* media queries for logout */
+    .logout-container{
+        background: none;
+        box-shadow: none;
+        border: none;
+        margin: 0px auto;
+    }
+     
+    /* media queries for address*/
+    .address-page {
+        max-width: 100%;
+        margin: 10px;
+        padding: 15px;
+        background: none;
+        box-shadow: none;
+        border: none;
+    }
+
+    .address-title {
+        font-size: 20px;
+    }
+
+    .address-form input[type="text"],
+    .address-form input[type="tel"],
+    .address-form textarea {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .location-block {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .input-row {
+        flex-direction: column;
+    }
+
+    .button-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .save-btn,
+    .cancel-btn {
+        width: 100%;
+    }
+    
+    .radio-group {
+        gap: 10px;
+    }
+    /* media queries for payment */
+    .payment-page {
+        background: none;
+        box-shadow: none;
+        border: none;
+        margin: 0px auto;
+    }
+    .payment-method{
+        background-color: #fff;
+    }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="nav-sidebar">
+            <div class="nav-item">
+                <i class="fa-solid fa-house"></i>
+                <span class="nav-text">Home</span>
+            </div>
+            <div class="nav-item">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="nav-text">Cart</span>
+            </div>
+            <div class="nav-item">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span class="nav-text">Search</span>
+            </div>
+            <div class="nav-item">
+                <i class="fa-regular fa-user"></i>
+                <span class="nav-text">Profile</span>
+            </div>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+            <div class="content-sections" id="main-section">
+        
+                <div class="settings-left">
+                    <h2>Account Settings</h2>
+        
+                    <!-- Profile Information  -->
+                    <div class="setting-row">
+                        <i class="setting-icon fa-solid fa-user-circle"></i>
+                        <div class="setting-text">
+                            <h3>Profile Information</h3>
+                            <p>Update your personal details</p>
+                        </div>
+                        <img src="assest/new-profile/icons8-forward-24.png"  alt="" data-section="profile">
+                    </div>
+        
+                    <!-- Payment Mode -->
+                    <div class="setting-row">
+                        <i class="setting-icon fa-solid fa-credit-card"></i>
+                        <div class="setting-text">
+                            <h3>Payment Mode</h3>
+                            <p>Add or update your cards</p>
+                        </div>
+                        <img src="assest/new-profile/icons8-forward-24.png"  alt="" data-section="payment">
+                    </div>
+        
+                    <!-- Address -->
+                    <div class="setting-row">
+                        <i class="setting-icon fa-solid fa-map-marker-alt"></i>
+                        <div class="setting-text">
+                            <h3>Address</h3>
+                            <p>Manage your delivery addresses</p>
+                        </div>
+                        <img src="assest/new-profile/icons8-forward-24.png"  alt="" data-section="address">
+                    </div>
+        
+                    <!-- Refer a Friend -->
+                    <div class="setting-row">
+                        <i class="fa-solid fa-share-nodes"></i>
+                        <div class="setting-text">
+                            <h3>Refer a Friend</h3>
+                            <p>Invite your friends to join</p>
+                        </div>
+                        <img src="assest/new-profile/icons8-forward-24.png"  alt="" data-section="refer">
+                    </div>
+        
+                    <!-- Notifications -->
+                    <div class="setting-row">
+                        <i class="setting-icon fa-solid fa-bell"></i>
+                        <div class="setting-text">
+                            <h3>Notifications</h3>
+                            <p>Customize your alerts and reminders</p>
+                        </div>
+                        <img src="assest/new-profile/icons8-forward-24.png"  alt="" data-section="notification">
+                    </div>
+                </div>
+
+        <div class="settings-right">
+            <h2>More</h2>
+
+            <!-- Rate Us -->
+            <div class="setting-row">
+                <i class="setting-icon fa-solid fa-star"></i>
+                <div class="setting-text">
+                    <h3>Rate Us</h3>
+                    <p>Give us feedback on the app</p>
+                </div>
+                <img src="assest/new-profile/icons8-forward-24.png"  alt="" data-section="rate-us">
+            </div>
+
+            <!-- FAQ -->
+            <div class="setting-row">
+                <i class="setting-icon fa-solid fa-question-circle"></i>
+                <div class="setting-text">
+                    <h3>FAQ</h3>
+                    <p>Find answers to common questions</p>
+                </div>
+                <img src="assest/new-profile/icons8-forward-24.png"  alt="" data-section="faq">
+            </div>
+
+            <!-- Log Out -->
+            <div class="setting-row">
+                <i class="setting-icon fa-solid fa-sign-out-alt"></i>
+                <div class="setting-text">
+                    <h3>Log Out</h3>
+                    <p>Sign out of your account</p>
+                </div>
+                <img src="assest/new-profile/icons8-forward-24.png"  alt="" data-section="log-out">
+            </div>
+                </div>
+            </div>
+
+
+            <!--profile page================================================================================== -->
+            <div class="profile-container hidden" id="profile">
+                <!-- Profile Header -->
+                <div class="profile-header">
+                    <a class="back-button" onclick="goBack()">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </a>
+                    <h2>Profile</h2>
+                    <span class="save-text">Save</span>
+                </div>
+        
+                <!-- Profile Form -->
+                <div class="profile-form">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" placeholder="Enter your full name" />
+        
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="Enter your phone number" />
+        
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Enter your email" />
+                </div>
+            </div>
+
+<!-- Payment Mode Page ======================================================================================= -->
+<div id="payment" class="payment-page hidden">
+    <!-- Payment Mode Header -->
+<div class="payment-header">
+    <a class="back-button" onclick="goBack()">
+        <i class="fa-solid fa-chevron-left"></i>
+    </a>
+    <h2>Choose Payment Mode</h2>
+</div>
+
+    <div class="payment-methods">
+        <!-- Credit Card -->
+        <div class="payment-method">
+            <label>
+                <input type="radio" name="payment-method" value="credit-card">
+                <div class="method-title">
+                    <h4>Credit Card</h4>
+                    <img src="assest/new-profile/credit or debit card.png" alt="Credit Card Icon">
+                </div>
+            </label>
+            <div class="method-details hidden" id="credit-card-details">
+                <input type="text" placeholder="Card Number" class="payment-input">
+                <input type="text" placeholder="Cardholder Name" class="payment-input">
+                <div class="payment-row">
+                    <input type="text" placeholder="Expiry (MM/YY)" class="payment-input">
+                    <input type="text" placeholder="CVV" class="payment-input">
+                </div>
+            </div>
+        </div>
+
+        <!-- Debit Card -->
+        <div class="payment-method">
+            <label>
+                <input type="radio" name="payment-method" value="debit-card">
+                <div class="method-title">
+                    <h4>Debit Card</h4>
+                    <img src="assest/new-profile/credit or debit card.png" alt="">
+                    
+                </div>
+            </label>
+            <div class="method-details hidden" id="debit-card-details">
+                <input type="text" placeholder="Card Number" class="payment-input">
+                <input type="text" placeholder="Cardholder Name" class="payment-input">
+                <div class="payment-row">
+                    <input type="text" placeholder="Expiry (MM/YY)" class="payment-input">
+                    <input type="text" placeholder="CVV" class="payment-input">
+                </div>
+            </div>
+        </div>
+
+        <!-- UPI -->
+        <div class="payment-method">
+            <label>
+                <input type="radio" name="payment-method" value="upi">
+                <div class="method-title">
+                    <h4>UPI</h4>
+                    <img src="assest/new-profile/upi-logo.png" alt="">
+                   
+                </div>
+            </label>
+            <div class="method-details hidden" id="upi-details">
+                <input type="text" placeholder="Enter UPI ID" class="payment-input">
+            </div>
+        </div>
+
+        <!-- Cash on Delivery -->
+        <div class="payment-method">
+            <label>
+                <input type="radio" name="payment-method" value="cod">
+                <div class="method-title">
+                    <h4>Cash on Delivery</h4>
+                    <img src="assest/new-profile/cod.png" alt="">
+                    
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <!-- Proceed Button -->
+    <div class="button-group">
+        <button class="proceed-btn">Proceed to Pay</button>
+    </div>
+</div>
+
+<!-- Address Page =================================================================================================-->
+ <div class="address-page hidden" id="address">
+    <!-- Address Header -->
+    <div class="address-header">
+        <div class="back-button" onclick="goBack()">
+            <i class="fa-solid fa-chevron-left"></i>
+        </div>
+        <span class="address-title">Manage Your Address</span>
+    </div>
+
+    <!-- Address Form -->
+    <div class="address-form" id="address-form">
+        <div class="location-block">
+            <i class="fa-solid fa-map-marker-alt"></i> Use my current location
+        </div>
+        
+        <div class="input-row">
+            <input type="text" placeholder="Name" class="input-field" id="name-input">
+            <input type="text" placeholder="Mobile Number" class="input-field" id="mobile-input">
+        </div>
+        
+        <div class="input-row">
+            <input type="text" placeholder="Pin Code" class="input-field" id="pincode-input">
+            <input type="text" placeholder="Locality" class="input-field" id="locality-input">
+        </div>
+        
+        <div class="input-block">
+            <textarea placeholder="Address (House No, Building, Street, Area)" class="textarea-field" id="address-input"></textarea>
+        </div>
+        
+        <div class="input-row">
+            <input type="text" placeholder="City/District/Town" class="input-field" id="city-input">
+            <input type="text" placeholder="State" class="input-field" id="state-input">
+        </div>
+        
+        <div class="input-row">
+            <input type="text" placeholder="Landmark (Optional)" class="input-field" id="landmark-input">
+            <input type="text" placeholder="Alternate Phone (Optional)" class="input-field" id="alt-phone-input">
+        </div>
+        
+        <div class="input-block">
+            <label>Address Type</label>
+            <div class="radio-group">
+                <label><input type="radio" name="address-type" value="Home" checked> Home</label>
+                <label><input type="radio" name="address-type" value="Work"> Work</label>
+            </div>
+        </div>
+        
+        <div class="button-group">
+            <button class="save-btn" onclick="saveAddress()">Save</button>
+            <button class="cancel-btn" onclick="cancelAddress()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- saved adrress (Initially Hidden) -->
+    <div class="saved-address hidden" id="saved-address">
+       
+        <div class="add-new-address" onclick="addNewAddress()">
+            <i class="fa fa-plus-circle"></i>
+            <span>Add a new address</span>
+        </div>
+
+        <!-- Saved Address Block -->
+        <div class="address-block">
+            <div class="address-header">
+                <span class="address-type">Home</span>
+                <div class="address-options">
+                    <i class="fa fa-ellipsis-v" onclick="toggleOptions(this)"></i>
+                    <div class="options-menu hidden">
+                        <button onclick="editAddress()">Edit</button>
+                        <button onclick="deleteAddress()">Delete</button>
+                    </div>
+                </div>
+            </div>
+            <div class="address-content">
+                <div class="name-mobile-row">
+                    <span class="name" id="saved-name">John Doe</span>
+                    <span class="mobile-no" id="saved-mobile">9876543210</span>
+                </div>
+                <div class="address-details" id="saved-address-details">
+                    <p>123, Main Street, Locality, City, State, 123456</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Refer a friend page==========================================================================================-->
+<div class="refer-container hidden" id="refer">
+                
+                <div class="refer-header">
+                    <div class="back-button" onclick="goBack()">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </div>
+                    <span class="refer-title">Refer to Friend</span>
+                </div>
+            
+              
+                <div class="refer-content">
+                
+                    <div class="refer-left">
+                        <h2 class="large-heading">Refer a Friend, get $10</h2>
+                        <p class="refer-description">Get $10 in credits when someone signs up using your referral link.</p>
+                        <button class="share-button">Share</button>
+                    </div>
+            
+               
+                    <div class="refer-right">
+                        <img src="assest/new-profile/money-576443_1920.png" alt="Refer a Friend" class="refer-image">
+                    </div>
+                </div>
+            </div>
+
+<!-- Notification page ====================================================================================== -->
+<div class="notification-container hidden" id="notification">
+    <div class="notification-header">
+    <a class="back-button" onclick="goBack()">
+    <i class="fa-solid fa-chevron-left"></i></a>
+    <span class="notification-title">Notifications</span>
+        </div>
+    <div class="notification-option">
+        <div>
+            <label>Receive SMS Notifications</label>
+            <p>News, promotions, discounts</p>
+        </div>
+        <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+        </label>
+    </div>
+    <div class="notification-option">
+            <div>
+                <label>Receive Push Notifications</label>
+                <p>Order and delivery notifications</p>
+            </div>
+            <label class="toggle-switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="notification-option">
+        <div>
+            <label>Receive Email Newsletters</label>
+            <p>News, promotions, discounts</p>
+        </div>
+        <label class="toggle-switch">
+            <input type="checkbox">
+            <span class="slider"></span>
+        </label>
+    </div>
+</div>
+
+            
+<!-- Rate-us page =========================================================================================-->
+<div class="rate-us-container hidden" id="rate-us">
+    <div class="back-button" onclick="goBack()">
+        <i class="fa-solid fa-chevron-left"></i>
+    </div>
+
+    <h2>Rate Us</h2>
+    <p class="description">What do you think about our delivery and the freshness of our produce? Share your thoughts below!</p>
+
+    <!-- Star Rating Section -->
+    <div class="star-rating">
+        <span class="star" onclick="rate(1)">&#9733;</span>
+        <span class="star" onclick="rate(2)">&#9733;</span>
+        <span class="star" onclick="rate(3)">&#9733;</span>
+        <span class="star" onclick="rate(4)">&#9733;</span>
+        <span class="star" onclick="rate(5)">&#9733;</span>
+    </div>
+    <div class="feedback-section">
+        <h3>Your Feedback</h3>
+        <textarea placeholder="Tell us about your experience with Vegiefy..."></textarea>
+    </div>
+    <button class="submit-button" onclick="submitFeedback()">Submit</button>
+</div>
+
+<!-- FAQ page===================================================================================================== -->
+<div class="faq-section hidden" id="faq">
+    <div class="faq-header">
+    <a class="back-button" onclick="goBack()">
+        <i class="fa-solid fa-chevron-left"></i>
+    </a>
+    <span class="faq-title">FAQs</span>
+</div>
+<!-- FAQ Questions -->
+<div class="faq-box">
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleAnswer(this)">
+            What areas do you deliver to?
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">We deliver fresh, organic produce within a 30 km radius of our farm. Please check with us to confirm if your location is within our delivery area.</div>
+    </div>
+    
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleAnswer(this)">
+            What is the delivery schedule?
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">Our delivery service is available 24/7, all week long! We will contact you to confirm the exact delivery time that suits you best.</div>
+    </div>
+    
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleAnswer(this)">
+            How do I place an order?
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">You can place an order through our website by selecting the items you want, adding them to your cart, and completing the checkout process.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleAnswer(this)">
+            What payment methods do you accept?
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">We accept various payment methods, including credit cards, debit cards, digital wallets, and cash on delivery for your convenience.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleAnswer(this)">
+            Do you offer any discounts or promotions?
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">Yes, we offer seasonal discounts and special promotions. Be sure to subscribe to our newsletter or follow us on social media for the latest offers!</div>
+    </div>
+    </div>
+    </div>
+
+<!-- Log-out page=============================================================================================== -->
+<div class="logout-container hidden" id="log-out">
+    <div class="back-button" onclick="goBack()">
+        <i class="fa-solid fa-chevron-left"></i>
+    </div>
+    <h1>Are you sure you want to log out?</h1>
+    <p>If you log out, you will be required to log in again to access your account.</p>
+                
+    <div class="logout-buttons">
+        <button class="confirm-logout" onclick="confirmLogout()">Log Out</button>
+        <button class="cancel-logout" onclick="goBack()">Cancel</button>
+    </div>
+</div>
+</div>
+</div>
+
+<script>
+// JavaScript to handle navigation between sections
+        document.querySelectorAll(".setting-row img").forEach(item => {
+            item.addEventListener("click", function() {
+                let section = this.getAttribute("data-section");
+                document.getElementById("main-section").classList.add("hidden");
+                document.getElementById(section).classList.remove("hidden");
+            });
+        });
+
+        function goBack() {
+            document.querySelectorAll(".content > div").forEach(div => div.classList.add("hidden"));
+            document.getElementById("main-section").classList.remove("hidden");
+        }
+
+// js for Rate-us page======================================================================================
+let selectedRating = 0;
+
+function rate(stars) {
+    selectedRating = stars;
+    const starsElements = document.querySelectorAll(".star");
+    starsElements.forEach((star, index) => {
+        if (index < stars) {
+            star.classList.add("selected");
+        } else {
+            star.classList.remove("selected");
+        }
+    });
+}
+
+function submitFeedback() {
+    const feedbackText = document.querySelector(".feedback-section textarea").value;
+    if (selectedRating === 0) {
+        alert("Please select a rating.");
+        return;
+    }
+   
+    alert(`Thanks for your ${selectedRating}-star rating!`);
+    // Reset form
+    document.querySelector(".feedback-section textarea").value = "";
+    document.querySelectorAll(".star").forEach(star => star.classList.remove("selected"));
+    selectedRating = 0;
+}
+
+// js for FAQs page===================================================================================
+function toggleAnswer(element) {
+        const answer = element.nextElementSibling;
+        const icon = element.querySelector("i");
+
+        if (answer.style.display === "block") {
+            answer.style.display = "none";
+            icon.classList.replace("fa-chevron-up", "fa-chevron-down");
+        } else {
+            answer.style.display = "block";
+            icon.classList.replace("fa-chevron-down", "fa-chevron-up");
+        }
+    }
+
+// js for logout page==================================================================================
+function confirmLogout() {
+    alert("You have been logged out successfully.");
+    window.location.href = "login.html";
+}
+
+//js for address page =================================================================================
+function saveAddress() {
+    
+// hide the address form and show the saved address block
+    document.getElementById('address-form').classList.add('hidden');
+    document.getElementById('saved-address').classList.remove('hidden');
+}
+
+function cancelAddress() {
+    // show the address form again and hide saved address view
+    document.getElementById('address-form').classList.remove('hidden');
+    document.getElementById('saved-address').classList.add('hidden');
+}
+
+function toggleOptions(element) {
+    const optionsMenu = element.nextElementSibling;
+    optionsMenu.classList.toggle("show");
+}
+
+function addNewAddress() {
+    // Show the address form when "Add a new address" is clicked
+    document.getElementById('address-form').classList.remove('hidden');
+    document.getElementById('saved-address').classList.add('hidden');
+}
+
+function editAddress() {
+    addNewAddress();
+}
+
+function deleteAddress() {
+    document.getElementById('saved-address').classList.add('hidden');
+    document.getElementById('address-form').classList.remove('hidden');
+}
+
+//js for payment mode page================================================================================
+document.querySelectorAll('input[name="payment-method"]').forEach((input) => {
+    input.addEventListener('click', function () {
+        const methodDetails = document.querySelectorAll('.method-details');
+        const selectedMethod = document.getElementById(this.value + '-details');
+
+        if (selectedMethod && selectedMethod.style.display === 'block') {
+            selectedMethod.style.display = 'none';
+            this.checked = false; 
+        } else {
+            methodDetails.forEach((details) => {
+                details.style.display = 'none';
+            });
+            if (selectedMethod) {
+                selectedMethod.style.display = 'block';
+            }
+        }
+    });
+});
+
+
+
+    </script>
+</body>
+</html>
