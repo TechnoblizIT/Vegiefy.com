@@ -17,7 +17,7 @@ router.post('/login', loginUser);
 router.get('/logout', logoutUser);
 
 router.get('/profile',checkuser,isloggedin, (req,res)=>{
-    res.render("profile",{req})
+    res.render("new-profilepage",{req})
 });
 
 router.post("/addtocart/:productid",isloggedin, checkuser,async(req,res)=>{
