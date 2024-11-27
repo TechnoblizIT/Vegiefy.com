@@ -5,7 +5,18 @@ const userSchema=mongoose.Schema({
     email:String,
     password:String,
     mobile:String,
-    address:String,
+    address:[{
+        name:String,
+        mobile:String,
+        pincode:String,
+        address:String,
+        city:String,
+        state:String,
+        landmark:{type:String, default:""},
+        alternateMobile:{type:String, default:""},
+        addresstype:{type:String, default:""}
+    
+    }],
     googleid:String,
     cart:[{
         product: { type: mongoose.Schema.Types.ObjectId, ref: 'Products' },

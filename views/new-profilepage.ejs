@@ -1117,14 +1117,14 @@
     <div class="container">
         <!-- Sidebar -->
         <div class="nav-sidebar">
-            <div class="nav-item">
+            <a href="/" style="text-decoration: none;"><div class="nav-item">
                 <i class="fa-solid fa-house"></i>
                 <span class="nav-text">Home</span>
-            </div>
-            <div class="nav-item">
+            </div></a>
+            <a href="/cart" style="text-decoration: none;"><div class="nav-item">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <span class="nav-text">Cart</span>
-            </div>
+            </div></a>
             <div class="nav-item">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <span class="nav-text">Search</span>
@@ -1149,7 +1149,7 @@
                             <h3>Profile Information</h3>
                             <p>Update your personal details</p>
                         </div>
-                        <img src="assest/new-profile/icons8-forward-24.png"  alt="" data-section="profile">
+                        <img src="../images/assest/new-profile/icons8-forward-24.png"  alt="" data-section="profile">
                     </div>
         
                     <!-- Payment Mode -->
@@ -1159,7 +1159,7 @@
                             <h3>Payment Mode</h3>
                             <p>Add or update your cards</p>
                         </div>
-                        <img src="assest/new-profile/icons8-forward-24.png"  alt="" data-section="payment">
+                        <img src="../images/assest/new-profile/icons8-forward-24.png"  alt="" data-section="payment">
                     </div>
         
                     <!-- Address -->
@@ -1169,7 +1169,7 @@
                             <h3>Address</h3>
                             <p>Manage your delivery addresses</p>
                         </div>
-                        <img src="assest/new-profile/icons8-forward-24.png"  alt="" data-section="address">
+                        <img src="../images/assest/new-profile/icons8-forward-24.png"  alt="" data-section="address">
                     </div>
         
                     <!-- Refer a Friend -->
@@ -1179,7 +1179,7 @@
                             <h3>Refer a Friend</h3>
                             <p>Invite your friends to join</p>
                         </div>
-                        <img src="assest/new-profile/icons8-forward-24.png"  alt="" data-section="refer">
+                        <img src="../images/assest/new-profile/icons8-forward-24.png"  alt="" data-section="refer">
                     </div>
         
                     <!-- Notifications -->
@@ -1189,7 +1189,7 @@
                             <h3>Notifications</h3>
                             <p>Customize your alerts and reminders</p>
                         </div>
-                        <img src="assest/new-profile/icons8-forward-24.png"  alt="" data-section="notification">
+                        <img src="../images/assest/new-profile/icons8-forward-24.png"  alt="" data-section="notification">
                     </div>
                 </div>
 
@@ -1203,7 +1203,7 @@
                     <h3>Rate Us</h3>
                     <p>Give us feedback on the app</p>
                 </div>
-                <img src="assest/new-profile/icons8-forward-24.png"  alt="" data-section="rate-us">
+                <img src="../images/assest/new-profile/icons8-forward-24.png"  alt="" data-section="rate-us">
             </div>
 
             <!-- FAQ -->
@@ -1213,7 +1213,7 @@
                     <h3>FAQ</h3>
                     <p>Find answers to common questions</p>
                 </div>
-                <img src="assest/new-profile/icons8-forward-24.png"  alt="" data-section="faq">
+                <img src="../images/assest/new-profile/icons8-forward-24.png"  alt="" data-section="faq">
             </div>
 
             <!-- Log Out -->
@@ -1223,7 +1223,7 @@
                     <h3>Log Out</h3>
                     <p>Sign out of your account</p>
                 </div>
-                <img src="assest/new-profile/icons8-forward-24.png"  alt="" data-section="log-out">
+                <img src="../images/assest/new-profile/icons8-forward-24.png"  alt="" data-section="log-out">
             </div>
                 </div>
             </div>
@@ -1237,19 +1237,39 @@
                         <i class="fa-solid fa-chevron-left"></i>
                     </a>
                     <h2>Profile</h2>
-                    <span class="save-text">Save</span>
+                    <span class="save-text" id="saveButton">Save</span>
                 </div>
-        
-                <!-- Profile Form -->
-                <div class="profile-form">
+                
+                <form class="profile-form" id="profileForm" action="/user/update-profile" method="POST">
                     <label for="fullName">Full Name</label>
-                    <input type="text" id="fullName" placeholder="Enter your full name" />
-        
+                    <input
+                        type="text"
+                        id="fullName"
+                        name="fullName"
+                        placeholder="Enter your full name"
+                        value="<%=req.user.name%>"
+                        readonly
+                    />
+                
                     <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" placeholder="Enter your phone number" />
-        
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="Enter your phone number"
+                        value="<%=req.user.mobile%>"
+                    />
+                
                     <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="Enter your email" />
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        value="<%=req.user.email%>"
+                        readonly
+                    />
+                </form>
                 </div>
             </div>
 
@@ -1270,7 +1290,7 @@
                 <input type="radio" name="payment-method" value="credit-card">
                 <div class="method-title">
                     <h4>Credit Card</h4>
-                    <img src="assest/new-profile/credit or debit card.png" alt="Credit Card Icon">
+                    <img src="../images/assest/new-profile/credit or debit card.png" alt="Credit Card Icon">
                 </div>
             </label>
             <div class="method-details hidden" id="credit-card-details">
@@ -1289,7 +1309,7 @@
                 <input type="radio" name="payment-method" value="debit-card">
                 <div class="method-title">
                     <h4>Debit Card</h4>
-                    <img src="assest/new-profile/credit or debit card.png" alt="">
+                    <img src="../images/assest/new-profile/credit or debit card.png" alt="">
                     
                 </div>
             </label>
@@ -1309,7 +1329,7 @@
                 <input type="radio" name="payment-method" value="upi">
                 <div class="method-title">
                     <h4>UPI</h4>
-                    <img src="assest/new-profile/upi-logo.png" alt="">
+                    <img src="../public/images/assest/new-profile/upi-logo.png" alt="">
                    
                 </div>
             </label>
@@ -1324,7 +1344,7 @@
                 <input type="radio" name="payment-method" value="cod">
                 <div class="method-title">
                     <h4>Cash on Delivery</h4>
-                    <img src="assest/new-profile/cod.png" alt="">
+                    <img src="../public/images/assest/new-profile/cod.png" alt="">
                     
                 </div>
             </label>
@@ -1445,7 +1465,7 @@
             
                
                     <div class="refer-right">
-                        <img src="assest/new-profile/money-576443_1920.png" alt="Refer a Friend" class="refer-image">
+                        <img src="../images/assest/new-profile/money-576443_1920.png" alt="Refer a Friend" class="refer-image">
                     </div>
                 </div>
             </div>
@@ -1642,8 +1662,17 @@ function toggleAnswer(element) {
 
 // js for logout page==================================================================================
 function confirmLogout() {
+    document.cookie.split(";").forEach(function (cookie) {
+        document.cookie = cookie
+            .replace(/^ +/, "") // Remove leading spaces
+            .replace(/=.*/, "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/");
+    });
+
+    
     alert("You have been logged out successfully.");
-    window.location.href = "login.html";
+
+    
+    window.location.href = "/";
 }
 
 //js for address page =================================================================================
@@ -1700,7 +1729,9 @@ document.querySelectorAll('input[name="payment-method"]').forEach((input) => {
     });
 });
 
-
+document.getElementById('saveButton').addEventListener('click', function () {
+        document.getElementById('profileForm').submit();
+    });
 
     </script>
 </body>
