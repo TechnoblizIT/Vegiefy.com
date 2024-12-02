@@ -155,9 +155,7 @@ router.get('/auth/google/callback',
   async (req, res) => {
     try {
       console.log('Authenticated User:', req.user);
-      const token = jwt.sign(req.user.name, process.env.JWT_SECRET);
-
-      
+      const token = jwt.sign(req.user.email, process.env.JWT_SECRET);
       res.cookie('tokken', token);
 
       res.redirect('/');
