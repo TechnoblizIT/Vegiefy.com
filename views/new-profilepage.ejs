@@ -1239,37 +1239,17 @@
                     <h2>Profile</h2>
                     <span class="save-text" id="saveButton">Save</span>
                 </div>
-                
-                <form class="profile-form" id="profileForm" action="/user/update-profile" method="POST">
+        
+                <!-- Profile Form -->
+                <div class="profile-form">
                     <label for="fullName">Full Name</label>
-                    <input
-                        type="text"
-                        id="fullName"
-                        name="fullName"
-                        placeholder="Enter your full name"
-                        value="<%=req.user.name%>"
-                        readonly
-                    />
-                
+                    <input type="text" id="fullName" placeholder="Enter your full name" />
+        
                     <label for="phone">Phone Number</label>
-                    <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        placeholder="Enter your phone number"
-                        value="<%=req.user.mobile%>"
-                    />
-                
+                    <input type="tel" id="phone" placeholder="Enter your phone number" />
+        
                     <label for="email">Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="Enter your email"
-                        value="<%=req.user.email%>"
-                        readonly
-                    />
-                </form>
+                    <input type="email" id="email" placeholder="Enter your email" />
                 </div>
             </div>
 
@@ -1329,7 +1309,7 @@
                 <input type="radio" name="payment-method" value="upi">
                 <div class="method-title">
                     <h4>UPI</h4>
-                    <img src="../public/images/assest/new-profile/upi-logo.png" alt="">
+                    <img src="assest/new-profile/upi-logo.png" alt="">
                    
                 </div>
             </label>
@@ -1344,7 +1324,7 @@
                 <input type="radio" name="payment-method" value="cod">
                 <div class="method-title">
                     <h4>Cash on Delivery</h4>
-                    <img src="../public/images/assest/new-profile/cod.png" alt="">
+                    <img src="assest/new-profile/cod.png" alt="">
                     
                 </div>
             </label>
@@ -1368,48 +1348,52 @@
     </div>
 
     <!-- Address Form -->
+     
     <div class="address-form" id="address-form">
         <div class="location-block">
             <i class="fa-solid fa-map-marker-alt"></i> Use my current location
         </div>
-        
+        <form action="/user/saveaddress" method="post">
         <div class="input-row">
-            <input type="text" placeholder="Name" class="input-field" id="name-input">
-            <input type="text" placeholder="Mobile Number" class="input-field" id="mobile-input">
+            <input type="text" name="name" placeholder="Name" class="input-field" id="name-input" required>
+            <input type="text" name="mobile" placeholder="Mobile Number" class="input-field" id="mobile-input" required>
         </div>
         
         <div class="input-row">
-            <input type="text" placeholder="Pin Code" class="input-field" id="pincode-input">
-            <input type="text" placeholder="Locality" class="input-field" id="locality-input">
+            <input type="text" name="pincode" placeholder="Pin Code" class="input-field" id="pincode-input" required>
+            <input type="text" name="locality" placeholder="Locality" class="input-field" id="locality-input" required>
         </div>
         
         <div class="input-block">
-            <textarea placeholder="Address (House No, Building, Street, Area)" class="textarea-field" id="address-input"></textarea>
+            <textarea name="address" placeholder="Address (House No, Building, Street, Area)" class="textarea-field" id="address-input" required></textarea>
         </div>
         
         <div class="input-row">
-            <input type="text" placeholder="City/District/Town" class="input-field" id="city-input">
-            <input type="text" placeholder="State" class="input-field" id="state-input">
+            <input type="text" name="city" placeholder="City/District/Town" class="input-field" id="city-input" required >
+            <input type="text" name="state" placeholder="State" class="input-field" id="state-input" required>
         </div>
         
         <div class="input-row">
-            <input type="text" placeholder="Landmark (Optional)" class="input-field" id="landmark-input">
-            <input type="text" placeholder="Alternate Phone (Optional)" class="input-field" id="alt-phone-input">
+            <input type="text" name="landmark" placeholder="Landmark (Optional)" class="input-field" id="landmark-input">
+            <input type="text" name="alternatemobile" placeholder="Alternate Phone (Optional)" class="input-field" id="alt-phone-input">
         </div>
         
         <div class="input-block">
             <label>Address Type</label>
             <div class="radio-group">
-                <label><input type="radio" name="address-type" value="Home" checked> Home</label>
-                <label><input type="radio" name="address-type" value="Work"> Work</label>
+                <label><input  type="radio" name="addresstype" value="Home" checked> Home</label>
+                <label><input type="radio" name="addresstype" value="Work"> Work</label>
             </div>
         </div>
         
         <div class="button-group">
-            <button class="save-btn" onclick="saveAddress()">Save</button>
+            <button class="save-btn" type="submit">Save</button>
+        </form>
+        <button class="manage-btn" onclick="saveAddress()">Manage Address</button>
             <button class="cancel-btn" onclick="cancelAddress()">Cancel</button>
         </div>
     </div>
+
 
     <!-- saved adrress (Initially Hidden) -->
     <div class="saved-address hidden" id="saved-address">
@@ -1465,7 +1449,7 @@
             
                
                     <div class="refer-right">
-                        <img src="../images/assest/new-profile/money-576443_1920.png" alt="Refer a Friend" class="refer-image">
+                        <img src="assest/new-profile/money-576443_1920.png" alt="Refer a Friend" class="refer-image">
                     </div>
                 </div>
             </div>

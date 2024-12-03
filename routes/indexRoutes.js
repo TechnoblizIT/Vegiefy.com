@@ -154,9 +154,14 @@ router.get('/auth/google/callback',
   passport.authenticate('google',{ failureRedirect: '/login' ,session:false}),
   async (req, res) => {
     try {
+<<<<<<< HEAD
       const token = jwt.sign(req.user.email, process.env.JWT_SECRET);
 
       
+=======
+      console.log('Authenticated User:', req.user);
+      const token = jwt.sign(req.user.email, process.env.JWT_SECRET);
+>>>>>>> 275fd40c7cd3ab504078222c7bde74a183f9f583
       res.cookie('tokken', token);
 
       res.redirect('/');
