@@ -1406,6 +1406,7 @@
         </div>
 
         <!-- Saved Address Block -->
+        <% req.user.address.forEach((addr, index) => { %>
         <div class="address-block">
             <div class="address-header">
                 <span class="address-type">Home</span>
@@ -1413,20 +1414,25 @@
                     <i class="fa fa-ellipsis-v" onclick="toggleOptions(this)"></i>
                     <div class="options-menu hidden">
                         <button onclick="editAddress()">Edit</button>
-                        <button onclick="deleteAddress()">Delete</button>
+                        <button onclick="deleteAddress(index)">Delete</button>
                     </div>
                 </div>
             </div>
             <div class="address-content">
-                <div class="name-mobile-row">
-                    <span class="name" id="saved-name">John Doe</span>
-                    <span class="mobile-no" id="saved-mobile">9876543210</span>
-                </div>
-                <div class="address-details" id="saved-address-details">
-                    <p>123, Main Street, Locality, City, State, 123456</p>
+              
+                    <div class="address-item">
+                        <div class="name-mobile-row">
+                            <span class="name"><%= addr.name %></span>
+                            <span class="mobile-no"><%= addr.mobile %></span>
+                        </div>
+                        <div class="address-details">
+                            <p><%= addr.address %>, <%= addr.locality %>, <%= addr.city %>, 
+                            <%= addr.state %>, <%= addr.pincode %></p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+            <% }) %>
     </div>
 </div>
 
