@@ -20,6 +20,24 @@ router.get('/profile',checkuser,isloggedin, (req,res)=>{
     res.render("new-profilepage",{req})
 });
 
+router.post('/update-profile',isloggedin,checkuser,async (req,res)=>{
+    
+    const user=await userModel.findOne({email:req.user.email});
+    user.name=req.body.fullName
+    user.email=req.body.email
+    user.mobile=req.body.phone
+    await user.save()
+    res.redirect("/user/profile")
+})
+
+
+
+
+
+
+
+
+
 router.post("/addtocart/:productid",isloggedin, checkuser,async(req,res)=>{
     const user=await userModel.findOne({email:req.user.email});
     const quantity = req.body.quantity; 
@@ -27,6 +45,7 @@ router.post("/addtocart/:productid",isloggedin, checkuser,async(req,res)=>{
     await user.save();
     res.redirect("/product")
 });
+
 
 router.get("/removeitem/:productid", isloggedin, checkuser, async (req, res) => {
     const user = await userModel.findOne({ email: req.user.email })
