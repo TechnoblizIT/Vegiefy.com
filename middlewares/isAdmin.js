@@ -1,6 +1,7 @@
 const jwt =require("jsonwebtoken")
-const userModel= require("../models/user-model")
-module.exports.checkuser=  function(req, res, next){
+const userModel= require("../models/user-model");
+const adminModel = require("../models/admin-model");
+module.exports.isAdmin=function(req, res, next){
     let tokken = req.cookies.tokken;
     if (!tokken) {
         req.user=null
@@ -11,10 +12,12 @@ module.exports.checkuser=  function(req, res, next){
          req.user=null
         return next()
       }
-      const userdetail= await userModel.findOne({email:user}).select("-password")
-    
+      if(user.role=="admin"){
+      const userdetail= await adminModel.findOne({email:user.user}).select("-password")
+       console.logz(userdetail)
        req.user=userdetail
        return next()
+      }
       
     });
 }

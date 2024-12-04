@@ -1404,33 +1404,37 @@
         </div>
 
         <!-- Saved Address Block -->
-        <% req.user.address.forEach((addr, index) => { %>
-        <div class="address-block">
-            <div class="address-header">
-                <span class="address-type">Home</span>
-                <div class="address-options">
-                    <i class="fa fa-ellipsis-v" onclick="toggleOptions(this)"></i>
-                    <div class="options-menu hidden">
-                        <button onclick="editAddress()">Edit</button>
-                        <button onclick="deleteAddress(index)">Delete</button>
-                    </div>
-                </div>
-            </div>
-            <div class="address-content">
-              
-                    <div class="address-item">
-                        <div class="name-mobile-row">
-                            <span class="name"><%= addr.name %></span>
-                            <span class="mobile-no"><%= addr.mobile %></span>
-                        </div>
-                        <div class="address-details">
-                            <p><%= addr.address %>, <%= addr.locality %>, <%= addr.city %>, 
-                            <%= addr.state %>, <%= addr.pincode %></p>
+       
+        <% if (req.user && req.user.address && req.user.address.length > 0) { %>
+            <% req.user.address.forEach((addr, index) => { %>
+                <div class="address-block">
+                    <div class="address-header">
+                        <span class="address-type">Home</span>
+                        <div class="address-options">
+                            <i class="fa fa-ellipsis-v" onclick="toggleOptions(this)"></i>
+                            <div class="options-menu hidden">
+                                <button onclick="editAddress()">Edit</button>
+                                <button onclick="deleteAddress()">Delete</button>
+                            </div>
                         </div>
                     </div>
+                    <div class="address-content">
+                        <div class="address-item">
+                            <div class="name-mobile-row">
+                                <span class="name"><%= addr.name %></span>
+                                <span class="mobile-no"><%= addr.mobile %></span>
+                            </div>
+                            <div class="address-details">
+                                <p><%= addr.address %>, <%= addr.locality %>, <%= addr.city %>, 
+                                <%= addr.state %>, <%= addr.pincode %></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
             <% }) %>
+        <% } else { %>
+            <p>No addresses found.</p>
+        <% } %>
     </div>
 </div>
 

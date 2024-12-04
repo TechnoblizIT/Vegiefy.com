@@ -298,7 +298,9 @@ res.redirect("/user/profile")
 router.post("/saveaddress",isloggedin,checkuser, async(req, res) => {
     const { name, mobile, pincode, locality, address, city, state, landmark, alternatemobile, addresstype } = req.body;
     const user=await userModel.findOne({ email: req.user.email }); 
+    const randomId = Math.floor(100000 + Math.random() * 900000);
     user.address.push({
+        id:randomId,
         name,
         mobile,
         pincode,
