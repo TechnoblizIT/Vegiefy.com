@@ -33,10 +33,7 @@ passport.use(new GoogleStrategy({
     callbackURL: "/auth/google/callback"
   }, async (accessToken, refreshToken, profile, done) => {
     try {
-<<<<<<< HEAD
-     
-=======
->>>>>>> 275fd40c7cd3ab504078222c7bde74a183f9f583
+
       let user = await userModel.findOne({ email: profile.emails[0].value });
       if (!user) {
         user = await userModel.create({

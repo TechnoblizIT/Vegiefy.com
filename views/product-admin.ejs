@@ -1,484 +1,2229 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
- <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-:root{
-  --base-clr: #11121a;
-  --line-clr: #42434a;
-  --hover-clr: #222533;
-  --text-clr: #e6e6ef;
-  --accent-clr: #5e63ff;
-  --secondary-text-clr: #b0b3c1;
-}
-*{
-  margin: 0;
-  padding: 0;
-}
-html{
-  font-family: Poppins, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.5rem;
-}
-body{
-  min-height: 100vh;
-  min-height: 100dvh;
-  background-color: var(--base-clr);
-  color: var(--text-clr);
-  display: grid;
-  grid-template-columns: auto 1fr;
-}
-#sidebar{
-  box-sizing: border-box;
-  height: 100vh;
-  width: 250px;
-  padding: 5px 1em;
-  background-color: var(--base-clr);
-  border-right: 1px solid var(--line-clr);
-  position: sticky;
-  top: 0;
-  align-self: start;
-  transition: 300ms ease-in-out;
-  overflow: hidden;
-  text-wrap: nowrap;
-}
-#sidebar.close{
-  padding: 5px;
-  width: 60px;
-}
-#sidebar ul{
-  list-style: none;
-}
-#sidebar > ul > li:first-child{
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 16px;
-  .logo{
-    font-weight: 600;
-  }
-}
-#sidebar ul li.active a{
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Admin</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+      :root {
+        --base-clr: #11121a;
+        --line-clr: #42434a;
+        --hover-clr: #222533;
+        --text-clr: #e6e6ef;
+        --accent-clr: #5e63ff;
+        --secondary-text-clr: #b0b3c1;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        font-family: Poppins, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.5rem;
+      }
+      body {
+        min-height: 100vh;
+        min-height: 100dvh;
+        background-color: var(--base-clr);
+        color: var(--text-clr);
+        display: grid;
+        grid-template-columns: auto 1fr;
+      }
+      #sidebar {
+        box-sizing: border-box;
+        height: 100vh;
+        width: 250px;
+        padding: 5px 1em;
+        background-color: var(--base-clr);
+        border-right: 1px solid var(--line-clr);
+
+        position: sticky;
+        top: 0;
+        align-self: start;
+        transition: 300ms ease-in-out;
+        overflow: hidden;
+        text-wrap: nowrap;
+      }
+      #sidebar.close {
+        padding: 5px;
+        width: 60px;
+      }
+      #sidebar ul {
+        list-style: none;
+      }
+      #sidebar > ul > li:first-child {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 16px;
+        .logo {
+          font-weight: 600;
+        }
+      }
+      #sidebar ul li.active a {
+        color: #007bff;
+
+        svg {
+          fill: #007bff;
+        }
+      }
+
+      #sidebar a,
+      #sidebar .dropdown-btn,
+      #sidebar .logo {
+        border-radius: 0.5em;
+        padding: 0.85em;
+        text-decoration: none;
+        color: var(--text-clr);
+        display: flex;
+        align-items: center;
+        gap: 1em;
+      }
+      .dropdown-btn {
+        width: 100%;
+        text-align: left;
+        background: none;
+        border: none;
+        font: inherit;
+        cursor: pointer;
+      }
+      #sidebar svg {
+        flex-shrink: 0;
+        fill: var(--text-clr);
+      }
+      #sidebar a span,
+      #sidebar .dropdown-btn span {
+        flex-grow: 1;
+      }
+      #sidebar a:hover,
+      #sidebar .dropdown-btn:hover {
+        background-color: var(--hover-clr);
+      }
+      #sidebar .sub-menu {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: 300ms ease-in-out;
+
+        > div {
+          overflow: hidden;
+        }
+      }
+      #sidebar .sub-menu.show {
+        grid-template-rows: 1fr;
+      }
+      .dropdown-btn svg {
+        transition: 200ms ease;
+      }
+      .rotate svg:last-child {
+        rotate: 180deg;
+      }
+      #sidebar .sub-menu a {
+        padding-left: 2em;
+      }
+      #toggle-btn {
+        margin-left: auto;
+        padding: 1em;
+        border: none;
+        border-radius: 0.5em;
+        background: none;
+        cursor: pointer;
+
+        svg {
+          transition: rotate 150ms ease;
+        }
+      }
+      #toggle-btn:hover {
+        background-color: var(--hover-clr);
+      }
+      /* css for dashboard============================================================================ */
+      #dashboard {
+        padding: 20px;
+        background-color: var(--base-clr);
+      }
+
+      .dashboard-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* 4 blocks in a row */
+        gap: 20px;
+      }
+
+      .dashboard-block {
+        background-color: #2c2f3d;
+        border-radius: 0.5em;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        color: var(--text-clr);
+        text-align: left;
+      }
+
+      .dashboard-value {
+        font-size: 2em;
+        font-weight: bold;
+      }
+
+      .dashboard-text {
+        font-size: 1em;
+        color: var(--secondary-text-clr);
+      }
+
+      /* end css for dahsboar========================================================================= */
+
+      /* css for order-list ========================================================================== */
+      .tm-block {
+        background-color: var(--base-clr);
+        border-radius: 0.5em;
+        padding: 1.5em;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .tm-block-title {
+        color: #007bff;
+        font-size: 1.5em;
+        margin-bottom: 1em;
+      }
+
+      .table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      /* .table::-webkit-scrollbar {
+        display: none;
+      } */
+
+      .table th,
+      .table td {
+        padding: 1em;
+        text-align: left;
+        border-bottom: 1px solid #3a3c46;
+        color: var(--text-clr);
+      }
+
+      .table thead {
+        background-color: var(--table-header-bg);
+      }
+
+      /* .table th {
   color: var(--accent-clr);
+} */
+      .tm-status-circle {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 10px;
+      }
 
-  svg{
-    fill: var(--accent-clr);
+      .tm-status-circle.moving {
+        background-color: #5e63ff;
+      }
+
+      .tm-status-circle.pending {
+        background-color: #f7b731;
+      }
+
+      .tm-status-circle.cancelled {
+        background-color: #e74c3c;
+      }
+
+      /* Scrollable Box for Orders */
+      .tm-block-scroll {
+        /* max-height: 400px; */
+        /* overflow-y: auto; Enables vertical scrolling */
+        padding-right: 1em;
+        margin-top: 20px;
+
+        /* Hides the scrollbar */
+        scrollbar-width: none; /* For Firefox */
+      }
+
+      .tm-block-scroll::-webkit-scrollbar {
+        display: none; /* For Webkit browsers (Chrome, Safari, Edge) */
+      }
+
+      /*end css for order list ============================================================== */
+
+   
+
+      /* start css foraccount page<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
+      .container-block {
+        margin: auto;
+        padding: 30px;
+      }
+      .add-account-btn {
+        width: 20%;
+      padding: 5px 10px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+    .account-form {
+        display: flex;
+        gap: 20px;
+      }
+      .account-form{
+        /* background-color: #42434a; */
+        box-shadow: 0 4px 8px rgba(255, 255, 255, 0.6); 
+        /* box-shadow: 0 4px 8px rgba(128, 128, 128, 0.3); */
+       }
+       .account-form h4 {
+  font-size: 18px; 
+  font-weight: bold; 
+  padding: 5px;
+ 
+}
+      .account-form > div {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      hr {
+  border: none; 
+  height: 2px; 
+ 
+  margin: 20px 0; 
+  border-radius: 5px; 
+}
+.image-column-left {
+        flex: 1 1 30%;
+        padding: 20px;
+        border-radius: 10px;
+        color: white;
+      }
+      .form-column-right {
+        flex: 1 1 65%;
+        padding: 20px;
+        border-radius: 10px;
+        color: white;
+      }
+      .form-details {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .form-group-details {
+        flex: 1 1 calc(50% - 10px);
+      }
+
+      .form-group-details label {
+        font-weight: 600;
+        margin-bottom: 8px;
+        display: block;
+      }
+
+      .form-group-details input {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+
+      .form-group-details input:focus {
+        border-color: #0056b3;
+        outline: none;
+      }
+
+/* Action Buttons Layout */
+.action-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .action-buttons button {
+      padding: 8px 12px;
+      font-size: 15px;
+      cursor: pointer;
+      border-radius: 5px;
+      border: none;
+      width: 120px; 
+    }
+
+    .action-buttons .update-btn {
+      background-color: #007bff;
+      color: white;
+    }
+    .update-btn:hover{
+      background-color: #0056b3;
+    }
+    .delete-btn {
+      background-color: rgb(209, 18, 18);
+      color: white;
+    }
+    .delete-btn:hover{
+      background-color: #972316;
+    }
+
+    /* start css for main-account================================================================ */
+      .container {
+        margin: auto;
+        padding: 10px 30px;
+      }
+
+      .block {
+        background-color: #2c2c54;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        color: #fff;
+      }
+
+      .block-dark {
+        background-color: #0056b3;
+      }
+
+      /* Headings */
+      .block-title {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+
+      /* Select Input */
+      .custom-select-wide {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        color: #000;
+        margin-top: 10px;
+      }
+
+      /* Avatar Section */
+      .avatar-container {
+        position: relative;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      .avatar-image {
+        width: 300px;
+        height: 250px;
+        object-fit: cover;
+      }
+
+      .avatar-delete-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+        font-size: 24px;
+        display: none; /* Hidden by default */
+      }
+
+      .avatar-container:hover .avatar-delete-icon {
+        display: block; /* Show delete icon on hover */
+      }
+
+      /* Button Colors */
+      .button-upload {
+        background-color: #0056b3;
+        color: #fff;
+        font-size: 16px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        text-transform: uppercase;
+        font-weight: bold;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      .button-upload:hover {
+        background-color: #5e63ff;
+      }
+
+      .button-clicked {
+        background-color: #0056b3;
+        color: #fff;
+        font-size: 16px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        text-transform: uppercase;
+        font-weight: bold;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      .button-clicked:hover {
+        background-color: #5e63ff;
+      }
+
+      .btn-danger {
+        background-color: #e74c3c;
+        color: #fff;
+        font-size: 16px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        text-transform: uppercase;
+        font-weight: bold;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      .btn-danger:hover {
+        background-color: #c0392b;
+      }
+
+      /* Form Styles */
+      .form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .form-group {
+        flex: 1 1 calc(50% - 10px);
+      }
+
+      .form-group label {
+        font-weight: 600;
+        margin-bottom: 8px;
+        display: block;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+
+      .form-group input:focus {
+        border-color: #0056b3;
+        outline: none;
+      }
+
+      /* Layout Adjustments */
+      .account-row {
+        display: flex;
+        gap: 20px;
+      }
+
+      .block-column-left {
+        flex: 1 1 30%;
+        padding: 20px;
+        border-radius: 10px;
+        color: white;
+      }
+
+      .block-column-right {
+        flex: 1 1 65%;
+        padding: 20px;
+        border-radius: 10px;
+        color: white;
+      }
+      .back-to-main {
+  font-size: 20px; 
+  color: #007bff; 
+  cursor: pointer; 
+  margin: 10px; 
+  transition: transform 0.3s ease, color 0.3s ease; 
+}
+
+.back-to-main:hover {
+  transform: scale(1.2);
+  color: #0056b3; 
+}
+
+.back-to-main:active {
+  transform: scale(1); 
+  color: #003d80; 
+}
+      /* end style of account============================================================================ */
+
+    /* media queries for all pages */
+      @media (max-width: 768px) {
+
+        /* for dashboard */
+        .dashboard-container {
+          grid-template-columns: none;
+        }
+        /* for order-list */
+        .tm-block-scroll{
+          overflow-y: auto;
+          max-height: 400vh;
+          overflow-x: auto;
+          max-width: 350px;
+        }
+        /* for account */
+
+        .add-account-btn{
+          width: 50%;
+        }
+        .account-row {
+          margin-bottom: 50px;
+    flex-direction: column; 
   }
-}
-
-#sidebar a, #sidebar .dropdown-btn, #sidebar .logo{
-  border-radius: .5em;
-  padding: .85em;
-  text-decoration: none;
-  color: var(--text-clr);
-  display: flex;
-  align-items: center;
-  gap: 1em;
-}
-.dropdown-btn{
-  width: 100%;
-  text-align: left;
-  background: none;
-  border: none;
-  font: inherit;
-  cursor: pointer;
-}
-#sidebar svg{
-  flex-shrink: 0;
-  fill: var(--text-clr);
-}
-#sidebar a span, #sidebar .dropdown-btn span{
-  flex-grow: 1;
-}
-#sidebar a:hover, #sidebar .dropdown-btn:hover{
-  background-color: var(--hover-clr);
-}
-#sidebar .sub-menu{
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: 300ms ease-in-out;
-
-  > div{
-    overflow: hidden;
-  }
-}
-#sidebar .sub-menu.show{
-  grid-template-rows: 1fr;
-}
-.dropdown-btn svg{
-  transition: 200ms ease;
-}
-.rotate svg:last-child{
-  rotate: 180deg;
-}
-#sidebar .sub-menu a{
-  padding-left: 2em;
-}
-#toggle-btn{
-  margin-left: auto;
-  padding: 1em;
-  border: none;
-  border-radius: .5em;
-  background: none;
-  cursor: pointer;
-
-  svg{
-    transition: rotate 150ms ease;
-  }
-}
-#toggle-btn:hover{
-  background-color: var(--hover-clr);
-}
-
-main{
-  padding: min(30px, 7%);
-}
-main p{
-  color: var(--secondary-text-clr);
-  margin-top: 5px;
-  margin-bottom: 15px;
-}
-.container{
-  border: 1px solid var(--line-clr);
-  border-radius: 1em;
-  margin-bottom: 20px;
-  padding: min(3em, 15%);
-
-  h2, p { margin-top: 1em }
-}
-
-@media(max-width: 800px){
-  body{
-    grid-template-columns: 1fr;
-  }
-  main{
-    padding: 2em 1em 60px 1em;
+  .account-form{
+    margin-bottom: 50px;
+    flex-direction: column; 
   }
   .container{
-    border: none;
-    padding: 0;
+    padding: 5px;
   }
-  #sidebar{
-    height: 60px;
+  .button-clicked{
+    font-size: 11px;
+    padding: 14px 20px;
+  }
+  .form-group label{
+    font-size: 15px;
+  }
+
+}
+       /* media queries for sidebar=================================================================== */
+      @media (max-width: 800px) {
+        body {
+          grid-template-columns: 1fr;
+        }
+
+        #sidebar {
+          height: 60px;
+          width: 100%;
+          border-right: none;
+          border-top: 1px solid var(--line-clr);
+          padding: 0;
+          position: fixed;
+          top: unset;
+          bottom: 0;
+
+          > ul {
+            padding: 0;
+            display: grid;
+            grid-auto-columns: 60px;
+            grid-auto-flow: column;
+            justify-content: space-around;
+            align-items: center;
+            /* overflow-x: scroll;
+      margin-left: 68px; */
+          }
+          ul li {
+            height: 100%;
+          }
+          ul a,
+          ul .dropdown-btn {
+            width: 60px;
+            height: 60px;
+            padding: 0;
+            border-radius: 0;
+            justify-content: center;
+          }
+
+          ul li span,
+          ul li:first-child,
+          .dropdown-btn svg:last-child {
+            display: none;
+          }
+
+          ul li .sub-menu.show {
+            position: fixed;
+            bottom: 60px;
+            left: 0;
+            box-sizing: border-box;
+            height: 60px;
+            width: 100%;
+            background-color: var(--hover-clr);
+            border-top: 1px solid var(--line-clr);
+            display: flex;
+            justify-content: center;
+
+            > div {
+              overflow-x: auto;
+            }
+            li {
+              display: inline-flex;
+            }
+            a {
+              box-sizing: border-box;
+              padding: 8px;
+              width: auto;
+              justify-content: center;
+            }
+          }
+        }
+      }
+
+      /* CSS for products ==============================================================================*/
+      .custom-table th,
+      .custom-table td,
+      .category-table th,
+      .category-table td {
+        padding: 12px;
+        border-bottom: 1px solid #3a3c46;
+      }
+
+      .custom-table th {
+        background-color: #007bff;
+        font-weight: bold;
+        color: #fff;
+      }
+
+     
+
+      .custom-table,
+      .category-table {
+        /* border-radius: 5px; */
+        overflow: hidden;
+        background-color: #2c2f3d;
+      }
+
+      .product-left-block div::-webkit-scrollbar,
+      .product-right-block div::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .product-left-block div::-webkit-scrollbar-thumb,
+      .product-right-block div::-webkit-scrollbar-thumb {
+        background-color: #ccc;
+        /* border-radius: 4px; */
+      }
+
+      .product-left-block div::-webkit-scrollbar-track,
+      .product-right-block div::-webkit-scrollbar-track {
+        background-color: #f1f1f1;
+      }
+
+      .delete-icon {
+        position: relative;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      .delete-icon i {
+        background-color: #2c2f3d;
+        color: white;
+        border-radius: 50%;
+        padding: 10px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+      }
+
+      .delete-icon:hover i {
+        background-color: #3a3c46;
+        transform: scale(1.1);
+        color: #ffffff;
+      }
+      
+      .product-container {
+        padding: 10px;
+        display: flex;
+        gap: 20px;
+        max-height: 600px;
+        margin-top: 20px;
+      }
+
+      .product-left-block,
+      .product-right-block {
+        display: flex;
+        flex-direction: column;
+      }
+   
+      .product-left-block {
+        flex: 2;
+      }
+      .product-left{
+        overflow-y: auto; 
+        margin-bottom: 10px
+      }
+      .product-right{
+        overflow-y: auto;
+      }
+      .product-right-block {
+        flex: 1;
+      }
+
+      .product-right-block h2 {
+        text-align: center;
+       
+        background-color: #007bff;
+        padding: 12px 0px;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        text-align: center;
+      }
+
+      /* Additional CSS for product buttons */
+      .add-product-btn {
+        margin-top: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 12px 0;
+        cursor: pointer;
+        font-size: 14px;
+        width: 100%;
+        /* border-radius: 5px; */
+      }
+
+      .delete-selected-btn {
+        margin-top: 5px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 12px 0;
+        cursor: pointer;
+        font-size: 14px;
+        width: 100%;
+        /* border-radius: 5px; */
+      }
+
+      .add-category-btn {
+        margin-top: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 12px 0;
+        cursor: pointer;
+        font-size: 14px;
+        width: 100%;
+        /* border-radius: 5px; */
+      }
+
+      /* media query for product */
+      @media (max-width: 768px) {
+ 
+  .product-container {
+    flex-direction: column;
+    gap: 10px;
+    height: auto;
+    padding: 10px;
+  }
+  .product-left-block,
+  .product-right-block {
+    flex: unset;
     width: 100%;
-    border-right: none;
-    border-top: 1px solid var(--line-clr);
-    padding: 0;
-    position: fixed;
-    top: unset;
-    bottom: 0;
+    height: 400px; 
+    overflow: auto; 
+    margin-bottom: 20px; 
+  }
 
-    > ul{
-      padding: 0;
-      display: grid;
-      grid-auto-columns: 60px;
-      grid-auto-flow: column;
-      align-items: center;
-      overflow-x: scroll;
-    }
-    ul li{
-      height: 100%;
-    }
-    ul a, ul .dropdown-btn{
-      width: 60px;
-      height: 60px;
-      padding: 0;
-      border-radius: 0;
-      justify-content: center;
-    }
+  /* Table adjustments for scrolling */
+  /* table {
+    display: block;
+    width: 100%;
+    overflow-x: auto; 
+    white-space: nowrap; 
+    font-size: 12px; 
+  } */
 
-    ul li span, ul li:first-child, .dropdown-btn svg:last-child{
-      display: none;
-    }
+  .custom-table th,
+  .custom-table td,
+  .category-table th,
+  .category-table td {
+    padding: 8px;
+  }
 
-    ul li .sub-menu.show{
-      position: fixed;
-      bottom: 60px;
-      left: 0;
-      box-sizing: border-box;
-      height: 60px;
-      width: 100%;
-      background-color: var(--hover-clr);
-      border-top: 1px solid var(--line-clr);
-      display: flex;
-      justify-content: center;
+  button {
+    font-size: 12px;
+    padding: 10px 0;
+  }
+  .product-right-block h2 {
+    font-size: 16px;
+    padding: 10px;
+  }
+  .delete-icon i {
+    padding: 8px;
+    font-size: 14px;
+  }
 
-      > div{
-        overflow-x: auto;
-      }
-      li{
-        display: inline-flex;
-      }
-      a{
-        box-sizing: border-box;
-        padding: 1em;
-        width: auto;
-        justify-content: center;
-      }
-    }
+  /* Adjust scrollbar width */
+  .product-left-block div::-webkit-scrollbar,
+  .product-right-block div::-webkit-scrollbar {
+    width: 6px; 
   }
 }
- </style>
+/* css for add product form =============================================================================== */
+#add-product-form {
+  max-width: 900px;
+  /* margin: 2rem auto; */
+  margin: auto;
+  padding: 2rem;
+  /* background: var(--base-clr); */
+  background-color: #2c2f3d;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(255, 253, 253, 0.1);
+}
 
-</head>
-<body>
-  <nav id="sidebar">
-    <ul>
-      <li>
-        <span class="logo">coding2go</span>
-        <button onclick=toggleSidebar() id="toggle-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m313-480 155 156q11 11 11.5 27.5T468-268q-11 11-28 11t-28-11L228-452q-6-6-8.5-13t-2.5-15q0-8 2.5-15t8.5-13l184-184q11-11 27.5-11.5T468-692q11 11 11 28t-11 28L313-480Zm264 0 155 156q11 11 11.5 27.5T732-268q-11 11-28 11t-28-11L492-452q-6-6-8.5-13t-2.5-15q0-8 2.5-15t8.5-13l184-184q11-11 27.5-11.5T732-692q11 11 11 28t-11 28L577-480Z"/></svg>
-        </button>
-      </li>
-      <li class="active">
-        <a href="index.html">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M240-200h120v-200q0-17 11.5-28.5T400-440h160q17 0 28.5 11.5T600-400v200h120v-360L480-740 240-560v360Zm-80 0v-360q0-19 8.5-36t23.5-28l240-180q21-16 48-16t48 16l240 180q15 11 23.5 28t8.5 36v360q0 33-23.5 56.5T720-120H560q-17 0-28.5-11.5T520-160v-200h-80v200q0 17-11.5 28.5T400-120H240q-33 0-56.5-23.5T160-200Zm320-270Z"/></svg>
-          <span>Home</span>
-        </a>
-      </li>
-      <li>
-        <a href="dashboard.html">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M520-640v-160q0-17 11.5-28.5T560-840h240q17 0 28.5 11.5T840-800v160q0 17-11.5 28.5T800-600H560q-17 0-28.5-11.5T520-640ZM120-480v-320q0-17 11.5-28.5T160-840h240q17 0 28.5 11.5T440-800v320q0 17-11.5 28.5T400-440H160q-17 0-28.5-11.5T120-480Zm400 320v-320q0-17 11.5-28.5T560-520h240q17 0 28.5 11.5T840-480v320q0 17-11.5 28.5T800-120H560q-17 0-28.5-11.5T520-160Zm-400 0v-160q0-17 11.5-28.5T160-360h240q17 0 28.5 11.5T440-320v160q0 17-11.5 28.5T400-120H160q-17 0-28.5-11.5T120-160Zm80-360h160v-240H200v240Zm400 320h160v-240H600v240Zm0-480h160v-80H600v80ZM200-200h160v-80H200v80Zm160-320Zm240-160Zm0 240ZM360-280Z"/></svg>
-          <span>Dashboard</span>
-        </a>
-      </li>
-      <li>
-        <button onclick=toggleSubMenu(this) class="dropdown-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h207q16 0 30.5 6t25.5 17l57 57h320q33 0 56.5 23.5T880-640v400q0 33-23.5 56.5T800-160H160Zm0-80h640v-400H447l-80-80H160v480Zm0 0v-480 480Zm400-160v40q0 17 11.5 28.5T600-320q17 0 28.5-11.5T640-360v-40h40q17 0 28.5-11.5T720-440q0-17-11.5-28.5T680-480h-40v-40q0-17-11.5-28.5T600-560q-17 0-28.5 11.5T560-520v40h-40q-17 0-28.5 11.5T480-440q0 17 11.5 28.5T520-400h40Z"/></svg>
-          <span>Create</span>
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M480-361q-8 0-15-2.5t-13-8.5L268-556q-11-11-11-28t11-28q11-11 28-11t28 11l156 156 156-156q11-11 28-11t28 11q11 11 11 28t-11 28L508-372q-6 6-13 8.5t-15 2.5Z"/></svg>
-        </button>
-        <ul class="sub-menu">
-          <div>
-            <li><a href="#">Folder</a></li>
-            <li><a href="#">Document</a></li>
-            <li><a href="#">Project</a></li>
+.form-heading {
+  /* text-align: center; */
+  margin-bottom: 1.5rem;
+  font-size: 20px;
+  color: #fff;
+}
+
+.form-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Allow the content to wrap on smaller screens */
+}
+
+.form-block {
+  flex: 1;
+  padding: 1rem;
+  min-width: 300px; /* Ensure both blocks remain responsive */
+}
+
+.left-form-block .form-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: #888;
+}
+
+textarea {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.right-form-block .tm-product-img-dummy {
+  width: 300px;
+  height: 250px;
+  background: #f0f0f0;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.tm-upload-icon {
+  font-size: 3rem;
+  color: #888;
+  cursor: pointer;
+}
+
+.custom-file .btn {
+ margin-top: 15px;
+  width: 75%;
+margin-left: 50px;
+  padding: 0.6rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.custom-file .btn:hover {
+  background-color: #0056b3;
+}
+
+.form-actions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  /* margin-top: 2rem; */
+}
+
+.btn-success {
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-success:hover {
+  background-color: #0056b3;
+}
+/* Style for the Back Icon */
+.back-icon {
+  cursor: pointer;
+  font-size: 24px;
+  color: #007bff;
+  margin-right: 15px;
+}
+
+.back-icon:hover {
+  color: #0056b3;
+}
+
+    </style>
+  </head>
+  <body>
+    <nav id="sidebar">
+      <ul>
+        <li>
+          <span class="logo">Product Admin</span>
+          <button onclick="toggleSidebar()" id="toggle-btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#e8eaed"
+            >
+              <path
+                d="m313-480 155 156q11 11 11.5 27.5T468-268q-11 11-28 11t-28-11L228-452q-6-6-8.5-13t-2.5-15q0-8 2.5-15t8.5-13l184-184q11-11 27.5-11.5T468-692q11 11 11 28t-11 28L313-480Zm264 0 155 156q11 11 11.5 27.5T732-268q-11 11-28 11t-28-11L492-452q-6-6-8.5-13t-2.5-15q0-8 2.5-15t8.5-13l184-184q11-11 27.5-11.5T732-692q11 11 11 28t-11 28L577-480Z"
+              />
+            </svg>
+          </button>
+        </li>
+        <li class="active">
+          <a href="javascript:void(0)" onclick="showPage('dashboard')">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#e8eaed"
+            >
+              <path
+                d="M520-640v-160q0-17 11.5-28.5T560-840h240q17 0 28.5 11.5T840-800v160q0 17-11.5 28.5T800-600H560q-17 0-28.5-11.5T520-640ZM120-480v-320q0-17 11.5-28.5T160-840h240q17 0 28.5 11.5T440-800v320q0 17-11.5 28.5T400-440H160q-17 0-28.5-11.5T120-480Zm400 320v-320q0-17 11.5-28.5T560-520h240q17 0 28.5 11.5T840-480v320q0 17-11.5 28.5T800-120H560q-17 0-28.5-11.5T520-160Zm-400 0v-160q0-17 11.5-28.5T160-360h240q17 0 28.5 11.5T440-320v160q0 17-11.5 28.5T400-120H160q-17 0-28.5-11.5T120-160Zm80-360h160v-240H200v240Zm400 320h160v-240H600v240Zm0-480h160v-80H600v80ZM200-200h160v-80H200v80Zm160-320Zm240-160Zm0 240ZM360-280Z"
+              />
+            </svg>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" onclick="showPage('order-list')">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#5f6368"
+            >
+              <path
+                d="M280-600v-80h560v80H280Zm0 160v-80h560v80H280Zm0 160v-80h560v80H280ZM160-600q-17 0-28.5-11.5T120-640q0-17 11.5-28.5T160-680q17 0 28.5 11.5T200-640q0 17-11.5 28.5T160-600Zm0 160q-17 0-28.5-11.5T120-480q0-17 11.5-28.5T160-520q17 0 28.5 11.5T200-480q0 17-11.5 28.5T160-440Zm0 160q-17 0-28.5-11.5T120-320q0-17 11.5-28.5T160-360q17 0 28.5 11.5T200-320q0 17-11.5 28.5T160-280Z"
+              />
+            </svg>
+            <span>Order-list</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" onclick="showPage('product')">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#5f6368"
+            >
+              <path
+                d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"
+              />
+            </svg>
+            <span>Product</span>
+          </a>
+        </li>
+        <li>
+          <button onclick="toggleSubMenu(this)" class="dropdown-btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#5f6368"
+            >
+              <path
+                d="M320-240h320v-80H320v80Zm0-160h320v-80H320v80ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520ZM240-800v200-200 640-640Z"
+              />
+            </svg>
+            <span>Report</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#e8eaed"
+            >
+              <path
+                d="M480-361q-8 0-15-2.5t-13-8.5L268-556q-11-11-11-28t11-28q11-11 28-11t28 11l156 156 156-156q11-11 28-11t28 11q11 11 11 28t-11 28L508-372q-6 6-13 8.5t-15 2.5Z"
+              />
+            </svg>
+          </button>
+          <ul class="sub-menu">
+            <div>
+              <li>
+                <a href="javascript:void(0)" onclick="showPage('dailyReport')"
+                  >Daily Report</a
+                >
+              </li>
+              <li>
+                <a href="javascript:void(0)" onclick="showPage('weeklyReport')"
+                  >Weekly Report</a
+                >
+              </li>
+              <li>
+                <a href="javascript:void(0)" onclick="showPage('yearlyReport')"
+                  >Yearly Report</a
+                >
+              </li>
+            </div>
+          </ul>
+        </li>
+        <li>
+          <a href="javascript:void(0)" onclick="showPage('account')">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#e8eaed"
+            >
+              <path
+                d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-240v-32q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v32q0 33-23.5 56.5T720-160H240q-33 0-56.5-23.5T160-240Zm80 0h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Z"
+              />
+            </svg>
+            <span>Account</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div id="main-content">
+      <!-- Dashboard Order-list page============================================================================== -->
+      <div id="dashboard" class="page-content">
+        <div class="dashboard-container">
+          <div class="dashboard-block">
+            <div class="dashboard-value">0</div>
+            <div class="dashboard-text">Unit Sold</div>
           </div>
-        </ul>
-      </li>
-      <li>
-        <button onclick=toggleSubMenu(this) class="dropdown-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m221-313 142-142q12-12 28-11.5t28 12.5q11 12 11 28t-11 28L250-228q-12 12-28 12t-28-12l-86-86q-11-11-11-28t11-28q11-11 28-11t28 11l57 57Zm0-320 142-142q12-12 28-11.5t28 12.5q11 12 11 28t-11 28L250-548q-12 12-28 12t-28-12l-86-86q-11-11-11-28t11-28q11-11 28-11t28 11l57 57Zm339 353q-17 0-28.5-11.5T520-320q0-17 11.5-28.5T560-360h280q17 0 28.5 11.5T880-320q0 17-11.5 28.5T840-280H560Zm0-320q-17 0-28.5-11.5T520-640q0-17 11.5-28.5T560-680h280q17 0 28.5 11.5T880-640q0 17-11.5 28.5T840-600H560Z"/></svg>
-          <span>Todo-Lists</span>
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M480-361q-8 0-15-2.5t-13-8.5L268-556q-11-11-11-28t11-28q11-11 28-11t28 11l156 156 156-156q11-11 28-11t28 11q11 11 11 28t-11 28L508-372q-6 6-13 8.5t-15 2.5Z"/></svg>
-        </button>
-        <ul class="sub-menu">
-          <div>
-            <li><a href="#">Work</a></li>
-            <li><a href="#">Private</a></li>
-            <li><a href="#">Coding</a></li>
-            <li><a href="#">Gardening</a></li>
-            <li><a href="#">School</a></li>
+          <div class="dashboard-block">
+            <div class="dashboard-value">₹0</div>
+            <div class="dashboard-text">Sales</div>
           </div>
-        </ul>
-      </li>
-      <li>
-        <a href="calendar.html">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-40q0-17 11.5-28.5T280-880q17 0 28.5 11.5T320-840v40h320v-40q0-17 11.5-28.5T680-880q17 0 28.5 11.5T720-840v40h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z"/></svg>
-          <span>Calendar</span>
-        </a>
-      </li>
-      <li>
-        <a href="profile.html">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-240v-32q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v32q0 33-23.5 56.5T720-160H240q-33 0-56.5-23.5T160-240Zm80 0h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Zm0 400Z"/></svg>
-          <span>Profile</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
-  <main>
-   <!-- Dashboard Order-list page============================================================================== -->
-   <div id="dashboard" class="page-content">
-    <div class="col-12 tm-block-col">
-        <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
+          <div class="dashboard-block">
+            <div class="dashboard-value">0</div>
+            <div class="dashboard-text">New Orders</div>
+          </div>
+          <div class="dashboard-block">
+            <div class="dashboard-value">0</div>
+            <div class="dashboard-text">Active Listings</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Order-list page -->
+      <div id="order-list" class="page-content" style="display: none">
+        <div class="col-xs-12 tm-block-col">
+          <div
+            class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll"
+          >
             <h2 class="tm-block-title">Orders List</h2>
             <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">ORDER NO.</th>
-                        <th scope="col">STATUS</th>
-                        <th scope="col">OPERATORS</th>
-                        <th scope="col">LOCATION</th>
-                        <th scope="col">DISTANCE</th>
-                        <th scope="col">START DATE</th>
-                        <th scope="col">EST DELIVERY DUE</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row"><b>#122349</b></th>
-                        <td>
-                            <div class="tm-status-circle moving">
-                            </div>Moving
-                        </td>
-                        <td><b>Oliver Trag</b></td>
-                        <td><b>London, UK</b></td>
-                        <td><b>485 km</b></td>
-                        <td>16:00, 12 NOV 2018</td>
-                        <td>08:00, 18 NOV 2018</td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><b>#122348</b></th>
-                        <td>
-                            <div class="tm-status-circle pending">
-                            </div>Pending
-                        </td>
-                        <td><b>Jacob Miller</b></td>
-                        <td><b>London, UK</b></td>
-                        <td><b>360 km</b></td>
-                        <td>11:00, 10 NOV 2018</td>
-                        <td>04:00, 14 NOV 2018</td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><b>#122347</b></th>
-                        <td>
-                            <div class="tm-status-circle cancelled">
-                            </div>Cancelled
-                        </td>
-                        <td><b>George Wilson</b></td>
-                        <td><b>London, UK</b></td>
-                        <td><b>340 km</b></td>
-                        <td>12:00, 22 NOV 2018</td>
-                        <td>06:00, 28 NOV 2018</td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><b>#122346</b></th>
-                        <td>
-                            <div class="tm-status-circle moving">
-                            </div>Moving
-                        </td>
-                        <td><b>William Aung</b></td>
-                        <td><b>London, UK</b></td>
-                        <td><b>218 km</b></td>
-                        <td>15:00, 10 NOV 2018</td>
-                        <td>09:00, 14 NOV 2018</td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><b>#122345</b></th>
-                        <td>
-                            <div class="tm-status-circle pending">
-                            </div>Pending
-                        </td>
-                        <td><b>Harry Ryan</b></td>
-                        <td><b>London, UK</b></td>
-                        <td><b>280 km</b></td>
-                        <td>15:00, 11 NOV 2018</td>
-                        <td>09:00, 17 NOV 2018</td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><b>#122344</b></th>
-                        <td>
-                            <div class="tm-status-circle pending">
-                            </div>Pending
-                        </td>
-                        <td><b>Michael Jones</b></td>
-                        <td><b>London, UK</b></td>
-                        <td><b>218 km</b></td>
-                        <td>18:00, 12 OCT 2018</td>
-                        <td>06:00, 18 OCT 2018</td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><b>#122343</b></th>
-                        <td>
-                            <div class="tm-status-circle moving">
-                            </div>Moving
-                        </td>
-                        <td><b>Timmy Davis</b></td>
-                        <td><b>London, UK</b></td>
-                        <td><b>218 km</b></td>
-                        <td>12:00, 10 OCT 2018</td>
-                        <td>08:00, 18 OCT 2018</td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><b>#122342</b></th>
-                        <td>
-                            <div class="tm-status-circle moving">
-                            </div>Moving
-                        </td>
-                        <td><b>Oscar Phyo</b></td>
-                        <td><b>London, UK</b></td>
-                        <td><b>420 km</b></td>
-                        <td>15:30, 06 OCT 2018</td>
-                        <td>09:30, 16 OCT 2018</td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><b>#122341</b></th>
-                        <td>
-                            <div class="tm-status-circle moving">
-                            </div>Moving
-                        </td>
-                        <td><b>Charlie Brown</b></td>
-                        <td><b>London, UK</b></td>
-                        <td><b>300 km</b></td>
-                        <td>11:00, 10 OCT 2018</td>
-                        <td>03:00, 14 OCT 2018</td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><b>#122340</b></th>
-                        <td>
-                            <div class="tm-status-circle cancelled">
-                            </div>Cancelled
-                        </td>
-                        <td><b>Wilson Cookies</b></td>
-                        <td><b>London, UK</b></td>
-                        <td><b>218 km</b></td>
-                        <td>17:30, 12 OCT 2018</td>
-                        <td>08:30, 22 OCT 2018</td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><b>#122339</b></th>
-                        <td>
-                            <div class="tm-status-circle moving">
-                            </div>Moving
-                        </td>
-                        <td><b>Richard Clamon</b></td>
-                        <td><b>London, UK</b></td>
-                        <td><b>150 km</b></td>
-                        <td>15:00, 12 OCT 2018</td>
-                        <td>09:20, 26 OCT 2018</td>
-                    </tr>
-                </tbody>
+              <thead>
+                <tr style="background-color: #007bff; color: #ffffff">
+                  <th scope="col">ORDER NO.</th>
+                  <th scope="col">STATUS</th>
+                  <th scope="col">OPERATORS</th>
+                  <th scope="col">LOCATION</th>
+                  <th scope="col">DISTANCE</th>
+                  <th scope="col">START DATE</th>
+                  <th scope="col">EST DELIVERY DUE</th>
+                </tr>
+              </thead>
+              <tbody style="background-color: #2c2f3d;">
+                <tr>
+                  <th scope="row"><b>#122349</b></th>
+                  <td>
+                    <div class="tm-status-circle moving"></div>
+                    Moving
+                  </td>
+                  <td><b>Oliver Trag</b></td>
+                  <td><b>London, UK</b></td>
+                  <td><b>485 km</b></td>
+                  <td>16:00, 12 NOV 2018</td>
+                  <td>08:00, 18 NOV 2018</td>
+                </tr>
+                <tr>
+                  <th scope="row"><b>#122348</b></th>
+                  <td>
+                    <div class="tm-status-circle pending"></div>
+                    Pending
+                  </td>
+                  <td><b>Jacob Miller</b></td>
+                  <td><b>London, UK</b></td>
+                  <td><b>360 km</b></td>
+                  <td>11:00, 10 NOV 2018</td>
+                  <td>04:00, 14 NOV 2018</td>
+                </tr>
+                <tr>
+                  <th scope="row"><b>#122347</b></th>
+                  <td>
+                    <div class="tm-status-circle cancelled"></div>
+                    Cancelled
+                  </td>
+                  <td><b>George Wilson</b></td>
+                  <td><b>London, UK</b></td>
+                  <td><b>340 km</b></td>
+                  <td>12:00, 22 NOV 2018</td>
+                  <td>06:00, 28 NOV 2018</td>
+                </tr>
+                <tr>
+                  <th scope="row"><b>#122346</b></th>
+                  <td>
+                    <div class="tm-status-circle moving"></div>
+                    Moving
+                  </td>
+                  <td><b>William Aung</b></td>
+                  <td><b>London, UK</b></td>
+                  <td><b>218 km</b></td>
+                  <td>15:00, 10 NOV 2018</td>
+                  <td>09:00, 14 NOV 2018</td>
+                </tr>
+                <tr>
+                  <th scope="row"><b>#122345</b></th>
+                  <td>
+                    <div class="tm-status-circle pending"></div>
+                    Pending
+                  </td>
+                  <td><b>Harry Ryan</b></td>
+                  <td><b>London, UK</b></td>
+                  <td><b>280 km</b></td>
+                  <td>15:00, 11 NOV 2018</td>
+                  <td>09:00, 17 NOV 2018</td>
+                </tr>
+                <tr>
+                  <th scope="row"><b>#122344</b></th>
+                  <td>
+                    <div class="tm-status-circle pending"></div>
+                    Pending
+                  </td>
+                  <td><b>Michael Jones</b></td>
+                  <td><b>London, UK</b></td>
+                  <td><b>218 km</b></td>
+                  <td>18:00, 12 OCT 2018</td>
+                  <td>06:00, 18 OCT 2018</td>
+                </tr>
+                <tr>
+                  <th scope="row"><b>#122343</b></th>
+                  <td>
+                    <div class="tm-status-circle moving"></div>
+                    Moving
+                  </td>
+                  <td><b>Timmy Davis</b></td>
+                  <td><b>London, UK</b></td>
+                  <td><b>218 km</b></td>
+                  <td>12:00, 10 OCT 2018</td>
+                  <td>08:00, 18 OCT 2018</td>
+                </tr>
+                <tr>
+                  <th scope="row"><b>#122342</b></th>
+                  <td>
+                    <div class="tm-status-circle moving"></div>
+                    Moving
+                  </td>
+                  <td><b>Oscar Phyo</b></td>
+                  <td><b>London, UK</b></td>
+                  <td><b>420 km</b></td>
+                  <td>15:30, 06 OCT 2018</td>
+                  <td>09:30, 16 OCT 2018</td>
+                </tr>
+                <tr>
+                  <th scope="row"><b>#122341</b></th>
+                  <td>
+                    <div class="tm-status-circle moving"></div>
+                    Moving
+                  </td>
+                  <td><b>Charlie Brown</b></td>
+                  <td><b>London, UK</b></td>
+                  <td><b>300 km</b></td>
+                  <td>11:00, 10 OCT 2018</td>
+                  <td>03:00, 14 OCT 2018</td>
+                </tr>
+                <tr>
+                  <th scope="row"><b>#122340</b></th>
+                  <td>
+                    <div class="tm-status-circle cancelled"></div>
+                    Cancelled
+                  </td>
+                  <td><b>Wilson Cookies</b></td>
+                  <td><b>London, UK</b></td>
+                  <td><b>218 km</b></td>
+                  <td>17:30, 12 OCT 2018</td>
+                  <td>08:30, 22 OCT 2018</td>
+                </tr>
+                <tr>
+                  <th scope="row"><b>#122339</b></th>
+                  <td>
+                    <div class="tm-status-circle moving"></div>
+                    Moving
+                  </td>
+                  <td><b>Richard Clamon</b></td>
+                  <td><b>London, UK</b></td>
+                  <td><b>150 km</b></td>
+                  <td>15:00, 12 OCT 2018</td>
+                  <td>09:20, 26 OCT 2018</td>
+                </tr>
+              </tbody>
             </table>
+          </div>
         </div>
+      </div>
+
+      <!--product page============================================ -->
+      <div id="product" class="page-content" style="display: none">
+        <div class="product-container">
+          <!-- Left Block -->
+          <div class="product-left-block" id="left-block">
+            <div class="product-left" >
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>&nbsp;</th>
+                    <th>PRODUCT NAME</th>
+                    <th>UNIT SOLD</th>
+                    <th>IN STOCK</th>
+                    <th>EXPIRE DATE</th>
+                    <th>&nbsp;</th>
+                  </tr>
+                </thead>
+                <tbody style="background-color: #2c2f3d">
+                  <!-- Sample Rows -->
+                  <tr >
+                    <td><input type="checkbox" /></td>
+                    <td>Lorem Ipsum Product 1</td>
+                    <td>1,450</td>
+                    <td>550</td>
+                    <td>28 March 2019</td>
+                    <td class="delete-icon">
+                      <i class="far fa-trash-alt"></i>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" /></td>
+                    <td>Lorem Ipsum Product 1</td>
+                    <td>1,450</td>
+                    <td>550</td>
+                    <td>28 March 2019</td>
+                    <td class="delete-icon">
+                      <i class="far fa-trash-alt"></i>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" /></td>
+                    <td>Lorem Ipsum Product 1</td>
+                    <td>1,450</td>
+                    <td>550</td>
+                    <td>28 March 2019</td>
+                    <td class="delete-icon">
+                      <i class="far fa-trash-alt"></i>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" /></td>
+                    <td>Lorem Ipsum Product 1</td>
+                    <td>1,450</td>
+                    <td>550</td>
+                    <td>28 March 2019</td>
+                    <td class="delete-icon">
+                      <i class="far fa-trash-alt"></i>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" /></td>
+                    <td>Lorem Ipsum Product 1</td>
+                    <td>1,450</td>
+                    <td>550</td>
+                    <td>28 March 2019</td>
+                    <td class="delete-icon">
+                      <i class="far fa-trash-alt"></i>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" /></td>
+                    <td>Lorem Ipsum Product 1</td>
+                    <td>1,450</td>
+                    <td>550</td>
+                    <td>28 March 2019</td>
+                    <td class="delete-icon">
+                      <i class="far fa-trash-alt"></i>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" /></td>
+                    <td>Lorem Ipsum Product 1</td>
+                    <td>1,450</td>
+                    <td>550</td>
+                    <td>28 March 2019</td>
+                    <td class="delete-icon">
+                      <i class="far fa-trash-alt"></i>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td><input type="checkbox" /></td>
+                    <td>Lorem Ipsum Product 2</td>
+                    <td>1,200</td>
+                    <td>350</td>
+                    <td>15 April 2019</td>
+                    <td class="delete-icon">
+                      <i class="far fa-trash-alt"></i>
+                    </td>
+                  </tr>
+                  <!-- Add more rows as needed -->
+                </tbody>
+              </table>
+            </div>
+            <button class="add-product-btn" id="add-product-btn">Add New Product</button>
+            <button class="delete-selected-btn">Delete Selected Product</button>
+          </div>
+          
+          <!-- Right Block -->
+          <div class="product-right-block" id="right-block">
+            <h2>Product Categories</h2>
+            <div class="product-right">
+              <table class="category-table">
+                <tbody>
+                  <!-- Sample Categories -->
+                  <tr>
+                    <td>Product Category 1</td>
+                    <td class="delete-icon">
+                      <i class="far fa-trash-alt"></i>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Product Category 2</td>
+                    <td class="delete-icon">
+                      <i class="far fa-trash-alt"></i>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Product Category 2</td>
+                    <td class="delete-icon">
+                      <i class="far fa-trash-alt"></i>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Product Category 2</td>
+                    <td class="delete-icon">
+                      <i class="far fa-trash-alt"></i>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Product Category 2</td>
+                    <td class="delete-icon">
+                      <i class="far fa-trash-alt"></i>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Product Category 2</td>
+                    <td class="delete-icon">
+                      <i class="far fa-trash-alt"></i>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Product Category 2</td>
+                    <td class="delete-icon">
+                      <i class="far fa-trash-alt"></i>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Product Category 2</td>
+                    <td class="delete-icon">
+                      <i class="far fa-trash-alt"></i>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Product Category 2</td>
+                    <td class="delete-icon">
+                      <i class="far fa-trash-alt"></i>
+                    </td>
+                  </tr>
+                  <!-- Add more rows as needed -->
+                </tbody>
+              </table>
+            </div>
+            <button class="add-category-btn">Add New Category</button>
+          </div>
+   <!-- Form Block -->
+<div id="add-product-form" style="display: none;">
+  <h2 class="form-heading">
+    <!-- Back Icon -->
+    <i id="back-icon" class="fas fa-arrow-left back-icon"></i>
+    Add Product
+  </h2>
+  <form class="form-container">
+    <div class="left-form-block">
+      <!-- Left Side Block -->
+      <div class="form-group">
+        <label for="product-name">Product Name:</label>
+        <input type="text" id="product-name" name="product-name" required />
+      </div>
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="3" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="category">Category:</label>
+        <select id="category" name="category" required>
+          <option value="" selected>Select Category</option>
+          <option value="new-arrival">New Arrival</option>
+          <option value="most-popular">Most Popular</option>
+          <option value="trending">Trending</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="expire-date">Expire Date:</label>
+          <input type="date" id="expire-date" name="expire-date" required />
+        </div>
+        <div class="form-group">
+          <label for="in-stock">Units in Stock:</label>
+          <input type="number" id="in-stock" name="in-stock" required />
+        </div>
+      </div>
     </div>
 
+    <!-- Right Side Block -->
+    <div class="right-form-block">
+      <div class="tm-product-img-dummy mx-auto">
+        <i
+          class="fas fa-cloud-upload-alt tm-upload-icon"
+          onclick="document.getElementById('fileInput').click();"
+        ></i>
+      </div>
+      <div class="custom-file mt-3 mb-3">
+        <input id="fileInput" type="file" style="display:none;" />
+        <input
+          type="button"
+          class="btn btn-primary btn-block mx-auto"
+          value="UPLOAD PRODUCT IMAGE"
+          onclick="document.getElementById('fileInput').click();"
+        />
+      </div>
+    </div>
+
+    <!-- Add Product Now Button (inside the form block) -->
+    <div class="form-actions">
+      <button type="submit" class="btn btn-success">Add Product Now</button>
+    </div>
+  </form>
 </div>
 
-  </main>
+        </div>
+      </div>
 
-  <script>
-    const toggleButton = document.getElementById('toggle-btn')
-const sidebar = document.getElementById('sidebar')
+      <!--  report page============================================================================================ -->
+      <div id="dailyReport" class="page-content" style="display: none">
+        <h1>This is Daily Report page</h1>
+      </div>
+      <div id="weeklyReport" class="page-content" style="display: none">
+        <h1>This is Weekly Report page</h1>
+      </div>
+      <div id="yearlyReport" class="page-content" style="display: none">
+        <h1>This is Yearly Report page</h1>
+      </div>
 
-function toggleSidebar(){
-  sidebar.classList.toggle('close')
-  toggleButton.classList.toggle('rotate')
+      <!-- Account page================================================================================================ -->
+      <div id="account" class="page-content" style="display: none">
+        <div class="container-block" id="container-block">
+          <button class="add-account-btn" id="add-account-btn">Add New Account</button>
+          <div class="account-form">
+            <h4>#1</h4>
 
-  closeAllSubMenus()
-}
+            <div class="image-column-left">
+              <div class="avatar-container">
+                <img class="avatar-image" src="assest/new-page/p-4.jpg" alt="Avatar" />
+              </div>
+          </div>
 
-function toggleSubMenu(button){
+            
+            <div class="form-column-right">
+              <form action="" class="form-details">
+                <!-- First Row -->
+                <div class="form-group-details">
+                  <label for="">ID:</label>
+                   <input type="text" placeholder="Enter your ID" class="input-field">
+                </div>
+                <div class="form-group-details">
+                  <label for="">Name:</label>
+                  <input type="text" placeholder="Enter your Name" class="input-field">
+                </div>
+                <!-- Second Row -->
+                <div class="form-group-details">
+                  <label for="">Mobile No.</label>
+                  <input type="text" placeholder="Enter your Mobile No." class="input-field">
+                </div>
+                <div class="form-group-details">
+                  <label for="">Email id:</label>
+                  <input type="email" placeholder="Enter your Email ID" class="input-field">
+                </div>
+                <!-- Third Row -->
+                <div class="form-group-details">
+                  <label for="">Password:</label>
+                  <input type="password" placeholder="Enter your Password" class="input-field">
+                </div>
+                <div class="form-group-details">
+                  <label for="">Joining Date:</label>
+                  <input type="date" placeholder="Enter your Joining Date" class="input-field">
+                </div>
+                
+              </form>
+            
+            <div class="action-buttons">
+              <button id="update-btn" class="update-btn">Update</button>
+              <button id="delete-btn" class="delete-btn">Delete</button>
+            </div>
+            </div>
+          </div>
 
-  if(!button.nextElementSibling.classList.contains('show')){
-    closeAllSubMenus()
+          <hr>
+          <div class="account-form">
+         
+       
+            <h4>#2</h4>
+            <div class="image-column-left">
+              <div class="avatar-container">
+                <img class="avatar-image" src="assest/new-page/p-4.jpg" alt="Avatar" />
+              </div>
+            </div>
+
+           
+             <div class="form-column-right">
+              <form action="" class="form-details">
+                <!-- First Row -->
+                <div class="form-group-details">
+                  <label for="">ID:</label>
+                   <input type="text" placeholder="Enter your ID" class="input-field">
+                </div>
+                <div class="form-group-details">
+                  <label for="">Name:</label>
+                  <input type="text" placeholder="Enter your Name" class="input-field">
+                </div>
+                <!-- Second Row -->
+                <div class="form-group-details">
+                  <label for="">Mobile No.</label>
+                  <input type="text" placeholder="Enter your Mobile No." class="input-field">
+                </div>
+                <div class="form-group-details">
+                  <label for="">Email id:</label>
+                  <input type="email" placeholder="Enter your Email ID" class="input-field">
+                </div>
+                <!-- Third Row -->
+                <div class="form-group-details">
+                  <label for="">Password:</label>
+                  <input type="password" placeholder="Enter your Password" class="input-field">
+                </div>
+                <div class="form-group-details">
+                  <label for="">Joining Date:</label>
+                  <input type="date" placeholder="Enter your Joining Date" class="input-field">
+                </div>
+               
+                
+              </form>
+              <div class="action-buttons">
+                <button  class="update-btn" id="update-btn">Update</button>
+                <button type="submit" class="delete-btn">Delete</button>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+          <div class="account-form">
+            <h4>#3</h4>
+            <div class="image-column-left">
+              <div class="avatar-container">
+                <img class="avatar-image" src="assest/new-page/p-4.jpg" alt="Avatar" />
+              </div>
+            </div>
+
+           
+            <div class="form-column-right">
+              <form action="" class="form-details">
+                <!-- First Row -->
+                <div class="form-group-details">
+                  <label for="">ID:</label>
+                   <input type="text" placeholder="Enter your ID" class="input-field">
+                </div>
+                <div class="form-group-details">
+                  <label for="">Name:</label>
+                  <input type="text" placeholder="Enter your Name" class="input-field">
+                </div>
+                <!-- Second Row -->
+                <div class="form-group-details">
+                  <label for="">Mobile No.</label>
+                  <input type="text" placeholder="Enter your Mobile No." class="input-field">
+                </div>
+                <div class="form-group-details">
+                  <label for="">Email id:</label>
+                  <input type="email" placeholder="Enter your Email ID" class="input-field">
+                </div>
+                <!-- Third Row -->
+                <div class="form-group-details">
+                  <label for="">Password:</label>
+                  <input type="password" placeholder="Enter your Password" class="input-field">
+                </div>
+                <div class="form-group-details">
+                  <label for="">Joining Date:</label>
+                  <input type="date" placeholder="Enter your Joining Date" class="input-field">
+                </div>
+                
+                
+              </form>
+              <div class="action-buttons">
+                <button id="update-btn" class="update-btn">Update</button>
+                <button type="submit" class="delete-btn">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+
+
+
+        <!-- Main-ACCOUNT-Form for add-new-account===================================================================================== -->
+        <div class="main-form" id="main-form" style="display: none;">
+          <i id="back-to-main" class="fas fa-arrow-left back-to-main"></i>
+          <div class="container">
+            <!-- Block 1: List of Accounts -->
+            <div class="block block-dark">
+              <h2 class="block-title">Account</h2>
+              <p>Account Role</p>
+              <select class="custom-select-wide">
+                <option value="0">Select role</option>
+                <option value="1">Delivery Boy</option>
+              </select>
+            </div>
+  
+            <!-- Row for Avatar and Account Settings -->
+            <div class="account-row">
+              <!-- Block 2: Change Avatar -->
+              <div class="block-column-left">
+                <h2 class="block-title">Profile</h2>
+                <div class="avatar-container">
+                  <img
+                    class="avatar-image"
+                    src="assest/new-page/p-4.jpg"
+                    alt="Avatar"
+                  />
+                  <a href="#" class="avatar-delete-icon">
+                    <i class="far fa-trash-alt"></i>
+                  </a>
+                </div>
+                <button class="button-upload">Upload New Photo</button>
+              </div>
+  
+              <!-- Block 3: Account Settings -->
+              <div class="block-column-right">
+                <h2 class="block-title">Account Settings</h2>
+                <form action="" class="form">
+                  <!-- First Row -->
+                  <div class="form-group">
+                    <label for="account-name">Name</label>
+                    <input
+                      id="account-name"
+                      name="name"
+                      type="text"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="account-email">Email</label>
+                    <input
+                      id="account-email"
+                      name="email"
+                      type="email"
+                      class="form-control"
+                    />
+                  </div>
+                  <!-- Second Row -->
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <input
+                      id="password"
+                      name="password"
+                      type="password"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="password2">Re-enter Password</label>
+                    <input
+                      id="password2"
+                      name="password2"
+                      type="password"
+                      class="form-control"
+                    />
+                  </div>
+                  <!-- Third Row -->
+                  <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      class="form-control"
+                    />
+                  </div>
+                  <!-- <div class="form-group">
+                    <label class="tm-hide-sm">&nbsp;</label>
+                    <button type="submit" class="button-clicked">
+                      Update Your Profile
+                    </button>
+                  </div> -->
+                  <div class="form-group">
+                    <label for="">Joining Date:</label>
+                  <input type="date" placeholder="Enter your Joining Date" class="input-field">
+                  </div>
+                  <!-- fourth row -->
+                  <div class="form-group">
+                    <label for="id-proof">ID Proof</label>
+                    <select id="id-proof" name="id-proof" class="form-control">
+                      <option value="" disabled selected>Select ID Proof</option>
+                      <option value="aadhaar-card">Aadhaar Card</option>
+                      <option value="pan-card">PAN Card</option>
+                      <option value="passport">Passport</option>
+                      <option value="voter-id">Voter ID</option>
+                      <option value="driving-license">Driving License</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="id-proof-upload">Upload ID Proof</label>
+                    <input
+                      id="id-proof-upload"
+                      name="id-proof-upload"
+                      type="file"
+                      class="form-control"
+                      accept=".pdf, .jpg, .jpeg, .png"
+                    />
+                  </div>
+                  <!-- Fifth Row -->
+                  <div class="form-group">
+                    <button type="submit" class="btn-danger">
+                      Add Your Account
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
+        <!-- Main-ACCOUNT-Form for update-button===================================================================================== -->
+        <div class="update-form" id="update-form" style="display: none;">
+          <i id="back-main" class="fas fa-arrow-left back-to-main"></i>
+          <div class="container">
+            <!-- Block 1: List of Accounts -->
+            <div class="block block-dark">
+              <h2 class="block-title">Account</h2>
+              <p>Account Role</p>
+              <select class="custom-select-wide">
+                <option value="0">Select role</option>
+                <option value="1">Delivery Boy</option>
+              </select>
+            </div>
+  
+            <!-- Row for Avatar and Account Settings -->
+            <div class="account-row">
+              <!-- Block 2: Change Avatar -->
+              <div class="block-column-left">
+                <h2 class="block-title">Profile</h2>
+                <div class="avatar-container">
+                  <img
+                    class="avatar-image"
+                    src="assest/new-page/p-4.jpg"
+                    alt="Avatar"
+                  />
+                  <a href="#" class="avatar-delete-icon">
+                    <i class="far fa-trash-alt"></i>
+                  </a>
+                </div>
+                <button class="button-upload">Upload New Photo</button>
+              </div>
+  
+              <!-- Block 3: Account Settings -->
+              <div class="block-column-right">
+                <h2 class="block-title">Account Settings</h2>
+                <form action="" class="form">
+                  <!-- First Row -->
+                  <div class="form-group">
+                    <label for="account-name">Name</label>
+                    <input
+                      id="account-name"
+                      name="name"
+                      type="text"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="account-email">Email</label>
+                    <input
+                      id="account-email"
+                      name="email"
+                      type="email"
+                      class="form-control"
+                    />
+                  </div>
+                  <!-- Second Row -->
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <input
+                      id="password"
+                      name="password"
+                      type="password"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="password2">Re-enter Password</label>
+                    <input
+                      id="password2"
+                      name="password2"
+                      type="password"
+                      class="form-control"
+                    />
+                  </div>
+                  <!-- Third Row -->
+                  <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      class="form-control"
+                    />
+                  </div>
+                  <!-- <div class="form-group">
+                    <label class="tm-hide-sm">&nbsp;</label>
+                    <button type="submit" class="button-clicked">
+                      Update Your Profile
+                    </button>
+                  </div> -->
+                  <div class="form-group">
+                    <label for="">Joining Date:</label>
+                  <input type="date" placeholder="Enter your Joining Date" class="input-field">
+                  </div>
+                 <!-- fourth row -->
+                 <div class="form-group">
+                  <label for="id-proof">ID Proof</label>
+                  <select id="id-proof" name="id-proof" class="form-control">
+                    <option value="" disabled selected>Select ID Proof</option>
+                    <option value="aadhaar-card">Aadhaar Card</option>
+                    <option value="pan-card">PAN Card</option>
+                    <option value="passport">Passport</option>
+                    <option value="voter-id">Voter ID</option>
+                    <option value="driving-license">Driving License</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="id-proof-upload">Upload ID Proof</label>
+                  <input
+                    id="id-proof-upload"
+                    name="id-proof-upload"
+                    type="file"
+                    class="form-control"
+                    accept=".pdf, .jpg, .jpeg, .png"
+                  />
+                </div>
+                <!-- Fifth Row -->
+                <div class="form-group">
+                  <button type="submit" class="btn-danger">
+                    Update Your Account
+                  </button>
+                </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+          <!-- Main-ACCOUNT-Form for delete-button===================================================================================== -->
+          <div class="delete-form" id="delete-form" style="display: none;">
+            <i id="main-back" class="fas fa-arrow-left back-to-main"></i>
+            <div class="container">
+              <!-- Block 1: List of Accounts -->
+              <div class="block block-dark">
+                <h2 class="block-title">Account</h2>
+                <p>Account Role</p>
+                <select class="custom-select-wide">
+                  <option value="0">Select role</option>
+                  <option value="1">Delivery Boy</option>
+                </select>
+              </div>
+    
+              <!-- Row for Avatar and Account Settings -->
+              <div class="account-row">
+                <!-- Block 2: Change Avatar -->
+                <div class="block-column-left">
+                  <h2 class="block-title">Profile</h2>
+                  <div class="avatar-container">
+                    <img
+                      class="avatar-image"
+                      src="assest/new-page/p-4.jpg"
+                      alt="Avatar"
+                    />
+                    <a href="#" class="avatar-delete-icon">
+                      <i class="far fa-trash-alt"></i>
+                    </a>
+                  </div>
+                  <button class="button-upload">Upload New Photo</button>
+                </div>
+    
+                <!-- Block 3: Account Settings -->
+                <div class="block-column-right">
+                  <h2 class="block-title">Account Settings</h2>
+                  <form action="" class="form">
+                    <!-- First Row -->
+                    <div class="form-group">
+                      <label for="account-name">Name</label>
+                      <input
+                        id="account-name"
+                        name="name"
+                        type="text"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="account-email">Email</label>
+                      <input
+                        id="account-email"
+                        name="email"
+                        type="email"
+                        class="form-control"
+                      />
+                    </div>
+                    <!-- Second Row -->
+                    <div class="form-group">
+                      <label for="password">Password</label>
+                      <input
+                        id="password"
+                        name="password"
+                        type="password"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="password2">Re-enter Password</label>
+                      <input
+                        id="password2"
+                        name="password2"
+                        type="password"
+                        class="form-control"
+                      />
+                    </div>
+                    <!-- Third Row -->
+                    <div class="form-group">
+                      <label for="phone">Phone</label>
+                      <input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        class="form-control"
+                      />
+                    </div>
+                    <!-- <div class="form-group">
+                      <label class="tm-hide-sm">&nbsp;</label>
+                      <button type="submit" class="button-clicked">
+                        Update Your Profile
+                      </button>
+                    </div> -->
+                    <div class="form-group">
+                      <label for="">Joining Date:</label>
+                    <input type="date" placeholder="Enter your Joining Date" class="input-field">
+                    </div>
+                    <!-- fourth row -->
+                  <div class="form-group">
+                    <label for="id-proof">ID Proof</label>
+                    <select id="id-proof" name="id-proof" class="form-control">
+                      <option value="" disabled selected>Select ID Proof</option>
+                      <option value="aadhaar-card">Aadhaar Card</option>
+                      <option value="pan-card">PAN Card</option>
+                      <option value="passport">Passport</option>
+                      <option value="voter-id">Voter ID</option>
+                      <option value="driving-license">Driving License</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="id-proof-upload">Upload ID Proof</label>
+                    <input
+                      id="id-proof-upload"
+                      name="id-proof-upload"
+                      type="file"
+                      class="form-control"
+                      accept=".pdf, .jpg, .jpeg, .png"
+                    />
+                  </div>
+                  <!-- Fifth Row -->
+                  <div class="form-group">
+                    <button type="submit" class="btn-danger">
+                      Delete Your Account
+                    </button>
+                  </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+
+    <script>
+      const toggleButton = document.getElementById("toggle-btn");
+      const sidebar = document.getElementById("sidebar");
+
+      function toggleSidebar() {
+        sidebar.classList.toggle("close");
+        toggleButton.classList.toggle("rotate");
+
+        closeAllSubMenus();
+      }
+
+      function toggleSubMenu(button) {
+        if (!button.nextElementSibling.classList.contains("show")) {
+          closeAllSubMenus();
+        }
+
+        button.nextElementSibling.classList.toggle("show");
+        button.classList.toggle("rotate");
+
+        if (sidebar.classList.contains("close")) {
+          sidebar.classList.toggle("close");
+          toggleButton.classList.toggle("rotate");
+        }
+      }
+
+      function closeAllSubMenus() {
+        Array.from(sidebar.getElementsByClassName("show")).forEach((ul) => {
+          ul.classList.remove("show");
+          ul.previousElementSibling.classList.remove("rotate");
+        });
+      }
+
+      // ====================
+      // Function to toggle page content visibility and set the active class
+      function showPage(pageId) {
+        // Hide all pages
+        let pages = document.querySelectorAll(".page-content");
+        pages.forEach((page) => (page.style.display = "none"));
+
+        // Show the selected page
+        let selectedPage = document.getElementById(pageId);
+        if (selectedPage) {
+          selectedPage.style.display = "block";
+        }
+
+        // Remove the active class from all menu items
+        let menuItems = document.querySelectorAll("#sidebar ul li");
+        menuItems.forEach((item) => item.classList.remove("active"));
+
+        // Add the active class to the clicked menu item
+        let clickedMenuItem = document.querySelector(
+          `[onclick="showPage('${pageId}')"]`
+        ).parentElement;
+        if (clickedMenuItem) {
+          clickedMenuItem.classList.add("active");
+        }
+      }
+
+      // js for account page
+
+      document.addEventListener('DOMContentLoaded', () => {
+  
+  const containerBlock = document.getElementById('container-block');
+  const mainForm = document.getElementById('main-form');
+  const updateForm = document.getElementById('update-form');
+  const deleteForm = document.getElementById('delete-form');
+
+  const backToMain = document.getElementById('back-to-main'); // Back button for add-account
+  const backMain = document.getElementById('back-main'); // Back button for update form
+  const mainBack = document.getElementById('main-back'); // Back button for delete form
+
+  // For handling add account button
+  const addAccountBtn = document.getElementById('add-account-btn');
+  addAccountBtn.addEventListener('click', () => {
+    containerBlock.style.display = 'none';
+    mainForm.style.display = 'block';
+  });
+
+  // For handling update account buttons
+  const updateButtons = document.querySelectorAll('.update-btn');
+  updateButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      containerBlock.style.display = 'none';
+      updateForm.style.display = 'block';
+    });
+  });
+
+  // For handling delete account buttons
+  const deleteButtons = document.querySelectorAll('.delete-btn');
+  deleteButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      containerBlock.style.display = 'none';
+      deleteForm.style.display = 'block';
+    });
+  });
+
+  // Back to main container (for add-account form)
+  if (backToMain) {
+    backToMain.addEventListener('click', () => {
+      containerBlock.style.display = 'block';
+      mainForm.style.display = 'none';
+    });
   }
 
-  button.nextElementSibling.classList.toggle('show')
-  button.classList.toggle('rotate')
-
-  if(sidebar.classList.contains('close')){
-    sidebar.classList.toggle('close')
-    toggleButton.classList.toggle('rotate')
+  // Back to main container (for update form)
+  if (backMain) {
+    backMain.addEventListener('click', () => {
+      containerBlock.style.display = 'block';
+      updateForm.style.display = 'none';
+    });
   }
-}
 
-function closeAllSubMenus(){
-  Array.from(sidebar.getElementsByClassName('show')).forEach(ul => {
-    ul.classList.remove('show')
-    ul.previousElementSibling.classList.remove('rotate')
-  })
-}
-  </script>
-</body>
+  // Back to main container (for delete form)
+  if (mainBack) {
+    mainBack.addEventListener('click', () => {
+      containerBlock.style.display = 'block';
+      deleteForm.style.display = 'none';
+    });
+  }
+});
+
+    </script>
+  </body>
 </html>
