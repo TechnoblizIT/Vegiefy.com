@@ -298,19 +298,23 @@ res.redirect("/user/profile")
 router.post("/saveaddress",isloggedin,checkuser, async(req, res) => {
     const { name, mobile, pincode, locality, address, city, state, landmark, alternatemobile, addresstype } = req.body;
     const user=await userModel.findOne({ email: req.user.email }); 
-    user.address.name = name;
-    user.address.mobile = mobile;
-    user.address.pincode = pincode;
-    user.address.locality = locality;
-    user.address.address = address;
-    user.address.city = city;
-    user.address.state = state;
-    user.address.landmark = landmark;
-    user.address.alternatemobile = alternatemobile;
-    user.address.addressType = addresstype;
+    const randomId = Math.floor(100000 + Math.random() * 900000);
+    user.address.push({
+        id:randomId,
+        name,
+        mobile,
+        pincode,
+        locality,
+        address,
+        city,
+        state,
+        landmark,
+        alternatemobile,
+        addressType: addresstype
+    });
     await user.save();
     res.redirect("/user/profile")
-    console.log(user.address)
+
 })
 
 module.exports = router;

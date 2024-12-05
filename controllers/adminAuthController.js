@@ -1,10 +1,13 @@
 const adminModel=require("../models/admin-model")
 const bcrypt = require('bcrypt');
 const {genrateToken }=require("../utils/generateToken");
+const {genrateTokenAdmin}=require("../utils/generateTokenAdmin")
 
 
 module.exports.registerAdmin =  async function(req,res){
-    try{ let { name , email, password} = req.body;
+    try{ let email="test@admin.com";
+      let password="123456";
+      let name="Admin";
     const admin = await adminModel.findOne({email:email})
     if(!admin){
         bcrypt.genSalt(password, async function (err, salt) {
@@ -16,7 +19,7 @@ module.exports.registerAdmin =  async function(req,res){
             }
         )
         await newAdmin.save();
-        const tokken = genrateToken(newAdmin);
+        const tokken = genrateTokenAdmin(newAdmin);
         res.cookie("tokken", tokken);
         res.redirect("/admin/login")
     })
@@ -45,9 +48,9 @@ module.exports.loginAdmin = async function (req, res) {
           res.redirect("/admin/login")
         }
 
-        const tokken = genrateToken(admin);
+        const tokken = genrateTokenAdmin(admin);
         res.cookie("tokken", tokken);
-        res.send("heyy admin")
+        res.redirect("/admin/dashboard")
 }catch(err){
     console.log(err.message)}
   };

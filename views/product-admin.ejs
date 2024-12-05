@@ -2161,6 +2161,25 @@ margin-left: 50px;
         }
       }
 
+        // Get elements
+  const addProductBtn = document.getElementById('add-product-btn');
+  const leftBlock = document.getElementById('left-block');
+  const rightBlock = document.getElementById('right-block');
+  const addProductForm = document.getElementById('add-product-form');
+  const backIcon = document.getElementById('back-icon');
+
+  // Show the form and hide the blocks
+  addProductBtn.addEventListener('click', () => {
+    leftBlock.style.display = 'none';
+    rightBlock.style.display = 'none';
+    addProductForm.style.display = 'block';
+  });
+
+  backIcon.addEventListener('click' , () => {
+    leftBlock.style.display = 'block';
+    rightBlock.style.display = 'block';
+    addProductForm.style.display = 'none';
+  });
       // js for account page
 
       document.addEventListener('DOMContentLoaded', () => {
