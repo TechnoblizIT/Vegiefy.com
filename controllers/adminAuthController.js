@@ -32,25 +32,32 @@ module.exports.registerAdmin =  async function(req,res){
 }
 
 module.exports.loginAdmin = async function (req, res) {
-    try{  
-        let { email, password } = req.body;
-        const admin = await adminModel.findOne({ email: email });
+  try {
+    let { email, password } = req.body;
+    const admin = await adminModel.findOne({ email: email });
 
-        if (!admin) {
-          req.flash("error","Email or password incorrect")
-          res.redirect("/admin/login")
-        }
+    
+    if (!admin) {
+      req.flash("error", "Email or password incorrect");
+      return res.redirect("/admin/login"); 
+    }
 
-        const isMatch = await bcrypt.compare(password, admin.password);
+  
+    const isMatch = await bcrypt.compare(password, admin.password);
+    if (!isMatch) {
+      req.flash("error", "Email or password incorrect");
+      return res.redirect("/admin/login"); 
+    }
 
-        if (!isMatch) {
-          req.flash("error","Email or password incorrect")
-          res.redirect("/admin/login")
-        }
+    
+    const tokken = genrateTokenAdmin(admin);
+    res.cookie("tokken", tokken);
 
-        const tokken = genrateTokenAdmin(admin);
-        res.cookie("tokken", tokken);
-        res.redirect("/admin/dashboard")
-}catch(err){
-    console.log(err.message)}
-  };
+    
+    return res.redirect("/admin/dashboard");
+  } catch (err) {
+    console.error(err.message);
+    // Optionally handle error response here
+    res.status(500).send("Internal Server Error");
+  }
+};

@@ -16,7 +16,7 @@ router.post('/login', loginUser);
 
 router.get('/logout', logoutUser);
 
-router.get('/profile',checkuser,isloggedin, (req,res)=>{
+router.get('/profile',isloggedin,checkuser, (req,res)=>{
     res.render("new-profilepage",{req})
 });
 

@@ -1134,6 +1134,9 @@ margin-left: 50px;
             <span>Account</span>
           </a>
         </li>
+        <li>
+          <a href="/admin/logout" style="color: red; cursor: pointer;">Logout</a>
+        </li>
       </ul>
     </nav>
 
@@ -1506,12 +1509,12 @@ margin-left: 50px;
     <i id="back-icon" class="fas fa-arrow-left back-icon"></i>
     Add Product
   </h2>
-  <form class="form-container">
+  <form class="form-container" action="/admin/addproduct" method="post" enctype="multipart/form-data">
     <div class="left-form-block">
       <!-- Left Side Block -->
       <div class="form-group">
         <label for="product-name">Product Name:</label>
-        <input type="text" id="product-name" name="product-name" required />
+        <input type="text" id="product-name" name="productname" required />
       </div>
       <div class="form-group">
         <label for="description">Description:</label>
@@ -1529,11 +1532,15 @@ margin-left: 50px;
       <div class="form-row">
         <div class="form-group">
           <label for="expire-date">Expire Date:</label>
-          <input type="date" id="expire-date" name="expire-date" required />
+          <input type="date" id="expire-date" name="expiredate" required />
+        </div>
+        <div class="form-group">
+          <label for="in-stock">Price(₹):</label>
+          <input type="number" id="in-stock" name="price" required />
         </div>
         <div class="form-group">
           <label for="in-stock">Units in Stock:</label>
-          <input type="number" id="in-stock" name="in-stock" required />
+          <input type="number" id="in-stock" name="instock" required />
         </div>
       </div>
     </div>
@@ -1547,7 +1554,7 @@ margin-left: 50px;
         ></i>
       </div>
       <div class="custom-file mt-3 mb-3">
-        <input id="fileInput" type="file" style="display:none;" />
+        <input id="fileInput" type="file" name="file" style="display:none;" />
         <input
           type="button"
           class="btn btn-primary btn-block mx-auto"
