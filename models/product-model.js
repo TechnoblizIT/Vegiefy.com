@@ -5,7 +5,7 @@ name:String,
 price:Number,
 description:String,
 image:{
-    Buffer:Buffer,
+    file:Buffer,
     imageType:String,
 },
 instock:Number,

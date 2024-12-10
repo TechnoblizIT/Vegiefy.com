@@ -20,8 +20,10 @@ router.get("/logout",(req, res)=>{
     res.clearCookie("tokken");
     res.redirect("/admin/login")
 })
-router.get("/dashboard",isAdmin,adminLogin,function(req, res){
-    res.render("product-admin")
+router.get("/dashboard",isAdmin,adminLogin,async function(req, res){
+    const products=await productModel.find()
+    
+    res.render("product-admin",{products})
 })
 
 router.get("/addproduct",isloggedin,function(req, res){
@@ -30,21 +32,39 @@ router.get("/addproduct",isloggedin,function(req, res){
 
 router.post("/addproduct",upload.single("file"),async function(req, res){
     let {productname, description, price ,category,expiredate,instock} = req.body;
-    console.log( {productname, description, price ,category,expiredate,instock,})
-    console.log(req.file.buffer)
-    // const newProduct = new productModel({
-    //   name,
-    //   description,
-    //   price,
-    //   image:{
-    //     buffer:req.file.buffer,
-    //     imageType:req.file.mimetype,
-    //   }
-    // }
-    // )
-    // await newProduct.save();
-    res.send("Product added successfully")
+    const newProduct = new productModel({
+      name:productname,
+      description,
+      price,
+      image:{
+        file:req.file.buffer,
+        imageType:req.file.mimetype,
+      },
+      category,
+      expirydate:new Date(expiredate),
+      instock,
+      
+    }
+    )
+  
+    await newProduct.save();
+   res.redirect("/admin/dashboard")
 
 })
+router.delete("/products/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      const deletedProduct = await productModel.findByIdAndDelete(id);
+      if (!deletedProduct) {
+        return res.status(404).json({ message: "Product not found" });
+      }
+  
+      res.status(200).json({ message: "Product deleted successfully" });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  });
 
 module.exports = router

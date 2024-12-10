@@ -6,6 +6,7 @@ const productModel=require("../models/product-model")
 const userModel=require("../models/user-model")
 const passport=require("passport")
 const GoogleStrategy = require('passport-google-oauth20');
+const {genrateToken} = require("../utils/generateToken")
 // Define the routes
 
 router.get('/',checkuser ,async function(req, res) {
@@ -154,7 +155,7 @@ router.get('/auth/google/callback',
   passport.authenticate('google',{ failureRedirect: '/login' ,session:false}),
   async (req, res) => {
     try {
-      const token = jwt.sign(req.user.email, process.env.JWT_SECRET);
+      const token = genrateToken(req.user)
 
       
       res.cookie('tokken', token);

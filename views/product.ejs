@@ -673,7 +673,7 @@ footer::before {
   <div class="product-list" id="product-list">
     <% products.forEach(product => { %>
      <a style="text-decoration: none;" href="/productdetails/<%=product._id%>"><div class="product-box">
-        <img src="../images/uploads/<%= product.image %>" alt="product.name">
+        <img src="data:<%= product.image.imageType %>;base64,<%= product.image.file.toString('base64') %>"  alt="product.name">
         <h2><%= product.name %></h2>
         <p><%= product.description %></p>
         <p style="font-weight: bolder;">Price: ₹ <%=product.price%>/-</p> 
