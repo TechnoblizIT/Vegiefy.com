@@ -1716,7 +1716,7 @@ margin-left: 50px;
               <!-- Block 3: Account Settings -->
               <div class="block-column-right">
                 <h2 class="block-title">Account Settings</h2>
-                <form action="" class="form">
+                <form action="/admin/create-deliveryboy" class="form" method="post" enctype="multipart/form-data">
                   <!-- First Row -->
                   <div class="form-group">
                     <label for="account-name">Name</label>
@@ -1746,15 +1746,7 @@ margin-left: 50px;
                       class="form-control"
                     />
                   </div>
-                  <div class="form-group">
-                    <label for="password2">Re-enter Password</label>
-                    <input
-                      id="password2"
-                      name="password2"
-                      type="password"
-                      class="form-control"
-                    />
-                  </div>
+    
                   <!-- Third Row -->
                   <div class="form-group">
                     <label for="phone">Phone</label>
@@ -1773,12 +1765,12 @@ margin-left: 50px;
                   </div> -->
                   <div class="form-group">
                     <label for="">Joining Date:</label>
-                  <input type="date" placeholder="Enter your Joining Date" class="input-field">
+                  <input type="date" name="joindate" placeholder="Enter your Joining Date" class="input-field">
                   </div>
                   <!-- fourth row -->
                   <div class="form-group">
                     <label for="id-proof">ID Proof</label>
-                    <select id="id-proof" name="id-proof" class="form-control">
+                    <select id="id-proof" name="idproof" class="form-control">
                       <option value="" disabled selected>Select ID Proof</option>
                       <option value="aadhaar-card">Aadhaar Card</option>
                       <option value="pan-card">PAN Card</option>
@@ -1791,7 +1783,7 @@ margin-left: 50px;
                     <label for="id-proof-upload">Upload ID Proof</label>
                     <input
                       id="id-proof-upload"
-                      name="id-proof-upload"
+                      name="idproofupload"
                       type="file"
                       class="form-control"
                       accept=".pdf, .jpg, .jpeg, .png"

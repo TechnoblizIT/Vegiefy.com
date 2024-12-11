@@ -67,4 +67,10 @@ router.delete("/products/:id", async (req, res) => {
     }
   });
 
+  router.post("/create-deliveryboy",upload.single("idproofupload"), function (req, res) {
+    const {name, phone, email ,joindate,idproof}=req.body;  
+    console.log(name, phone, email,joindate,idproof)
+    console.log(req.file)
+  
+  })
 module.exports = router
