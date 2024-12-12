@@ -879,130 +879,127 @@ footer::before {
 <body>
   
     <!-- Header Section -->
-<header>
-  <nav class="navbar">
-    <div class="top-nav">
-     
-      <div class="logo-search-container">
-        <a href="#" class="logo">
-          <img src="../images/assest/vegiefy-logo.png" alt="Vegiefy Logo">
-        </a>
-        <div class="search-bar">
-          <input 
-            type="text" 
-            id="search-input" 
-            placeholder="Search for products..." 
-            onfocus="showDropdown()" 
-            onkeyup="fetchProducts()" 
-          >
-          <button><i class="fas fa-search"></i></button>
-          <div class="dropdown" id="dropdown" style="display: none;">
-            <ul id="product-list">
-              <!-- Dynamic search results will be inserted here -->
-            </ul>
-          </div>
-        </div>
-      </div>
-      
-      <div class="horizontal-line"></div>
-   
-      <div class="nav-icons">
-        <div class="hamburger-btn">
-          <i class="fas fa-bars"></i>
-        </div>
-        <a href="/cart" class="cart-icon">
-          <i class="fas fa-shopping-cart"></i>
-          <span class="cart-count"><%=cartcount%></span>
-        </a>
-        <a href="/user/profile" class="profile-icon">
-          <i class="fas fa-user"></i>
-        </a>
-        <% if(req.user){ %>
-          <a href="/user/logout" ><button class="logout-btn" >LOG OUT</button></a>
-          <%}else{%>
-            <a href="/login"><button class="login-btn">LOG IN</button></a> 
-            
-          <%}%>
-      </div>
-    </div>
-
-    <!-- Bottom Navigation: Helpline & Links -->
-    <div class="bottom-nav">
-      <div class="helpline">
-        <a href="https://www.facebook.com" target="_blank"><i class="fa-brands fa-square-facebook"></i></i></a>
-    <!-- <a href="https://www.twitter.com" target="_blank"><i class="fa-brands fa-square-twitter"></i></i></a> -->
-    <a href="https://www.instagram.com" target="_blank"><i class="fa-brands fa-square-instagram"></i></i></a>
-    <!-- <a href="https://www.linkedin.com" target="_blank"><i class="fa-brands fa-linkedin"></i></a> -->
-    <i class="fa-solid fa-phone"></i><span>+91-8698105221</span>
-      </div>
-
-     <!-- Navigation Links -->
-      <ul class="nav-links">
-        <li><a href="/">Home</a></li>
-              <li><a href="/#about-us">About</a></li>
-              <li><a href="/product"  >Products</a></li>
-              <li><a href="/cart" class="nav-active">Cart</a></li>
-              <li><a href="/delivery">Delivery</a></li>
-              <li><a href="/blog"  >Blog</a></li>
-              <li><a href="/contact">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
-</header>
-
-<!-- html for shopping-cart -->
-    <div class="shopping-cart">
-        <div class="product-container">
-        
-            <% user.cart.forEach(items => {%>
-            <div class="product">
-                <img src="data:<%= items.product.image.imageType %>;base64,<%= items.product.image.file.toString('base64') %>"  alt="Product Image" class="product-image">
-                <h2 class="product-name"><%=items.product.name%></h2>
-                <p class="product-description"><%= items.product.description %>.</p>
-                <p class="product-price">₹<%=items.product.price * items.quantity%></p>
-                <% if(limit){ %>
-                     <p style="color: red;"><%=limit%></p>
-                  <% }%>
-                <div class="quantity-remove-container">
-                  <!-- Quantity Selector -->
-                  <div class="quantity-container">
-                    <a href="/user/quantity/dec/<%=items.product._id%>" style="text-decoration: none;"><button class="decrease-btn">-</button></a>
-                      <input type="number" class="quantity-input" value="<%=items.quantity%>" max="5" readonly><p>Kg</p>
-                      <a href="/user/quantity/inc/<%=items.product._id%>" style="text-decoration: none;"><button class="increase-btn">+</button></a>
-                  </div>
-          
-                  <!-- Remove Button -->
-                  <a class="remove-btn" href="/user/removeitem/<%=items._id%>">Remove</a>
-             
-        
+    <header>
+      <nav class="navbar">
+        <div class="top-nav">
+          <div class="logo-search-container">
+            <a href="#" class="logo">
+              <img src="../images/assest/vegiefy-logo.png" alt="Vegiefy Logo">
+            </a>
+            <div class="search-bar">
+              <input 
+                type="text" 
+                id="search-input" 
+                placeholder="Search for products..." 
+                onfocus="showDropdown()" 
+                onkeyup="fetchProducts()" 
+              >
+              <button><i class="fas fa-search"></i></button>
+              <div class="dropdown" id="dropdown" style="display: none;">
+                <ul id="product-list">
+                  <!-- Dynamic search results will be inserted here -->
+                </ul>
               </div>
             </div>
+          </div>
+          
+          <div class="horizontal-line"></div>
+       
+          <div class="nav-icons">
+            <div class="hamburger-btn">
+              <i class="fas fa-bars"></i>
+            </div>
+            <a href="/cart" class="cart-icon">
+              <i class="fas fa-shopping-cart"></i>
+              <span class="cart-count"><%= cartcount || 0 %></span>
+            </a>
+            <a href="/user/profile" class="profile-icon">
+              <i class="fas fa-user"></i>
+            </a>
+            <% if (req.user) { %>
+              <a href="/user/logout"><button class="logout-btn">LOG OUT</button></a>
+            <% } else { %>
+              <a href="/login"><button class="login-btn">LOG IN</button></a> 
+            <% } %>
+          </div>
+        </div>
+    
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+          <div class="helpline">
+            <a href="https://www.facebook.com" target="_blank"><i class="fa-brands fa-square-facebook"></i></a>
+            <a href="https://www.instagram.com" target="_blank"><i class="fa-brands fa-square-instagram"></i></a>
+            <i class="fa-solid fa-phone"></i><span>+91-8698105221</span>
+          </div>
+          <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/#about-us">About</a></li>
+            <li><a href="/product">Products</a></li>
+            <li><a href="/cart" class="nav-active">Cart</a></li>
+            <li><a href="/delivery">Delivery</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    
+    <!-- Shopping Cart -->
+    <div class="shopping-cart">
+      <div class="product-container">
+        <% try { %>
+          <% if (user && user.cart && user.cart.length > 0) { %>
+            <% user.cart.forEach(items => { %>
+              <% if (items.product) { %>
+                <div class="product">
+                  <img src="data:<%= items.product.image.imageType %>;base64,<%= items.product.image.file.toString('base64') %>" alt="Product Image" class="product-image">
+                  <h2 class="product-name"><%= items.product.name || 'Product Name Unavailable' %></h2>
+                  <p class="product-description"><%= items.product.description || 'Description Unavailable' %>.</p>
+                  <p class="product-price">₹<%= (items.product.price || 0) * (items.quantity || 0) %></p>
+                  <% if (limit) { %>
+                    <p style="color: red;"><%= limit %></p>
+                  <% } %>
+                  <div class="quantity-remove-container">
+                    <div class="quantity-container">
+                      <a href="/user/quantity/dec/<%= items.product._id %>" style="text-decoration: none;">
+                        <button class="decrease-btn">-</button>
+                      </a>
+                      <input type="number" class="quantity-input" value="<%= items.quantity || 0 %>" max="5" readonly><p>Kg</p>
+                      <a href="/user/quantity/inc/<%= items.product._id %>" style="text-decoration: none;">
+                        <button class="increase-btn">+</button>
+                      </a>
+                    </div>
+                    <a class="remove-btn" href="/user/removeitem/<%= items._id %>">Remove</a>
+                  </div>
+                </div>
+              <% } %>
             <% }) %>
+          <% } else { %>
+            <p>Your cart is empty.</p>
+          <% } %>
+        <% } catch (error) { %>
+          <p>Error loading cart items. Please try again later.</p>
+        <% } %>
+      </div>
     
+      <div class="cart-summary">
+        <h2>Cart Summary</h2>
+        <div class="summary-details">
+          <p><i class="fas fa-box"></i> Total Items: <%= cartcount || 0 %></p>
+          <p><i class="fas fa-money-bill-wave"></i> Subtotal: ₹<%= carttotal || 0 %></p>
+          <p><i class="fas fa-percent"></i> Discount: 3%</p>
+          <p><i class="fas fa-truck"></i> Shipping: Free</p>
+          <p><i class="fa-solid fa-indian-rupee-sign"></i> Total Price: ₹<%= (carttotal || 0) - (carttotal || 0) / 100 * 3 %></p>
         </div>
-    
-        <div class="cart-summary">
-            <h2>Cart Summary</h2>
-    
-            <div class="summary-details">
-                <p><i class="fas fa-box"></i> Total Items: <%=cartcount%></p>
-                <p><i class="fas fa-money-bill-wave"></i> Subtotal: ₹<%=carttotal%></p>
-                <p><i class="fas fa-percent"></i> Discount: 3%</p>
-                <p><i class="fas fa-truck"></i> Shipping:free</p>
-                <p><i class="fa-solid fa-indian-rupee-sign"></i> Total Price:₹<%=carttotal-carttotal/100*3%></p>
-            </div>
-        
-            <!-- Promo code input -->
-            <div class="promo-code">
-                <input type="text" placeholder="Enter discount code" />
-                <button class="apply-btn">Apply</button>
-            </div>
-            <div class="divider"></div>
-        
-            <button class="checkout-btn" onclick="showCheckoutForm()">Proceed to Checkout</button>
+        <div class="promo-code">
+          <input type="text" placeholder="Enter discount code" />
+          <button class="apply-btn">Apply</button>
         </div>
-        
+        <div class="divider"></div>
+        <button class="checkout-btn" onclick="showCheckoutForm()">Proceed to Checkout</button>
+      </div>
     </div>
+    
  <!-- Checkout Form -->
 <div class="form-checkout">
   <div class="checkout-form" id="checkoutForm" style="display: none;">

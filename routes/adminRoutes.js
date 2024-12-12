@@ -4,6 +4,7 @@ const {registerAdmin,loginAdmin}=require("../controllers/adminAuthController");
 const { render } = require('ejs');
 const upload =require("../configs/multer-setup")
 const productModel=require("../models/product-model");
+const deliveryboyModel=require("../models/deliveryboydata-model")
 const { isloggedin } = require('../middlewares/isloggedin');
 const {adminLogin}=require("../middlewares/isAdminlogin")
 const {isAdmin}=require("../middlewares/isAdmin")
@@ -67,10 +68,50 @@ router.delete("/products/:id", async (req, res) => {
     }
   });
 
-  router.post("/create-deliveryboy",upload.single("idproofupload"), function (req, res) {
-    const {name, phone, email ,joindate,idproof}=req.body;  
-    console.log(name, phone, email,joindate,idproof)
-    console.log(req.file)
+  router.post("/create-deliveryboy", upload.single("idproofupload"), async function (req, res) {
+    try {
+      const { name, phone, email, joindate, idproof, username, password } = req.body;
   
-  })
+      
+      if (!name || !phone || !email || !joindate || !idproof || !username || !password) {
+        return res.status(400).send("All fields are required.");
+      }
+  
+      
+      if (!req.file) {
+        return res.status(400).send("ID proof upload is required.");
+      }
+  
+      // Create new delivery boy instance
+      const newDeliveryboy = new deliveryboyModel({
+        name,
+        phone,
+        email,
+        username,
+        password,
+        IDproof: idproof,
+        joiningDate: joindate,
+        IDupload: {
+          file: req.file.buffer,
+          imageType: req.file.mimetype,
+        },
+      });
+  
+      // Save to database
+      await newDeliveryboy.save();
+  
+     
+      res.redirect("/admin/dashboard");
+    } catch (error) {
+      console.error("Error creating delivery boy:", error);
+  
+      if (error.name === "ValidationError") {
+        return res.status(400).send("Invalid data: " + error.message);
+      }
+  
+      
+      res.status(500).send("An error occurred while creating the delivery boy. Please try again later.");
+    }
+  });
+  
 module.exports = router

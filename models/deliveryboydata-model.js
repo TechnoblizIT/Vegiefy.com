@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const deliveryboySchema=mongoose.Schema({
     name:String,
     email:String,
-    usernames:String,
+    username:String,
     password:String,
     reenterpassword:String,
     mobile:String,

@@ -118,23 +118,42 @@ router.get("/productdetails/:productid",checkuser,async function(req, res) {
   res.render('single-product',{product,req})
 })
 
-router.get('/cart',  isloggedin,checkuser ,async function(req, res) {
-  var cartcount=0
-   const user = await userModel.findOne({ email: req.user.email })
-   .populate({
-     path: 'cart.product',  
-     model: 'Products'      
-   });
-   const limit=req.flash("limit")
-  
-   var carttotal=0;
-   var cartcount=0
-   user.cart.forEach((item)=>{ carttotal+=item.product.price*item.quantity 
-      cartcount+=1
-   })
-   
-   res.render('shoping_cart',{req,user,carttotal,cartcount,limit})
+router.get('/cart', isloggedin, checkuser, async function (req, res) {
+  try {
+    let cartcount = 0;
+    const user = await userModel
+      .findOne({ email: req.user.email })
+      .populate({
+        path: 'cart.product',
+        model: 'Products',
+      });
+
+    // Check if the user exists and has a cart
+    if (!user || !user.cart) {
+      req.flash('error', 'User not found or cart is empty');
+      return res.redirect('/'); // Redirect to home or any other appropriate page
+    }
+
+    const limit = req.flash('limit') || null;
+
+    let carttotal = 0;
+    cartcount = 0;
+
+    user.cart.forEach((item) => {
+      if (item.product && item.product.price) {
+        carttotal += item.product.price * item.quantity;
+        cartcount += 1;
+      }
+    });
+
+    res.render('shoping_cart', { req, user, carttotal, cartcount, limit });
+  } catch (error) {
+    console.error('Error fetching cart:', error); // Log the error for debugging
+    req.flash('error', 'Something went wrong while fetching the cart');
+    res.status(500).redirect('/'); // Redirect with an error status
+  }
 });
+
 
 router.get('/search', async (req, res) => {
   try {
