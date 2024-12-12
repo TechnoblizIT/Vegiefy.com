@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vegiefy -Delivery Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+    /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    background: #1e293b; 
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Container Styles */
+.container {
+    background: #0f172a; 
+    padding: 30px;
+    width: 100%;
+    max-width: 450px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.container:hover {
+    transform: translateY(-5px);
+}
+
+.container h1 {
+    font-size: 32px;
+    margin-bottom: 15px;
+    color: #38bdf8; 
+    font-weight: 700;
+}
+
+.sub-heading {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #94a3b8; 
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-size: 14px;
+    color: #94a3b8;
+    text-align: left;
+}
+
+input {
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    background: #334155; 
+    color: #ffffff;
+    outline: none;
+    transition: all 0.3s;
+}
+
+input::placeholder {
+    color: #94a3b8;
+}
+
+input:focus {
+    background: #475569; 
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.5); 
+}
+
+.login-btn {
+    background: #38bdf8;
+    color: #0f172a;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.login-btn:hover {
+    background: #0ea5e9; 
+    transform: scale(1.05);
+}
+
+/* Help Links */
+.help-links {
+    margin-top: 20px;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    color: #38bdf8;
+}
+
+.help-links a {
+    text-decoration: none;
+    font-weight: 600;
+    color: #38bdf8;
+    transition: color 0.3s;
+}
+
+.help-links a:hover {
+    color: #0ea5e9;
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+        margin: 10px;
+        border-radius: 10px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .sub-heading {
+        font-size: 14px;
+    }
+
+    .login-btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .help-links {
+        font-size: 12px;
+    }
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Vegiefy</h1>
+        <p class="sub-heading">Delivery Agent Login</p>
+        <form>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+            <button type="submit" class="login-btn">Login</button>
+
+            <div class="help-links">
+                <a href="#" class="forgot-password">Forgot Password?</a>
+                <span>|</span>
+                <a href="#" class="call-admin">Call To Admin</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
