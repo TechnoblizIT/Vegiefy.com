@@ -432,7 +432,7 @@
 }
 
 /* Buttons */
-.button-upload, .button-clicked, .btn-danger {
+ .button-clicked, .btn-danger {
   font-size: 16px;
   padding: 10px 20px;
   border: none;
@@ -444,13 +444,22 @@
   color: #fff;
 }
 
+#uploadBtn{
+  display: none;
+}
 .button-upload {
-  background-color: #0056b3;
+  background-color: #0056b3; display: inline-block;
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .button-upload:hover,
 .button-clicked:hover {
-  background-color: #5e63ff;
+  background-color: #007bff;
 }
 
 .btn-danger {
@@ -1714,7 +1723,8 @@ margin-left: 50px;
                       <i class="far fa-trash-alt"></i>
                     </a>
                   </div>
-                  <button type="button" class="button-upload">Upload New Photo</button>
+                  <input type="file" id="uploadBtn" />
+                  <label for="uploadBtn" class="button-upload">Upload Image</label>
                 </div>
         
                 <!-- Block 3: Account Settings -->
@@ -1853,7 +1863,8 @@ margin-left: 50px;
                       <i class="far fa-trash-alt"></i>
                     </a>
                   </div>
-                  <button type="button" class="button-upload">Upload New Photo</button>
+                  <input type="file" id="uploadBtn" />
+                  <label for="uploadBtn" class="button-upload">Upload Image</label>
                 </div>
         
                 <!-- Block 3: Account Settings -->
@@ -1984,7 +1995,8 @@ margin-left: 50px;
                         <i class="far fa-trash-alt"></i>
                       </a>
                     </div>
-                    <button type="button" class="button-upload">Upload New Photo</button>
+                    <input type="file" id="uploadBtn" />
+                    <label for="uploadBtn" class="button-upload">Upload Image</label>
                   </div>
           
                   <!-- Block 3: Account Settings -->
