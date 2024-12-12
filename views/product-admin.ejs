@@ -368,172 +368,172 @@
     }
 
     /* start css for main-account================================================================ */
-      .container {
-        margin: auto;
-        padding: 10px 30px;
-      }
+    .container {
+  margin: auto;
+  padding: 10px 30px;
+}
 
-      .block {
-        background-color: #2c2c54;
-        padding: 20px;
-        border-radius: 10px;
-        margin-bottom: 20px;
-        color: #fff;
-      }
+.block {
+  background-color: #2c2c54;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  color: #fff;
+}
 
-      .block-dark {
-        background-color: #0056b3;
-      }
+.block-dark {
+  background-color: #0056b3;
+}
 
-      /* Headings */
-      .block-title {
-        font-size: 24px;
-        font-weight: 700;
-        margin-bottom: 20px;
-      }
+/* Headings */
+.block-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
 
-      /* Select Input */
-      .custom-select-wide {
-        width: 100%;
-        padding: 10px;
-        font-size: 16px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        background-color: #fff;
-        color: #000;
-        margin-top: 10px;
-      }
+/* Select Input */
+.custom-select-wide {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #000;
+  margin-top: 10px;
+}
 
-      /* Avatar Section */
-      .avatar-container {
-        position: relative;
-        text-align: center;
-        margin-bottom: 10px;
-      }
+/* Avatar Section */
+.avatar-container {
+  position: relative;
+  text-align: center;
+  margin-bottom: 10px;
+}
 
-      .avatar-image {
-        width: 300px;
-        height: 250px;
-        object-fit: cover;
-      }
+.avatar-image {
+  width: 300px;
+  height: 250px;
+  object-fit: cover;
+}
 
-      .avatar-delete-icon {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: #fff;
-        font-size: 24px;
-        display: none; /* Hidden by default */
-      }
+.avatar-delete-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 24px;
+  display: none; /* Hidden by default */
+}
 
-      .avatar-container:hover .avatar-delete-icon {
-        display: block; /* Show delete icon on hover */
-      }
+.avatar-container:hover .avatar-delete-icon {
+  display: block; /* Show delete icon on hover */
+}
 
-      /* Button Colors */
-      .button-upload {
-        background-color: #0056b3;
-        color: #fff;
-        font-size: 16px;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        text-transform: uppercase;
-        font-weight: bold;
-        cursor: pointer;
-        width: 100%;
-      }
+/* Buttons */
+.button-upload, .button-clicked, .btn-danger {
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  color: #fff;
+}
 
-      .button-upload:hover {
-        background-color: #5e63ff;
-      }
+.button-upload {
+  background-color: #0056b3;
+}
 
-      .button-clicked {
-        background-color: #0056b3;
-        color: #fff;
-        font-size: 16px;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        text-transform: uppercase;
-        font-weight: bold;
-        cursor: pointer;
-        width: 100%;
-      }
+.button-upload:hover,
+.button-clicked:hover {
+  background-color: #5e63ff;
+}
 
-      .button-clicked:hover {
-        background-color: #5e63ff;
-      }
+.btn-danger {
+  background-color: #e74c3c;
+}
 
-      .btn-danger {
-        background-color: #e74c3c;
-        color: #fff;
-        font-size: 16px;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        text-transform: uppercase;
-        font-weight: bold;
-        cursor: pointer;
-        width: 100%;
-      }
+.btn-danger:hover {
+  background-color: #c0392b;
+}
 
-      .btn-danger:hover {
-        background-color: #c0392b;
-      }
+/* Form Styles */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 
-      /* Form Styles */
-      .form {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-      }
+.form-group {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
 
-      .form-group {
-        flex: 1 1 calc(50% - 10px);
-      }
+.form-group label {
+  flex: 0 0 30%;
+  font-weight: 600;
+}
 
-      .form-group label {
-        font-weight: 600;
-        margin-bottom: 8px;
-        display: block;
-      }
+.form-group input,
+.form-group select {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
 
-      .form-group input {
-        width: 100%;
-        padding: 10px;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        box-sizing: border-box;
-      }
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #0056b3;
+  outline: none;
+}
 
-      .form-group input:focus {
-        border-color: #0056b3;
-        outline: none;
-      }
+/* Layout Adjustments */
+.account-row {
+  display: flex;
+  gap: 20px;
+}
 
-      /* Layout Adjustments */
-      .account-row {
-        display: flex;
-        gap: 20px;
-      }
+.block-column-left {
+  flex: 1 1 30%;
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+}
 
-      .block-column-left {
-        flex: 1 1 30%;
-        padding: 20px;
-        border-radius: 10px;
-        color: white;
-      }
+.block-column-right {
+  flex: 1 1 65%;
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+}
 
-      .block-column-right {
-        flex: 1 1 65%;
-        padding: 20px;
-        border-radius: 10px;
-        color: white;
-      }
-      .back-to-main {
+/* Responsive Design */
+@media (max-width: 768px) {
+  .form-group {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .form-group label {
+    flex: 0 0 auto;
+    margin-bottom: 5px;
+  }
+
+  .account-row {
+    flex-direction: column;
+  }
+}
+
+.back-to-main {
   font-size: 20px; 
   color: #007bff; 
   cursor: pointer; 
@@ -550,6 +550,7 @@
   transform: scale(1); 
   color: #003d80; 
 }
+
       /* end style of account============================================================================ */
 
     /* media queries for all pages */
@@ -1677,7 +1678,7 @@ margin-left: 50px;
             </div>
           </div>
         </div>
-        </div>
+       
 
 
 
@@ -1694,29 +1695,31 @@ margin-left: 50px;
                 <option value="1">Delivery Boy</option>
               </select>
             </div>
-  
-            <!-- Row for Avatar and Account Settings -->
-            <div class="account-row">
-              <!-- Block 2: Change Avatar -->
-              <div class="block-column-left">
-                <h2 class="block-title">Profile</h2>
-                <div class="avatar-container">
-                  <img
-                    class="avatar-image"
-                    src="assest/new-page/p-4.jpg"
-                    alt="Avatar"
-                  />
-                  <a href="#" class="avatar-delete-icon">
-                    <i class="far fa-trash-alt"></i>
-                  </a>
+            <!-- Form starts here -->
+            <form action="" class="form">
+              
+        
+              <!-- Row for Avatar and Account Settings -->
+              <div class="account-row">
+                <!-- Block 2: Change Avatar -->
+                <div class="block-column-left">
+                  <h2 class="block-title">Profile</h2>
+                  <div class="avatar-container">
+                    <img
+                      class="avatar-image"
+                      src="assest/new-page/p-4.jpg"
+                      alt="Avatar"
+                    />
+                    <a href="#" class="avatar-delete-icon">
+                      <i class="far fa-trash-alt"></i>
+                    </a>
+                  </div>
+                  <button type="button" class="button-upload">Upload New Photo</button>
                 </div>
-                <button class="button-upload">Upload New Photo</button>
-              </div>
-  
-              <!-- Block 3: Account Settings -->
-              <div class="block-column-right">
-                <h2 class="block-title">Account Settings</h2>
-                <form action="/admin/create-deliveryboy" class="form" method="post" enctype="multipart/form-data">
+        
+                <!-- Block 3: Account Settings -->
+                <div class="block-column-right">
+                  <h2 class="block-title">Account Settings</h2>
                   <!-- First Row -->
                   <div class="form-group">
                     <label for="account-name">Name</label>
@@ -1755,7 +1758,15 @@ margin-left: 50px;
                       class="form-control"
                     />
                   </div>
-    
+                  <div class="form-group">
+                    <label for="password2">Re-enter Password</label>
+                    <input
+                      id="password2"
+                      name="password2"
+                      type="password"
+                      class="form-control"
+                    />
+                  </div>
                   <!-- Third Row -->
                   <div class="form-group">
                     <label for="phone">Phone</label>
@@ -1766,20 +1777,21 @@ margin-left: 50px;
                       class="form-control"
                     />
                   </div>
-                  <!-- <div class="form-group">
-                    <label class="tm-hide-sm">&nbsp;</label>
-                    <button type="submit" class="button-clicked">
-                      Update Your Profile
-                    </button>
-                  </div> -->
+        
                   <div class="form-group">
-                    <label for="">Joining Date:</label>
-                  <input type="date" name="joindate" placeholder="Enter your Joining Date" class="input-field">
+                    <label for="joining-date">Joining Date:</label>
+                    <input
+                      type="date"
+                      id="joining-date"
+                      name="joining-date"
+                      placeholder="Enter your Joining Date"
+                      class="form-control"
+                    />
                   </div>
-                  <!-- fourth row -->
+                  <!-- Fourth Row -->
                   <div class="form-group">
                     <label for="id-proof">ID Proof</label>
-                    <select id="id-proof" name="idproof" class="form-control">
+                    <select id="id-proof" name="id-proof" class="form-control">
                       <option value="" disabled selected>Select ID Proof</option>
                       <option value="aadhaar-card">Aadhaar Card</option>
                       <option value="pan-card">PAN Card</option>
@@ -1792,7 +1804,7 @@ margin-left: 50px;
                     <label for="id-proof-upload">Upload ID Proof</label>
                     <input
                       id="id-proof-upload"
-                      name="idproofupload"
+                      name="id-proof-upload"
                       type="file"
                       class="form-control"
                       accept=".pdf, .jpg, .jpeg, .png"
@@ -1804,13 +1816,11 @@ margin-left: 50px;
                       Add Your Account
                     </button>
                   </div>
-                </form>
+                </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
-        
-        
         <!-- Main-ACCOUNT-Form for update-button===================================================================================== -->
         <div class="update-form" id="update-form" style="display: none;">
           <i id="back-main" class="fas fa-arrow-left back-to-main"></i>
@@ -1824,29 +1834,31 @@ margin-left: 50px;
                 <option value="1">Delivery Boy</option>
               </select>
             </div>
-  
-            <!-- Row for Avatar and Account Settings -->
-            <div class="account-row">
-              <!-- Block 2: Change Avatar -->
-              <div class="block-column-left">
-                <h2 class="block-title">Profile</h2>
-                <div class="avatar-container">
-                  <img
-                    class="avatar-image"
-                    src="assest/new-page/p-4.jpg"
-                    alt="Avatar"
-                  />
-                  <a href="#" class="avatar-delete-icon">
-                    <i class="far fa-trash-alt"></i>
-                  </a>
+            <!-- Form starts here -->
+            <form action="" class="form">
+              
+        
+              <!-- Row for Avatar and Account Settings -->
+              <div class="account-row">
+                <!-- Block 2: Change Avatar -->
+                <div class="block-column-left">
+                  <h2 class="block-title">Profile</h2>
+                  <div class="avatar-container">
+                    <img
+                      class="avatar-image"
+                      src="assest/new-page/p-4.jpg"
+                      alt="Avatar"
+                    />
+                    <a href="#" class="avatar-delete-icon">
+                      <i class="far fa-trash-alt"></i>
+                    </a>
+                  </div>
+                  <button type="button" class="button-upload">Upload New Photo</button>
                 </div>
-                <button class="button-upload">Upload New Photo</button>
-              </div>
-  
-              <!-- Block 3: Account Settings -->
-              <div class="block-column-right">
-                <h2 class="block-title">Account Settings</h2>
-                <form action="" class="form">
+        
+                <!-- Block 3: Account Settings -->
+                <div class="block-column-right">
+                  <h2 class="block-title">Account Settings</h2>
                   <!-- First Row -->
                   <div class="form-group">
                     <label for="account-name">Name</label>
@@ -1895,38 +1907,39 @@ margin-left: 50px;
                       class="form-control"
                     />
                   </div>
-                  <!-- <div class="form-group">
-                    <label class="tm-hide-sm">&nbsp;</label>
-                    <button type="submit" class="button-clicked">
-                      Update Your Profile
-                    </button>
-                  </div> -->
+        
                   <div class="form-group">
-                    <label for="">Joining Date:</label>
-                  <input type="date" placeholder="Enter your Joining Date" class="input-field">
+                    <label for="joining-date">Joining Date:</label>
+                    <input
+                      type="date"
+                      id="joining-date"
+                      name="joining-date"
+                      placeholder="Enter your Joining Date"
+                      class="form-control"
+                    />
                   </div>
-                 <!-- fourth row -->
-                 <div class="form-group">
-                  <label for="id-proof">ID Proof</label>
-                  <select id="id-proof" name="id-proof" class="form-control">
-                    <option value="" disabled selected>Select ID Proof</option>
-                    <option value="aadhaar-card">Aadhaar Card</option>
-                    <option value="pan-card">PAN Card</option>
-                    <option value="passport">Passport</option>
-                    <option value="voter-id">Voter ID</option>
-                    <option value="driving-license">Driving License</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="id-proof-upload">Upload ID Proof</label>
-                  <input
-                    id="id-proof-upload"
-                    name="id-proof-upload"
-                    type="file"
-                    class="form-control"
-                    accept=".pdf, .jpg, .jpeg, .png"
-                  />
-                </div>
+                  <!-- Fourth Row -->
+                  <div class="form-group">
+                    <label for="id-proof">ID Proof</label>
+                    <select id="id-proof" name="id-proof" class="form-control">
+                      <option value="" disabled selected>Select ID Proof</option>
+                      <option value="aadhaar-card">Aadhaar Card</option>
+                      <option value="pan-card">PAN Card</option>
+                      <option value="passport">Passport</option>
+                      <option value="voter-id">Voter ID</option>
+                      <option value="driving-license">Driving License</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="id-proof-upload">Upload ID Proof</label>
+                    <input
+                      id="id-proof-upload"
+                      name="id-proof-upload"
+                      type="file"
+                      class="form-control"
+                      accept=".pdf, .jpg, .jpeg, .png"
+                    />
+                  </div>
                 <!-- Fifth Row -->
                 <div class="form-group">
                   <button type="submit" class="btn-danger">
@@ -1952,29 +1965,31 @@ margin-left: 50px;
                   <option value="1">Delivery Boy</option>
                 </select>
               </div>
-    
-              <!-- Row for Avatar and Account Settings -->
-              <div class="account-row">
-                <!-- Block 2: Change Avatar -->
-                <div class="block-column-left">
-                  <h2 class="block-title">Profile</h2>
-                  <div class="avatar-container">
-                    <img
-                      class="avatar-image"
-                      src="assest/new-page/p-4.jpg"
-                      alt="Avatar"
-                    />
-                    <a href="#" class="avatar-delete-icon">
-                      <i class="far fa-trash-alt"></i>
-                    </a>
+              <!-- Form starts here -->
+              <form action="" class="form">
+                
+          
+                <!-- Row for Avatar and Account Settings -->
+                <div class="account-row">
+                  <!-- Block 2: Change Avatar -->
+                  <div class="block-column-left">
+                    <h2 class="block-title">Profile</h2>
+                    <div class="avatar-container">
+                      <img
+                        class="avatar-image"
+                        src="assest/new-page/p-4.jpg"
+                        alt="Avatar"
+                      />
+                      <a href="#" class="avatar-delete-icon">
+                        <i class="far fa-trash-alt"></i>
+                      </a>
+                    </div>
+                    <button type="button" class="button-upload">Upload New Photo</button>
                   </div>
-                  <button class="button-upload">Upload New Photo</button>
-                </div>
-    
-                <!-- Block 3: Account Settings -->
-                <div class="block-column-right">
-                  <h2 class="block-title">Account Settings</h2>
-                  <form action="" class="form">
+          
+                  <!-- Block 3: Account Settings -->
+                  <div class="block-column-right">
+                    <h2 class="block-title">Account Settings</h2>
                     <!-- First Row -->
                     <div class="form-group">
                       <label for="account-name">Name</label>
@@ -2023,38 +2038,39 @@ margin-left: 50px;
                         class="form-control"
                       />
                     </div>
-                    <!-- <div class="form-group">
-                      <label class="tm-hide-sm">&nbsp;</label>
-                      <button type="submit" class="button-clicked">
-                        Update Your Profile
-                      </button>
-                    </div> -->
+          
                     <div class="form-group">
-                      <label for="">Joining Date:</label>
-                    <input type="date" placeholder="Enter your Joining Date" class="input-field">
+                      <label for="joining-date">Joining Date:</label>
+                      <input
+                        type="date"
+                        id="joining-date"
+                        name="joining-date"
+                        placeholder="Enter your Joining Date"
+                        class="form-control"
+                      />
                     </div>
-                    <!-- fourth row -->
-                  <div class="form-group">
-                    <label for="id-proof">ID Proof</label>
-                    <select id="id-proof" name="id-proof" class="form-control">
-                      <option value="" disabled selected>Select ID Proof</option>
-                      <option value="aadhaar-card">Aadhaar Card</option>
-                      <option value="pan-card">PAN Card</option>
-                      <option value="passport">Passport</option>
-                      <option value="voter-id">Voter ID</option>
-                      <option value="driving-license">Driving License</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="id-proof-upload">Upload ID Proof</label>
-                    <input
-                      id="id-proof-upload"
-                      name="id-proof-upload"
-                      type="file"
-                      class="form-control"
-                      accept=".pdf, .jpg, .jpeg, .png"
-                    />
-                  </div>
+                    <!-- Fourth Row -->
+                    <div class="form-group">
+                      <label for="id-proof">ID Proof</label>
+                      <select id="id-proof" name="id-proof" class="form-control">
+                        <option value="" disabled selected>Select ID Proof</option>
+                        <option value="aadhaar-card">Aadhaar Card</option>
+                        <option value="pan-card">PAN Card</option>
+                        <option value="passport">Passport</option>
+                        <option value="voter-id">Voter ID</option>
+                        <option value="driving-license">Driving License</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="id-proof-upload">Upload ID Proof</label>
+                      <input
+                        id="id-proof-upload"
+                        name="id-proof-upload"
+                        type="file"
+                        class="form-control"
+                        accept=".pdf, .jpg, .jpeg, .png"
+                      />
+                    </div>
                   <!-- Fifth Row -->
                   <div class="form-group">
                     <button type="submit" class="btn-danger">
@@ -2066,10 +2082,9 @@ margin-left: 50px;
               </div>
             </div>
           </div>
-        
+        </div>
       </div>
     </div>
-
     <script>
       const toggleButton = document.getElementById("toggle-btn");
       const sidebar = document.getElementById("sidebar");
