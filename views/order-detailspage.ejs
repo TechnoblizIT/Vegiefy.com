@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order-details</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+  * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+}
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #0f172a;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 15px 0;
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 20px 20px 0 0;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.nav-link {
+  color: #bbb;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  position: relative;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #fff;
+  transform: translateY(-6px);
+}
+
+.nav-link.active {
+  color: #007bff;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  background-color: #007bff;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* =========================================================== */
+.content {
+  flex-grow: 1; 
+  display: none;
+  padding-bottom: 70px; 
+}
+
+.content.active {
+  display: block;
+}
+
+/* css for home page========================================================== */
+.home {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 50px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.home-name{
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.status {
+  font-size: 25px;
+  font-weight: bold;
+  color: #2ab130;
+}
+
+.time-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.time-left .day {
+  font-size: 18px;
+  text-align: left;
+  font-weight: bold;
+}
+
+.time-left .time {
+  font-size: 22px;
+  color: #888;
+  font-weight: bold;
+  text-align: left;
+  font-weight: bold;
+}
+
+.new-orders button {
+  background: linear-gradient(90deg, #e74c3c, #ff6b6b);
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.new-orders button:hover {
+  background: linear-gradient(90deg, #ff6b6b, #e74c3c);
+}
+
+.map-block {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+  height: 400px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  color: #777;
+}
+
+/* css for new order page  */
+
+.new-orders-content {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  display: none;
+  margin-bottom: 50px;
+}
+
+.new-orders-content.active {
+  display: flex;
+  flex-direction: column;
+}
+
+.new-orders-content h2 {
+  color: #0f172a;
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  text-transform: uppercase;
+  border-bottom: 2px solid #4CAF50;
+  padding-bottom: 10px;
+}
+
+.order-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  
+ 
+}
+
+.order-details .left,
+.order-details .right {
+  flex: 1;
+}
+
+.order-details .left {
+  padding-right: 20px;
+}
+
+.order-details .right {
+  padding-left: 20px;
+  text-align: right;
+}
+
+.order-details .name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.order-details .address {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.4;
+  font-weight: bold;
+}
+
+.order-details .time,
+.order-details .distance {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.order-details .time {
+  margin-bottom: 10px;
+}
+
+.order-info-box {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0px;
+}
+
+.order-info-box div {
+  width: 48%;
+  padding: 10px;
+  background: #f1f1f1;
+  border-radius: 8px;
+}
+
+.order-info-box div span {
+  display: block;
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+  font-weight: bold;
+}
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.product-table th, 
+.product-table td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+.product-table th {
+  font-size: 16px;
+  color: #fff;
+  background: linear-gradient(90deg, #4caf50, #2ab130);
+  text-transform: uppercase;
+}
+
+.product-table td {
+  font-size: 14px;
+  color: #333;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.product-table tr:hover td {
+  background: #f1f1f1;
+}
+
+.product-table td img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.product-table tr:last-child td {
+  border-bottom: none;
+}
+
+.order-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+.order-buttons button {
+  padding: 12px 25px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: none;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+}
+
+.order-buttons .accept-btn {
+  background: linear-gradient(90deg, #28a745, #2ab130);
+  color: white;
+  box-shadow: 0 4px 6px rgba(42, 177, 48, 0.3);
+}
+
+.order-buttons .accept-btn:hover {
+  border: 1px solid #2ab130;
+  transform: translateY(-3px);
+  background-color: transparent;
+  box-shadow: 0 8px 12px rgba(42, 177, 48, 0.4);
+}
+
+.order-buttons .reject-btn {
+  background: linear-gradient(90deg, #e74c3c, #ff6b6b);
+  color: white;
+  box-shadow: 0 4px 6px rgba(231, 76, 60, 0.3);
+}
+
+.order-buttons .reject-btn:hover {
+  background: linear-gradient(90deg, #ff6b6b, #e74c3c);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 12px rgba(231, 76, 60, 0.4);
+}
+
+/* css for profile page=================================================================== */
+
+.profile {
+  background-color: #f4f4f9;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-bottom: 50px;
+}
+
+.profile-image {
+  text-align: center;
+  margin-bottom: 20px;
+  
+}
+.profile-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);  /* Add this line for the box-shadow */
+}
+
+.profile-info {
+  margin-top: 20px;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 10px 0px;
+}
+
+.info h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.on_off_status {
+  display: flex;
+  align-items: center; 
+}
+
+.on_off_status span {
+  font-size: 16px;
+  color: red;
+  font-weight: bold;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  left: 4px;
+  bottom: 2px;
+  background-color: white;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2ab130;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+
+.email, .phone {
+  font-size: 18px;
+  color: #666;
+  text-align: left;
+  margin: 10px 0;
+}
+
+.email span, .phone span {
+  font-weight: bold;
+  color: #333;
+}
+
+.select-duration {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  align-items: center;
+}
+
+.duration-select {
+  flex: 1;
+  text-align: left;
+}
+
+.duration-select select {
+  padding: 10px;
+  font-size: 14px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+
+
+.custom-duration {
+  display: none;
+}
+
+.custom-duration label {
+  display: block;
+  font-size: 14px;
+  color: #333;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.custom-duration input {
+font-size: 14px;
+  /* margin-top: 5px; */
+  border: none;
+  background-color: transparent;
+}
+.form-label{
+    display: flex;
+}
+#to-date {
+  margin-left: 19px;  
+}
+.order-blocks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.order-block {
+    height: 130px;
+  width: 48%;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.order-block h3 {
+  font-size: 13px;
+  color: #333;
+  /* margin-bottom: 10px; */
+}
+
+.order-count {
+  font-size: 32px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.logout-btn {
+  width: 100%;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.logout-btn:hover {
+  background-color: #e53935;
+}
+/* css for history page======================================================================== */
+.content.history {
+  margin-top: 120px; 
+  padding: 10px;
+  margin-bottom: 50px;
+}
+
+.history-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  color: #fff;
+  padding: 20px 15px;
+  z-index: 1000;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border-bottom: 3px solid #0056b3;
+}
+
+.history-header h1 {
+  font-size: 26px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  margin: 0;
+}
+
+.links {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+  gap: 15px;
+}
+
+.links button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 18px;
+  position: relative;
+  transition: color 0.3s, transform 0.2s;
+}
+
+.links button::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0%;
+  height: 3px;
+  background: #fff;
+  transition: all 0.3s ease-in-out;
+  transform: translateX(-50%);
+}
+
+.links button:hover {
+  color: #ffc107;
+  transform: translateY(-2px);
+}
+
+.links button:hover::after,
+.links button.active::after {
+  width: 100%;
+}
+
+.links button.active {
+  color: #ffc107;
+  font-weight: bold;
+}
+
+
+.box-container {
+  margin-top: 15px;
+}
+
+.box {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  margin-top: 10px;
+}
+
+.history-name{
+  margin: 5px 0;
+  font-weight: bold;
+  font-size: 15px;
+  text-align: left;
+}
+.map-icon{
+    color: #ffc107;
+}
+.delivery-time{
+ margin: 5px 0;
+  font-size: 13px;
+  text-align: left;
+  color: #666;
+}
+.delivery-time span{
+   color: black;
+   font-weight: bold; 
+}
+table {
+  width: 100%;
+  margin: 10px 0;
+  border-collapse: collapse;
+}
+
+table td {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 13px;
+  font-weight: bold;
+}
+table td span{
+    font-size: 11px;
+    color: #666;
+}
+.history-address {
+  margin-top: 10px;
+  color: #555;
+  font-size: 12px;
+  text-align: left;
+}
+
+/* css for order page=============================================================== */
+
+.content.orders{
+  padding: 10px;
+  margin-bottom: 50px;
+}
+.order-box-container{
+  margin-top: 15px;
+}
+.order-box{
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  margin-top: 10px;
+}
+.order-name{
+  margin: 5px 0;
+  font-weight: bold;
+  font-size: 15px;
+  text-align: left;
+}
+
+.order-delivery-time{
+ margin: 5px 0;
+  font-size: 13px;
+  text-align: left;
+  color: #666;
+}
+.order-delivery-time span{
+   color: black;
+   font-weight: bold; 
+}
+.order-address {
+  margin-top: 10px;
+  color: #555;
+  font-size: 12px;
+  text-align: left;
+}
+.order-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.mark-as {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.processing-btn,.outfordelivery-btn,.delivered-btn,.cancelled-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.options-container {
+      margin-top: 10px;
+      display: none;
+    }
+    .options-container h5{
+      margin-bottom: 10px;
+    }
+    .options-container select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .options-container select:focus{
+      border: 1px solid #007bff;
+      outline: 0;
+    }
+    .other-message {
+      display: none;
+      margin-top: 10px;
+    }
+
+    .other-message textarea{
+      width: 100%;
+      height: 150px;
+      padding: 15px 20px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+    .other-message textarea:focus{
+     border: 1px solid #007bff;
+     outline: 0;
+    }
+    .submit-reason{
+      background-color: #007bff; 
+      color: white; 
+      padding: 5px 10px; 
+      font-size: 16px;
+      border: none; 
+      border-radius: 5px; 
+      cursor: pointer; 
+   }
+/* Responsive Design for Mobile */
+@media (max-width: 600px) {
+  .profile-info {
+    padding: 10px;
+  }
+
+  .profile-info h2 {
+    font-size: 18px;
+  }
+
+  .select-duration {
+    text-align: left;
+  }
+
+  
+
+  .order-block {
+    
+    margin-bottom: 10px;
+  }
+
+  .logout-btn {
+    font-size: 14px;
+  }
+}
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .nav-link {
+    font-size: 14px;
+  }
+
+  .home {
+    padding: 15px;
+  }
+ 
+
+  .time {
+    font-size: 20px;
+  }
+
+  .new-orders button {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  .map-block {
+    height: 500px;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+
+  <!-- Home Page Content -->
+<div class="content home">
+    <div class="header">
+      <div class="home-name">John Carter</div>
+      <div class="status">Active</div>
+    </div>
+    
+    <div class="time-info">
+      <div class="time-left">
+        <p class="day">Today</p>
+        <p class="time">04 hours & 23 minutes</p>
+      </div>
+      <div class="new-orders">
+        <button id="new-order-button">New Orders</button>
+      </div>
+    </div>
+    
+    <div class="map-block">
+      <div id="map">Map will be displayed here</div>
+    </div>
+    
+  </div>
+  
+  <!-- html for new order page -->
+  <div class="content new-orders-content">
+    <!-- New Order Page Content -->
+    <h2>New Order</h2>
+  
+    <!-- Order Details -->
+    <div class="order-details">
+        <div class="left">
+          <span class="name">John Carter</span>
+          <p class="address">123 Main Street, Apartment 4B, CityMall, State 78722, United States</p>
+        </div>
+        <div class="right">
+          <span class="time">Time: 30min</span>
+          <h4 class="distance">Distance: 10km</h4>
+        </div>
+      </div>
+  
+    <!-- Order Info Boxes -->
+    <div class="order-info-box">
+      <div>
+        <span>Order ID</span>
+        <span>=OD12345</span>
+      </div>
+      <div>
+        <span>Order Amount</span>
+        <span>₹247.98</span>
+      </div>
+    </div>
+  
+    <!-- Product Table -->
+    <table class="product-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Product</th>
+          <th>Qty</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><img src="/public/images/assest/products/crops/onions.jpg" alt="Onion"></td>
+          <td>Onion <br><span style="color: #666;">1kg</span></td>
+          <td>2</td>
+          <td>₹148 <br><span style="color: #666; text-decoration: line-through;">₹198</span></td>
+        </tr>
+        <tr>
+          <td><img src="/public/images/assest/products/crops/potatoes.jpg" alt="Corn"></td>
+          <td>Potato <br><span style="color: #666;">1kg</span></td>
+          <td>1</td>
+          <td>₹50<br><span style="color: #666; text-decoration: line-through;">₹94</span></td>
+        </tr>
+        <tr>
+          <td><img src="/public/images/assest/products/crops/cucumber.jpg" alt="Cucumber"></td>
+          <td>Cucumber <br><span style="color: #666;">1kg</span></td>
+          <td>1</td>
+          <td>₹31<br><span style="color: #666; text-decoration: line-through;">₹40</span></td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="order-buttons">
+      <button class="accept-btn">Accept</button>
+      <button class="reject-btn"> Reject</button>
+    </div>
+  </div>
+
+  <!-- Orders Page Content======================================================================= -->
+  <div class="content orders">
+    <div class="order-box-container">
+      <!-- Box 1 -->
+      <div class="order-box">
+        <div class="order-container">
+        <p class="order-name">John Chamber</p>
+        <p class="order-delivery-time">Order Time: <span> Jan 15, 2016, 12:34 PM</span></p>
+        <table>
+            <tr>
+                <td> <span >Order ID:</span> <br>#OTB00234</td>
+                <td><span>Order Amount: </span><br>  458.75</td>
+                <td><span>Payment Type: </span><br> Online</td>
+              </tr>
+        </table>
+        <p class="order-address">
+          <i class="fas fa-map-marker-alt map-icon"></i> 2634 Crestview Terrace, New York, 78004, United States
+        </p>
+      </div>
+       
+  <div class="order-actions">
+    <p class="mark-as">Mark As:</p>
+    <button class="processing-btn">Processing</button>
+  </div>
+      </div>
+  
+      <!-- Box 2 -->
+      <div class="order-box">
+        <div class="order-container">
+        <p class="order-name">John Doe</p>
+        <p class="order-delivery-time">Order Time: <span> Jan 15, 2016, 12:34 PM</span></p>
+        <table>
+            <tr>
+                <td> <span>Order ID:</span> <br>#OTB00234</td>
+                <td><span>Order Amount: </span><br>  458.75</td>
+                <td><span>Payment Type: </span><br> Online</td>
+              </tr>
+         
+        </table>
+        <p class="order-address">
+          <i class="fas fa-map-marker-alt map-icon"></i> 1745 Forest Drive, Los Angeles, 90001, United States
+        </p>
+        </div>
+        <div class="order-actions">
+          <p class="mark-as">Mark As:</p>
+          <button class="outfordelivery-btn">Out for Delivery</button>
+        </div>
+      </div>
+
+       <!-- Box 3 -->
+       <div class="order-box">
+        <div class="order-container">
+        <p class="order-name">John Doe</p>
+        <p class="order-delivery-time">Order Time: <span> Jan 15, 2016, 12:34 PM</span></p>
+        <table>
+            <tr>
+                <td> <span>Order ID:</span> <br>#OTB00234</td>
+                <td><span>Order Amount: </span><br>  458.75</td>
+                <td><span>Payment Type: </span><br> Online</td>
+              </tr>
+         
+        </table>
+        <p class="order-address">
+          <i class="fas fa-map-marker-alt map-icon"></i> 1745 Forest Drive, Los Angeles, 90001, United States
+        </p>
+        </div>
+        <div class="order-actions">
+          <p class="mark-as">Mark As:</p>
+          <button class="delivered-btn">Delivered</button>
+        </div>
+      </div>
+
+       <!-- Box 4 -->
+  <div class="order-box">
+      <div class="order-container">
+    <p class="order-name">John Doe</p>
+    <p class="order-delivery-time">Order Time: <span> Jan 15, 2016, 12:34 PM</span></p>
+    <table>
+      <tr>
+        <td> <span>Order ID:</span> <br>#OTB00234</td>
+        <td><span>Order Amount: </span><br> 458.75</td>
+        <td><span>Payment Type: </span><br> Online</td>
+      </tr>
+    </table>
+    <p class="order-address">
+      <i class="fas fa-map-marker-alt map-icon"></i> 1745 Forest Drive, Los Angeles, 90001, United States
+    </p>
+    </div>
+    <div class="order-actions">
+      <p class="mark-as">Mark As:</p>
+      <button class="cancelled-btn" onclick="toggleOptions()">Cancelled</button>
+    </div>
+
+    <!-- Options Section -->
+    <div class="options-container" id="options-container">
+      <h5>Reason for cancellation</h5>
+      <select id="cancel-options" onchange="showOtherInput()">
+        <option value="">Select a reason...</option>
+        <option value="door-locked">Door Locked</option>
+        <option value="customer-not-picking">Customer Not Picking Call</option>
+        <option value="incorrect-address">Incorrect Address</option>
+        <option value="bad-weather">Bad Weather</option>
+        <option value="payment-issue">Payment Issue</option>
+        <option value="item-out-of-stock">Item Out of Stock</option>
+        <option value="vehicle-breakdown">Vehicle Breakdown</option>
+        <option value="package-lost">Package Lost</option>
+        <option value="wrong-item-placed">Wrong Item Placed</option>
+        <option value="accident">Accident During Delivery</option>
+        <option value="technical-issue">Technical Issue</option>
+        <option value="other">Other</option>
+      </select>
+
+      <!-- "Other" input section -->
+      <div class="other-message" id="other-message">
+        <h5>Mention it:</h5>
+        <textarea name="message" placeholder="Type another reason..."></textarea>
+      </div>
+      <button type="submit" class="submit-reason">Submit</button>
+    </div>
+
+ 
+  </div>
+      
+      
+    </div>
+  </div>
+
+  <!-- History Page Content=============================================================== -->
+  <div class="content history">
+    <div class="history-header">
+      <h1>Order History</h1>
+      <div class="links">
+        <button id="delivered-btn" class="active">Delivered</button>
+      <button id="rejected-btn">Rejected</button>
+      </div>
+    </div>
+    
+    <div id="delivered-content" class="box-container">
+      <!-- Box 1 -->
+      <div class="box">
+        <p class="history-name">John Chamber</p>
+        <p class="delivery-time">Delivery Time: <span> Jan 15, 2016, 12:34 PM</span></p>
+        <table>
+            <tr>
+                <td> <span >Order ID:</span> <br>#OTB00234</td>
+                <td><span>Order Amount: </span><br>  458.75</td>
+                <td><span>Payment Type: </span><br> Online</td>
+              </tr>
+        </table>
+        <p class="history-address">
+          <i class="fas fa-map-marker-alt map-icon"></i> 2634 Crestview Terrace, New York, 78004, United States
+        </p>
+      </div>
+  
+      <!-- Box 2 -->
+      <div class="box">
+        <p class="history-name">John Doe</p>
+        <p class="delivery-time">Delivery Time: <span> Jan 15, 2016, 12:34 PM</span></p>
+        <table>
+            <tr>
+                <td> <span>Order ID:</span> <br>#OTB00234</td>
+                <td><span>Order Amount: </span><br>  458.75</td>
+                <td><span>Payment Type: </span><br> Online</td>
+              </tr>
+         
+        </table>
+        <p class="history-address">
+          <i class="fas fa-map-marker-alt map-icon"></i> 1745 Forest Drive, Los Angeles, 90001, United States
+        </p>
+      </div>
+      
+    </div>
+  
+    <div id="rejected-content" class="box-container" style="display: none;">
+      <p>This is the rejected page.</p>
+    </div>
+  </div>
+  
+
+  <!-- Profile Page Content -->
+  <div class="content profile">
+    <div class="profile-image">
+      <img src="assest/new-page/p-4.jpg" alt="Profile Image" class="profile-img">
+    </div>
+  
+    <div class="profile-info">
+        <div class="info">
+            <h2>John Carter</h2>
+            <div class="on_off_status">
+              <span>Offline</span>
+              &nbsp;
+              <label class="toggle-switch">
+                <input type="checkbox" id="toggle-switch" />
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+          
+  
+      <p class="email">Email ID:- <span>sample@gmail.com</span></p>
+      <p class="phone">Phone no.:- <span>+91-1234567890</span></p>
+  
+      <div class="select-duration">
+        <!-- Select Duration on the Left -->
+        <div class="duration-select">
+         
+          <select id="duration" name="duration">
+            <option value="all">All</option>
+            <option value="today">Today</option>
+            <option value="week">This Week</option>
+            <option value="month">This Month</option>
+            <option value="custom">Select Duration</option>
+          </select>
+        </div>
+        
+        <!-- Custom Duration on the Right -->
+       
+          <div class="custom-duration" id="custom-duration">
+            <div class="form-label">
+            <label for="from-date">From</label> &nbsp;
+            <input type="date" id="from-date">
+        </div>
+        <div class="form-label">
+            <label for="to-date">To</label> &nbsp;
+            <input type="date" id="to-date">
+        </div>
+          </div>
+        </div>
+      
+  
+      <div class="order-blocks">
+        <div class="order-block total-order">
+          <h3>Total Orders</h3>
+          <p class="order-count">49</p>
+        </div>
+        <div class="order-block completed-order">
+          <h3>Completed Orders</h3>
+          <p class="order-count">36</p>
+        </div>
+      </div>
+  
+      <button class="logout-btn">Log Out</button>
+    </div>
+  </div>
+  
+
+  <!-- Bottom Navigation Bar -->
+  <div class="bottom-nav">
+    <a href="#home" class="nav-link active" id="home-link">
+        <i class="fas fa-home"></i> Home
+      </a>
+      <a href="#orders" class="nav-link" id="orders-link">
+        <i class="fas fa-box"></i> Orders
+      </a>
+      <a href="#history" class="nav-link" id="history-link">
+        <i class="fas fa-history"></i> History
+      </a>
+      <a href="#profile" class="nav-link" id="profile-link">
+        <i class="fas fa-user"></i> Profile
+      </a>
+      
+  </div>
+
+<script>
+
+const home = document.querySelector(".home");
+const orders = document.querySelector(".orders");
+const history = document.querySelector(".history");
+const profile = document.querySelector(".profile");
+const newOrderContent = document.querySelector(".new-orders-content");
+
+
+const homeLink = document.getElementById("home-link");
+const ordersLink = document.getElementById("orders-link");
+const historyLink = document.getElementById("history-link");
+const profileLink = document.getElementById("profile-link");
+
+
+function hideAllContent() {
+  home.classList.remove("active");
+  orders.classList.remove("active");
+  history.classList.remove("active");
+  profile.classList.remove("active");
+  newOrderContent.classList.remove("active");
+
+  homeLink.classList.remove("active");
+  ordersLink.classList.remove("active");
+  historyLink.classList.remove("active");
+  profileLink.classList.remove("active");
+}
+
+// Show the selected section and add active class to the link
+function showContent(content, link) {
+  hideAllContent();
+  content.classList.add("active");
+  link.classList.add("active");
+}
+
+// Set initial content to be displayed
+showContent(home, homeLink);
+
+// Add event listeners to the navigation links
+homeLink.addEventListener("click", () => showContent(home, homeLink));
+ordersLink.addEventListener("click", () => showContent(orders, ordersLink));
+historyLink.addEventListener("click", () => showContent(history, historyLink));
+profileLink.addEventListener("click", () => showContent(profile, profileLink));
+
+// js for new order button=================================================================================
+const newOrderButton = document.getElementById('new-order-button');
+
+// Show new order page
+newOrderButton.addEventListener('click', () => {
+  // Hide the home content when new order is shown
+  hideAllContent();
+  newOrderContent.classList.add('active');
+});
+
+// Show home content when home link is clicked
+homeLink.addEventListener('click', () => {
+  hideAllContent();
+  home.classList.add('active');
+});
+
+// js for profile page===================================================================================
+document.getElementById('duration').addEventListener('change', function() {
+  var customDuration = document.getElementById('custom-duration');
+  if (this.value === 'custom') {
+    customDuration.style.display = 'block';
+  } else {
+    customDuration.style.display = 'none';
+  }
+});
+
+// js for history page==================================================================================
+const deliveredBtn = document.getElementById("delivered-btn");
+const rejectedBtn = document.getElementById("rejected-btn");
+const deliveredContent = document.getElementById("delivered-content");
+const rejectedContent = document.getElementById("rejected-content");
+
+deliveredBtn.addEventListener("click", () => {
+  deliveredContent.style.display = "block";
+  rejectedContent.style.display = "none";
+  deliveredBtn.classList.add("active");
+  rejectedBtn.classList.remove("active");
+});
+
+rejectedBtn.addEventListener("click", () => {
+  deliveredContent.style.display = "none";
+  rejectedContent.style.display = "block";
+  rejectedBtn.classList.add("active");
+  deliveredBtn.classList.remove("active");
+});
+
+// js for orders page ========================================================================
+// Toggle the visibility of options when Cancelled button is clicked
+function toggleOptions() {
+      const optionsContainer = document.getElementById('options-container');
+      optionsContainer.style.display = optionsContainer.style.display === 'block' ? 'none' : 'block';
+    }
+
+    // Show the input field if "Other" is selected from the dropdown
+    function showOtherInput() {
+      const selectedOption = document.getElementById('cancel-options').value;
+      const otherMessage = document.getElementById('other-message');
+
+      if (selectedOption === 'other') {
+        otherMessage.style.display = 'block';
+      } else {
+        otherMessage.style.display = 'none';
+      }
+    }
+
+</script>
+</body>
+</html>
