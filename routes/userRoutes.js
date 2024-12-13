@@ -138,7 +138,8 @@ const newOrder = new orderMoel({
 await newOrder.save()
 user.cart=[]
 await user.save()
-console.log(newOrder)
+
+// Send email to customer
 let transporter = nodemailer.createTransport({
     host: 'smtpout.secureserver.net', 
     port: 587, 

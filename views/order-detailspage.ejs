@@ -817,19 +817,25 @@ table td span{
     height: 500px;
   }
 }
-
+#map {
+      height: 500px;
+      width: 100%;
+    }
+    #permission-status {
+      margin: 20px 0;
+    }
 
   </style>
 </head>
 <body>
 
   <!-- Home Page Content -->
-<div class="content home">
+  <div class="content home">
     <div class="header">
       <div class="home-name">John Carter</div>
       <div class="status">Active</div>
     </div>
-    
+
     <div class="time-info">
       <div class="time-left">
         <p class="day">Today</p>
@@ -839,13 +845,15 @@ table td span{
         <button id="new-order-button">New Orders</button>
       </div>
     </div>
+
+    <div id="permission-status">Requesting location access...</div>
+    <div id="address">Address will appear here...</div>
+
+    <div class="map-block" id="map">
     
-    <div class="map-block">
-      <div id="map">Map will be displayed here</div>
     </div>
-    
   </div>
-  
+
   <!-- html for new order page -->
   <div class="content new-orders-content">
     <!-- New Order Page Content -->
@@ -1175,6 +1183,10 @@ table td span{
       </a>
       
   </div>
+  <script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9HldXl2x3j5IgUNQ33f5tJkjj9os15XI"
+  async
+></script>
 
 <script>
 
@@ -1284,6 +1296,106 @@ function toggleOptions() {
         otherMessage.style.display = 'none';
       }
     }
+    const statusElement = document.getElementById('permission-status');
+    const addressElement = document.getElementById('address');
+    const mapElement = document.getElementById('map');
+    let map, marker;
+
+    // Automatically request location on page load
+    window.onload = () => {
+  if ('geolocation' in navigator) {
+    statusElement.textContent = 'Requesting location access...';
+    
+    // Watch the user's position with periodic updates
+    navigator.geolocation.watchPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        statusElement.textContent = `Location permission granted.`;
+        updateLocation(latitude, longitude);
+        getAddressFromCoordinates(latitude, longitude);
+      },
+      (error) => {
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            statusElement.textContent = 'Location permission denied.';
+            break;
+          case error.POSITION_UNAVAILABLE:
+            statusElement.textContent = 'Location information is unavailable.';
+            break;
+          case error.TIMEOUT:
+            statusElement.textContent = 'Location request timed out.';
+            break;
+          default:
+            statusElement.textContent = 'An unknown error occurred.';
+            break;
+        }
+      },
+      {
+        enableHighAccuracy: true,
+        maximumAge: 10000, // Cache location for 10 seconds
+
+      }
+    );
+
+    // Refresh location every 10 seconds
+    setInterval(() => {
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            updateLocation(latitude, longitude);
+            getAddressFromCoordinates(latitude, longitude);
+          },
+          (error) => {
+            console.error('Error fetching location on interval:', error);
+          }
+        );
+      }
+    }, 10000); // Refresh every 10 seconds (10,000 milliseconds)
+  } else {
+    statusElement.textContent = 'Geolocation is not supported by your browser.';
+  }
+};
+
+function updateLocation(lat, lng) {
+  // If the map is not initialized, initialize it
+  if (!map) {
+    map = new google.maps.Map(mapElement, {
+      center: { lat, lng },
+      zoom: 12,
+    });
+
+    // Initialize marker at user's location
+    marker = new google.maps.Marker({
+      position: { lat, lng },
+      map: map,
+      icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+    });
+  } else {
+    // Update map center and marker position
+    map.setCenter({ lat, lng });
+    marker.setPosition({ lat, lng });
+  }
+}
+
+function getAddressFromCoordinates(lat, lng) {
+  const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyC9HldXl2x3j5IgUNQ33f5tJkjj9os15XI`;
+
+  fetch(geocodingUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.status === 'OK' && data.results.length > 0) {
+        const address = data.results[0].formatted_address;
+        addressElement.textContent = `Address: ${address}`;
+      } else {
+        addressElement.textContent = 'Unable to fetch address.';
+      }
+    })
+    .catch((error) => {
+      console.error('Error fetching address:', error);
+      addressElement.textContent = 'Error fetching address.';
+    });
+}
 
 </script>
 </body>

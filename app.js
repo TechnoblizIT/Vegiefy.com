@@ -6,6 +6,7 @@ const indexRouter = require('./routes/indexRoutes')
 const userRouter = require('./routes/userRoutes')
 const userModel=require("./models/user-model")
 const adminRouter = require('./routes/adminRoutes')
+const deliveryRouter = require('./routes/deliveryRoutes')
 const checkUser=require("./middlewares/checkUser")
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
@@ -48,6 +49,7 @@ passport.use(new GoogleStrategy({
 app.use("/",indexRouter)
 app.use("/user",userRouter)
 app.use("/admin",adminRouter)
+app.use("/delivery", deliveryRouter)
 
 
 app.listen(process.env.PORT)

@@ -8,6 +8,7 @@ const deliveryboyModel=require("../models/deliveryboydata-model")
 const { isloggedin } = require('../middlewares/isloggedin');
 const {adminLogin}=require("../middlewares/isAdminlogin")
 const {isAdmin}=require("../middlewares/isAdmin")
+
 router.get("/login", function(req, res){
     res.render("admin-login")
 })
