@@ -1184,7 +1184,7 @@ table td span{
       
   </div>
   <script
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9HldXl2x3j5IgUNQ33f5tJkjj9os15XI"
+  src="https://maps.googleapis.com/maps/api/js?key=<%=googlemapapi%>"
   async
 ></script>
 
@@ -1379,7 +1379,7 @@ function updateLocation(lat, lng) {
 }
 
 function getAddressFromCoordinates(lat, lng) {
-  const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyC9HldXl2x3j5IgUNQ33f5tJkjj9os15XI`;
+  const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=<%=googlemapapi%>`;
 
   fetch(geocodingUrl)
     .then((response) => response.json())

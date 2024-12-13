@@ -10,7 +10,8 @@ router.get('/login', function(req, res) {
 });
 
 router.get("/dashboard", function(req, res) {
-    res.render("order-detailspage") 
+    const googlemapapi=process.env.API_KEY
+    res.render("order-detailspage",{googlemapapi}) 
 })
 
 
