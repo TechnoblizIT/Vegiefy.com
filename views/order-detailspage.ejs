@@ -179,7 +179,6 @@ body {
   font-size: 28px;
   margin-bottom: 20px;
   text-align: center;
-  font-family: 'Poppins', sans-serif;
   text-transform: uppercase;
   border-bottom: 2px solid #4CAF50;
   padding-bottom: 10px;
@@ -271,7 +270,7 @@ body {
 .product-table th {
   font-size: 16px;
   color: #fff;
-  background: linear-gradient(90deg, #4caf50, #2ab130);
+  background: #6c757d;
   text-transform: uppercase;
 }
 
@@ -320,9 +319,7 @@ body {
 }
 
 .order-buttons .accept-btn:hover {
-  border: 1px solid #2ab130;
   transform: translateY(-3px);
-  background-color: transparent;
   box-shadow: 0 8px 12px rgba(42, 177, 48, 0.4);
 }
 
@@ -357,7 +354,7 @@ body {
   height: 200px;
   border-radius: 10px;
   object-fit: cover;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);  /* Add this line for the box-shadow */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);  
 }
 
 .profile-info {
@@ -768,6 +765,273 @@ table td span{
       border-radius: 5px; 
       cursor: pointer; 
    }
+
+   /* css for delivery-details page============================================ */
+   .delivery-details {
+  margin-top: 70px; 
+}
+
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  border-bottom: 3px solid #0056b3;
+  color: #fff;
+  padding: 10px 20px;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.header-back-time{
+  display: flex;
+  justify-content: space-between;
+}
+.fixed-header .back-icon {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.fixed-header .order-id {
+  font-size: 20px;
+  margin-left: 55px;
+}
+
+.fixed-header .delivery-time-section {
+  font-size: 18px;
+}
+
+.fixed-header .delivery-time-section .time {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.title-section {
+  background-color: #f4f4f4;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.title-section h1 {
+  font-size: 18px;
+}
+
+.delivery-info {
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.info-item i {
+  font-size: 24px;
+  margin-right: 15px;
+  color: #ffc107; 
+}
+.delivery-name h2{
+  font-size: 18px;
+}
+.delivery-name,.delivery-email,.delivery-mobile,.delivery-address,.delivery-payment {
+  display: flex;
+  flex-direction: column;
+}
+
+.delivery-email,.delivery-mobile,.delivery-address,.delivery-payment h3 {
+  font-size: 10px;
+  color: #333;
+}
+
+.delivery-email,.delivery-mobile,.delivery-address,.delivery-payment  p {
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.delivery-info .info-item:last-child {
+  margin-bottom: 0;
+}
+.info-item:hover {
+  background-color: #f9f9f9;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.order-summary{
+  margin-top: 20px;
+  padding: 10px;
+}
+.delivery-product-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+}
+
+.delivery-product-table th, 
+.delivery-product-table td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+.delivery-product-table th {
+  font-size: 16px;
+  color: #fff;
+  background: #6c757d;
+  text-transform: uppercase;
+}
+
+.delivery-product-table td {
+  font-size: 15px;
+  color: #333;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.delivery-product-table tr:hover td {
+  background: #f1f1f1;
+}
+
+.delivery-product-table td img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.delivery-product-table tr:last-child td {
+  border-bottom: none;
+}
+/* General Layout */
+.payment-summary {
+  padding: 15px;
+  margin-bottom: 50px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.summary-row.bold span {
+  font-weight: bold;
+}
+
+.summary-row .price {
+  font-weight: bold;
+  font-size: 15px ;
+}
+.summary-row .price span{
+  color: #777;
+  text-decoration: line-through;
+}
+.summary-row .total-price{
+  font-size: 18px;
+  font-weight: bold;
+}
+.summary-row .total-price span{
+  color: #777;
+  text-decoration: line-through;
+  font-size: 15px;
+}
+.summary-row.small {
+  font-size: 14px;
+}
+
+.summary-row .price.green-bg {
+  background-color: #a5d6a7;
+  padding: 5px;
+  color: #198a1f;
+  border-radius: 5px;
+  font-size: 12PX;
+}
+
+hr {
+  margin: 20px 0;
+  border: 0;
+  border-top: 1px solid #ccc;
+}
+.call-map {
+  display: flex;
+  justify-content: space-around;
+  position: fixed; 
+  bottom: 50px;
+  left: 0;
+  width: 100%; 
+  background-color: white; 
+  padding: 10px 0;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); 
+  z-index: 1000; 
+}
+
+.call-map button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.call-map .call-btn {
+  color: white;
+  background: linear-gradient(135deg, #ffc107, #e0a800); /* Warm yellow gradient */
+  border: none;
+}
+
+.call-map .map-btn {
+  color: white;
+  background: linear-gradient(135deg, #333, #777); 
+  border: none;
+}
+
+.call-map button:focus {
+  outline: none; 
+}
+
+.call-map button:hover {
+  transform: translateY(-2px); 
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.call-map button:active {
+  transform: translateY(1px); 
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  
+  .info-item i {
+    font-size: 20px;
+  }
+
+  .delivery-email,.delivery-mobile,.delivery-address,.delivery-payment h3 {
+    font-size: 14px;
+  }
+
+  .delivery-email,.delivery-mobile,.delivery-address,.delivery-payment  p {
+    font-size: 13px;
+  }
+  .delivery-details {
+    margin-top: 100px; 
+  }
+
+}
+
+
 /* Responsive Design for Mobile */
 @media (max-width: 600px) {
   .profile-info {
@@ -817,15 +1081,7 @@ table td span{
     height: 500px;
   }
 }
-#map {
-      height: 500px;
-      width: 100%;
-    }
-    #permission-status {
-      margin: 20px 0;
-    }
-
-  </style>
+</style>
 </head>
 <body>
 
@@ -921,132 +1177,283 @@ table td span{
     </div>
   </div>
 
-  <!-- Orders Page Content======================================================================= -->
-  <div class="content orders">
-    <div class="order-box-container">
-      <!-- Box 1 -->
-      <div class="order-box">
-        <div class="order-container">
-        <p class="order-name">John Chamber</p>
-        <p class="order-delivery-time">Order Time: <span> Jan 15, 2016, 12:34 PM</span></p>
-        <table>
-            <tr>
-                <td> <span >Order ID:</span> <br>#OTB00234</td>
-                <td><span>Order Amount: </span><br>  458.75</td>
-                <td><span>Payment Type: </span><br> Online</td>
-              </tr>
-        </table>
-        <p class="order-address">
-          <i class="fas fa-map-marker-alt map-icon"></i> 2634 Crestview Terrace, New York, 78004, United States
-        </p>
-      </div>
+ <!-- Orders Page Content======================================================================= -->
+ <div class="content orders">
+  <div class="order-box-container" id="order-box-container">
+    <!-- Box 1 -->
+    <div class="order-box">
+      <div class="order-container" id="order-container">
+      <p class="order-name">John Chamber</p>
+      <p class="order-delivery-time">Order Time: <span> Jan 15, 2016, 12:34 PM</span></p>
+      <table>
+          <tr>
+              <td> <span >Order ID:</span> <br>#OTB00234</td>
+              <td><span>Order Amount: </span><br>  458.75</td>
+              <td><span>Payment Type: </span><br> Online</td>
+            </tr>
+      </table>
+      <p class="order-address">
+        <i class="fas fa-map-marker-alt map-icon"></i> 2634 Crestview Terrace, New York, 78004, United States
+      </p>
+    </div>
+     
+<div class="order-actions">
+  <p class="mark-as">Mark As:</p>
+  <button class="processing-btn">Processing</button>
+</div>
+    </div>
+
+    <!-- Box 2 -->
+    <div class="order-box">
+      <div class="order-container" id="order-container">
+      <p class="order-name">John Doe</p>
+      <p class="order-delivery-time">Order Time: <span> Jan 15, 2016, 12:34 PM</span></p>
+      <table>
+          <tr>
+              <td> <span>Order ID:</span> <br>#OTB00234</td>
+              <td><span>Order Amount: </span><br>  458.75</td>
+              <td><span>Payment Type: </span><br> Online</td>
+            </tr>
        
+      </table>
+      <p class="order-address">
+        <i class="fas fa-map-marker-alt map-icon"></i> 1745 Forest Drive, Los Angeles, 90001, United States
+      </p>
+      </div>
+      <div class="order-actions">
+        <p class="mark-as">Mark As:</p>
+        <button class="outfordelivery-btn">Out for Delivery</button>
+      </div>
+    </div>
+
+     <!-- Box 3 -->
+     <div class="order-box">
+      <div class="order-container" id="order-container">
+      <p class="order-name">John Doe</p>
+      <p class="order-delivery-time">Order Time: <span> Jan 15, 2016, 12:34 PM</span></p>
+      <table>
+          <tr>
+              <td> <span>Order ID:</span> <br>#OTB00234</td>
+              <td><span>Order Amount: </span><br>  458.75</td>
+              <td><span>Payment Type: </span><br> Online</td>
+            </tr>
+       
+      </table>
+      <p class="order-address">
+        <i class="fas fa-map-marker-alt map-icon"></i> 1745 Forest Drive, Los Angeles, 90001, United States
+      </p>
+      </div>
+      <div class="order-actions">
+        <p class="mark-as">Mark As:</p>
+        <button class="delivered-btn">Delivered</button>
+      </div>
+    </div>
+
+     <!-- Box 4 -->
+<div class="order-box">
+    <div class="order-container" id="order-container">
+  <p class="order-name">John Doe</p>
+  <p class="order-delivery-time">Order Time: <span> Jan 15, 2016, 12:34 PM</span></p>
+  <table>
+    <tr>
+      <td> <span>Order ID:</span> <br>#OTB00234</td>
+      <td><span>Order Amount: </span><br> 458.75</td>
+      <td><span>Payment Type: </span><br> Online</td>
+    </tr>
+  </table>
+  <p class="order-address">
+    <i class="fas fa-map-marker-alt map-icon"></i> 1745 Forest Drive, Los Angeles, 90001, United States
+  </p>
+  </div>
   <div class="order-actions">
     <p class="mark-as">Mark As:</p>
-    <button class="processing-btn">Processing</button>
+    <button class="cancelled-btn" onclick="toggleOptions()">Cancelled</button>
   </div>
-      </div>
-  
-      <!-- Box 2 -->
-      <div class="order-box">
-        <div class="order-container">
-        <p class="order-name">John Doe</p>
-        <p class="order-delivery-time">Order Time: <span> Jan 15, 2016, 12:34 PM</span></p>
-        <table>
-            <tr>
-                <td> <span>Order ID:</span> <br>#OTB00234</td>
-                <td><span>Order Amount: </span><br>  458.75</td>
-                <td><span>Payment Type: </span><br> Online</td>
-              </tr>
-         
-        </table>
-        <p class="order-address">
-          <i class="fas fa-map-marker-alt map-icon"></i> 1745 Forest Drive, Los Angeles, 90001, United States
-        </p>
-        </div>
-        <div class="order-actions">
-          <p class="mark-as">Mark As:</p>
-          <button class="outfordelivery-btn">Out for Delivery</button>
-        </div>
-      </div>
 
-       <!-- Box 3 -->
-       <div class="order-box">
-        <div class="order-container">
-        <p class="order-name">John Doe</p>
-        <p class="order-delivery-time">Order Time: <span> Jan 15, 2016, 12:34 PM</span></p>
-        <table>
-            <tr>
-                <td> <span>Order ID:</span> <br>#OTB00234</td>
-                <td><span>Order Amount: </span><br>  458.75</td>
-                <td><span>Payment Type: </span><br> Online</td>
-              </tr>
-         
-        </table>
-        <p class="order-address">
-          <i class="fas fa-map-marker-alt map-icon"></i> 1745 Forest Drive, Los Angeles, 90001, United States
-        </p>
-        </div>
-        <div class="order-actions">
-          <p class="mark-as">Mark As:</p>
-          <button class="delivered-btn">Delivered</button>
-        </div>
-      </div>
+  <!-- Options Section -->
+  <div class="options-container" id="options-container">
+    <h5>Reason for cancellation</h5>
+    <select id="cancel-options" onchange="showOtherInput()">
+      <option value="">Select a reason...</option>
+      <option value="door-locked">Door Locked</option>
+      <option value="customer-not-picking">Customer Not Picking Call</option>
+      <option value="incorrect-address">Incorrect Address</option>
+      <option value="bad-weather">Bad Weather</option>
+      <option value="payment-issue">Payment Issue</option>
+      <option value="item-out-of-stock">Item Out of Stock</option>
+      <option value="vehicle-breakdown">Vehicle Breakdown</option>
+      <option value="package-lost">Package Lost</option>
+      <option value="wrong-item-placed">Wrong Item Placed</option>
+      <option value="accident">Accident During Delivery</option>
+      <option value="technical-issue">Technical Issue</option>
+      <option value="other">Other</option>
+    </select>
 
-       <!-- Box 4 -->
-  <div class="order-box">
-      <div class="order-container">
-    <p class="order-name">John Doe</p>
-    <p class="order-delivery-time">Order Time: <span> Jan 15, 2016, 12:34 PM</span></p>
-    <table>
-      <tr>
-        <td> <span>Order ID:</span> <br>#OTB00234</td>
-        <td><span>Order Amount: </span><br> 458.75</td>
-        <td><span>Payment Type: </span><br> Online</td>
-      </tr>
-    </table>
-    <p class="order-address">
-      <i class="fas fa-map-marker-alt map-icon"></i> 1745 Forest Drive, Los Angeles, 90001, United States
-    </p>
+    <!-- "Other" input section -->
+    <div class="other-message" id="other-message">
+      <h5>Mention it:</h5>
+      <textarea name="message" placeholder="Type another reason..."></textarea>
     </div>
-    <div class="order-actions">
-      <p class="mark-as">Mark As:</p>
-      <button class="cancelled-btn" onclick="toggleOptions()">Cancelled</button>
-    </div>
+    <button type="submit" class="submit-reason">Submit</button>
+  </div>
 
-    <!-- Options Section -->
-    <div class="options-container" id="options-container">
-      <h5>Reason for cancellation</h5>
-      <select id="cancel-options" onchange="showOtherInput()">
-        <option value="">Select a reason...</option>
-        <option value="door-locked">Door Locked</option>
-        <option value="customer-not-picking">Customer Not Picking Call</option>
-        <option value="incorrect-address">Incorrect Address</option>
-        <option value="bad-weather">Bad Weather</option>
-        <option value="payment-issue">Payment Issue</option>
-        <option value="item-out-of-stock">Item Out of Stock</option>
-        <option value="vehicle-breakdown">Vehicle Breakdown</option>
-        <option value="package-lost">Package Lost</option>
-        <option value="wrong-item-placed">Wrong Item Placed</option>
-        <option value="accident">Accident During Delivery</option>
-        <option value="technical-issue">Technical Issue</option>
-        <option value="other">Other</option>
-      </select>
 
-      <!-- "Other" input section -->
-      <div class="other-message" id="other-message">
-        <h5>Mention it:</h5>
-        <textarea name="message" placeholder="Type another reason..."></textarea>
-      </div>
-      <button type="submit" class="submit-reason">Submit</button>
-    </div>
+</div>
+</div>
 
+<!-- delivery details====================================================== -->
+<div class="delivery-details" id="delivery-details" style="display: none;">
+<!-- Fixed Header -->
+<header class="fixed-header">
+  <div class="header-back-time">
+  <div class="back-icon">
+    <i id="back-to-main" class="fa-solid fa-chevron-left"></i>
+  </div>
  
+  <div class="order-id">
+    <span><strong>#OTB000145</strong></span>
+  </div><br>
+  <div class="delivery-time-section">
+    <span>Delivery Time</span><br>
+    <span class="time">09:20 AM</span>
   </div>
-      
-      
-    </div>
+
+</div>
+</header>
+
+<!-- Delivery Details Title -->
+<div class="title-section">
+  <h1>Delivery Details</h1>
+</div>
+
+<!-- Delivery Information -->
+<div class="delivery-info">
+<div class="info-item">
+  <div class="delivery-name">
+    <h2>John Chambers</h2>
   </div>
+</div>
+
+<div class="info-item">
+  <i class="fas fa-map-marker-alt"></i>
+  <div class="delivery-address">
+    <h3>Address</h3>
+    <p>123 Main Street, Apartment 4B, CityMall, State 78722, United States</p>
+  </div>
+</div>
+
+<div class="info-item">
+  <i class="fas fa-envelope"></i>
+  <div class="delivery-email">
+    <h3>Email Id</h3>
+    <p>johnchambers@gmail.com</p>
+  </div>
+</div>
+
+<div class="info-item">
+  <i class="fas fa-phone"></i>
+  <div class="delivery-mobile">
+    <h3>Mobile</h3>
+    <p>+91 1234567890</p>
+  </div>
+</div>
+
+<div class="info-item">
+  <i class="fas fa-credit-card"></i>
+  <div class="delivery-payment">
+    <h3>Payment Type</h3>
+    <p>Cash on Delivery</p>
+  </div>
+</div>
+</div>
+
+<div class="title-section">
+<h1>Order Summary</h1>
+</div>
+
+<!-- delivery-Product Table -->
+<table class="delivery-product-table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Product</th>
+      <th>Qty</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="assest/products/crops/onions.jpg" alt="Onion"></td>
+      <td>Onion <br><span style="color: #666;">1kg</span></td>
+      <td>2</td>
+      <td>₹148 <br><span style="color: #666; text-decoration: line-through;">₹198</span></td>
+    </tr>
+    <tr>
+      <td><img src="assest/products/crops/potatoes.jpg" alt="Corn"></td>
+      <td>Potato <br><span style="color: #666;">1kg</span></td>
+      <td>1</td>
+      <td>₹50<br><span style="color: #666; text-decoration: line-through;">₹94</span></td>
+    </tr>
+    <tr>
+      <td><img src="assest/products/crops/cucumber.jpg" alt="Cucumber"></td>
+      <td>Cucumber <br><span style="color: #666;">1kg</span></td>
+      <td>1</td>
+      <td>₹31<br><span style="color: #666; text-decoration: line-through;">₹40</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="title-section">
+  <h1>Bill Summary</h1>
+</div>
+
+<div class="payment-summary">
+  <!-- Item Total -->
+  <div class="summary-row">
+    <span>Item Total</span>
+    <h2 class="price"><span>₹407</span>&nbsp; ₹267</h2>
+  </div>
+
+  <!-- Handling Charge -->
+  <div class="summary-row">
+    <span>Handling Charge</span>
+    <h2 class="price"><span>₹15</span>&nbsp;₹6.49</h2>
+  </div>
+
+  <!-- Delivery Fee -->
+  <div class="summary-row">
+    <span>Delivery Fee</span>
+    <h2 class="price"><span>₹25</span>&nbsp;₹0</h2>
+  </div>
+
+  <!-- GST & Taxes -->
+  <div class="summary-row bold">
+    <span>GST & Taxes</span>
+    <h2 class="price"><span>₹299</span>&nbsp;₹1</h2>
+  </div>
+
+  <hr>
+
+  <!-- To Pay -->
+  <div class="summary-row">
+    <span style="font-weight: bold;">To Pay</span>
+    <h2 class="total-price"><span>₹746</span>&nbsp;₹274.49</h2>
+  </div>
+
+  <!-- Taxes and Savings -->
+  <div class="summary-row small">
+    <span>Incl. all taxes and charges</span>
+    <span class="price green-bg">SAVING ₹471.51</span>
+  </div>
+
+
+  <div class="call-map">
+    <button class="call-btn"><i class="fa-solid fa-phone"></i> &nbsp;Call</button>
+    <button class="map-btn"><i class="fa-solid fa-location-dot"></i> &nbsp;Map</button>
+  </div>
+</div>
+</div>
+</div>
 
   <!-- History Page Content=============================================================== -->
   <div class="content history">
@@ -1296,6 +1703,31 @@ function toggleOptions() {
         otherMessage.style.display = 'none';
       }
     }
+
+    // js for delivery details==================================================================
+ 
+const orderBoxContainer = document.querySelector('.order-box-container');
+const deliveryDetails = document.querySelector('.delivery-details');
+const backToMain = document.querySelector('#back-to-main');
+const orderContainers = document.querySelectorAll('.order-container'); 
+
+//  event listener to each order container
+orderContainers.forEach((orderContainer) => {
+  orderContainer.addEventListener('click', () => {
+    orderBoxContainer.style.display = 'none'; 
+    deliveryDetails.style.display = 'block'; 
+  });
+});
+
+//  event listener for the "Back to Main" button
+if (backToMain) {
+  backToMain.addEventListener('click', () => {
+    orderBoxContainer.style.display = 'block'; 
+    deliveryDetails.style.display = 'none'; 
+  });
+}
+
+
     const statusElement = document.getElementById('permission-status');
     const addressElement = document.getElementById('address');
     const mapElement = document.getElementById('map');
