@@ -19,7 +19,8 @@ const deliveryboySchema=mongoose.Schema({
     profileimage:{
          file:Buffer,
          filetype:String,
-    }
+    },
+    isActive:Boolean,
 
 })
 

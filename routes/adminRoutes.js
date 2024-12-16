@@ -74,46 +74,36 @@ router.delete("/products/:id", async (req, res) => {
 
   router.post(
     "/create-deliveryboy",
-    upload.fields([
-      { name: "idproofupload", maxCount: 1 },
-      { name: "profile", maxCount: 1 },
-    ]),
+    upload.single("profile"),
     async function (req, res) {
       try {
-        const { name, phone, email, joindate, idproof, username, password } = req.body;
+   
+        const { name, phone, email, joindate, username, password } = req.body;
   
-       console.log(name, phone, email, joindate, idproof, username,password);
-        if (!name || !phone || !email || !joindate || !idproof || !username || !password) {
+     
+        if (!name || !phone || !email || !joindate ||  !username || !password) {
           return res.status(400).send("All fields are required.");
         }
-  
-        if (!req.files || !req.files.idproofupload || !req.files.profile) {
-          return res.status(400).send("ID proof and profile image uploads are required.");
+           
+        if (!req.file) {
+          return res.status(400).send("profile image uploads are required.");
         }
   
         
-        const idProofFile = req.files.idproofupload[0];
-        const profileFile = req.files.profile[0];
-  
        
         const newDeliveryboy = new deliveryboyModel({
           name,
-          phone,
+          mobile:phone,
           email,
           username,
           password,
-          IDproof: idproof,
           joiningDate: joindate,
-          IDupload: {
-            file: idProofFile.buffer,
-            filetype: idProofFile.mimetype,
-          },
-          profileImage: {
-            file: profileFile.buffer,
-            filetype: profileFile.mimetype,
+          profileimage: {
+            file:req.file.buffer,
+            filetype: req.file.mimetype,
           },
         });
-  
+
         // Save to database
         await newDeliveryboy.save();
   
@@ -171,4 +161,19 @@ router.delete("/products/:id", async (req, res) => {
       }
     }
   );
+
+  router.get('/delete-deliveryboy/:id', async function (req, res) {
+    try {
+      const { id } = req.params;
+      const deletedDeliveryboy = await deliveryboyModel.findByIdAndDelete(id);
+      if (!deletedDeliveryboy) {
+        return res.status(404).json({ message: "Delivery boy not found" });
+      }
+      res.redirect("/admin/dashboard")
+    
+    }catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  })
 module.exports = router

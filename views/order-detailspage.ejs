@@ -1088,7 +1088,7 @@ hr {
   <!-- Home Page Content -->
   <div class="content home">
     <div class="header">
-      <div class="home-name">John Carter</div>
+      <div class="home-name"><%=user.name%></div>
       <div class="status">Active</div>
     </div>
 
@@ -1510,12 +1510,12 @@ hr {
   <!-- Profile Page Content -->
   <div class="content profile">
     <div class="profile-image">
-      <img src="assest/new-page/p-4.jpg" alt="Profile Image" class="profile-img">
+      <img src="data:<%= user.profileimage.imageType %>;base64,<%= user.profileimage.file.toString('base64') %>" alt="Profile Image" class="profile-img">
     </div>
   
     <div class="profile-info">
         <div class="info">
-            <h2>John Carter</h2>
+            <h2><%=user.name%></h2>
             <div class="on_off_status">
               <span>Offline</span>
               &nbsp;
@@ -1527,8 +1527,8 @@ hr {
           </div>
           
   
-      <p class="email">Email ID:- <span>sample@gmail.com</span></p>
-      <p class="phone">Phone no.:- <span>+91-1234567890</span></p>
+      <p class="email">Email ID:- <span><%=user.email%></span></p>
+      <p class="phone">Phone no.:- <span><%=user.mobile%></span></p>
   
       <div class="select-duration">
         <!-- Select Duration on the Left -->
@@ -1561,15 +1561,15 @@ hr {
       <div class="order-blocks">
         <div class="order-block total-order">
           <h3>Total Orders</h3>
-          <p class="order-count">49</p>
+          <p class="order-count">0</p>
         </div>
         <div class="order-block completed-order">
           <h3>Completed Orders</h3>
-          <p class="order-count">36</p>
+          <p class="order-count">0</p>
         </div>
       </div>
   
-      <button class="logout-btn">Log Out</button>
+     <a href="/delivery/logout"><button class="logout-btn">Log Out</button></a> 
     </div>
   </div>
   
