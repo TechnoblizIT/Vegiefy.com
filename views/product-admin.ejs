@@ -1538,57 +1538,155 @@ margin-left: 50px;
       <div id="account" class="page-content" style="display: none">
         <div class="container-block" id="container-block">
           <button class="add-account-btn" id="add-account-btn">Add New Account</button>
-          <div class="accounts-container">
-            <% deliveryBoys.forEach((deliveryBoy, index) => { %>
-              <div class="account-form">
-                <h4>#<%= index + 1 %></h4>
-        
-                <div class="image-column-left">
-                  <div class="avatar-container">
-                 
-                  </div>
-                </div>
-        
-                <div class="form-column-right">
-                  <form action="/update-deliveryboy/<%= deliveryBoy._id %>" method="POST" class="form-details">
-                    <!-- First Row -->
-                    <div class="form-group-details">
-                      <label for="">ID:</label>
-                      <input type="text" name="id" value="<%= deliveryBoy._id %>" readonly class="input-field">
-                    </div>
-                    <div class="form-group-details">
-                      <label for="">Name:</label>
-                      <input type="text" name="name" value="<%= deliveryBoy.name %>" class="input-field">
-                    </div>
-                    <!-- Second Row -->
-                    <div class="form-group-details">
-                      <label for="">Mobile No.:</label>
-                      <input type="text" name="phone" value="<%= deliveryBoy.phone %>" class="input-field">
-                    </div>
-                    <div class="form-group-details">
-                      <label for="">Email ID:</label>
-                      <input type="email" name="email" value="<%= deliveryBoy.email %>" class="input-field">
-                    </div>
-                    <!-- Third Row -->
-                    <div class="form-group-details">
-                      <label for="">Password:</label>
-                      <input type="password" name="password" value="<%= deliveryBoy.password %>" class="input-field">
-                    </div>
-                    <div class="form-group-details">
-                      <label for="">Joining Date:</label>
-                      <input type="date" name="joiningDate" value="<%= deliveryBoy.joiningDate.toISOString().split('T')[0] %>" class="input-field">
-                    </div>
-        
-                    <div class="action-buttons">
-                      <button type="submit" class="update-btn">Update</button>
-                      <a href="/delete-deliveryboy/<%= deliveryBoy._id %>" class="delete-btn">Delete</a>
-                    </div>
-                  </form>
-                </div>
+          <div class="account-form">
+            <h4>#1</h4>
+
+            <div class="image-column-left">
+              <div class="avatar-container">
+                <img class="avatar-image" src="assest/new-page/p-4.jpg" alt="Avatar" />
               </div>
-              <hr>
-            <% }); %>
           </div>
+
+            
+            <div class="form-column-right">
+              <form action="" class="form-details">
+                <!-- First Row -->
+                <div class="form-group-details">
+                  <label for="">ID:</label>
+                   <input type="text" placeholder="Enter your ID" class="input-field">
+                </div>
+                <div class="form-group-details">
+                  <label for="">Name:</label>
+                  <input type="text" placeholder="Enter your Name" class="input-field">
+                </div>
+                <!-- Second Row -->
+                <div class="form-group-details">
+                  <label for="">Mobile No.</label>
+                  <input type="text" placeholder="Enter your Mobile No." class="input-field">
+                </div>
+                <div class="form-group-details">
+                  <label for="">Email id:</label>
+                  <input type="email" placeholder="Enter your Email ID" class="input-field">
+                </div>
+                <!-- Third Row -->
+                <div class="form-group-details">
+                  <label for="">Password:</label>
+                  <input type="password" placeholder="Enter your Password" class="input-field">
+                </div>
+                <div class="form-group-details">
+                  <label for="">Joining Date:</label>
+                  <input type="date"  placeholder="Enter your Joining Date" class="input-field">
+                </div>
+                
+              </form>
+            
+            <div class="action-buttons">
+              <button id="update-btn" class="update-btn">Update</button>
+              <button id="delete-btn" class="delete-btn">Delete</button>
+            </div>
+            </div>
+          </div>
+
+          <hr>
+          <div class="account-form">
+         
+       
+            <h4>#2</h4>
+            <div class="image-column-left">
+              <div class="avatar-container">
+                <img class="avatar-image" src="assest/new-page/p-4.jpg" alt="Avatar" />
+              </div>
+            </div>
+
+           
+             <div class="form-column-right">
+              <form action="" class="form-details">
+                <!-- First Row -->
+                <div class="form-group-details">
+                  <label for="">ID:</label>
+                   <input type="text" placeholder="Enter your ID" class="input-field">
+                </div>
+                <div class="form-group-details">
+                  <label for="">Name:</label>
+                  <input type="text" placeholder="Enter your Name" class="input-field">
+                </div>
+                <!-- Second Row -->
+                <div class="form-group-details">
+                  <label for="">Mobile No.</label>
+                  <input type="text" placeholder="Enter your Mobile No." class="input-field">
+                </div>
+                <div class="form-group-details">
+                  <label for="">Email id:</label>
+                  <input type="email" placeholder="Enter your Email ID" class="input-field">
+                </div>
+                <!-- Third Row -->
+                <div class="form-group-details">
+                  <label for="">Password:</label>
+                  <input type="password" placeholder="Enter your Password" class="input-field">
+                </div>
+                <div class="form-group-details">
+                  <label for="">Joining Date:</label>
+                  <input type="date" placeholder="Enter your Joining Date" class="input-field">
+                </div>
+               
+                
+              </form>
+              <div class="action-buttons">
+                <button  class="update-btn" id="update-btn">Update</button>
+                <button type="submit" class="delete-btn">Delete</button>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+          <div class="account-form">
+            <h4>#3</h4>
+            <div class="image-column-left">
+              <div class="avatar-container">
+                <img class="avatar-image" src="assest/new-page/p-4.jpg" alt="Avatar" />
+              </div>
+            </div>
+
+           
+            <div class="form-column-right">
+              <form action="" class="form-details">
+                <!-- First Row -->
+                <div class="form-group-details">
+                  <label for="">ID:</label>
+                   <input type="text" placeholder="Enter your ID" class="input-field">
+                </div>
+                <div class="form-group-details">
+                  <label for="">Name:</label>
+                  <input type="text" placeholder="Enter your Name" class="input-field">
+                </div>
+                <!-- Second Row -->
+                <div class="form-group-details">
+                  <label for="">Mobile No.</label>
+                  <input type="text" placeholder="Enter your Mobile No." class="input-field">
+                </div>
+                <div class="form-group-details">
+                  <label for="">Email id:</label>
+                  <input type="email" placeholder="Enter your Email ID" class="input-field">
+                </div>
+                <!-- Third Row -->
+                <div class="form-group-details">
+                  <label for="">Password:</label>
+                  <input type="password" placeholder="Enter your Password" class="input-field">
+                </div>
+                <div class="form-group-details">
+                  <label for="">Joining Date:</label>
+                  <input type="date" placeholder="Enter your Joining Date" class="input-field">
+                </div>
+                
+                
+              </form>
+              <div class="action-buttons">
+                <button id="update-btn" class="update-btn">Update</button>
+                <button type="submit" class="delete-btn">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
 
 
 
