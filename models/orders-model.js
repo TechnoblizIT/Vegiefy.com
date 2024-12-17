@@ -1,14 +1,23 @@
 const mongoose = require('mongoose');
 
 const orderSchema=mongoose.Schema({
-    Name :String,
+    orderid:String,
     Date:Date,
-    Address:String,
+    User:{
+        type: mongoose.Schema.Types.ObjectId, ref: 'User'
+    },
     Products:[{
         type: mongoose.Schema.Types.ObjectId, ref: 'Products'
     }],
     TotalPrice:Number,
-    Phone:Number
+    
+    DeliveryBoy:{
+        type: mongoose.Schema.Types.ObjectId, ref: 'Deliveryboys'
+    },
+    status:{
+        type:String,
+        default:""
+    }
 })
 
 module.exports=mongoose.model("Orders",orderSchema)

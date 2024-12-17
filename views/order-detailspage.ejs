@@ -1081,6 +1081,18 @@ hr {
     height: 500px;
   }
 }
+.order-status-dropdown {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.order-status-dropdown:hover {
+  border-color: #888;
+}
 </style>
 </head>
 <body>
@@ -1197,10 +1209,15 @@ hr {
       </p>
     </div>
      
-<div class="order-actions">
-  <p class="mark-as">Mark As:</p>
-  <button class="processing-btn">Processing</button>
-</div>
+    <div class="order-actions">
+      <p class="mark-as">Mark As:</p>
+      <select class="order-status-dropdown">
+        <option value="" >Select</option>
+        <option value="processing">Processing</option>
+        <option value="outfordelivery">Out for Delivery</option>
+        <option value="delivered">Delivered</option>
+      </select>
+    </div>
     </div>
 
     <!-- Box 2 -->
@@ -1222,7 +1239,11 @@ hr {
       </div>
       <div class="order-actions">
         <p class="mark-as">Mark As:</p>
-        <button class="outfordelivery-btn">Out for Delivery</button>
+        <select class="order-status-dropdown">
+          <option value="processing">Processing</option>
+          <option value="outfordelivery">Out for Delivery</option>
+          <option value="delivered">Delivered</option>
+        </select>
       </div>
     </div>
 
@@ -1245,7 +1266,13 @@ hr {
       </div>
       <div class="order-actions">
         <p class="mark-as">Mark As:</p>
-        <button class="delivered-btn">Delivered</button>
+        <select class="order-status-dropdown">
+          <option value="">Select</option>
+          <option value="processing">Processing</option>
+          <option value="outfordelivery">Out for Delivery</option>
+          <option value="delivered">Delivered</option>
+          <option value="Cancelled" >Cancelled</option>
+        </select>
       </div>
     </div>
 
@@ -1267,7 +1294,13 @@ hr {
   </div>
   <div class="order-actions">
     <p class="mark-as">Mark As:</p>
-    <button class="cancelled-btn" onclick="toggleOptions()">Cancelled</button>
+    <select class="order-status-dropdown">
+      <option value="">Select</option>
+      <option value="processing">Processing</option>
+      <option value="outfordelivery">Out for Delivery</option>
+      <option value="delivered">Delivered</option>
+      <option value="Cancelled" >Cancelled</option>
+    </select>
   </div>
 
   <!-- Options Section -->
