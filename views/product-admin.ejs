@@ -141,6 +141,31 @@
       #toggle-btn:hover {
         background-color: var(--hover-clr);
       }
+      .custom-logout-btn {
+  display: inline-block;
+  text-decoration: none;
+  color: #fff;
+  background-color: #ff6b6b; /* Light red background */
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 4px; /* Subtle rounded corners */
+  border: 2px solid #ff4d4d; /* Slightly darker border */
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.custom-logout-btn:hover {
+  background-color: #ff4d4d; /* Darker red on hover */
+  color: #ffffff;
+  border-color: #e63946; /* More intense red border */
+}
+
+.custom-logout-btn:active {
+  background-color: #e63946; /* Active state color */
+  transform: scale(0.96); /* Slight shrinking effect on click */
+}
+
       /* css for dashboard============================================================================ */
       #dashboard {
         padding: 20px;
@@ -675,6 +700,66 @@
 
       
       /* CSS for products ==============================================================================*/
+      .toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+td[contenteditable="true"] {
+  outline: none;
+  cursor: text;
+}
+
+td[contenteditable="true"]:focus {
+  background-color: #3a3c46;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #4caf50;
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+.box-update-btn button{
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 3px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 13px;
+    }
       .custom-table th,
       .custom-table td,
       .category-table th,
@@ -882,15 +967,20 @@
 /* css for add product form =============================================================================== */
 #add-product-form {
   max-width: 900px;
-  /* margin: 2rem auto; */
   margin: auto;
   padding: 2rem;
-  /* background: var(--base-clr); */
   background-color: #2c2f3d;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(255, 253, 253, 0.1);
 }
-
+#update-product-form{
+  max-width: 900px;
+  margin: auto;
+  padding: 2rem;
+  background-color: #2c2f3d;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(255, 253, 253, 0.1);
+}
 .form-heading {
   /* text-align: center; */
   margin-bottom: 1.5rem;
@@ -924,18 +1014,21 @@ label {
 input[type="text"],
 input[type="number"],
 input[type="date"],
-select {
+select,
+textarea {
   width: 100%;
   padding: 0.5rem;
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 1rem;
   color: #888;
+  box-sizing: border-box; 
 }
 
 textarea {
-  width: 100%;
-  border-radius: 4px;
+  resize: vertical; 
+  height: 2.5rem; 
+  line-height: 1.5; 
 }
 
 .form-row {
@@ -1145,7 +1238,7 @@ margin-left: 50px;
           </a>
         </li>
         <li>
-          <a href="/admin/logout" style="color: red; cursor: pointer;">Logout</a>
+          <a href="/admin/logout" class="custom-logout-btn">Logout</a>
         </li>
       </ul>
     </nav>
@@ -1350,6 +1443,7 @@ margin-left: 50px;
                         <th>UNIT SOLD</th>
                         <th>IN STOCK</th>
                         <th>EXPIRE DATE</th>
+                        <th>Status</th>
                         <th>&nbsp;</th>
                     </tr>
                 </thead>
@@ -1362,12 +1456,21 @@ margin-left: 50px;
                             <td> 
                                 <%= product.unitSold || 'N/A' %> 
                             </td>
-                            <td><%= product.instock %></td>
+                            <td contenteditable="true"><%= product.instock %></td>
                             <td>
                                 <%= product.expirydate ? new Date(product.expirydate).toDateString() : 'No Expiry' %>
                             </td>
-                            <td class="delete-icon">
+                            <td class="toggle-switch-cell">
+                              <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                              </label>
+                            </td>
+                            <!-- <td class="delete-icon">
                                 <i class="far fa-trash-alt" data-id="<%= product._id %>"></i>
+                            </td> -->
+                            <td class="box-update-btn" id="box-update-btn">
+                               <button>Update</button>
                             </td>
                         </tr>
                     <% }); } else{ %>
@@ -1461,15 +1564,15 @@ margin-left: 50px;
   <form class="form-container" action="/admin/addproduct" method="post" enctype="multipart/form-data">
     <div class="left-form-block">
       <!-- Left Side Block -->
-      <div class="form-group">
+      <div class="form-group-account">
         <label for="product-name">Product Name:</label>
         <input type="text" id="product-name" name="productname" required />
       </div>
-      <div class="form-group">
+      <div class="form-group-account">
         <label for="description">Description:</label>
         <textarea id="description" name="description" rows="3" required></textarea>
       </div>
-      <div class="form-group">
+      <div class="form-group-account">
         <label for="category">Category:</label>
         <select id="category" name="category" required>
           <option value="" selected>Select Category</option>
@@ -1479,19 +1582,25 @@ margin-left: 50px;
         </select>
       </div>
       <div class="form-row">
-        <div class="form-group">
+        <div class="form-group-account">
           <label for="expire-date">Expire Date:</label>
           <input type="date" id="expire-date" name="expiredate" required />
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group-account">
           <label for="in-stock">Price(₹):</label>
           <input type="number" id="in-stock" name="price" required />
-        </div>
-        <div class="form-group">
+        </div> -->
+        <div class="form-group-account">
           <label for="in-stock">Units in Stock:</label>
           <input type="number" id="in-stock" name="instock" required />
         </div>
       </div>
+      <div class="form-row">
+        <div class="form-group-account">
+          <label for="in-stock">Price(₹):</label>
+          <input type="number" id="in-stock" name="price" required />
+        </div>
+        </div>
     </div>
 
     <!-- Right Side Block -->
@@ -1516,6 +1625,73 @@ margin-left: 50px;
     <!-- Add Product Now Button (inside the form block) -->
     <div class="form-actions">
       <button type="submit" class="btn btn-success">Add Product Now</button>
+    </div>
+  </form>
+</div>
+
+<!-- update form -->
+<div id="update-product-form" style="display: none;">
+  <h2 class="form-heading">
+    <!-- Back Icon -->
+    <i id="back-icon" class="fas fa-arrow-left back-icon"></i>
+    Update Product
+  </h2>
+  <form class="form-container">
+    <div class="left-form-block">
+      <!-- Left Side Block -->
+      <div class="form-group-account">
+        <label for="product-name">Product Name:</label>
+        <input type="text" id="product-name" name="product-name" required />
+      </div>
+      <div class="form-group-account">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="3" required></textarea>
+      </div>
+      <div class="form-group-account">
+        <label for="category">Category:</label>
+        <select id="category" name="category" required>
+          <option value="" selected>Select Category</option>
+          <option value="new-arrival">New Arrival</option>
+          <option value="most-popular">Most Popular</option>
+          <option value="trending">Trending</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group-account">
+          <label for="expire-date">Expire Date:</label>
+          <input type="date" id="expire-date" name="expire-date" required />
+        </div>
+        
+        <div class="form-group-account">
+          <label for="in-stock">Units in Stock:</label>
+          <input type="number" id="in-stock" name="in-stock" required />
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- Right Side Block -->
+    <div class="right-form-block">
+      <div class="tm-product-img-dummy mx-auto">
+        <i
+          class="fas fa-cloud-upload-alt tm-upload-icon"
+          onclick="document.getElementById('fileInput').click();"
+        ></i>
+      </div>
+      <div class="custom-file mt-3 mb-3">
+        <input id="fileInput" type="file" style="display:none;" />
+        <input
+          type="button"
+          class="btn btn-primary btn-block mx-auto"
+          value="UPLOAD PRODUCT IMAGE"
+          onclick="document.getElementById('fileInput').click();"
+        />
+      </div>
+    </div>
+
+    <!-- Add Product Now Button (inside the form block) -->
+    <div class="form-actions">
+      <button type="submit" class="btn btn-success">Update Product Now</button>
     </div>
   </form>
 </div>
@@ -2035,25 +2211,56 @@ margin-left: 50px;
           clickedMenuItem.classList.add("active");
         }
       }
-  // Get elements
+  // js for product page
   const addProductBtn = document.getElementById('add-product-btn');
   const leftBlock = document.getElementById('left-block');
   const rightBlock = document.getElementById('right-block');
   const addProductForm = document.getElementById('add-product-form');
-  const backIcon = document.getElementById('back-icon');
+  const backIcons = document.querySelectorAll('.back-icon');
 
-  // Show the form and hide the blocks
-  addProductBtn.addEventListener('click', () => {
-    leftBlock.style.display = 'none';
-    rightBlock.style.display = 'none';
-    addProductForm.style.display = 'block';
-  });
+  
 
-  backIcon.addEventListener('click' , () => {
-    leftBlock.style.display = 'block';
-    rightBlock.style.display = 'block';
-    addProductForm.style.display = 'none';
+// Show the form and hide the blocks
+addProductBtn.addEventListener('click', () => {
+  leftBlock.style.display = 'none';
+  rightBlock.style.display = 'none';
+  addProductForm.style.display = 'block';
+});
+
+backIcons.forEach((icon) => {
+icon.addEventListener('click', () => {
+  // Example: Show or hide specific blocks
+  leftBlock.style.display = 'block';
+  rightBlock.style.display = 'block';
+  addProductForm.style.display = 'none';
+});
+});
+const boxUpdateBtn =  document.getElementById('box-update-btn');
+const updateProductForm = document.getElementById('update-product-form');
+
+boxUpdateBtn.addEventListener('click' , () => {
+  leftBlock.style.display = 'none';
+  rightBlock.style.display = 'none';
+  updateProductForm.style.display = 'block';
+})
+
+backIcons.forEach((icon) => {
+icon.addEventListener('click', () => {
+  // Example: Show or hide specific blocks
+  leftBlock.style.display = 'block';
+  rightBlock.style.display = 'block';
+  updateProductForm.style.display = 'none';
+});
+});
+  // for edit number
+const editableCells = document.querySelectorAll('td[contenteditable="true"]');
+
+editableCells.forEach((cell) => {
+  cell.addEventListener('blur', () => {
+    console.log(`Updated value: ${cell.textContent}`);
+    // Add logic to save or process the updated value
   });
+});
       // js for account page
 
       document.addEventListener('DOMContentLoaded', () => {
