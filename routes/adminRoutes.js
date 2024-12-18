@@ -54,6 +54,35 @@ router.post("/addproduct",upload.single("file"),async function(req, res){
    res.redirect("/admin/dashboard")
 
 })
+router.post("/updateproduct",upload.single("productimage"),async function(req, res){
+  let { productid, productname, productdescription, productcategory, productexpiredate, productinstock } = req.body;
+
+  if(req.file){
+    const updatedProduct = await productModel.findByIdAndUpdate(productid, {
+      name: productname,
+      description: productdescription,
+  
+      image:{
+        file:req.file.buffer,
+        imageType:req.file.mimetype,
+      },
+      category:productcategory,
+      expirydate: new Date(productexpiredate),
+      productinstock,
+    }, { new: true });
+  }else{
+    const updatedProduct = await productModel.findByIdAndUpdate(productid, {
+      name: productname,
+      description:productdescription,
+      category:productcategory,
+      expirydate: new Date(productexpiredate),
+      instock:productinstock,
+    }, { new: true });
+  }
+  
+    res.redirect("/admin/dashboard")
+})
+
 router.delete("/products/:id", async (req, res) => {
     try {
       const { id } = req.params;
@@ -69,6 +98,20 @@ router.delete("/products/:id", async (req, res) => {
       res.status(500).json({ message: "Internal Server Error" });
     }
   });
+
+  router.get("/getproduct/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const product = await productModel.findById(id);
+      if (!product) {
+        return res.status(404).json({ message: "Product not found" });
+      }
+      res.json(product);
+    }catch(e){
+      console.error(e);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  })
 
 
 
