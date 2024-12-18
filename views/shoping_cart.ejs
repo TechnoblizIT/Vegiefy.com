@@ -571,79 +571,265 @@ hr {
 .form-checkout {
   margin-bottom: 10px;
 }
-
 .checkout-form {
-  padding: 10px; 
-  background-color: #fff;
-  border-radius: 10px;
-  max-width: 400px;
-  margin: 20px auto; 
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  font-family: 'Poppins', sans-serif;
-  border-left: 4px solid #0f5256; 
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    max-width: 400px;
+    margin: 20px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
+    border-left: 4px solid #0f5256;
+}
+/* Add New Address Link */
+.add-address {
+    margin-bottom: 20px;
+    text-align: left;
 }
 
-.checkout-form h2 {
-  text-align: center;
-  font-size: 20px;
-  color: #0f5256;
-  margin-bottom: 12px; 
-  font-weight: 600;
+.add-address-link {
+    font-size: 16px;
+    font-weight: bold;
+    color: #007bff;
+    text-decoration: none;
 }
 
-.checkout-form label {
-  font-size: 14px; 
-  font-weight: bold;
-  display: block;
-  margin-bottom: 5px;
-  color: #333;
+.add-address-link:hover {
+    text-decoration: underline;
+}
+.address-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
-.checkout-form input,
-.checkout-form select {
-  width: 100%;
-  padding: 8px; 
-  margin-bottom: 12px; 
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px; 
-  background-color: #fff;
-  transition: border 0.3s ease;
-  box-sizing: border-box;
+.address-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.address-radio {
+    margin-top: 5px;
+}
+.address-label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
 }
 
-.checkout-form input:focus,
-.checkout-form select:focus {
-  border-color: #0f5256;
-  outline: none;
-  box-shadow: 0 0 5px rgba(15, 82, 86, 0.2);
+.address-details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
-.checkout-form button {
-  width: 100%;
-  background: linear-gradient(135deg, #0f5256, #09343c);
-  color: white;
-  font-size: 16px;
-  padding: 10px; 
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  text-transform: uppercase;
-  transition: background-color 0.3s ease;
+.name-tag {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
 }
 
-.checkout-form button:hover {
-  background: linear-gradient(135deg, #09343c, #0f5256);
-  box-shadow: 0 3px 8px rgba(15, 82, 86, 0.25);
+.address-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
 }
 
-.checkout-form .row {
-  display: flex;
-  gap: 8px; 
+.address-tag {
+    font-size: 14px;
+    background-color: #e0e0e0;
+    color: #7F8C8D;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+.address-text {
+    font-size: 14px;
+    color: #666;
+}
+.address-phone {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 5px;
+}
+.confirm-order-button-container {
+    margin-top: 20px;
+    text-align: center;
 }
 
-.checkout-form .row input {
-  flex: 1;
+.confirm-order-button {
+    margin-top: 20px;
+    text-align: center;
+    background-color: #218838;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.confirm-order-button:hover {
+    background-color: #69ba6b;
+}
+/* css for popup-container */
+.popup-container {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    padding-top: 80px; 
+}
+
+.popup-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 13px;
+    border-radius: 6px;
+    width: 70%;
+    max-width: 250px;
+    text-align: center;
+    position: relative; 
+}
+
+.popup-header {
+    display: flex;
+    align-items: center;
+    gap: 45px; 
+}
+
+.popup-close {
+    font-size: 15px;
+    font-weight: bold;
+    color: #7F8C8D;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.popup-close:hover {
+    color: #555;
+}
+
+.popup-header h2 {
+    font-size: 12px;
+    color: #333;
+    margin: 0;
+}
+
+.popup-divider {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 5px auto 10px; 
+    width: 90%;
+    max-width: 400px;
+    display: block;
+}
+
+.popup-text {
+    font-size: 15px;
+    color: #218838;
+    font-weight: bold;
+    margin: 8px 0;
+}
+
+.popup-image {
+    width: 100px;
+    height: 100px;
+    margin: 8px auto;
+    display: block;
+}
+
+.popup-delivery-time {
+    font-size: 12px;
+    color: #7F8C8D;
+    margin: 4px 0;
+}
+.popup-delivery-time strong{
+    color: #555;
+}
+.popup-info {
+    font-size: 11px;
+    color: #555;
+    line-height: 1.4;
+    margin-bottom: 15px;
+}
+
+.popup-block {
+    background: linear-gradient(145deg, #ffffff, #f7f7f7);
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    margin: auto;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    width: 100%;
+    max-width: 400px;
+    padding: 5px;
+}
+
+.popup-block-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 10px auto;
+    width: 90%;
+    background-color: transparent;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+
+.popup-detail {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    color: #7F8C8D;
+}
+.popup-cart-text{
+    font-size: 12px;
+    color: #7F8C8D;
+}
+.popup-cart-text strong{
+    color: #555;
+}
+.popup-shop-icon,.popup-cart-icon,.popup-time-icon{
+    font-size: 10px;
+    color: #7F8C8D;
+    padding: 5px;
+}
+.popup-detail strong {
+    color: #555;
+}
+
+.popup-home-button {
+    background-color: #218838;
+    color: #fff;
+    font-size: 12px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 18px;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+.popup-home-button:hover {
+    background-color: #69ba6b;
 }
 
 
@@ -671,21 +857,57 @@ hr {
     .form-checkout{
       padding: 10px;
     }
-    .checkout-form {
-    padding: 8px;
-    margin: 15px auto;
-  }
+  
+   .popup-content {
+        width: 90%;
+        max-width: none;
+        margin: 5% auto;
+        padding: 20px;
+        margin-top: 115px;
+    }
+    .popup-header{
+      gap: 55px;
+    }
+    .popup-header h2 {
+        font-size: 16px;
+    }
 
-  .checkout-form h2 {
-    font-size: 18px;
-  }
+    .popup-text {
+        font-size: 18px;
+    }
+    .popup-info{
+      font-size: 13px;
+    }
+    .popup-image {
+        width: 120px;
+        height: 120px;
+    }
 
-  .checkout-form .row {
-    flex-direction: column;
-    gap: 5px;
-  }
-   
-    
+    .popup-divider {
+        width: 100%;
+    }
+
+    .popup-block {
+        max-width: none;
+        padding: 20px;
+    }
+
+    hr {
+        width: 100%;
+    }
+    .popup-shop-icon, .popup-cart-icon, .popup-time-icon {
+      font-size: 13px;
+    }
+    .popup-cart-text,.popup-detail{
+      font-size: 14px;
+    }
+    .popup-home-button {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+    .popup-delivery-time{
+      font-size: 15px;
+    }
 }
 
 
@@ -1003,56 +1225,104 @@ footer::before {
  <!-- Checkout Form -->
 <div class="form-checkout">
   <div class="checkout-form" id="checkoutForm" style="display: none;">
-    <h2>Checkout</h2>
-    <form id="myForm" action="/user/createOrder" method="post">
-      
-      <!-- Name Section -->
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" value="<%=user.name%>" required readonly>
-      
-     
-      <label for="houseBuilding">Address:</label>
-      <input type="text" id="houseBuilding" name="houseBuilding" placeholder="House No.,Building Name" required>
-      <input type="text" id="roadName" name="roadName" placeholder="Road Name, Area, Colony" required>
-      
-   
-      <div class="row">
-        <div>
-          <label for="district">District:</label>
-          <input type="text" id="district" name="district" required>
-        </div>
-        <div>
-          <label for="city">City:</label>
-          <input type="text" id="city" name="city" required>
-        </div>
-        <div>
-          <label for="pinCode">Pin Code:</label>
-          <input type="text" id="pinCode" name="pinCode" required>
-        </div>
-      </div>
-      
-     
-      <label for="phone">Phone:</label>
-      <input type="tel" id="phone" name="phone" required>
-      
-      
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" value="<%=user.email%>" required>
-      
-  
-      <label for="paymentMode">Payment Mode:</label>
-      <select id="paymentMode" name="paymentMode" required>
-        <option value="cashOnDelivery">Cash on Delivery</option>
-      </select>
-      
-     
-      <button type="submit" class="submit-btn">Submit</button>
-      
-    </form>
-  </div>
-</div>
+    <div class="add-address">
+        <a href="#" class="add-address-link">+ Add New Address</a>
+    </div>
 
-  </div>
+    <div class="address-container">
+        <div class="address-item">
+            <input type="radio" id="address1" name="address" class="address-radio" checked>
+            <label for="address1" class="address-label">
+                <div class="address-details">
+                    <div class="name-tag">
+                        <span class="address-name">John Doe</span>
+                        <span class="address-tag">Home</span>
+                    </div>
+                    <div class="address-text">
+                        123, Main Street, Locality, 
+                        City, State, 123456
+                    </div>
+                    <div class="address-phone">+91-9876543210</div>
+                </div>
+            </label>
+        </div>
+        
+        <div class="address-item">
+            <input type="radio" id="address2" name="address" class="address-radio">
+            <label for="address2" class="address-label">
+                <div class="address-details">
+                    <div class="name-tag">
+                        <span class="address-name">Jane Smith</span>
+                        <span class="address-tag">Work</span>
+                    </div>
+                    <div class="address-text">
+                        456, Blue River Road,
+                        Corporate Plaza, 
+                        New York, NY 10001
+                    </div>
+                    <div class="address-phone">+91-9876543211</div>
+                </div>
+            </label>
+        </div>
+        
+        <div class="address-item">
+            <input type="radio" id="address3" name="address" class="address-radio">
+            <label for="address3" class="address-label">
+                <div class="address-details">
+                    <div class="name-tag">
+                        <span class="address-name">Robert Brown</span>
+                        <span class="address-tag">Home</span>
+                    </div>
+                    <div class="address-text">
+                        789, Pinewood Drive,
+                        Green Valley Apartments,
+                        California, CA 90210
+                    </div>
+                    <div class="address-phone">+91-9876543212</div>
+                </div>
+            </label>
+        </div>
+    </div>
+    <div class="confirm-order-button-container">
+        <button class="confirm-order-button" onclick="openPopup()">Confirm Order</button>
+    </div>
+    
+    <!-- Modal (Popup Box) -->
+    <div id="orderPopup" class="popup-container">
+        <div class="popup-content">
+            <div class="popup-header">
+                <span class="popup-close" onclick="closePopup()"><i class="fa-solid fa-xmark"></i></span>
+                <h2>Order Confirmation</h2>
+            </div>
+            <hr class="popup-divider">
+    <p class="popup-text">Order placed successfully!</p>
+    <img src="../images/assest/popup-image.jpg" alt="Order Success" class="popup-image">
+    <p class="popup-delivery-time">Estimated delivery in <strong>25 minutes</strong></p>
+    <p class="popup-info">
+        We are searching in the best outlets to satisfy all your needs in 1 go!
+    </p>
+    <div class="popup-block">
+        <div class="popup-block-header">
+            <i class="fa-solid fa-cart-shopping popup-shop-icon"></i>
+            <span class="popup-cart-text">
+                6 items for <strong>'219 EGP Cash'</strong>
+            </span>
+        </div>
+        <hr>
+        <div class="popup-detail">
+            <i class="fa-solid fa-paper-plane popup-cart-icon"></i>
+            <span>Delivery to <strong>Home</strong></span>
+        </div>
+        <hr>
+        <div class="popup-detail">
+            <i class="fa-solid fa-clock popup-time-icon" ></i>
+            <span>Will be delivered at <strong>02:02 PM</strong></span>
+        </div>
+    </div>
+    <button class="popup-home-button" onclick="window.location.href='index.html'">Back to Home</button>
+        </div>
+    </div>
+</div>
 </div>
 
 
@@ -1208,15 +1478,15 @@ document.addEventListener('click', function(event) {
         });
 
     // -----------------------------------------------------------------------------------------------------
-      // js for footer section
-      document.addEventListener("DOMContentLoaded", function () {
-                const btn = document.querySelector('.contact-btn');
-    
-                btn.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    alert('Your message has been sent!');
-                });
-            });
+     // Function to open the popup
+function openPopup() {
+    document.getElementById("orderPopup").style.display = "block";
+}
+
+// Function to close the popup
+function closePopup() {
+    document.getElementById("orderPopup").style.display = "none";
+}
         </script>
 </body>
 </html>
