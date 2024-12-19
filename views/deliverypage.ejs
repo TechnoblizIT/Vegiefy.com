@@ -290,440 +290,7 @@ header {
   margin: 10px 0; 
 }
 
-hr {
-  width: 100%;
-  height: 1px; 
-  background-color: #69ba6b; 
-  border: none; 
-  margin: 10px 0; 
 }
-
-}
-
-
-  /* css for delivery */
-  .delivery{
-    margin-top: 80px;
-  }
-  .title p span{
-    color: #48d84a;
-  }
-  .delivery-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            margin-top: 130px;
-            
-        }
-         .delivery-container .title h2 {
-            text-align: center;
-            margin-bottom: 15px;
-            color: #333;
-            text-transform: capitalize;
-            font-size: 45px;
-           font-weight: bold;
-        }
-        .delivery-container .title p{
-            text-align: center;
-            font-size: 20px;
-        }
-        .delivery-container .box-container{
-           display: flex;
-           justify-content: space-evenly;
-           align-items: center;
-        }
-        .delivery-container .box-container .card-content{
-            
-            width: 400px;
-            height: 200px;
-            margin-top: 30px;
-            background-image: url(./images/assest/delivery/delivery-img.png);
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            border-radius: 10px;
-            position: relative;
-            overflow: hidden;
-        }
-       
-      
-.card-content::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); 
-    z-index: 1;
-}
-
-.card-content h4 {
-    font-size: 25px;
-    margin-left: 36px;
-    margin-top: 15px;
-    position: relative;
-    z-index: 2;
-    color: white;
-}
-
-.card-content .box {
-    border: 0.5px solid #a7aaaa;
-    width: 320px;
-    margin-left: 36px;
-    margin-top: 27px;
-    position: relative; 
-    z-index: 2; 
-    color: white;
-}
-.card-content .box ul li{
-    list-style-type: square;
-
-}
-/* css for order process */
-.order-process{
-    
-    width: 920px;
-    height: 220px;
-    margin-bottom: 10px;
-    margin: auto;
-    margin-top: 45px;
-    margin-bottom: 20px;
-    background-image: url(./images/assest/delivery/delivery-img.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 10px;
-    position: relative;
-    overflow: hidden;
-}
-.order-process::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); 
-    z-index: 1;
-}
-.order-process .order-content{
-  
-    width: 850px;
-    margin-top: 31px;
-    margin-left: 34px;
-    border: 0.5px solid #a7aaaa;
-    position: relative;
-    z-index: 2;
-}
-.order-process .order-content h4,ol{
-    margin-left: 36px;
-    margin-top: 10px;
-    position: relative;
-    z-index: 2;
-    color: white;
-    list-style-type: none;
-}
-.order-process .order-content h4{
-    font-size: 25px;
-}
-
-/* Media queries for delivery section */
-@media (max-width: 991px) {
-    .delivery-container .title h2 {
-        font-size: 30px; 
-    }
-
-    .delivery-container .title p {
-        font-size: 20px;
-    }
-
-    .delivery-container .box-container {
-        flex-direction: column; 
-        align-items: center;
-    }
-
-    .delivery-container .box-container .card-content {
-        width: 100%; 
-        margin-top: 30px;
-        height: 150px; 
-    }
-
-    .card-content h4 {
-        font-size: 20px; 
-        margin-left: 0;
-        margin-top: 10px; 
-    }
-
-    .card-content .box {
-        width: 90%;
-        margin-top: 15px;
-    }
-}
-
-@media (max-width: 768px) {
-    .delivery-container{
-        margin-top: 180px;
-    }
-    .delivery-container .title h2 {
-        font-size: 25px; 
-    }
-
-    .delivery-container .title p {
-        font-size: 18px; 
-    }
-
-    .delivery-container .box-container .card-content {
-        width: 100%; 
-    }
-
-    .card-content h4 {
-        font-size: 18px; 
-        margin-top: 5px;
-        margin-left: 15px; 
-    }
-
-    .card-content .box {
-        width: 90%; 
-        margin-top: 15px; 
-        margin-left: 18px;
-    }
-}
-
-/* Media queries for ordering process */
-@media (max-width: 991px) {
-    .order-process {
-        width: 90%;
-        height: auto;
-        
-    }
-
-    .order-process::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1;
-    }
-
-    .order-process .order-content {
-        width: 90%;
-        margin: 50px auto;
-        /* padding: 20px; */
-        border: 1px solid #a7aaaa;
-        /* border-radius: 10px; */
-        background-color: transparent;
-    }
-
-    .order-process .order-content h4 {
-        font-size: 25px;
-        margin-left: 5px;
-        margin-top: 10px;
-        color: white;
-    }
-
-    .order-process .order-content ol {
-        margin-left: 0px;
-        margin-top: 10px;
-    }
-
-    .order-process .order-content ol li {
-        font-size: 18px;
-        color: white;
-    }
-}
-
-@media (max-width: 767px) {
-  
-    .order-process .order-content h4 {
-        font-size: 25px;
-        /* margin-left: 36px; */
-        margin-top: 10px;
-        color: white;
-    }
-
-    .order-process .order-content ol {
-        /* margin-left: 36px; */
-        margin-top: 10px;
-    }
-
-    .order-process .order-content ol li {
-        font-size: 18px;
-        color: white;
-    }
-}
-/* css for FAQs */
-.faqs{
-    margin-bottom: 10px;
-}
-.faqs h3{
-    text-align: center;
-    margin-top: 30px;
-    margin-bottom: 20px;
-    font-size: 30px;
-}
-.faq-item {
-    margin: auto;
-    width: 920px;
-     
-    border: 1px solid rgb(209, 204, 204); 
-    border-radius: 5px; 
-    overflow: hidden; 
-    
-    
-}
-
-.question {
-    cursor: pointer;
-    background-color: white;
-    padding: 10px;
-    border-bottom: 1px solid gray; 
-    transition: all 0.3s ease;
-    color: black;
-}
-.question:hover{
-    background-color: #0f5256;
-    color: white;
-}
-
-.answer {
-    display: none;
-    padding: 10px;
-    border-bottom: 1px solid rgb(209, 204, 204); 
-    transition: all 0.3s ease;
-}
-
-.faq-item.active {
-    margin-bottom: 40px;
-}
-
-.question.active {
-    font-size: 20px;
-    background-color: white; 
-}
-.question.active:hover{
-    background-color: #0f5256;
-}
-
-.answer.active {
-    display: block;
-    font-size: 18px;
-    background-color: #f5f0f0; 
-}
-
-@media (max-width: 991px) {
-    .faq-item {
-        width: 90%;
-    }
-    .faqs h3{
-        font-size: 25px;
-    }
-}
-
-@media (max-width: 767px) {
-    .faq-item {
-        width: 90%;
-    }
-
-    .faqs {
-        font-size: 15px;
-    }
-
-    .question.active,
-    .answer.active {
-        background-size: 110%;
-    }
-}
-
-        /* CSS for product registration form */
-        /* .product-registration {
-            margin-top: 50px;
-            padding: 20px;
-        }
-
-        .registration-container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .product-registration .title h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333;
-            text-transform: capitalize;
-        }
-
-        .product-registration .title p {
-            text-align: center;
-            font-size: 18px;
-            margin-bottom: 30px;
-            color: #666;
-        }
-
-        .product-registration .form-group {
-            margin-bottom: 15px;
-        }
-
-        .product-registration .form-group label {
-            display: block;
-            font-size: 16px;
-            margin-bottom: 5px;
-            color: #333;
-        }
-
-        .product-registration .form-group input,
-        .product-registration .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .product-registration .form-group textarea {
-            height: 100px;
-            resize: none;
-        }
-
-        .product-registration .form-group button {
-            width: 100%;
-            padding: 10px;
-            font-size: 18px;
-            border: none;
-            border-radius: 5px;
-            background-color: #0f5256;
-            color: white;
-            cursor: pointer;
-        }
-
-        .product-registration .form-group button:hover {
-            background-color: #09343c;
-        } */
-
-        /* Media queries for product registration form */
-        /* @media (max-width: 767px) {
-            .product-registration .title h2 {
-                font-size: 22px;
-            }
-
-            .product-registration .title p {
-                font-size: 16px;
-            }
-
-            .product-registration .form-group label,
-            .product-registration .form-group input,
-            .product-registration .form-group textarea,
-            .product-registration .form-group button {
-                font-size: 14px;
-            }
-        } */
 /* css for footer */
 footer {
   position: relative;
@@ -914,7 +481,371 @@ footer::before {
 }
 
 
+.my-order {
+  width: 90%;
+  max-width: 400px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin: auto;
+  margin-top: 150px;
+}
+.order-details{
+  padding: 10px;
+}
+.my-order h1 {
+  margin: 0;
+  text-align: center;
+}
 
+.my-order hr {
+  border: none;
+  height: 1px;
+  background: #a7aaaa;
+}
+
+.order-id h2 {
+  padding: 10px;
+  color: black;
+  text-align: left;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.details {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.details-heading {
+  color: black;
+  text-align: left;
+  font-size: 18px;
+}
+
+.delivery-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delivery-agent {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.delivery-agent img {
+  width: 50px;
+  height: 50px;
+}
+
+.delivery-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.delivery-info .name {
+  font-weight: bold;
+}
+
+.delivery-time {
+  text-align: right;
+}
+
+.delivery-time .time {
+  font-weight: bold;
+  color: #388e3c;
+}
+
+.star-rating {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.star {
+  font-size: 20px;
+  color: #ddd;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.star:hover,
+.star.selected {
+  color: #f39c12;
+}
+
+.address-details {
+  padding: 10px;
+}
+
+.address-details h2 {
+  color: black;
+  text-align: left;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.address-details span {
+  font-size: 14px;
+  background-color: #388e3c;
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.address-block {
+  background: linear-gradient(135deg, #e8f5e9, #a5d6a7);
+  border: 2px solid #388e3c;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.address-block .order-address {
+  font-size: 14px;
+  color: #1b5e20;
+  line-height: 1.6;
+}
+
+.price {
+  padding: 0px 15px;
+}
+
+.price span {
+  font-size: 18px;
+  color: #777;
+}
+
+.price h2 {
+  font-size: 18px;
+}
+
+.order-track {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 10px;
+}
+
+.order-step {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.step-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: white;
+  font-weight: bold;
+  margin-right: 15px;
+}
+
+.order-tracking-block {
+  width: 100%;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+.order-step p {
+  font-size: 14px;
+  margin: 0;
+}
+
+.order-date,
+.processing-date,
+.outfordeliverd-date,
+.delivered-date {
+  display: block;
+  font-size: 12px;
+  color: #777;
+}
+
+.order-step::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 40px;
+  background-color: lightgray;
+  z-index: -1;
+}
+
+.order-step:last-child::after {
+  display: none;
+}
+
+.step-1 .step-circle {
+  background-color: #4caf50;
+}
+
+.step-2 .step-circle {
+  background-color: #4caf50;
+}
+
+.step-3 .step-circle {
+  background-color: #ff9800;
+}
+
+.step-4 .step-circle {
+  background-color: #ff9800;
+}
+
+.step-5 .step-circle {
+  background-color: #f44336;
+}
+
+.step-1::after {
+  background-color: #4caf50;
+}
+
+.step-2::after {
+  background-color: #4caf50;
+}
+
+.step-3::after {
+  background-color: #ff9800;
+}
+
+.step-4::after {
+  background-color: #ff9800;
+}
+
+.step-5::after {
+  background-color: #f44336;
+}
+
+.order-details-button {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+  align-items: center;
+  padding: 20px;
+}
+
+.order-details-button button {
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.cancel-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background-color: #d32f2f;
+}
+
+.for-help {
+  background-color: #4caf50;
+  color: white;
+}
+
+.for-help:hover {
+  background-color: #69ba6b;
+}
+@media (max-width: 768px) {
+  .my-order {
+    margin-top: 190px;
+    padding: 10px;
+    width: 100%;
+    max-width: 100%;
+  }
+  .my-order h1 {
+    font-size: 18px;
+  }
+
+  .order-id h2 {
+    font-size: 16px;
+  }
+
+  .details-heading,
+  .order-id h2,
+  .address-details h2 {
+    font-size: 16px;
+  }
+
+  .details {
+    padding: 5px;
+  }
+
+  .star-rating {
+    gap: 3px;
+  }
+
+  .star {
+    font-size: 16px;
+  }
+
+  .address-block .order-address {
+    font-size: 12px;
+  }
+
+  .price {
+    padding: 0 10px;
+  }
+
+  .price span {
+    font-size: 16px;
+  }
+
+  .price h2 {
+    font-size: 16px;
+  }
+
+  .order-step p {
+    font-size: 12px;
+  }
+
+  .order-step::after {
+    height: 30px;
+  }
+
+  button {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+  .order-step{
+    margin-bottom: 10px;
+  }
+  .order-tracking-block{
+    padding: 10px 20px;
+  }
+  .order-details-button {
+    /* flex-direction: column; */
+    /* align-items: stretch; */
+    padding: 10px;
+  }
+  .order-id h2 {
+    padding: 0px 5px;
+  }
+  .address-block{
+    padding: 5px 15px;
+  }
+}
     </style>
 </head>
 <body>
@@ -982,7 +913,7 @@ footer::before {
                 <li><a href="/#about-us">About</a></li>
                 <li><a href="/product">Products</a></li>
                 <li><a href="/cart">Cart</a></li>
-                <li><a href="/delivery"  class="nav-active">Delivery</a></li>
+                <li><a href="/delivery"  class="nav-active">My Orders</a></li>
                 <li><a href="/blog"  >Blog</a></li>
                 <li><a href="/contact">Contact</a></li>
         </ul>
@@ -991,124 +922,80 @@ footer::before {
   </header>
 
   <!-- html for delivery section -->
-      <section class="delivery">
-        <div class="delivery-container">
-            <div class="title">
-            <h2>Direct farm-to-table Delivery</h2>
-            <p>Our <span>farm-to-table delivery</span> service offers a seamless experience, ensuring the utmost <span>freshness and convenience</span> for our 
-                customers. Straight from our hydroponic farms, our produce is delivered directly to your <span>table</span>, guaranteeing the <span>highest quality and taste</span>. 
-                Experience the difference with our farm-fresh offerings, delivered with <span>care</span> from our farms to your home</p>
-        </div>
-        <div class="box-container">
-           
+  <section class="my-order">
+    <div class="order-details">
+    <h1>Order Details</h1>
+    <hr>
+    <div class="order-id"><h2>Order ID: 1235</h2></div>
+    <div class="details">
+      <h2 class="details-heading">Your delivery Agent</h2>
+      <div class="delivery-section">
+          
+          <div class="delivery-agent">
             
-        <div class="card-content">
-            <h4>Delivery Areas</h4>
-            <div class="box">
-              <ul>
-                <li>Gondia</li>
-                <li>Goregaon</li>
-                <li>Tirora</li>
-              </ul>
-            </div>
+              <img src="../images/assest/team/p-4.jpg" alt="Delivery Agent">
+              <div class="delivery-info">
+                  <span class="name">William Smith</span>
+                  <div class="star-rating">
+                    <span class="star" onclick="rate(1)">&#9733;</span>
+                    <span class="star" onclick="rate(2)">&#9733;</span>
+                    <span class="star" onclick="rate(3)">&#9733;</span>
+                    <span class="star" onclick="rate(4)">&#9733;</span>
+                    <span class="star" onclick="rate(5)">&#9733;</span>
+                </div>
+              </div>
           </div>
-       <div class="card-content">
-            <h4>Delivery Schedule</h4>
-            <div class="box">
-            <ul>
-                <li>Schedule: Monday to Friday</li>
-                <li>Ordering Process: Place your order online between 9 AM and 9 PM for next-day delivery</li>
-            </ul>
-           </div>
-          </div>
-        
-    </div>
-</div>
-
-<div class="order-process">
-    <div class="order-content">
-         <h4>Ordering process</h4>
-         <ol>
-            <li>Step 1: Go to our website and select the products you want to order.</li>
-            <li>Step 2: Proceed to checkout and choose your delivery date and time.</li>
-            <li>Step 3: Complete the payment process.</li>
-            <li>Step 4: Sit back and relax while we prepare your order for delivery!</li>
-          </ol>
-    </div>
-</div>
-
-<div class="faqs" id="faq">
-    <h3>FAQs</h3>
-    <div class="faq-item">
-        <h4 class="question">How do I place an order?</h4>
-        <p class="answer">You can place an order on our website by selecting the items you want and proceeding to checkout.</p>
-    </div>
-    <div class="faq-item">
-        <h4 class="question"> What should I do if there is an issue with my delivery?</h4>
-        <p class="answer">If you encounter any issues with your delivery, please contact our customer support team immediately. 
-            We will do our best to resolve the issue promptly.</p>
-    </div>
-    <div class="faq-item">
-        <h4 class="question">What should I do if I'm not home during the delivery time?</h4>
-        <p class="answer"> If you're not home during the delivery time, our delivery partner will attempt to leave the package in a safe place or with a neighbor. 
-            You can also provide specific delivery instructions during checkout.</p>
-    </div>
-    <div class="faq-item">
-        <h4 class="question">Can I change my delivery address after placing an order?</h4>
-        <p class="answer">Unfortunately, we cannot change the delivery address once the order is placed. 
-            Please ensure the correct address is provided at the time of ordering.</p>
-    </div>
-    <div class="faq-item">
-        <h4 class="question">What are the delivery charges?</h4>
-        <p class="answer"> Delivery charges vary based on your location and order size. 
-            Please check the delivery information during checkout for details.</p>
-    </div>
-    
-</div>
-      </section>
-
-      <!-- product registration form section -->
-
-<!-- <section class="product-registration">
-    <div class="registration-container">
-        <div class="title">
-            <h2>Product Registration Form</h2>
-            <p>Please fill out the form below to register your product.</p>
+          <div class="delivery-time">
+            <span>Expected Delivery Time</span>
+            <div class="time">08:20 PM</div>
         </div>
-        <form action="submit_registration.php" method="post">
-            <div class="form-group">
-                <label for="product-name">Product Name:</label>
-                <input type="text" id="product-name" name="product-name" required>
-            </div>
-           
-            <div class="form-group">
-                <label for="customer-name">Customer Name:</label>
-                <input type="text" id="customer-name" name="customer-name" required>
-            </div>
-            <div class="form-group">
-                <label for="customer-email">Customer Email:</label>
-                <input type="email" id="customer-email" name="customer-email" required>
-            </div>
-            <div class="form-group">
-                <label for="product-id">Mobile No.:</label>
-                <input type="number" id="mobile-number" name="mobile-number" required>
-            </div>
-            <div class="form-group">
-                <label for="purchase-date">Purchase Date:</label>
-                <input type="date" id="purchase-date" name="purchase-date" required>
-            </div>
-            <div class="form-group">
-                <label for="comments">Comments:</label>
-                <textarea id="comments" name="comments"></textarea>
-            </div>
-            <div class="form-group">
-                <button type="submit">Submit</button>
-            </div>
-        </form>
+      </div>
+  </div>
+
+  <div class="address-details">
+    <h2>Your Delivery Address</h2>
+    <div class="address-block">
+    <span>Home</span>
+    <div class="order-address">
+      <p>John Doe 9876543210 123, Main Street, Locality, City, State, 123456</p>
     </div>
-</section> -->
+  </div>
+  </div>
 
+  <div class="price">
+    <h2>Total Amount:<span> &nbsp;₹4,499</span></h2>
+  </div>
+  <div class="order-track">
+    <div class="order-tracking-block">
+    <div class="order-step step-1">
+      <div class="step-circle">1</div>
+      <p>Order Confirm <span class="order-date">Thu, 6th Dec'24</span></p>
+    </div>
+    <div class="order-step step-2">
+      <div class="step-circle">2</div>
+      <p>Processing<span class="processing-date">Thu, 6th Dec'24</span></p>
+    </div>
+    <div class="order-step step-3">
+      <div class="step-circle">3</div>
+      <p>Out for Delivery<span class="outfordeliverd-date">Fri, 7th Dec'24</span></p>
+    </div>
+    <div class="order-step step-4">
+      <div class="step-circle">4</div>
+      <p>Delivered<span class="delivered-date">Fri, 7th Dec'24</span></p>
+    </div>
+  </div>
+  
+  </div>
+  
+  <div class="order-details-button">
+    <button class="cancel-btn">Cancel</button>
+    <button class="for-help">For Help</button>
+  </div>
 
+</div>
+</section>
+
+     
 <!-- footer section -->
 <footer>
     <div class="footer-content">
@@ -1249,6 +1136,13 @@ document.addEventListener('click', function(event) {
     dropdown.style.display = 'none';
   }
 });
+
+function rate(stars) {
+            const starElements = document.querySelectorAll('.star');
+            starElements.forEach((star, index) => {
+                star.classList.toggle('selected', index < stars);
+            });
+        }
 
      </script>
 </body>

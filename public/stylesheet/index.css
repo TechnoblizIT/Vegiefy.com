@@ -862,6 +862,387 @@ transform: rotate(10deg);
         padding: 0px;
     }
 }
+  /* css for delivery */
+  .delivery{
+    margin-top: 80px;
+  }
+  .title p span{
+    color: #48d84a;
+    font-weight: bold;
+  }
+  .delivery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            /* padding: 20px; */
+            /* margin-top: 130px; */
+            
+        }
+         .delivery-container .title h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #333;
+            text-transform: capitalize;
+            font-size: 40px;
+           font-weight: bold;
+        }
+        .delivery-container .title p{
+            text-align: center;
+            font-size: 20px;
+        }
+        .delivery-container .box-container{
+           display: flex;
+           justify-content: space-evenly;
+           align-items: center;
+        }
+        .delivery-container .box-container .card-content{
+            
+            width: 400px;
+            height: 250px;
+            margin-top: 30px;
+            background-image: url(../images/assest/delivery/delivery-img.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+       
+      
+.card-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 1;
+}
+
+.card-content h4 {
+    font-size: 25px;
+    margin-left: 36px;
+    margin-top: 15px;
+    position: relative;
+    z-index: 2;
+    color: white;
+}
+
+.card-content .box {
+    border: 0.5px solid #a7aaaa;
+    width: 320px;
+    margin-left: 36px;
+    margin-top: 15px;
+    position: relative; 
+    z-index: 2; 
+    color: white;
+    padding: 5px;
+}
+.card-content .box ul li{
+    list-style-type: square;
+
+}
+/* css for order process */
+.order-process{
+    
+    width: 920px;
+    height: 220px;
+    margin-bottom: 10px;
+    margin: auto;
+    margin-top: 45px;
+    margin-bottom: 20px;
+    background-image: url(../images/assest/delivery/delivery-img.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+.order-process::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 1;
+}
+.order-process .order-content{
+  
+    width: 850px;
+    margin-top: 31px;
+    margin-left: 34px;
+    border: 0.5px solid #a7aaaa;
+    position: relative;
+    z-index: 2;
+}
+.order-process .order-content h4,ol{
+    margin-left: 36px;
+    margin-top: 10px;
+    position: relative;
+    z-index: 2;
+    color: white;
+    list-style-type: none;
+}
+.order-process .order-content h4{
+    font-size: 25px;
+}
+
+/* Media queries for delivery section */
+@media (max-width: 991px) {
+    .delivery-container .title h2 {
+        font-size: 30px; 
+    }
+
+    .delivery-container .title p {
+        font-size: 20px;
+    }
+
+    .delivery-container .box-container {
+        flex-direction: column; 
+        align-items: center;
+    }
+
+    .delivery-container .box-container .card-content {
+        width: 100%; 
+        margin-top: 30px;
+        height: 200px; 
+    }
+
+    .card-content h4 {
+        font-size: 20px; 
+        margin-left: 0;
+        margin-top: 10px; 
+    }
+
+    .card-content .box {
+        width: 90%;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .delivery-container{
+        margin-top: 0px;
+        padding: 20px;
+    }
+    .delivery-container .title h2 {
+        font-size: 25px; 
+    }
+
+    .delivery-container .title p {
+        font-size: 18px; 
+    }
+
+    .delivery-container .box-container .card-content {
+        width: 100%; 
+    }
+
+    .card-content h4 {
+        font-size: 18px; 
+        margin-top: 5px;
+        margin-left: 15px; 
+    }
+
+    .card-content .box {
+        width: 90%; 
+        margin-top: 10px; 
+        margin-left: 18px;
+    }
+}
+
+/* Media queries for ordering process */
+@media (max-width: 991px) {
+    .order-process {
+        width: 90%;
+        height: auto;
+        
+    }
+
+    .order-process::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+    }
+
+    .order-process .order-content {
+        width: 90%;
+        margin: 50px auto;
+        /* padding: 20px; */
+        border: 1px solid #a7aaaa;
+        /* border-radius: 10px; */
+        background-color: transparent;
+    }
+
+    .order-process .order-content h4 {
+        font-size: 25px;
+        margin-left: 5px;
+        margin-top: 10px;
+        color: white;
+    }
+
+    .order-process .order-content ol {
+        margin-left: 0px;
+        margin-top: 10px;
+    }
+
+    .order-process .order-content ol li {
+        font-size: 18px;
+        color: white;
+    }
+}
+
+@media (max-width: 767px) {
+  
+    .order-process .order-content h4 {
+        font-size: 25px;
+        /* margin-left: 36px; */
+        margin-top: 10px;
+        color: white;
+    }
+
+    .order-process .order-content ol {
+        /* margin-left: 36px; */
+        margin-top: 10px;
+    }
+
+    .order-process .order-content ol li {
+        font-size: 18px;
+        color: white;
+    }
+}
+/* CSS for FAQs */
+.faqs {
+  margin-bottom: 40px;
+  padding: 20px 100px;
+  background: linear-gradient(135deg, #48d84a 50%, #f0f8ff 50%); 
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.faqs h3 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #fff; 
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.faq-description {
+  text-align: center;
+  font-size: 18px;
+  color: #4d4d4d; 
+  line-height: 1.6;
+  margin-bottom: 30px; 
+  font-weight: 400;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.faq-item {
+  margin: auto;
+  width: 50%;
+  background-color: #ffffff; 
+  border-radius: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.faq-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+.question {
+  cursor: pointer;
+  background: linear-gradient(to right, #d4f1d1, #48d84a);
+color: #333; 
+  padding: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.question:hover {
+  background-color: #a8e8a3; 
+}
+
+.question:after {
+  content: '\25BA'; 
+  font-size: 18px;
+  transition: transform 0.3s ease;
+  color: #d4f1d1;
+}
+
+.faq-item.active .question:after {
+  transform: rotate(90deg); 
+}
+.answer {
+  display: none;
+  padding: 20px;
+  font-size: 16px;
+  color: #4d4d4d;
+  line-height: 1.6;
+  background-color: #f1f1f1;
+  border-radius: 0 0 10px 10px;
+}
+
+.faq-item.active .answer {
+  display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+  .faq-item {
+    width: 100%; 
+  }
+
+  .faqs h3 {
+    font-size: 26px;
+  }
+  .faqs{
+    padding: 20px 10px;
+  }
+}
+
+@media (max-width: 767px) {
+  .faq-item {
+    width: 100%;
+  }
+
+  .faqs h3 {
+    font-size: 22px;
+  }
+
+  .question {
+    font-size: 16px;
+  }
+
+  .answer {
+    font-size: 14px;
+  }
+  .faqs{
+    padding: 20px 10px;
+  }
+}
+
+
 /* css for footer */
   footer {
     position: relative;

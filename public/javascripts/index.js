@@ -88,3 +88,74 @@
 });
 
 // js for search-dropdown======================================================================================================
+
+ // js for FAQs
+
+ document.addEventListener("DOMContentLoaded", function() {
+  const questions = document.querySelectorAll(".question");
+
+  questions.forEach(function(question) {
+      question.addEventListener("click", function() {
+          const answer = this.nextElementSibling;
+          this.classList.toggle("active");
+          answer.classList.toggle("active");
+          this.parentNode.classList.toggle("active");
+      });
+  });
+});
+
+let fuse;
+
+async function fetchProducts() {
+const input = document.getElementById('search-input').value.toLowerCase();
+
+if (input.length === 0) {
+  document.getElementById('dropdown').style.display = 'none';
+  return; // Hide the dropdown if input is empty
+} else {
+  document.getElementById('dropdown').style.display = 'block';
+}
+
+try {
+  // Fetch all products from the backend
+  const response = await fetch('/search?q=');
+  const products = await response.json();
+
+  
+  fuse = new Fuse(products, {
+    keys: ['name'], 
+    threshold: 0.4, 
+  });
+
+ 
+  const result = fuse.search(input);
+  const productList = document.getElementById('product-list');
+  productList.innerHTML = '';
+
+  if (result.length === 0) {
+    productList.innerHTML = '<li>No products found</li>';
+  } else {
+    
+    result.forEach(({ item }) => {
+      const li = document.createElement('li');
+      li.textContent = item.name;
+      li.addEventListener('click', () => {
+        window.location.href = `/productdetails/${item._id}`; 
+      });
+      productList.appendChild(li);
+    });
+  }
+
+} catch (error) {
+  console.error('Error fetching products:', error);
+}
+}
+
+// Hide dropdown when clicking outside (optional)
+document.addEventListener('click', function(event) {
+const dropdown = document.getElementById('dropdown');
+const searchInput = document.getElementById('search-input');
+if (!dropdown.contains(event.target) && event.target !== searchInput) {
+  dropdown.style.display = 'none';
+}
+});

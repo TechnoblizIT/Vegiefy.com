@@ -302,169 +302,140 @@ hr {
 
 
          /* css for shopping-page */
-        .product-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            width: 65%; 
-            padding: 0;
-            margin-top: 70px;
-        }
-
-        .product {
-            background-color: #fff;
-            margin: 10px;
-            padding-top: 15px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 12px 0 rgba(0, 0, 0, 0.19);
-            text-align: center;
-            max-width: 300px;
-            flex: 1 1 calc(33.333% - 40px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .product:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        .product-image {
-            width: 80%;
-            height: auto;
-            border-radius: 8px;
-            transition: transform 0.3s ease;
-        }
-
-        .product:hover .product-image {
-            transform: scale(1.05);
-        }
-
-        .product-name {
-            font-size: 1.5em;
-            transition: color 0.3s ease;
-        }
-
-        .product:hover .product-name {
-            color:#0f5256 ;
-        }
-
-        .product-description {
-            font-size: 1em;
-            color: #888;
-           
-        }
-
-        .product-price {
-            font-size: 1.2em;
-            color: #888;
-            margin: 10px 0;
-            font-weight: bold;
-        }
-   /* Quantity and Remove Button Row */
-.quantity-remove-container {
+         .product-container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 20px;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 80px;
 }
 
-/* Quantity Container */
+/* Individual Product */
+.product {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    gap: 15px;
+    width: 700px;
+}
+
+/* Image Container */
+.product-image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.product-image {
+    width: 40px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.product-weight {
+    font-size: 10px;
+    color: #333;
+    text-align: center;
+}
+
+/* Product Info Section */
+.product-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+   
+}
+
+.product-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin-right: 20px; /* Spacing between name and other elements */
+}
+
+.product-price {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #888;
+    margin-right: 20px; /* Spacing between price and other elements */
+}
+
 .quantity-container {
     display: flex;
-    justify-content: center;
     align-items: center;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    overflow: hidden;
-    width: auto;
+    gap: 5px;
 }
 
-/* Quantity Buttons */
-.decrease-btn, .increase-btn {
-    background-color: #f1f1f1;
-    color: #333;
-    border: none;
-    padding: 8px 15px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Hover effect for buttons */
-.decrease-btn:hover, .increase-btn:hover {
+.quantity-container button {
+    width: 24px;
+    height: 24px;
     background-color: #e0e0e0;
-}
-
-/* Quantity Input */
-.quantity-input {
-    width: 50px;
-    text-align: center;
-    font-size: 16px;
-    border: none;
-    outline: none;
-    background-color: #f9f9f9;
-    height: 40px;
-}
-
-
-        .remove-btn {
-    display: inline-block;
-    padding: 12px 30px;
-    font-size: 15px;
+    color: #333;
+    border: 1px solid #ccc;
+    font-size: 14px;
     font-weight: bold;
-    color: #fff;
-    background: linear-gradient(135deg, #e73827, #a7220a); 
-    border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.quantity-container button:hover {
+    background-color: #d6d6d6;
+    color: #000;
+}
+
+.quantity-container input {
+    width: 32px;
+    height: 24px;
     text-align: center;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #333;
+    background-color: #fafafa;
+    outline: none;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-
-.remove-btn:hover {
-    background: linear-gradient(135deg, #a7220a, #e73827); 
-    box-shadow: 0 6px 15px rgba(255, 68, 68, 0.4); 
+.quantity-container input:focus {
+    border-color: #999;
+}
+.quantity-container p{
+    color: #666;
+    font-size: 12px;
+}
+/* Delete Icon */
+.delete-icon-container {
+    margin-left: 20px;
 }
 
-
-.remove-btn::after {
-    content: '>';  
-    font-size: 1.2em;
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    transition: right 0.3s ease;
+.delete-btn {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
 
-
-.remove-btn:hover::after {
-    right: 15px;
+.delete-btn:hover {
+    color: #c0392b;
 }
 
 /* Main shopping cart container */
 .shopping-cart {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 50px;
     flex-wrap: wrap;
     gap: 20px;
     margin-top: 20px;
 }
-
-
 
 
 /* Cart summary section */
@@ -545,10 +516,6 @@ hr {
     border-radius: 20px; 
     margin: 20px 0;   
 }
-
-
-/* Checkout button */
-
 .checkout-btn {
     width: 100%;
     padding: 15px;
@@ -567,7 +534,7 @@ hr {
     background-color: #09343c;
 }
 
-/* Checkout Form Styles */
+/* Checkout Form */
 .form-checkout {
   margin-bottom: 10px;
 }
@@ -581,7 +548,6 @@ hr {
     font-family: 'Poppins', sans-serif;
     border-left: 4px solid #0f5256;
 }
-/* Add New Address Link */
 .add-address {
     margin-bottom: 20px;
     text-align: left;
@@ -837,22 +803,42 @@ hr {
 
 /* Responsive Styles */
 @media (max-width: 768px) {
-    .shopping-cart{
+  .shopping-cart{
         padding: 10px;
     }
     .product-container {
         width: 100%; 
-      
         margin-top: 170px;
     }
-
+    .product{
+        gap: 0;
+    }
+    .product-name{
+        font-size: 15px;
+        margin-right: 0px;
+        margin-left: 10px;
+    }
+    .product-price{
+        margin-left: 10px;
+        margin-right: 0px;
+    }
+    .quantity-container button{
+        width: 20px;
+        height: 20px;
+    }
+    .quantity-container input{
+        width: 20px;
+        height: 20px;
+    }
+    .delete-btn{
+        font-size: 18px;
+    }
     .cart-summary {
         width: 100%;
         margin-top: 20px;
-       
     }
     .product {
-        flex: 1 1 calc(100% - 40px);
+        width: 100%;
     }
     .form-checkout{
       padding: 10px;
@@ -1158,7 +1144,7 @@ footer::before {
             <li><a href="/#about-us">About</a></li>
             <li><a href="/product">Products</a></li>
             <li><a href="/cart" class="nav-active">Cart</a></li>
-            <li><a href="/delivery">Delivery</a></li>
+            <li><a href="/delivery">My Orders</a></li>
             <li><a href="/blog">Blog</a></li>
             <li><a href="/contact">Contact</a></li>
           </ul>
@@ -1174,14 +1160,34 @@ footer::before {
             <% user.cart.forEach(items => { %>
               <% if (items.product) { %>
                 <div class="product">
+                  <div class="product-image-container">
                   <img src="data:<%= items.product.image.imageType %>;base64,<%= items.product.image.file.toString('base64') %>" alt="Product Image" class="product-image">
+                </div>
+                <div class="product-info">
                   <h2 class="product-name"><%= items.product.name || 'Product Name Unavailable' %></h2>
-                  <p class="product-description"><%= items.product.description || 'Description Unavailable' %>.</p>
-                  <p class="product-price">₹<%= (items.product.price || 0) * (items.quantity || 0) %></p>
+                  <!-- <p class="product-description"><%= items.product.description || 'Description Unavailable' %>.</p> -->
+                  <!-- <p class="product-price">₹<%= (items.product.price || 0) * (items.quantity || 0) %></p> -->
                   <% if (limit) { %>
                     <p style="color: red;"><%= limit %></p>
                   <% } %>
-                  <div class="quantity-remove-container">
+                  <div class="quantity-container">
+                    <a href="/user/quantity/dec/<%= items.product._id %>" style="text-decoration: none;">
+                      <button class="decrease-btn">-</button>
+                    </a>
+                    <input type="number" class="quantity-input" value="<%= items.quantity || 0 %>" max="5" readonly><p>Kg</p>
+                    <a href="/user/quantity/inc/<%= items.product._id %>" style="text-decoration: none;">
+                      <button class="increase-btn">+</button>
+                    </a>
+                  </div>
+                  <p class="product-price">₹<%= (items.product.price || 0) * (items.quantity || 0) %></p>
+
+                  <div class="delete-icon-container">
+                    <a href="/user/removeitem/<%= items._id %>" class="delete-btn" title="Delete">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </div>
+                </div>
+                  <!-- <div class="quantity-remove-container">
                     <div class="quantity-container">
                       <a href="/user/quantity/dec/<%= items.product._id %>" style="text-decoration: none;">
                         <button class="decrease-btn">-</button>
@@ -1192,7 +1198,7 @@ footer::before {
                       </a>
                     </div>
                     <a class="remove-btn" href="/user/removeitem/<%= items._id %>">Remove</a>
-                  </div>
+                  </div> -->
                 </div>
               <% } %>
             <% }) %>
@@ -1287,7 +1293,7 @@ footer::before {
         <button class="confirm-order-button" onclick="openPopup()">Confirm Order</button>
     </div>
     
-    <!-- Modal (Popup Box) -->
+    <!-- Popup Box-->
     <div id="orderPopup" class="popup-container">
         <div class="popup-content">
             <div class="popup-header">

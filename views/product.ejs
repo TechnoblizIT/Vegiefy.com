@@ -661,7 +661,7 @@ footer::before {
               <li><a href="/#about-us">About</a></li>
               <li><a href="/product"  class="nav-active">Products</a></li>
               <li><a href="/cart">Cart</a></li>
-              <li><a href="/delivery">Delivery</a></li>
+              <li><a href="/delivery">My Orders</a></li>
               <li><a href="/blog"  >Blog</a></li>
               <li><a href="/contact">Contact</a></li>
       </ul>
@@ -680,7 +680,6 @@ footer::before {
         <!-- Quantity Dropdown -->
         <form action="/user/addtocart/<%= product._id %>" method="POST">
           <select name="quantity" class="quantity-selecter">
-            
             <option value="0.5">0.5kg</option>
             <option value="0.75">0.75kg</option>
             <option value="1" selected >1kg</option>
