@@ -11,6 +11,7 @@ image:{
 instock:Number,
 category:String,
 expirydate:Date,
+isActive:Boolean,
 })
 
 module.exports=mongoose.model("Products",productSchema)

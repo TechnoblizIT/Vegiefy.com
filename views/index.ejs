@@ -248,7 +248,7 @@
       <div class="swiper-wrapper">
         <% products.forEach(product => { %>
           <div class="swiper-slide box">
-              <img src="../images/uploads/<%= product.image %>" alt="">
+              <img src="data:<%= product.image.imageType %>;base64,<%= product.image.file.toString('base64') %>" alt="">
               <h3><%= product.name %></h3>
               <div class="product-info">
                 <p class="price">₹ <%=product.price%>/-</p>

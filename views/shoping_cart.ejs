@@ -1232,62 +1232,33 @@ footer::before {
 <div class="form-checkout">
   <div class="checkout-form" id="checkoutForm" style="display: none;">
     <div class="add-address">
-        <a href="#" class="add-address-link">+ Add New Address</a>
+        <a href="/user/profile" class="add-address-link">+ Add New Address</a>
     </div>
 
     <div class="address-container">
+      <% if (user && user.address && user.address.length > 0) { %>
+      <% user.address.forEach((user) =>{ %>
         <div class="address-item">
             <input type="radio" id="address1" name="address" class="address-radio" checked>
             <label for="address1" class="address-label">
                 <div class="address-details">
                     <div class="name-tag">
-                        <span class="address-name">John Doe</span>
+                        <span class="address-name"><%=user.name%></span>
                         <span class="address-tag">Home</span>
                     </div>
                     <div class="address-text">
-                        123, Main Street, Locality, 
-                        City, State, 123456
+                      <%=user.address%>, <%=user.locality%>, 
+                      <%=user.city%>, <%=user.state%>, <%=user.pincode%>
                     </div>
-                    <div class="address-phone">+91-9876543210</div>
+                    <div class="address-phone"><%=user.mobile%></div>
                 </div>
             </label>
         </div>
         
-        <div class="address-item">
-            <input type="radio" id="address2" name="address" class="address-radio">
-            <label for="address2" class="address-label">
-                <div class="address-details">
-                    <div class="name-tag">
-                        <span class="address-name">Jane Smith</span>
-                        <span class="address-tag">Work</span>
-                    </div>
-                    <div class="address-text">
-                        456, Blue River Road,
-                        Corporate Plaza, 
-                        New York, NY 10001
-                    </div>
-                    <div class="address-phone">+91-9876543211</div>
-                </div>
-            </label>
-        </div>
-        
-        <div class="address-item">
-            <input type="radio" id="address3" name="address" class="address-radio">
-            <label for="address3" class="address-label">
-                <div class="address-details">
-                    <div class="name-tag">
-                        <span class="address-name">Robert Brown</span>
-                        <span class="address-tag">Home</span>
-                    </div>
-                    <div class="address-text">
-                        789, Pinewood Drive,
-                        Green Valley Apartments,
-                        California, CA 90210
-                    </div>
-                    <div class="address-phone">+91-9876543212</div>
-                </div>
-            </label>
-        </div>
+       <% })%>
+        <% } else { %>
+            <p>No addresses found. Please add an address to proceed.</p>
+        <% } %>
     </div>
     <div class="confirm-order-button-container">
         <button class="confirm-order-button" onclick="openPopup()">Confirm Order</button>
@@ -1325,7 +1296,7 @@ footer::before {
             <span>Will be delivered at <strong>02:02 PM</strong></span>
         </div>
     </div>
-    <button class="popup-home-button" onclick="window.location.href='index.html'">Back to Home</button>
+    <button class="popup-home-button" onclick="window.location.href='/'">Back to Home</button>
         </div>
     </div>
 </div>

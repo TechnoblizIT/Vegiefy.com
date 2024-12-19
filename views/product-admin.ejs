@@ -1469,8 +1469,8 @@ margin-left: 50px;
                             <!-- <td class="delete-icon">
                                 <i class="far fa-trash-alt" data-id="<%= product._id %>"></i>
                             </td> -->
-                            <td class="box-update-btn" id="box-update-btn">
-                               <button>Update</button>
+                            <td class="box-update-btn" id="box-update-btn"  data-id="<%= product._id %>">
+                               <button >Update</button>
                             </td>
                         </tr>
                     <% }); } else{ %>
@@ -1636,20 +1636,21 @@ margin-left: 50px;
     <i id="back-icon" class="fas fa-arrow-left back-icon"></i>
     Update Product
   </h2>
-  <form class="form-container">
+  <form class="form-container" action="/admin/updateproduct" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="productid" id="productid" value="" />
     <div class="left-form-block">
       <!-- Left Side Block -->
       <div class="form-group-account">
         <label for="product-name">Product Name:</label>
-        <input type="text" id="product-name" name="product-name" required />
+        <input type="text" id="updateproductname" name="productname" required />
       </div>
       <div class="form-group-account">
         <label for="description">Description:</label>
-        <textarea id="description" name="description" rows="3" required></textarea>
+        <textarea id="updatedescription" name="productdescription" rows="3" required></textarea>
       </div>
       <div class="form-group-account">
         <label for="category">Category:</label>
-        <select id="category" name="category" required>
+        <select id="updatecategory" name="praductcategory" required>
           <option value="" selected>Select Category</option>
           <option value="new-arrival">New Arrival</option>
           <option value="most-popular">Most Popular</option>
@@ -1659,12 +1660,12 @@ margin-left: 50px;
       <div class="form-row">
         <div class="form-group-account">
           <label for="expire-date">Expire Date:</label>
-          <input type="date" id="expire-date" name="expire-date" required />
+          <input type="date" id="updateexpiredate" name="productexpiredate" required />
         </div>
         
         <div class="form-group-account">
           <label for="in-stock">Units in Stock:</label>
-          <input type="number" id="in-stock" name="in-stock" required />
+          <input type="number" id="updateinstock" name="productinstock" required />
         </div>
       </div>
       
@@ -1672,19 +1673,35 @@ margin-left: 50px;
 
     <!-- Right Side Block -->
     <div class="right-form-block">
+      <!-- Product Image Preview -->
       <div class="tm-product-img-dummy mx-auto">
+        <img
+          id="updateproductimage-preview"
+          src=""
+          alt="Product Image"
+          style="width: 150px; height: 150px; object-fit: cover; display: none;"
+        />
         <i
           class="fas fa-cloud-upload-alt tm-upload-icon"
-          onclick="document.getElementById('fileInput').click();"
+          onclick="document.getElementById('updateproductimage').click();"
         ></i>
       </div>
+      
+      <!-- File Input and Upload Button -->
       <div class="custom-file mt-3 mb-3">
-        <input id="fileInput" type="file" style="display:none;" />
+        <input
+          id="updateproductimage"
+          type="file"
+          name="productimage"
+          style="display: none;"
+          accept="image/*"
+          onchange="previewUploadedProductImage()"
+        />
         <input
           type="button"
           class="btn btn-primary btn-block mx-auto"
           value="UPLOAD PRODUCT IMAGE"
-          onclick="document.getElementById('fileInput').click();"
+          onclick="document.getElementById('updateproductimage').click();"
         />
       </div>
     </div>
@@ -2238,10 +2255,47 @@ icon.addEventListener('click', () => {
 const boxUpdateBtn =  document.getElementById('box-update-btn');
 const updateProductForm = document.getElementById('update-product-form');
 
-boxUpdateBtn.addEventListener('click' , () => {
+boxUpdateBtn.addEventListener('click' , async() => {
   leftBlock.style.display = 'none';
   rightBlock.style.display = 'none';
   updateProductForm.style.display = 'block';
+  const itemId = boxUpdateBtn.getAttribute('data-id');
+      try {
+        const response = await fetch(`/admin/getproduct/${itemId}`);
+        if (response.ok) {
+          const itemData = await response.json();
+
+          // Populate the update form with fetched data
+          document.querySelector('#updateproductname').value = itemData.name || '';
+document.querySelector('#updatedescription').value = itemData.description || '';
+document.querySelector('#updatecategory').value = itemData.category || '';
+document.querySelector('#productid').value = itemData._id || '';
+if (itemData.expirydate) {
+  const formattedDate = new Date(itemData.expirydate).toISOString().split('T')[0];
+  document.querySelector('#updateexpiredate').value = formattedDate;
+}
+document.querySelector('#updateinstock').value = itemData.instock || '';
+
+const productImagePreview = document.querySelector('#updateproductimage-preview');
+if (itemData.image) {
+  const previewImage = document.getElementById('updateproductimage-preview');
+  const base64Image = `data:${itemData.image.imageType};base64,${btoa(
+    String.fromCharCode(...new Uint8Array(itemData.image.file.data))
+  )}`;
+
+  previewImage.src = base64Image;
+  previewImage.style.display = 'block';
+} else {
+  document.getElementById('updateproductimage-preview').style.display = 'none';
+}
+          console.log('Item details loaded:', itemData);
+        } else {
+          alert('Failed to load item details.');
+        }
+      } catch (error) {
+        console.error('Error fetching item details:', error);
+      }
+      
 })
 
 backIcons.forEach((icon) => {
@@ -2284,9 +2338,10 @@ editableCells.forEach((cell) => {
   // For handling update account buttons
   const updateButtons = document.querySelectorAll('.update-btn');
   updateButtons.forEach((btn) => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', async() => {
       containerBlock.style.display = 'none';
       updateForm.style.display = 'block';
+
     });
   });
 
@@ -2296,6 +2351,7 @@ editableCells.forEach((cell) => {
     btn.addEventListener('click', () => {
       containerBlock.style.display = 'none';
       deleteForm.style.display = 'block';
+   
     });
   });
 
@@ -2354,6 +2410,22 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   });
+  function previewUploadedProductImage() {
+  const fileInput = document.getElementById('updateproductimage');
+  const previewImage = document.getElementById('updateproductimage-preview');
+
+  if (fileInput.files && fileInput.files[0]) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      previewImage.src = e.target.result; // Set the preview image source
+      previewImage.style.display = 'block'; // Show the image preview
+    };
+    reader.readAsDataURL(fileInput.files[0]); // Read the file as a DataURL
+  } else {
+    previewImage.src = '';
+    previewImage.style.display = 'none'; // Hide the preview if no file is selected
+  }
+}
 
     </script>
   </body>
