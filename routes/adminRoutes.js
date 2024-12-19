@@ -9,6 +9,7 @@ const { isloggedin } = require('../middlewares/isloggedin');
 const {adminLogin}=require("../middlewares/isAdminlogin")
 const {isAdmin}=require("../middlewares/isAdmin")
 const nodemailer = require("nodemailer")
+const orderModel=require("../models/orders-model")
 router.get("/login", function(req, res){
     res.render("admin-login")
 })
@@ -25,8 +26,8 @@ router.get("/logout",(req, res)=>{
 router.get("/dashboard",isAdmin,adminLogin,async function(req, res){
     const products=await productModel.find()
     const deliveryBoys=await deliveryboyModel.find()
-    
-    res.render("product-admin",{products,deliveryBoys})
+    const orders=await orderModel.find().populate("Products.product").populate("User").populate("DeliveryBoy")
+    res.render("product-admin",{products,deliveryBoys,orders})
 })
 
 router.get("/addproduct",isloggedin,function(req, res){

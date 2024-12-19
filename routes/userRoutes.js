@@ -6,7 +6,8 @@ const{isloggedin}=require("../middlewares/isloggedin")
 const userModel=require("../models/user-model")
 const orderMoel=require("../models/orders-model")
 const nodemailer=require("nodemailer");
-const queryModel=require("../models/user-query")
+const queryModel=require("../models/user-query");
+const productModel = require('../models/product-model');
 // Define the routes
 
 
@@ -114,112 +115,70 @@ router.get("/quantity/dec/:productid", isloggedin, checkuser, async (req, res)=>
    })
    
 
-
-router.post("/createOrder",isloggedin,checkuser, async function(req, res) {
-
-const user = await userModel.findOne({ email: req.user.email }).populate("cart")
-var carttotal=0;
-var cartcount=0
-const products=[]
-user.cart.forEach((item)=>{ carttotal+=item.price 
-   cartcount+=1
-   products.push(item.name)
-})
-const total_price=carttotal-carttotal/100*3
-const newOrder = new orderMoel({
-    Name: req.body.name,
-    Date: Date.now(),
-    Address: req.body.address,
-    Products: user.cart,
-    TotalPrice: total_price,
-    Phone: req.body.phone
-
-})
-await newOrder.save()
-user.cart=[]
-await user.save()
-
-// Send email to customer
-let transporter = nodemailer.createTransport({
-    host: 'smtpout.secureserver.net', 
-    port: 587, 
-    secure: false, 
-    auth: {
-        user: 'support@vegiefy.com', 
-        pass: process.env.MAIL_PASS
-    }
-});
-
-
-let mailOptions = {
-    from: 'support@vegiefy.com',
-    to: req.body.email, 
-    subject: 'Order Confirmation - Vegiefy Organics Farming',
-    text: `Dear ${req.body.name},
-
-Thank you for your order with Vegiefy Organics Framing. We are pleased to inform you that your order has been successfully placed.
-
-Order Details:
-- Order ID: ${newOrder._id}
-- Total Amount: ₹${total_price}
-- Products Ordered: ${products}
-- Delivery Time: Within 2-3 hours
-
-We will notify you once your order is out for delivery. Should you have any questions or need further assistance, please do not hesitate to contact our support team at support@vegiefy.com.
-
-Thank you for choosing Vegiefy Organics. We look forward to serving you again!
-
-Best regards,
-Vegiefy Organics Farming
-Customer Support Team
-`
-};
-
-let mailOptions2 = {
-    from: 'support@vegiefy.com',
-    to: 'support@vegiefy.com', 
-    subject: 'New Order Received - Order ID: ' + newOrder._id,
-    text: `Hello Support Team,
-
-A new order has been placed on Vegiefy Organics. Below are the details:
-
-Order Details:
-- Order ID: ${newOrder._id}
-- Customer Name: ${req.body.name}
-- Delivery Address: ${req.body.address}
-- Products Ordered: ${products}
-- Customer Mobile: ${req.body.phone}
-- Total Amount: ₹${total_price}
-
-Please ensure timely processing and delivery of this order.
-
-Best regards,
-Vegiefy Organics Farming
-Order Management Team
-`
-};
-
-
-
-transporter.sendMail(mailOptions, function(error, info){
-    if (error) {
-        console.log('Error:', error);
-    } else {
-        console.log('Customer Email sent: ' + info.response);
-    }
-});
-
-
-transporter.sendMail(mailOptions2, function(error, info){
-    if (error) {
-        console.log('Error:', error);
-    } else {
-        console.log('Support Email sent: ' + info.response);
-    }
-});
-
-res.redirect("/")
-})
+   router.post("/order/confirm", async function(req, res) {
+    try {
+        const { userId, addressId, products, totalPrice } = req.body;
+    
+        // Validate request data
+        if (!userId || !addressId || !products || products.length === 0 || !totalPrice) {
+          return res.status(400).json({ success: false, message: 'Missing required fields' });
+        }
+    
+        // Check if the user exists
+        const user = await userModel.findById(userId);
+        if (!user) {
+          return res.status(404).json({ success: false, message: 'User not found' });
+        }
+    
+        // Validate all products and their stock
+        for (const item of products) {
+          const product = await productModel.findById(item.productId);
+          if (!product) {
+            return res.status(404).json({ success: false, message: `Product not found for ID: ${item.productId}` });
+          }
+          if (product.instock < item.quantity) {
+            return res.status(400).json({
+              success: false,
+              message: `Insufficient stock for product: ${product.name}`,
+            });
+          }
+    
+          // Deduct stock
+          product.instock -= item.quantity;
+          await product.save();
+        }
+        const orderItems = user.cart.map(item => ({
+            product: item.product._id,  // product ID
+            quantity: item.quantity     // quantity of the product
+          }));
+    
+        // Create the new order
+        const newOrder = new orderMoel({
+          orderid: `OD-VO${Date.now()}`,
+          Date: new Date(),
+          User: userId,
+          Products: orderItems,
+          TotalPrice: totalPrice,
+          status: 'Confirmed',
+        });
+    
+        // Save the order
+        await newOrder.save();
+    
+        // Respond with success
+        res.status(200).json({
+          success: true,
+          message: 'Order confirmed',
+          orderId: newOrder._id,
+        });
+      } catch (error) {
+        console.error('Error confirming order:', error);
+        res.status(500).json({
+          success: false,
+          message: 'Failed to confirm order. Please try again.',
+        });
+      }
+   })
 
 router.post("/contactus", async function(req, res){
     console.log("heelp")

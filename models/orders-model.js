@@ -1,24 +1,45 @@
 const mongoose = require('mongoose');
 
-const orderSchema=mongoose.Schema({
-    orderid:String,
-    Date:Date,
-    User:{
-        type: mongoose.Schema.Types.ObjectId, ref: 'User'
+const orderSchema = mongoose.Schema({
+  orderid: {
+    type: String,
+    unique: true,
+    default: () => `OD-VO${Date.now()}`
+  },
+  Date: {
+    type: Date,
+    default: Date.now
+  },
+  User: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  Products:[{
+    product: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Products',
+      required: true
     },
-    Products:[{
-        type: mongoose.Schema.Types.ObjectId, ref: 'Products'
-    }],
-    TotalPrice:Number,
-    
-    DeliveryBoy:{
-        type: mongoose.Schema.Types.ObjectId, ref: 'Deliveryboys'
-    },
-    status:{
-        type:String,
-        default:""
+    quantity: {
+      type: Number,
+      required: true,
+      min: 1
     }
-})
+  }],
+  TotalPrice: {
+    type: Number,
+    required: true
+  },
+  DeliveryBoy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Deliveryboys'
+  },
+  status: {
+    type: String,
+    enum: ['Pending', 'Confirmed', 'Preparing', 'Out For Deliverey', "Delivered" ,'Cancelled'],
+    default: 'Pending'
+  }
+});
 
-module.exports=mongoose.model("Orders",orderSchema)
-
+module.exports = mongoose.model('Orders', orderSchema);

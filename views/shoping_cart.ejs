@@ -1187,18 +1187,6 @@ footer::before {
                     </a>
                 </div>
                 </div>
-                  <!-- <div class="quantity-remove-container">
-                    <div class="quantity-container">
-                      <a href="/user/quantity/dec/<%= items.product._id %>" style="text-decoration: none;">
-                        <button class="decrease-btn">-</button>
-                      </a>
-                      <input type="number" class="quantity-input" value="<%= items.quantity || 0 %>" max="5" readonly><p>Kg</p>
-                      <a href="/user/quantity/inc/<%= items.product._id %>" style="text-decoration: none;">
-                        <button class="increase-btn">+</button>
-                      </a>
-                    </div>
-                    <a class="remove-btn" href="/user/removeitem/<%= items._id %>">Remove</a>
-                  </div> -->
                 </div>
               <% } %>
             <% }) %>
@@ -1261,7 +1249,7 @@ footer::before {
         <% } %>
     </div>
     <div class="confirm-order-button-container">
-        <button class="confirm-order-button" onclick="openPopup()">Confirm Order</button>
+      <button class="confirm-order-button" onclick="confirmOrder()">Confirm Order</button>
     </div>
     
     <!-- Popup Box-->
@@ -1360,16 +1348,16 @@ footer::before {
          // js for nav bar Mobile menu toggle
  const hamburgerBtn = document.querySelector('.hamburger-btn');
  const navbarMenu = document.querySelector('.nav-links');
- 
+
  hamburgerBtn.addEventListener('click', () => {
    navbarMenu.classList.toggle('show-menu');
  });
- 
+
  document.querySelectorAll('.nav-links a').forEach(link => {
    link.addEventListener('click', function() {
      // Remove active class from all links
      document.querySelector('.nav-active')?.classList.remove('nav-active');
-     
+
      // Add active class to the clicked link
      this.classList.add('nav-active');
    });
@@ -1383,7 +1371,7 @@ footer::before {
 }
 
 document.getElementById('myForm').addEventListener('submit', function(event) {
-        
+
         alert("Form is being submitted");
         document.getElementById('myForm').submit();
     });
@@ -1405,13 +1393,13 @@ async function fetchProducts() {
     const response = await fetch('/search?q=');
     const products = await response.json();
 
-    
+
     fuse = new Fuse(products, {
       keys: ['name'], 
       threshold: 0.4, 
     });
 
-   
+
     const result = fuse.search(input);
     const productList = document.getElementById('product-list');
     productList.innerHTML = '';
@@ -1419,7 +1407,7 @@ async function fetchProducts() {
     if (result.length === 0) {
       productList.innerHTML = '<li>No products found</li>';
     } else {
-      
+
       result.forEach(({ item }) => {
         const li = document.createElement('li');
         li.textContent = item.name;
@@ -1464,6 +1452,57 @@ function openPopup() {
 function closePopup() {
     document.getElementById("orderPopup").style.display = "none";
 }
+async function confirmOrder() {
+  const userId = '<%= user._id %>'; // Pass the logged-in user ID
+  const addressId = document.querySelector('input[name="address"]:checked')?.value;
+  const products = <%- JSON.stringify(user.cart.map(item => ({ productId: item.product._id, quantity: item.quantity }))) %>;
+  const totalPrice = <%- carttotal %>;
+  if (!addressId) {
+    alert('Please select an address to proceed!');
+    return;
+  }
+
+  try {
+    const response = await fetch('/user/order/confirm', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId, addressId, products, totalPrice }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      // Update popup content dynamically
+      document.querySelector('.popup-text').textContent = 'Order placed successfully!';
+      document.querySelector('.popup-delivery-time strong').textContent = '25 minutes';
+      document.querySelector('.popup-cart-text').innerHTML = `
+        ${products.length} items for <strong>₹${totalPrice}</strong>
+      `;
+      document.querySelector('.popup-detail span').innerHTML = `
+        Delivery to <strong>Home</strong>
+      `;
+      document.querySelector('.popup-time-icon + span strong').textContent = new Date().toLocaleTimeString();
+
+      // Show the popup
+      openPopup();
+    } else {
+      alert(`Error: ${data.message}`);
+    }
+  } catch (error) {
+    console.error('Error confirming order:', error);
+    alert('An unexpected error occurred. Please try again later.');
+  }
+}
+
+function openPopup() {
+  document.getElementById('orderPopup').style.display = 'block';
+}
+
+function closePopup() {
+  document.getElementById('orderPopup').style.display = 'none';
+}
+
+
         </script>
 </body>
 </html>
