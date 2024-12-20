@@ -1455,7 +1455,12 @@ function closePopup() {
 async function confirmOrder() {
   const userId = '<%= user._id %>'; // Pass the logged-in user ID
   const addressId = document.querySelector('input[name="address"]:checked')?.value;
-  const products = <%- JSON.stringify(user.cart.map(item => ({ productId: item.product._id, quantity: item.quantity }))) %>;
+  const products = <%- JSON.stringify(
+  user.cart
+    .filter(item => item.product) // Exclude null/undefined products
+    .map(item => ({ productId: item.product._id, quantity: item.quantity }))
+) %>;
+
   const totalPrice = <%- carttotal %>;
   if (!addressId) {
     alert('Please select an address to proceed!');

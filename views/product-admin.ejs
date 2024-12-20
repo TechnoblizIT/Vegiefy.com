@@ -2337,6 +2337,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 }
 
+document.querySelector('.delete-selected-btn').addEventListener('click', async () => {
+    const selectedIds = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+        .map(checkbox => checkbox.closest('tr').querySelector('.box-update-btn').getAttribute('data-id'));
+
+    try {
+        const response = await fetch('/admin/products/delete', {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ productIds: selectedIds })
+        });
+        const data = await response.json();
+        if (response.ok) {
+            alert('Selected products deleted successfully');
+            // Optionally, refresh the page or remove rows from the DOM
+            location.reload();
+        } else console.error(data.error);
+    } catch (err) {
+        console.error('Failed to delete products', err);
+    }
+});
+
     </script>
   </body>
 </html>

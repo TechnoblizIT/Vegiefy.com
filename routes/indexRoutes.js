@@ -18,7 +18,8 @@ router.get('/',checkuser ,async function(req, res) {
      path: 'cart.product',  
      model: 'Products'      
    });
-   user.cart.forEach((item)=>{ cartcount+=1})
+   user.cart = user.cart.filter(item => item.product !== null);
+   cartcount = user.cart.length;
    res.render('index',{req,products,cartcount})
    }else{
     res.render('index',{req,products,cartcount})
@@ -41,7 +42,8 @@ router.get('/login', function(req, res) {
      model: 'Products'      
    });
    var cartcount=0
-   user.cart.forEach((item)=>{ cartcount+=1})
+   user.cart = user.cart.filter(item => item.product !== null);
+   cartcount = user.cart.length;
    res.render('product',{products,req,cartcount})}
    else{
     res.render('product',{products,req,cartcount})
@@ -59,7 +61,8 @@ router.get('/blog',checkuser ,async function(req, res) {
       path: 'cart.product',  
       model: 'Products'      
     });
-    user.cart.forEach((item)=>{ cartcount+=1})
+    user.cart = user.cart.filter(item => item.product !== null);
+    cartcount = user.cart.length;
     res.render('blog',{req,cartcount})
     }else{
      res.render('blog',{req,cartcount})
@@ -75,7 +78,8 @@ router.get('/blog',checkuser ,async function(req, res) {
      model: 'Products'      
    });
    var cartcount=0
-   user.cart.forEach((item)=>{ cartcount+=1})
+   user.cart = user.cart.filter(item => item.product !== null);
+   cartcount = user.cart.length;
    res.render('deliverypage',{req,cartcount})
   }
    else{
@@ -91,7 +95,8 @@ router.get('/blog',checkuser ,async function(req, res) {
       path: 'cart.product',  
       model: 'Products'      
     });
-    user.cart.forEach((item)=>{ cartcount+=1})
+    user.cart = user.cart.filter(item => item.product !== null);
+    cartcount = user.cart.length;
     res.render('contact',{req,cartcount})
     }else{
      res.render('contact',{req,cartcount})

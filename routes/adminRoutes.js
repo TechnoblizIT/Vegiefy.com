@@ -84,23 +84,15 @@ router.post("/updateproduct",upload.single("productimage"),async function(req, r
   
     res.redirect("/admin/dashboard")
 })
-
-router.delete("/products/:id", async (req, res) => {
-    try {
-      const { id } = req.params;
-  
-      const deletedProduct = await productModel.findByIdAndDelete(id);
-      if (!deletedProduct) {
-        return res.status(404).json({ message: "Product not found" });
-      }
-  
-      res.status(200).json({ message: "Product deleted successfully" });
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ message: "Internal Server Error" });
-    }
-  });
-
+router.delete('/products/delete', async (req, res) => {
+  const { productIds } = req.body; 
+  try {
+      await productModel.deleteMany({ _id: { $in: productIds } });
+      res.status(200).send({ message: 'Selected products deleted successfully' });
+  } catch (err) {
+      res.status(500).send({ error: 'Failed to delete products' });
+  }
+});
   router.get("/getproduct/:id", async (req, res) => {
     try {
       const { id } = req.params;
