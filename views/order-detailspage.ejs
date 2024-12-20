@@ -667,7 +667,7 @@ table td span{
   padding: 10px;
   margin-bottom: 50px;
 }
-.order-box-container{
+.new-order-box-container{
   margin-top: 15px;
 }
 .order-box{
@@ -767,7 +767,7 @@ table td span{
    }
 
    /* css for delivery-details page============================================ */
-   .delivery-details {
+   .new-delivery-details {
   margin-top: 70px; 
 }
 
@@ -787,7 +787,7 @@ table td span{
   display: flex;
   justify-content: space-between;
 }
-.fixed-header .back-icon {
+.fixed-header .new-back-icon {
   font-size: 20px;
   cursor: pointer;
 }
@@ -1025,7 +1025,7 @@ hr {
   .delivery-email,.delivery-mobile,.delivery-address,.delivery-payment  p {
     font-size: 13px;
   }
-  .delivery-details {
+  .new-delivery-details {
     margin-top: 100px; 
   }
 
@@ -1435,10 +1435,10 @@ hr {
   
   <!-- new page content -->
    <div class="content newpage">
-    <div class="order-box-container" id="order-box-container">
+    <div class="new-order-box-container" id="new-order-box-container">
       <!-- Box 1 -->
       <div class="order-box">
-        <div class="order-container" id="order-container">
+        <div class="new-order-container" id="new-order-container">
         <p class="order-name">John Chamber</p>
         <p class="order-delivery-time">Order Time: <span> Jan 15, 2016, 12:34 PM</span></p>
         <table>
@@ -1466,7 +1466,7 @@ hr {
   
       <!-- Box 2 -->
       <div class="order-box">
-        <div class="order-container" id="order-container">
+        <div class="new-order-container" id="new-order-container">
         <p class="order-name">John Doe</p>
         <p class="order-delivery-time">Order Time: <span> Jan 15, 2016, 12:34 PM</span></p>
         <table>
@@ -1494,7 +1494,7 @@ hr {
 
        <!-- Box 3 -->
        <div class="order-box">
-        <div class="order-container" id="order-container">
+        <div class="new-order-container" id="new-order-container">
         <p class="order-name">John Doe</p>
         <p class="order-delivery-time">Order Time: <span> Jan 15, 2016, 12:34 PM</span></p>
         <table>
@@ -1522,7 +1522,7 @@ hr {
 
        <!-- Box 4 -->
   <div class="order-box">
-      <div class="order-container" id="order-container">
+      <div class="new-order-container" id="new-order-container">
     <p class="order-name">John Doe</p>
     <p class="order-delivery-time">Order Time: <span> Jan 15, 2016, 12:34 PM</span></p>
     <table>
@@ -1572,12 +1572,12 @@ hr {
   </div>
 </div>
 
-<div class="delivery-details" id="delivery-details" style="display: none;">
+<div class="new-delivery-details" id="new-delivery-details" style="display: none;">
   <!-- Fixed Header -->
   <header class="fixed-header">
     <div class="header-back-time">
     <div class="back-icon">
-      <i id="back-to-main" class="fa-solid fa-chevron-left"></i>
+      <i id="new-back-to-main" class="fa-solid fa-chevron-left"></i>
     </div>
    
     <div class="order-id">
@@ -1935,24 +1935,24 @@ function toggleOptions() {
 
     // js for delivery details==================================================================
  
-const orderBoxContainer = document.querySelector('.order-box-container');
-const deliveryDetails = document.querySelector('.delivery-details');
-const backToMain = document.querySelector('#back-to-main');
-const orderContainers = document.querySelectorAll('.order-container'); 
+const neworderBoxContainer = document.querySelector('.new-order-box-container');
+const newdeliveryDetails = document.querySelector('.new-delivery-details');
+const backToMain = document.querySelector('#new-back-to-main');
+const neworderContainers = document.querySelectorAll('.new-order-container'); 
 
 //  event listener to each order container
-orderContainers.forEach((orderContainer) => {
-  orderContainer.addEventListener('click', () => {
-    orderBoxContainer.style.display = 'none'; 
-    deliveryDetails.style.display = 'block'; 
+neworderContainers.forEach((neworderContainer) => {
+  neworderContainer.addEventListener('click', () => {
+    neworderBoxContainer.style.display = 'none'; 
+    newdeliveryDetails.style.display = 'block'; 
   });
 });
 
 //  event listener for the "Back to Main" button
 if (backToMain) {
   backToMain.addEventListener('click', () => {
-    orderBoxContainer.style.display = 'block'; 
-    deliveryDetails.style.display = 'none'; 
+    neworderBoxContainer.style.display = 'block'; 
+    newdeliveryDetails.style.display = 'none'; 
   });
 }
 
