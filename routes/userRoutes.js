@@ -145,6 +145,7 @@ router.get("/quantity/dec/:productid", isloggedin, checkuser, async (req, res)=>
     
           // Deduct stock
           product.instock -= item.quantity;
+          product.unitsold += item.quantity;
           await product.save();
         }
         const orderItems = user.cart.map(item => ({

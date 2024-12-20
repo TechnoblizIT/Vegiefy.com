@@ -35,10 +35,11 @@ router.get("/addproduct",isloggedin,function(req, res){
 })
 
 router.post("/addproduct",upload.single("file"),async function(req, res){
-    let {productname, description, price ,category,expiredate,instock} = req.body;
+    let {productname, description, price ,category,expiredate,instock,description2} = req.body;
     const newProduct = new productModel({
       name:productname,
       description,
+      description2,
       price,
       image:{
         file:req.file.buffer,
