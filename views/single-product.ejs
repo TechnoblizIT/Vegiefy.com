@@ -830,7 +830,7 @@ footer::before {
   
       <div class="product-image-wrapper">
         <div class="product-image">
-          <img class="product-img" src="../images/uploads/<%= product.image %>" alt="Organic Kale Image 1">
+          <img class="product-img" src="data:<%= product.image.imageType %>;base64,<%= product.image.file.toString('base64') %>" alt="Organic Kale Image 1">
          
         </div>
       </div>
@@ -884,9 +884,9 @@ footer::before {
   
         <!-- Product Features -->
         <div class="product-description">
-          <h2>Product Features</h2>
+          <h2>Product Features</h2>`
           <ul>
-            <li><%=product.description%></li>
+            <li><%=product.description2%></li>
           </ul>
         </div>
       </div>
