@@ -1375,7 +1375,7 @@ margin-left: 50px;
                             <!-- <td class="delete-icon">
                                 <i class="far fa-trash-alt" data-id="<%= product._id %>"></i>
                             </td> -->
-                            <td class="box-update-btn" id="box-update-btn"  data-id="<%= product._id %>">
+                            <td class="box-update-btn"   data-id="<%= product._id %>">
                                <button >Update</button>
                             </td>
                         </tr>
@@ -2140,8 +2140,7 @@ margin-left: 50px;
       }
   // js for product page
   const addProductBtn = document.getElementById('add-product-btn');
-  const leftBlock = document.getElementById('left-block');
-  const rightBlock = document.getElementById('right-block');
+  
   const addProductForm = document.getElementById('add-product-form');
   const backIcons = document.querySelectorAll('.back-icon');
 
@@ -2162,51 +2161,61 @@ icon.addEventListener('click', () => {
   addProductForm.style.display = 'none';
 });
 });
-const boxUpdateBtn =  document.getElementById('box-update-btn');
+const boxUpdateBtns = document.querySelectorAll('.box-update-btn');
 const updateProductForm = document.getElementById('update-product-form');
+const leftBlock = document.getElementById('left-block'); // Ensure these IDs are correct
+const rightBlock = document.getElementById('right-block');
 
-boxUpdateBtn.addEventListener('click' , async() => {
-  leftBlock.style.display = 'none';
-  rightBlock.style.display = 'none';
-  updateProductForm.style.display = 'block';
-  const itemId = boxUpdateBtn.getAttribute('data-id');
-      try {
-        const response = await fetch(`/admin/getproduct/${itemId}`);
-        if (response.ok) {
-          const itemData = await response.json();
+boxUpdateBtns.forEach(boxUpdateBtn => {
+  boxUpdateBtn.addEventListener('click', async () => {
+    // Hide the left and right blocks, show the update form
+    leftBlock.style.display = 'none';
+    rightBlock.style.display = 'none';
+    updateProductForm.style.display = 'block';
 
-          // Populate the update form with fetched data
-          document.querySelector('#updateproductname').value = itemData.name || '';
-document.querySelector('#updatedescription').value = itemData.description || '';
-document.querySelector('#updatecategory').value = itemData.category || '';
-document.querySelector('#productid').value = itemData._id || '';
-if (itemData.expirydate) {
-  const formattedDate = new Date(itemData.expirydate).toISOString().split('T')[0];
-  document.querySelector('#updateexpiredate').value = formattedDate;
-}
-document.querySelector('#updateinstock').value = itemData.instock || '';
+    // Fetch the item ID from the data-id attribute
+    const itemId = boxUpdateBtn.getAttribute('data-id');
 
-const productImagePreview = document.querySelector('#updateproductimage-preview');
-if (itemData.image) {
-  const previewImage = document.getElementById('updateproductimage-preview');
-  const base64Image = `data:${itemData.image.imageType};base64,${btoa(
-    String.fromCharCode(...new Uint8Array(itemData.image.file.data))
-  )}`;
+    try {
+      // Fetch product details from the server
+      const response = await fetch(`/admin/getproduct/${itemId}`);
+      if (response.ok) {
+        const itemData = await response.json();
 
-  previewImage.src = base64Image;
-  previewImage.style.display = 'block';
-} else {
-  document.getElementById('updateproductimage-preview').style.display = 'none';
-}
-          console.log('Item details loaded:', itemData);
-        } else {
-          alert('Failed to load item details.');
+        // Populate the update form with fetched data
+        document.querySelector('#updateproductname').value = itemData.name || '';
+        document.querySelector('#updatedescription').value = itemData.description || '';
+        document.querySelector('#updatecategory').value = itemData.category || '';
+        document.querySelector('#productid').value = itemData._id || '';
+
+        if (itemData.expirydate) {
+          const formattedDate = new Date(itemData.expirydate).toISOString().split('T')[0];
+          document.querySelector('#updateexpiredate').value = formattedDate;
         }
-      } catch (error) {
-        console.error('Error fetching item details:', error);
+
+        document.querySelector('#updateinstock').value = itemData.instock || '';
+
+        const productImagePreview = document.querySelector('#updateproductimage-preview');
+        // if (itemData.image) {
+        //   const base64Image = `data:${itemData.image.imageType};base64,${btoa(
+        //     String.fromCharCode(...new Uint8Array(itemData.image.file.data))
+        //   )}`;
+        //   productImagePreview.src = base64Image;
+        //   productImagePreview.style.display = 'block';
+        // } else {
+        //   productImagePreview.style.display = 'none';
+        // }
+
+        console.log('Item details loaded:', itemData);
+      } else {
+        alert('Failed to load item details.');
       }
-      
-})
+    } catch (error) {
+      console.error('Error fetching item details:', error);
+    }
+  });
+});
+
 
 backIcons.forEach((icon) => {
 icon.addEventListener('click', () => {

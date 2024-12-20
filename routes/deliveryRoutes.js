@@ -51,14 +51,21 @@ router.get("/dashboard",isDeliverylogin,checkDelivery ,async function(req, res) 
     const user=req.user
     const neworder=await ordersModel.find({status:"Confirmed"}).populate("Products.product").populate("User")
     const activeOrder = await ordersModel.find({
-      status: { $ne: "Delivered", $ne: "Confirmed" }
+      status:"Processing"
     }).populate("Products.product").populate("User");
     console.log(activeOrder)
     const orderhistory = await ordersModel.find({status:"Delivered"}).populate("Products.product").populate("User")
     res.render("order-detailspage",{googlemapapi,user,neworder,activeOrder,orderhistory}) 
 })
 
-
+router.post('/updateOrderStatus', (req, res) => {
+  const { status, orderid } = req.body;
+  
+  // Update the order status in your database
+  ordersModel.updateOne({ orderid: orderid }, { status: status })
+    .then(() => res.redirect('/delivery/dashboard#new-link-content')) // Redirect or respond as needed
+    .catch(err => res.status(500).send(err));
+});
 
 
   router.get("/accept/:id", isDeliverylogin, checkDelivery, async function(req, res) {
