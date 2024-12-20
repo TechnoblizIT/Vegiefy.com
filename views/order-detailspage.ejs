@@ -1139,7 +1139,8 @@ hr {
 
           </div>
         </div>
-    
+        
+
         <!-- Order Info Boxes -->
         <div class="order-info-box">
           <div>
@@ -1237,7 +1238,7 @@ hr {
 
 <!-- delivery details====================================================== -->
 <div class="delivery-details" id="delivery-details" style="display: none;">
-<!-- Fixed Header -->
+
 <header class="fixed-header">
   <div class="header-back-time">
   <div class="back-icon">
@@ -1431,6 +1432,297 @@ hr {
     </div>
   </div>
   
+  <!-- new page content -->
+   <div class="content newpage">
+    <div class="order-box-container" id="order-box-container">
+      <!-- Box 1 -->
+      <div class="order-box">
+        <div class="order-container" id="order-container">
+        <p class="order-name">John Chamber</p>
+        <p class="order-delivery-time">Order Time: <span> Jan 15, 2016, 12:34 PM</span></p>
+        <table>
+            <tr>
+                <td> <span >Order ID:</span> <br>#OTB00234</td>
+                <td><span>Order Amount: </span><br>  458.75</td>
+                <td><span>Payment Type: </span><br> Online</td>
+              </tr>
+        </table>
+        <p class="order-address">
+          <i class="fas fa-map-marker-alt map-icon"></i> 2634 Crestview Terrace, New York, 78004, United States
+        </p>
+      </div>
+       
+      <div class="order-actions">
+        <p class="mark-as">Mark As:</p>
+        <select class="order-status-dropdown">
+          <option value="" >Select</option>
+          <option value="processing">Processing</option>
+          <option value="outfordelivery">Out for Delivery</option>
+          <option value="delivered">Delivered</option>
+        </select>
+      </div>
+      </div>
+  
+      <!-- Box 2 -->
+      <div class="order-box">
+        <div class="order-container" id="order-container">
+        <p class="order-name">John Doe</p>
+        <p class="order-delivery-time">Order Time: <span> Jan 15, 2016, 12:34 PM</span></p>
+        <table>
+            <tr>
+                <td> <span>Order ID:</span> <br>#OTB00234</td>
+                <td><span>Order Amount: </span><br>  458.75</td>
+                <td><span>Payment Type: </span><br> Online</td>
+              </tr>
+         
+        </table>
+        <p class="order-address">
+          <i class="fas fa-map-marker-alt map-icon"></i> 1745 Forest Drive, Los Angeles, 90001, United States
+        </p>
+        </div>
+        <div class="order-actions">
+          <p class="mark-as">Mark As:</p>
+          <select class="order-status-dropdown">
+            <option value="" >Select</option>
+            <option value="processing">Processing</option>
+            <option value="outfordelivery">Out for Delivery</option>
+            <option value="delivered">Delivered</option>
+          </select>
+        </div>
+      </div>
+
+       <!-- Box 3 -->
+       <div class="order-box">
+        <div class="order-container" id="order-container">
+        <p class="order-name">John Doe</p>
+        <p class="order-delivery-time">Order Time: <span> Jan 15, 2016, 12:34 PM</span></p>
+        <table>
+            <tr>
+                <td> <span>Order ID:</span> <br>#OTB00234</td>
+                <td><span>Order Amount: </span><br>  458.75</td>
+                <td><span>Payment Type: </span><br> Online</td>
+              </tr>
+         
+        </table>
+        <p class="order-address">
+          <i class="fas fa-map-marker-alt map-icon"></i> 1745 Forest Drive, Los Angeles, 90001, United States
+        </p>
+        </div>
+        <div class="order-actions">
+          <p class="mark-as">Mark As:</p>
+          <select class="order-status-dropdown">
+            <option value="" >Select</option>
+            <option value="processing">Processing</option>
+            <option value="outfordelivery">Out for Delivery</option>
+            <option value="delivered">Delivered</option>
+          </select>
+        </div>
+      </div>
+
+       <!-- Box 4 -->
+  <div class="order-box">
+      <div class="order-container" id="order-container">
+    <p class="order-name">John Doe</p>
+    <p class="order-delivery-time">Order Time: <span> Jan 15, 2016, 12:34 PM</span></p>
+    <table>
+      <tr>
+        <td> <span>Order ID:</span> <br>#OTB00234</td>
+        <td><span>Order Amount: </span><br> 458.75</td>
+        <td><span>Payment Type: </span><br> Online</td>
+      </tr>
+    </table>
+    <p class="order-address">
+      <i class="fas fa-map-marker-alt map-icon"></i> 1745 Forest Drive, Los Angeles, 90001, United States
+    </p>
+    </div>
+    <div class="order-actions">
+      <p class="mark-as">Mark As:</p>
+      <button class="cancelled-btn" onclick="toggleOptions()">Cancelled</button>
+    </div>
+
+    <!-- Options Section -->
+    <div class="options-container" id="options-container">
+      <h5>Reason for cancellation</h5>
+      <select id="cancel-options" onchange="showOtherInput()">
+        <option value="">Select a reason...</option>
+        <option value="door-locked">Door Locked</option>
+        <option value="customer-not-picking">Customer Not Picking Call</option>
+        <option value="incorrect-address">Incorrect Address</option>
+        <option value="bad-weather">Bad Weather</option>
+        <option value="payment-issue">Payment Issue</option>
+        <option value="item-out-of-stock">Item Out of Stock</option>
+        <option value="vehicle-breakdown">Vehicle Breakdown</option>
+        <option value="package-lost">Package Lost</option>
+        <option value="wrong-item-placed">Wrong Item Placed</option>
+        <option value="accident">Accident During Delivery</option>
+        <option value="technical-issue">Technical Issue</option>
+        <option value="other">Other</option>
+      </select>
+
+      <!-- "Other" input section -->
+      <div class="other-message" id="other-message">
+        <h5>Mention it:</h5>
+        <textarea name="message" placeholder="Type another reason..."></textarea>
+      </div>
+      <button type="submit" class="submit-reason">Submit</button>
+    </div>
+
+ 
+  </div>
+</div>
+
+<div class="delivery-details" id="delivery-details" style="display: none;">
+  <!-- Fixed Header -->
+  <header class="fixed-header">
+    <div class="header-back-time">
+    <div class="back-icon">
+      <i id="back-to-main" class="fa-solid fa-chevron-left"></i>
+    </div>
+   
+    <div class="order-id">
+      <span><strong>#OTB000145</strong></span>
+    </div><br>
+    <div class="delivery-time-section">
+      <span>Delivery Time</span><br>
+      <span class="time">09:20 AM</span>
+    </div>
+  
+  </div>
+  </header>
+
+  <!-- Delivery Details Title -->
+  <div class="title-section">
+    <h1>Delivery Details</h1>
+  </div>
+
+  <!-- Delivery Information -->
+<div class="delivery-info">
+  <div class="info-item">
+    <div class="delivery-name">
+      <h2>John Chambers</h2>
+    </div>
+  </div>
+
+  <div class="info-item">
+    <i class="fas fa-map-marker-alt"></i>
+    <div class="delivery-address">
+      <h3>Address</h3>
+      <p>123 Main Street, Apartment 4B, CityMall, State 78722, United States</p>
+    </div>
+  </div>
+
+  <div class="info-item">
+    <i class="fas fa-envelope"></i>
+    <div class="delivery-email">
+      <h3>Email Id</h3>
+      <p>johnchambers@gmail.com</p>
+    </div>
+  </div>
+
+  <div class="info-item">
+    <i class="fas fa-phone"></i>
+    <div class="delivery-mobile">
+      <h3>Mobile</h3>
+      <p>+91 1234567890</p>
+    </div>
+  </div>
+
+  <div class="info-item">
+    <i class="fas fa-credit-card"></i>
+    <div class="delivery-payment">
+      <h3>Payment Type</h3>
+      <p>Cash on Delivery</p>
+    </div>
+  </div>
+</div>
+
+<div class="title-section">
+  <h1>Order Summary</h1>
+</div>
+
+  <!-- delivery-Product Table -->
+  <table class="delivery-product-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Product</th>
+        <th>Qty</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><img src="assest/products/crops/onions.jpg" alt="Onion"></td>
+        <td>Onion <br><span style="color: #666;">1kg</span></td>
+        <td>2</td>
+        <td>₹148 <br><span style="color: #666; text-decoration: line-through;">₹198</span></td>
+      </tr>
+      <tr>
+        <td><img src="assest/products/crops/potatoes.jpg" alt="Corn"></td>
+        <td>Potato <br><span style="color: #666;">1kg</span></td>
+        <td>1</td>
+        <td>₹50<br><span style="color: #666; text-decoration: line-through;">₹94</span></td>
+      </tr>
+      <tr>
+        <td><img src="assest/products/crops/cucumber.jpg" alt="Cucumber"></td>
+        <td>Cucumber <br><span style="color: #666;">1kg</span></td>
+        <td>1</td>
+        <td>₹31<br><span style="color: #666; text-decoration: line-through;">₹40</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="title-section">
+    <h1>Bill Summary</h1>
+  </div>
+  
+  <div class="payment-summary">
+    <!-- Item Total -->
+    <div class="summary-row">
+      <span>Item Total</span>
+      <h2 class="price"><span>₹407</span>&nbsp; ₹267</h2>
+    </div>
+  
+    <!-- Handling Charge -->
+    <div class="summary-row">
+      <span>Handling Charge</span>
+      <h2 class="price"><span>₹15</span>&nbsp;₹6.49</h2>
+    </div>
+  
+    <!-- Delivery Fee -->
+    <div class="summary-row">
+      <span>Delivery Fee</span>
+      <h2 class="price"><span>₹25</span>&nbsp;₹0</h2>
+    </div>
+  
+    <!-- GST & Taxes -->
+    <div class="summary-row bold">
+      <span>GST & Taxes</span>
+      <h2 class="price"><span>₹299</span>&nbsp;₹1</h2>
+    </div>
+  
+    <hr>
+  
+    <!-- To Pay -->
+    <div class="summary-row">
+      <span style="font-weight: bold;">To Pay</span>
+      <h2 class="total-price"><span>₹746</span>&nbsp;₹274.49</h2>
+    </div>
+  
+    <!-- Taxes and Savings -->
+    <div class="summary-row small">
+      <span>Incl. all taxes and charges</span>
+      <span class="price green-bg">SAVING ₹471.51</span>
+    </div>
+  
+  
+    <div class="call-map">
+      <button class="call-btn"><i class="fa-solid fa-phone"></i> &nbsp;Call</button>
+      <button class="map-btn"><i class="fa-solid fa-location-dot"></i> &nbsp;Map</button>
+    </div>
+  </div>
+</div>
+   </div>
 
   <!-- Profile Page Content -->
   <div class="content profile">
@@ -1510,9 +1802,14 @@ hr {
       <a href="#history" class="nav-link" id="history-link">
         <i class="fas fa-history"></i> History
       </a>
+      <a href="#new-link-content" class="nav-link" id="new-link">
+        <i class="fas fa-history"></i> New
+      </a>
       <a href="#profile" class="nav-link" id="profile-link">
         <i class="fas fa-user"></i> Profile
       </a>
+      
+      
       
   </div>
   <script
@@ -1526,6 +1823,7 @@ const home = document.querySelector(".home");
 const orders = document.querySelector(".orders");
 const history = document.querySelector(".history");
 const profile = document.querySelector(".profile");
+const newpage = document.querySelector(".newpage");
 const newOrderContent = document.querySelector(".new-orders-content");
 
 
@@ -1533,6 +1831,7 @@ const homeLink = document.getElementById("home-link");
 const ordersLink = document.getElementById("orders-link");
 const historyLink = document.getElementById("history-link");
 const profileLink = document.getElementById("profile-link");
+const newLink = document.getElementById("new-link");
 
 
 function hideAllContent() {
@@ -1540,12 +1839,15 @@ function hideAllContent() {
   orders.classList.remove("active");
   history.classList.remove("active");
   profile.classList.remove("active");
+  newpage.classList.remove("active");
+
   newOrderContent.classList.remove("active");
 
   homeLink.classList.remove("active");
   ordersLink.classList.remove("active");
   historyLink.classList.remove("active");
   profileLink.classList.remove("active");
+  newLink.classList.remove("active");
 }
 
 // Show the selected section and add active class to the link
@@ -1563,6 +1865,7 @@ homeLink.addEventListener("click", () => showContent(home, homeLink));
 ordersLink.addEventListener("click", () => showContent(orders, ordersLink));
 historyLink.addEventListener("click", () => showContent(history, historyLink));
 profileLink.addEventListener("click", () => showContent(profile, profileLink));
+newLink.addEventListener("click", () => showContent(newpage, newLink));
 
 // js for new order button=================================================================================
 const newOrderButton = document.getElementById('new-order-button');
