@@ -1126,30 +1126,35 @@ hr {
   <div class="content new-orders-content">
     <!-- New Order Page Content -->
     <h2>New Order</h2>
-    <% if (neworder.length > 0) { %>
+    <% if (neworder && neworder.length > 0) { %>
       <% neworder.forEach((order) => { %>  
         <div class="order-details">
           <div class="left">
-            <span class="name"><%= order.User.name %></span>
+            <span class="name"><%= order.User?.name || 'Unknown User' %></span>
             <p class="address">
-              <%= order.User.address && order.User.address.length > 0 ? `${order.User.address[0].address}, ${order.User.address[0].locality}, ${order.User.address[0].city}, ${order.User.address[0].state} ${order.User.address[0].pincode}` : 'No address available' %>
+              <% if (order.User?.address && order.User.address.length > 0) { %>
+                <%= order.User.address[0].address %>, <%= order.User.address[0].locality %>, 
+                <%= order.User.address[0].city %>, <%= order.User.address[0].state %> 
+                <%= order.User.address[0].pincode %>
+              <% } else { %>
+                No address available
+              <% } %>
             </p>
           </div>
           <div class="right">
-
+            <!-- Additional content can go here -->
           </div>
         </div>
-        
-
+    
         <!-- Order Info Boxes -->
         <div class="order-info-box">
           <div>
             <span>Order ID</span>
-            <span><%= order.orderid %></span>
+            <span><%= order.orderid || 'N/A' %></span>
           </div>
           <div>
             <span>Order Amount</span>
-            <span>₹<%= order.TotalPrice.toFixed(2) %></span>
+            <span>₹<%= order.TotalPrice?.toFixed(2) || '0.00' %></span>
           </div>
         </div>
     
@@ -1164,32 +1169,47 @@ hr {
             </tr>
           </thead>
           <tbody>
-            <% order.Products.forEach((product) => { %>
+            <% if (order.Products && order.Products.length > 0) { %>
+              <% order.Products.forEach((product) => { %>
+                <tr>
+                  <td>
+                    <% if (product.product?.image && product.product.image.file && product.product.image.imageType) { %>
+                      <img src="data:<%= product.product.image.imageType %>;base64,<%= product.product.image.file.toString('base64') %>" alt="<%= product.product.name || 'Product' %>">
+                    <% } else { %>
+                      <img src="/path/to/placeholder-image.jpg" alt="No Image Available">
+                    <% } %>
+                  </td>
+                  <td>
+                    <%= product.product?.name || 'Unknown Product' %> <br>
+                    <span style="color: #666;"><%= product.product?.description || 'No description' %></span>
+                  </td>
+                  <td><%= product.quantity || 0 %></td>
+                  <td>
+                    ₹<%= product.product?.price?.toFixed(2) || '0.00' %> <br>
+                    <span style="color: #666; text-decoration: line-through;">
+                      <%= product.product?.oldPrice ? product.product.oldPrice.toFixed(2) : '' %>
+                    </span>
+                  </td>
+                </tr>
+              <% }) %>
+            <% } else { %>
               <tr>
-                <td>
-                  <img src="data:<%= product.product.image.imageType %>;base64,<%= product.product.image.file.toString('base64') %>" alt="<%= product.product.name %>">
-                </td>
-                <td>
-                  <%= product.product.name %> <br><span style="color: #666;"><%= product.product.description || 'No description' %></span>
-                </td>
-                <td><%= product.quantity %></td>
-                <td>₹<%= product.product.price.toFixed(2) %> <br><span style="color: #666; text-decoration: line-through;"><%= product.product.oldPrice ? product.product.oldPrice.toFixed(2) : '' %></span></td>
+                <td colspan="4">No products available</td>
               </tr>
-            <% }) %>
-          </tbody>
+            <% } %>
+          </tbody>`
         </table>
     
         <div class="order-buttons">
-          <a href="/delivery/accept/<%=order._id%>"><button class="accept-btn">Accept</button></a>
-          <a href="/delivery/decline/<%=order._id%>"><button class="reject-btn">Reject</button></a>
+          <a href="/delivery/accept/<%= order._id || '' %>"><button class="accept-btn">Accept</button></a>
+          <a href="/delivery/decline/<%= order._id || '' %>"><button class="reject-btn">Reject</button></a>
         </div>
-      </div>
       <% }) %>
     <% } else { %>
       <h2>No New Orders</h2>
       <p>You have no new orders at the moment.</p>
     <% } %>
-
+    
  <!-- Orders Page Content======================================================================= -->
  <div class="content orders">
   <div class="order-box-container" id="order-box-container">

@@ -129,7 +129,28 @@ router.get("/quantity/dec/:productid", isloggedin, checkuser, async (req, res)=>
         if (!user) {
           return res.status(404).json({ success: false, message: 'User not found' });
         }
-    
+     
+        const validPincodes = ["441601", "441614", "441801"];
+        let isValidPincode = false;
+        
+        // Loop through the user's addresses
+        user.address.forEach(addr => {
+          console.log(addr.pincode); // This will print each pincode to the console
+          
+          // Check if the current address's pincode is valid
+          if (validPincodes.includes(addr.pincode)) {
+            isValidPincode = true; // If a valid pincode is found, set the flag to true
+          }
+        });
+        
+        // If no valid pincode was found, return an error response
+        if (!isValidPincode) {
+          return res.status(400).json({
+            success: false,
+            redirect: '/not-available',
+            message: 'Delivery not available in your area.',
+          });
+        }
         // Validate all products and their stock
         for (const item of products) {
           const product = await productModel.findById(item.productId);
@@ -165,7 +186,51 @@ router.get("/quantity/dec/:productid", isloggedin, checkuser, async (req, res)=>
     
         // Save the order
         await newOrder.save();
-    
+        let transporter = nodemailer.createTransport({
+          host: 'smtpout.secureserver.net', 
+          port: 587, 
+          secure: false, 
+          auth: {
+              user: 'support@vegiefy.com', 
+              pass: process.env.MAIL_PASS
+          }
+        });
+        const mailOptions = {
+          from: 'support@vegiefy.com',
+          to: user.email,
+          subject: "Order Confirmation",
+          text: `
+            Order Confirmation
+        
+            Dear ${user.name},
+        
+            Thank you for shopping with Vegiefy Organics Farming! We're excited to confirm your order.
+        
+            Order Details:
+            ------------------------
+            Order ID: ${newOrder.orderid}
+            Total Amount: ₹${totalPrice.toFixed(2)}
+        
+            We are processing your order and will notify you once it is shipped.
+        
+            If you have any questions or need assistance, please feel free to contact our support team at support@vegiefy.com.
+        
+            Thank you for choosing Vegiefy!
+        
+            Best Regards,
+            Vegiefy Team
+        
+            Visit Vegiefy: https://vegiefy.com
+            Contact Us: support@vegiefy.com
+          `
+        };
+        transporter.sendMail(mailOptions, function(error, info){
+          if (error) {
+              console.log('Error:', error);
+          } else {
+              console.log('Email sent: ', info.response);
+          }
+        })      
         // Respond with success
         res.status(200).json({
           success: true,

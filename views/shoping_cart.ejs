@@ -1468,35 +1468,38 @@ async function confirmOrder() {
   }
 
   try {
-    const response = await fetch('/user/order/confirm', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ userId, addressId, products, totalPrice }),
-    });
+  const response = await fetch('/user/order/confirm', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ userId, addressId, products, totalPrice }),
+  });
 
-    const data = await response.json();
+  const data = await response.json();
 
-    if (response.ok) {
-      // Update popup content dynamically
-      document.querySelector('.popup-text').textContent = 'Order placed successfully!';
-      document.querySelector('.popup-delivery-time strong').textContent = '25 minutes';
-      document.querySelector('.popup-cart-text').innerHTML = `
-        ${products.length} items for <strong>₹${totalPrice}</strong>
-      `;
-      document.querySelector('.popup-detail span').innerHTML = `
-        Delivery to <strong>Home</strong>
-      `;
-      document.querySelector('.popup-time-icon + span strong').textContent = new Date().toLocaleTimeString();
+  if (response.ok) {
+    // Update popup content dynamically
+    document.querySelector('.popup-text').textContent = 'Order placed successfully!';
+    document.querySelector('.popup-delivery-time strong').textContent = '25 minutes';
+    document.querySelector('.popup-cart-text').innerHTML = `
+      ${products.length} items for <strong>₹${totalPrice}</strong>
+    `;
+    document.querySelector('.popup-detail span').innerHTML = `
+      Delivery to <strong>Home</strong>
+    `;
+    document.querySelector('.popup-time-icon + span strong').textContent = new Date().toLocaleTimeString();
 
-      // Show the popup
-      openPopup();
-    } else {
-      alert(`Error: ${data.message}`);
-    }
-  } catch (error) {
-    console.error('Error confirming order:', error);
-    alert('An unexpected error occurred. Please try again later.');
+    // Show the popup
+    openPopup();
+  } else if (data.redirect) {
+    // Redirect to the specified page
+    window.location.href = data.redirect;
+  } else {
+    alert(`Error: ${data.message}`);
   }
+} catch (error) {
+  console.error('Error confirming order:', error);
+  alert('An unexpected error occurred. Please try again later.');
+}
 }
 
 function openPopup() {

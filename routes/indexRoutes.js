@@ -111,7 +111,8 @@ router.get("/not-available" ,isloggedin,checkuser ,async function(req, res) {
       path: 'cart.product',  
       model: 'Products'      
     });
-    user.cart.forEach((item)=>{ cartcount+=1})
+    user.cart = user.cart.filter(item => item.product !== null);
+    cartcount = user.cart.length;
     res.render('not-available',{req,cartcount})
     }else{
      res.render('not-available',{req,cartcount})

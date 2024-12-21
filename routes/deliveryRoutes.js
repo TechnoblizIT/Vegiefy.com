@@ -50,9 +50,9 @@ router.get("/dashboard",isDeliverylogin,checkDelivery ,async function(req, res) 
     const googlemapapi=process.env.API_KEY
     const user=req.user
     const neworder=await ordersModel.find({status:"Confirmed"}).populate("Products.product").populate("User")
+    console.log(neworder)
     const activeOrder = await ordersModel.find({
-      status:"Processing"
-    }).populate("Products.product").populate("User");
+      status:"Processing"}).populate("Products.product").populate("User");
     console.log(activeOrder)
     const orderhistory = await ordersModel.find({status:"Delivered"}).populate("Products.product").populate("User")
     res.render("order-detailspage",{googlemapapi,user,neworder,activeOrder,orderhistory}) 
