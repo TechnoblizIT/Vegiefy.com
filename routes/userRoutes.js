@@ -60,9 +60,11 @@ router.get("/quantity/inc/:productid", isloggedin, checkuser, async (req, res)=>
     path: 'cart.product',  
     model: 'Products'      
   });
+  console.log(user);
 
  user.cart.forEach((item)=>{
    if(item.product._id.toString()===req.params.productid){
+   
     if(item.quantity===0.5){
         item.quantity=0.75
         item.product.price=item.quantity*item.product.price

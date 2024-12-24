@@ -75,7 +75,7 @@ router.post('/updateOrderStatus', (req, res) => {
       // Step 1: Update the order status and assign the DeliveryBoy
       const updatedOrder = await ordersModel.findByIdAndUpdate(
         id, 
-        { status: "Preparing", DeliveryBoy: req.user._id }, 
+        { status: "Processing", DeliveryBoy: req.user._id }, 
         { new: true }
       );
    
