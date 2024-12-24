@@ -50,10 +50,10 @@ router.get("/dashboard",isDeliverylogin,checkDelivery ,async function(req, res) 
     const googlemapapi=process.env.API_KEY
     const user=req.user
     const neworder=await ordersModel.find({status:"Confirmed"}).populate("Products.product").populate("User")
-    console.log(neworder)
+    
     const activeOrder = await ordersModel.find({
       status:"Processing"}).populate("Products.product").populate("User");
-    console.log(activeOrder)
+   
     const orderhistory = await ordersModel.find({status:"Delivered"}).populate("Products.product").populate("User")
     res.render("order-detailspage",{googlemapapi,user,neworder,activeOrder,orderhistory}) 
 })
@@ -72,25 +72,24 @@ router.post('/updateOrderStatus', (req, res) => {
     const { id } = req.params;
   
     try {
-      // Step 1: Update the order status and assign the DeliveryBoy
-      const updatedOrder = await ordersModel.findByIdAndUpdate(
+          const updatedOrder = await ordersModel.findByIdAndUpdate(
         id, 
         { status: "Processing", DeliveryBoy: req.user._id }, 
         { new: true }
       );
    
-      // Step 2: Add the order to the DeliveryBoy's orders array
+    
       await deliveryboysModel.findByIdAndUpdate(
         req.user._id,
         { $push: { orders: updatedOrder._id } },
         { new: true }
       );
     
-      // After updating both models, redirect to the dashboard
+   
       res.redirect("/delivery/dashboard");
   
     } catch (err) {
-      // Handle errors and send a response
+      
       res.status(500).send(err);
     }
   });

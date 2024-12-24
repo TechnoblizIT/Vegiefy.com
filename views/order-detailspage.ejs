@@ -1127,7 +1127,7 @@ hr {
     <!-- New Order Page Content -->
     <h2>New Order</h2>
     <% if (neworder && neworder.length > 0) { %>
-      <% neworder.forEach((order) => { %>  
+      <% neworder.reverse().forEach((order) => { %>  
         <div class="order-details">
           <div class="left">
             <span class="name"><%= order.User?.name || 'Unknown User' %></span>
@@ -1170,7 +1170,7 @@ hr {
           </thead>
           <tbody>
             <% if (order.Products && order.Products.length > 0) { %>
-              <% order.Products.forEach((product) => { %>
+              <% order.Products.reverse().forEach((product) => { %>
                 <tr>
                   <td>
                     <% if (product.product?.image && product.product.image.file && product.product.image.imageType) { %>
@@ -1214,7 +1214,7 @@ hr {
  <div class="content orders">
   <div class="order-box-container" id="order-box-container">
   <% if(activeOrder.lenght>0){%>
-    <% activeOrder.forEach((order)=>{ %>
+    <% activeOrder.reverse().forEach((order)=>{ %>
     <div class="order-box">
       <div class="order-container" id="order-container">
       <p class="order-name">order.User.name</p>
@@ -1425,7 +1425,7 @@ hr {
       <!-- Box 1 -->
        <%if(orderhistory.length>0){%>
 
-      <% orderhistory.forEach((order)=>{ %>
+      <% orderhistory.reverse().forEach((order)=>{ %>
       <div class="box">
         <p class="history-name"><%=order.User.name%></p>
         <p class="delivery-time">Delivery Time: <span> Jan 15, 2016, 12:34 PM</span></p>
@@ -1458,8 +1458,8 @@ hr {
     <div class="new-order-box-container" id="new-order-box-container">
       <!-- Box 1 -->
        <%if(activeOrder.length>0){%>
-        <% activeOrder.forEach((order)=>{ %>
-     <a href="/delivery/orderdetalis/<%=order.orderid%>" > <div class="order-box">
+        <% activeOrder.reverse.forEach((order)=>{ %>
+     <a href="/delivery/orderdetalis/<%=order.orderid%>" style="text-decoration: none;"> <div class="order-box">
         <div class="new-order-container" id="new-order-container">
         <p class="order-name"><%=order.User.name%></p>
         <p class="order-delivery-time">Order Time: <span><%= new Date(order.Date).toLocaleString('en-US', {

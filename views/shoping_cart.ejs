@@ -1176,6 +1176,9 @@ footer::before {
     <div class="shopping-cart">
       <div class="product-container">
         <% try { %>
+          <% if (limit) { %>
+            <p style="color: red;"><%= limit %></p>
+          <% } %>
           <% if (user && user.cart && user.cart.length > 0) { %>
             <% user.cart.forEach(items => { %>
               <% if (items.product) { %>
@@ -1187,9 +1190,7 @@ footer::before {
                   <h2 class="product-name"><%= items.product.name || 'Product Name Unavailable' %></h2>
                   <!-- <p class="product-description"><%= items.product.description || 'Description Unavailable' %>.</p> -->
                   <!-- <p class="product-price">₹<%= (items.product.price || 0) * (items.quantity || 0) %></p> -->
-                  <% if (limit) { %>
-                    <p style="color: red;"><%= limit %></p>
-                  <% } %>
+              
                   <div class="quantity-container">
                     <a href="/user/quantity/dec/<%= items.product._id %>" style="text-decoration: none;">
                       <button class="decrease-btn">-</button>

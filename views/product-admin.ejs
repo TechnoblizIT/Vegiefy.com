@@ -244,12 +244,16 @@
         margin-right: 10px;
       }
 
-      .tm-status-circle.moving {
-        background-color: #5e63ff;
+      .tm-status-circle.confirmed {
+        background-color: #5efffc;
+      }
+      .tm-status-circle.processing {
+        background-color: #1a4cb7;
       }
 
-      .tm-status-circle.pending {
-        background-color: #f7b731;
+
+      .tm-status-circle.delivered {
+        background-color: #18df26;
       }
 
       .tm-status-circle.cancelled {
@@ -1287,7 +1291,7 @@ margin-left: 50px;
               </thead>
               <tbody style="background-color: #2c2f3d;">
                 <% if (orders.length > 0) { %>
-                  <% orders.forEach(order => { %>
+                  <% orders.reverse().forEach(order => { %>
                     <tr>
                       <th scope="row"><b>#<%= order.orderid %></b></th>
                       <td>
