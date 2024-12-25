@@ -1283,10 +1283,8 @@ margin-left: 50px;
                   <th scope="col">ORDER NO.</th>
                   <th scope="col">STATUS</th>
                   <th scope="col">OPERATORS</th>
-                  <th scope="col">LOCATION</th>
-                  <th scope="col">DISTANCE</th>
-                  <th scope="col">START DATE</th>
-                  <th scope="col">EST DELIVERY DUE</th>
+                  <th scope="col">ORDER TIME</th>
+                  <th scope="col">DELIVERD TIME</th>
                 </tr>
               </thead>
               <tbody style="background-color: #2c2f3d;">
@@ -1299,8 +1297,6 @@ margin-left: 50px;
                         <%= order.status %>
                       </td>
                       <td><b><%= order.DeliveryBoy ? order.DeliveryBoy.name : 'Unassigned' %></b></td>
-                      <td><b><%= order.User ? order.User.address.city : 'Unknown' %></b></td>
-                      <td><b><%= order.distance || 'N/A' %> km</b></td>
                       <td><%= new Date(order.Date).toLocaleString('en-US', {
                           year: 'numeric',
                           month: 'short',
@@ -1660,8 +1656,8 @@ margin-left: 50px;
               <form action="" class="form-details">
                 <!-- First Row -->
                 <div class="form-group-details">
-                  <label for="">ID:</label>
-                   <input type="text" placeholder="Enter your ID" value="<%=user._id%>" class="input-field">
+                  <label for="">User ID:</label>
+                   <input type="text" placeholder="Enter your ID" value="<%=user.username%>" class="input-field">
                 </div>
                 <div class="form-group-details">
                   <label for="">Name:</label>

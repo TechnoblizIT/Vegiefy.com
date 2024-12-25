@@ -1458,8 +1458,8 @@ hr {
     <div class="new-order-box-container" id="new-order-box-container">
       <!-- Box 1 -->
        <%if(activeOrder.length>0){%>
-        <% activeOrder.reverse.forEach((order)=>{ %>
-     <a href="/delivery/orderdetalis/<%=order.orderid%>" style="text-decoration: none;"> <div class="order-box">
+        <% activeOrder.reverse().forEach((order)=>{ %>
+     <div class="order-box">
         <div class="new-order-container" id="new-order-container">
         <p class="order-name"><%=order.User.name%></p>
         <p class="order-delivery-time">Order Time: <span><%= new Date(order.Date).toLocaleString('en-US', {
@@ -1494,7 +1494,7 @@ hr {
           <button type="submit">Mark As</button>
         </form>
       </div>
-      </div></a>
+      </div>
       <% }) } else { %>
         <p>No active orders found.</p>
       <% } %>
