@@ -69,22 +69,26 @@ router.get('/blog',checkuser ,async function(req, res) {
     }
  });
 
- router.get('/delivery', checkuser ,async function(req, res) {
+ router.get('/delivery',isloggedin, checkuser ,async function(req, res) {
   var cartcount=0
-  if (req.user){
    const user = await userModel.findOne({ email: req.user.email })
    .populate({
      path: 'cart.product',  
      model: 'Products'      
    });
+   const orders = await ordersModel.find({ User: req.user._id }) // Fetch orders for a specific user
+   .populate('User')
+   .populate({
+     path: 'Products.product',
+     model: 'Products',
+   })
+   .populate('DeliveryBoy');
    var cartcount=0
    user.cart = user.cart.filter(item => item.product !== null);
    cartcount = user.cart.length;
-   res.render('deliverypage',{req,cartcount})
-  }
-   else{
-    res.render('deliverypage',{req,cartcount})
-   }
+   res.render('deliverypage',{req,cartcount,orders})
+  
+  
 });
 
  router.get('/contact', checkuser ,async function(req, res) {
@@ -174,6 +178,7 @@ router.get('/search', async (req, res) => {
   }
 });
 const jwt = require('jsonwebtoken');
+const ordersModel = require('../models/orders-model');
 router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
 
 router.get('/auth/google/callback', 

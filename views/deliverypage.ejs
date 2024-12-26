@@ -920,78 +920,75 @@ footer::before {
   </header>
 
   <!-- html for delivery section -->
-  <section class="my-order">
-    <div class="order-details">
-    <h1>Order Details</h1>
-    <hr>
-    <div class="order-id"><h2>Order ID: 1235</h2></div>
-    <div class="details">
-      <h2 class="details-heading">Your delivery Agent</h2>
-      <div class="delivery-section">
-          
-          <div class="delivery-agent">
-            
-              <img src="../images/assest/team/p-4.jpg" alt="Delivery Agent">
-              <div class="delivery-info">
-                  <span class="name">William Smith</span>
-                  <div class="star-rating">
-                    <span class="star" onclick="rate(1)">&#9733;</span>
-                    <span class="star" onclick="rate(2)">&#9733;</span>
-                    <span class="star" onclick="rate(3)">&#9733;</span>
-                    <span class="star" onclick="rate(4)">&#9733;</span>
-                    <span class="star" onclick="rate(5)">&#9733;</span>
+  <div class="orders-list">
+    <% orders.forEach(order => { %>
+      <div class="my-order">
+        <div class="order-details">
+          <h1>Order Details</h1>
+          <hr>
+          <div class="order-id">
+            <h2>Order ID: <%= order.orderid %></h2>
+          </div>
+          <div class="details">
+            <h2 class="details-heading">Your Delivery Agent</h2>
+            <div class="delivery-section">
+              <div class="delivery-agent">
+                <img
+                  src="<%= order.DeliveryBoy?.image || '/default-image.jpg' %>"
+                  alt="Delivery Agent"
+                />
+                <div class="delivery-info">
+                  <span class="name"><%= order.DeliveryBoy?.name || 'Not Assigned' %></span>
                 </div>
               </div>
+              <div class="delivery-time">
+   
+              </div>
+            </div>
           </div>
-          <div class="delivery-time">
-            <span>Expected Delivery Time</span>
-            <div class="time">08:20 PM</div>
+  
+          <div class="address-details">
+            <h2>Your Delivery Address</h2>
+            <div class="address-block">
+              <span>Home</span>
+              <div class="order-address">
+                <p>
+                  <%= order.User.name %> <%= order.User.mobile %>
+                  <%= order.User.address.name%>
+                </p>
+              </div>
+            </div>
+          </div>
+  
+          <div class="price">
+            <h2>
+              Total Amount: <span>₹<%= order.TotalPrice %></span>
+            </h2>
+          </div>
+  
+          <div class="order-track">
+            <div class="order-tracking-block">
+              <div class="order-step step-1">
+                <div class="step-circle">1</div>
+                <p>Order Confirm <span class="order-date"><%= order.Date.toDateString() %></span></p>
+              </div>
+              <div class="order-step step-2">
+                <div class="step-circle">2</div>
+                <p>Processing<span class="processing-date">Update dynamically</span></p>
+              </div>
+              <!-- Add additional steps dynamically -->
+            </div>
+          </div>
+  
+          <div class="order-details-button">
+            <button class="cancel-btn">Cancel</button>
+            <button class="for-help">For Help</button>
+          </div>
         </div>
       </div>
-  </div>
-
-  <div class="address-details">
-    <h2>Your Delivery Address</h2>
-    <div class="address-block">
-    <span>Home</span>
-    <div class="order-address">
-      <p>John Doe 9876543210 123, Main Street, Locality, City, State, 123456</p>
-    </div>
-  </div>
-  </div>
-
-  <div class="price">
-    <h2>Total Amount:<span> &nbsp;₹4,499</span></h2>
-  </div>
-  <div class="order-track">
-    <div class="order-tracking-block">
-    <div class="order-step step-1">
-      <div class="step-circle">1</div>
-      <p>Order Confirm <span class="order-date">Thu, 6th Dec'24</span></p>
-    </div>
-    <div class="order-step step-2">
-      <div class="step-circle">2</div>
-      <p>Processing<span class="processing-date">Thu, 6th Dec'24</span></p>
-    </div>
-    <div class="order-step step-3">
-      <div class="step-circle">3</div>
-      <p>Out for Delivery<span class="outfordeliverd-date">Fri, 7th Dec'24</span></p>
-    </div>
-    <div class="order-step step-4">
-      <div class="step-circle">4</div>
-      <p>Delivered<span class="delivered-date">Fri, 7th Dec'24</span></p>
-    </div>
+    <% }) %>
   </div>
   
-  </div>
-  
-  <div class="order-details-button">
-    <button class="cancel-btn">Cancel</button>
-    <button class="for-help">For Help</button>
-  </div>
-
-</div>
-</section>
 
      
 <!-- footer section -->
