@@ -279,7 +279,7 @@
 
    
 
-      /* start css foraccount page<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
+      /* start css for account page<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
       .container-block {
         margin: auto;
         padding: 30px;
@@ -599,11 +599,15 @@
           grid-template-columns: none;
         }
         /* for order-list */
+      
         .tm-block-scroll{
-          overflow-y: auto;
-          max-height: 400vh;
-          overflow-x: auto;
-          max-width: 350px;
+          padding: 0px;
+        padding-top: 20px;
+        margin: auto;
+        overflow-y: auto;
+        max-height: 85vh;
+        overflow-x: auto;
+        max-width: 295px;
         }
         /* for account */
 
@@ -618,8 +622,8 @@
     margin-bottom: 50px;
     flex-direction: column; 
   }
-  .container{
-    padding: 5px;
+  .container-block{
+    padding: 10px;
   }
   .button-clicked{
     font-size: 11px;
@@ -916,8 +920,10 @@ input:checked + .slider:before {
 
       /* media query for product */
       @media (max-width: 768px) {
- 
+       
   .product-container {
+    max-width: 340px;
+    max-height: 650px;
     flex-direction: column;
     gap: 10px;
     height: auto;
@@ -925,8 +931,9 @@ input:checked + .slider:before {
     
   }
   .product-right-block{
-    margin-top: 50px;
-  }
+    margin-top: 20px;
+        height: 1100px;
+    }
   .product-left-block,
   .product-right-block {
     flex: unset;
@@ -996,13 +1003,13 @@ input:checked + .slider:before {
   display: flex;
   gap: 1rem;
   justify-content: space-between;
-  flex-wrap: wrap; /* Allow the content to wrap on smaller screens */
+  flex-wrap: wrap; 
 }
 
 .form-block {
   flex: 1;
   padding: 1rem;
-  min-width: 300px; /* Ensure both blocks remain responsive */
+  min-width: 300px; 
 }
 
 .left-form-block .form-group {
@@ -1109,7 +1116,19 @@ margin-left: 50px;
 .back-icon:hover {
   color: #0056b3;
 }
-
+@media (max-width: 768px){
+  #add-product-form {
+  padding: 1rem;
+  margin-bottom: 100px;
+}
+#update-product-form{
+  padding: 1rem;
+  margin-bottom: 50px;
+}
+.btn-success{
+  margin-bottom: 60px;
+}
+}
     </style>
   </head>
   <body>
