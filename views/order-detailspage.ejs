@@ -164,7 +164,7 @@ body {
 .new-orders-content {
   background-color: #fff;
   border-radius: 15px;
-  padding: 20px;
+  padding: 10px;
   display: none;
   margin-bottom: 50px;
 }
@@ -177,19 +177,22 @@ body {
 .new-orders-content h2 {
   color: #0f172a;
   font-size: 28px;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   text-align: center;
   text-transform: uppercase;
   border-bottom: 2px solid #4CAF50;
   padding-bottom: 10px;
 }
-
+.order-details-box{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  padding: 5px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
 .order-details {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  
- 
 }
 
 .order-details .left,
@@ -198,7 +201,8 @@ body {
 }
 
 .order-details .left {
-  padding-right: 20px;
+  /* padding-right: 20px; */
+  margin-top: 20px;
 }
 
 .order-details .right {
@@ -1128,6 +1132,7 @@ hr {
     <h2>New Order</h2>
     <% if (neworder && neworder.length > 0) { %>
       <% neworder.reverse().forEach((order) => { %>  
+        <div class="order-details-box">
         <div class="order-details">
           <div class="left">
             <span class="name"><%= order.User?.name || 'Unknown User' %></span>
@@ -1203,6 +1208,7 @@ hr {
         <div class="order-buttons">
           <a href="/delivery/accept/<%= order._id || '' %>"><button class="accept-btn">Accept</button></a>
           <a href="/delivery/decline/<%= order._id || '' %>"><button class="reject-btn">Reject</button></a>
+        </div>
         </div>
       <% }) %>
     <% } else { %>
