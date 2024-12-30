@@ -498,7 +498,7 @@ hr {
   }
 
   .hero-slide .hero-text {
-    width: 80%; 
+    /* width: 80%;  */
     padding: 10px; 
   }
 }
