@@ -953,8 +953,18 @@ footer::before {
               <span>Home</span>
               <div class="order-address">
                 <p>
-                  <%= order.User.name %> <%= order.User.mobile %>
-                  <%= order.User.address.name%>
+                  <%= order.User.name %> <br>
+                  Mobile:
+                  <%= order.User.address[0].mobile %>
+                  <br>
+                  <%= order.User.address[0].address %> 
+                  <%= order.User.address[0].city %>
+                  <br>
+                  <%= order.User.address[0].state %>
+                  <%= order.User.address[0].pincode %>
+                  <%= order.User.address[0].country %>
+              
+                  
                 </p>
               </div>
             </div>
@@ -976,8 +986,14 @@ footer::before {
                 <div class="step-circle">2</div>
                 <p>Processing<span class="processing-date">Update dynamically</span></p>
               </div>
-              <!-- Add additional steps dynamically -->
+              <div class="order-step step-3">
+                <div class="step-circle">3</div>
+                <p>Out For Delivery<span class="outfordeliverd-date">Update dynamically</span></p>
             </div>
+            <div class="order-step step-4">
+                <div class="step-circle">4</div>
+                <p>Delivered<span class="delivered-date">Update dynamically</span></p>
+              </div>
           </div>
   
           <div class="order-details-button">
@@ -986,8 +1002,8 @@ footer::before {
           </div>
         </div>
       </div>
+    </div>
     <% }) %>
-  </div>
   
 
      
