@@ -641,7 +641,7 @@ footer::before {
   position: relative;
 }
 
-.step-circle {
+.order-confirm, .processing, .out-for-delivery ,.delivered{
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -692,24 +692,20 @@ footer::before {
   display: none;
 }
 
-.step-1 .step-circle {
+.step-1 .order-confirm {
   background-color: #4caf50;
 }
 
-.step-2 .step-circle {
+.step-2 .processing {
   background-color: #4caf50;
 }
 
-.step-3 .step-circle {
+.step-3 .out-for-delivery{
   background-color: #ff9800;
 }
 
-.step-4 .step-circle {
+.step-4 .delivered {
   background-color: #ff9800;
-}
-
-.step-5 .step-circle {
-  background-color: #f44336;
 }
 
 .step-1::after {
@@ -728,26 +724,20 @@ footer::before {
   background-color: #ff9800;
 }
 
-.step-5::after {
-  background-color: #f44336;
-}
 
 .order-details-button {
   display: flex;
   justify-content: space-around;
   gap: 10px;
-  align-items: center;
   padding: 20px;
 }
 
 .order-details-button button {
   padding: 10px 20px;
-  font-size: 14px;
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  width: 100%;
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  font-size: 14px; 
 }
 
 .cancel-btn {
@@ -979,26 +969,26 @@ footer::before {
           <div class="order-track">
             <div class="order-tracking-block">
               <div class="order-step step-1">
-                <div class="step-circle">1</div>
+                <div class="order-confirm">1</div>
                 <p>Order Confirm <span class="order-date"><%= order.Date.toDateString() %></span></p>
               </div>
               <div class="order-step step-2">
-                <div class="step-circle">2</div>
+                <div class="processing">2</div>
                 <p>Processing<span class="processing-date">Update dynamically</span></p>
               </div>
               <div class="order-step step-3">
-                <div class="step-circle">3</div>
+                <div class="out-for-delivery">3</div>
                 <p>Out For Delivery<span class="outfordeliverd-date">Update dynamically</span></p>
             </div>
             <div class="order-step step-4">
-                <div class="step-circle">4</div>
+                <div class="delivered">4</div>
                 <p>Delivered<span class="delivered-date">Update dynamically</span></p>
               </div>
           </div>
   
           <div class="order-details-button">
             <button class="cancel-btn">Cancel</button>
-            <button class="for-help">For Help</button>
+            <button class="for-help">Need Help?</button>
           </div>
         </div>
       </div>
