@@ -180,6 +180,7 @@ router.get("/quantity/dec/:productid", isloggedin, checkuser, async (req, res)=>
       // Create the new order
       const newOrder = new ordersModel({
         orderid: `OD-VO${Date.now()}`,
+        AddressIndex:addressId,
         Date: new Date(),
         User: userId,
         Products: orderItems,

@@ -1316,7 +1316,7 @@ margin-left: 50px;
                         <div class="tm-status-circle <%= order.status.toLowerCase() %>"></div>
                         <%= order.status %>
                       </td>
-                      <td><b><%= order.DeliveryBoy ? order.DeliveryBoy.name : 'Unassigned' %></b></td>
+                      <td><b><%= order.DeliveryBoy ? order.DeliveryBoy.name : 'Unassigned' %></b></td> 
                       <td><%= new Date(order.Date).toLocaleString('en-US', {
                           year: 'numeric',
                           month: 'short',
@@ -1380,7 +1380,7 @@ margin-left: 50px;
                             <td><input type="checkbox" /></td>
                             <td><%= product.name %></td>
                             <td> 
-                                <%= product.unitSold || 'N/A' %> 
+                                <%= product.unitsold || 'N/A' %> 
                             </td>
                             <td contenteditable="true"><%= product.instock %></td>
                             <td>

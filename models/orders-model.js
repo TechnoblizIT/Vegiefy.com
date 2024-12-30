@@ -6,6 +6,10 @@ const orderSchema = mongoose.Schema({
     unique: true,
     default: () => `OD-VO${Date.now()}`
   },
+  AddressIndex:{
+    type: Number,
+    default: 0
+  },
   Date: {
     type: Date,
     default: Date.now

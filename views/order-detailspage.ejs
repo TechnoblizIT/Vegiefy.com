@@ -1138,9 +1138,9 @@ hr {
             <span class="name"><%= order.User?.name || 'Unknown User' %></span>
             <p class="address">
               <% if (order.User?.address && order.User.address.length > 0) { %>
-                <%= order.User.address[0].address %>, <%= order.User.address[0].locality %>, 
-                <%= order.User.address[0].city %>, <%= order.User.address[0].state %> 
-                <%= order.User.address[0].pincode %>
+                <%= order.User.address[order.AddressIndex].address %>, <%= order.User.address[order.AddressIndex].locality %>, 
+                <%= order.User.address[order.AddressIndex].city %>, <%= order.User.address[order.AddressIndex].state %> 
+                <%= order.User.address[order.AddressIndex].pincode %>
               <% } else { %>
                 No address available
               <% } %>
@@ -1241,7 +1241,14 @@ hr {
             
       </table>
       <p class="order-address">
-        <i class="fas fa-map-marker-alt map-icon"></i> 2634 Crestview Terrace, New York, 78004, United States
+        <i class="fas fa-map-marker-alt map-icon"></i> <% if (order.User?.address && order.User.address.length > 0) { %>
+          <%= order.User.address[order.AddressIndex].address %>, <%= order.User.address[order.AddressIndex].locality %>, 
+          <%= order.User.address[order.AddressIndex].city %>, <%= order.User.address[order.AddressIndex].state %> 
+          <%= order.User.address[order.AddressIndex].pincode %>
+        <% } else { %>
+          No address available
+        <% } %>
+      </p>
       </p>
     </div>
      
@@ -1443,7 +1450,7 @@ hr {
               </tr>
         </table>
         <p class="history-address">
-              <%= order.User.address && order.User.address.length > 0 ? `${order.User.address[0].address}, ${order.User.address[0].locality}, ${order.User.address[0].city}, ${order.User.address[0].state} ${order.User.address[0].pincode}` : 'No address available' %>
+              <%= order.User.address && order.User.address.length > 0 ? `${order.User.address[order.AddressIndex].address}, ${order.User.address[order.AddressIndex].locality}, ${order.User.address[0].city}, ${order.User.address[0].state} ${order.User.address[0].pincode}` : 'No address available' %>
               <i class="fas fa-map-marker-alt map-icon"></i> 
         </p>
       </div>
@@ -1465,7 +1472,7 @@ hr {
       <!-- Box 1 -->
        <%if(activeOrder.length>0){%>
         <% activeOrder.reverse().forEach((order)=>{ %>
-     <div class="order-box">
+    <a href="/delivery/deliverydetails/<%=order._id%>" style="text-decoration: none;"> <div class="order-box">
         <div class="new-order-container" id="new-order-container">
         <p class="order-name"><%=order.User.name%></p>
         <p class="order-delivery-time">Order Time: <span><%= new Date(order.Date).toLocaleString('en-US', {
@@ -1484,17 +1491,17 @@ hr {
               </tr>
         </table>
         <p class="order-address">
-          <i class="fas fa-map-marker-alt map-icon"></i><%= order.User.address && order.User.address.length > 0 ? `${order.User.address[0].address}, ${order.User.address[0].locality}, ${order.User.address[0].city}, ${order.User.address[0].state} ${order.User.address[0].pincode}` : 'No address available' %>
+          <i class="fas fa-map-marker-alt map-icon"></i><%= order.User.address && order.User.address.length > 0 ? `${order.User.address[order.AddressIndex].address}, ${order.User.address[order.AddressIndex].locality}, ${order.User.address[order.AddressIndex].city}, ${order.User.address[order.AddressIndex].state} ${order.User.address[order.AddressIndex].pincode}` : 'No address available' %>
         </p>
       </div>
-       
+    </a>
       <div class="order-actions">
         <form action="/delivery/updateOrderStatus" method="POST">
           <p class="mark-as">Mark As:</p>
           <select class="order-status-dropdown" name="status">
-            <option value="Processing">Processing</option>
-            <option value="Out For Deliverey">Out For Deliverey</option>
-            <option value="Delivered">Delivered</option>
+            <option value="Processing" <%= order.status === "Processing" ? "selected" : "" %>>Processing</option>
+            <option value="Out For Deliverey" <%= order.status === "Out For Deliverey" ? "selected" : "" %>>Out For Deliverey</option>
+            <option value="Delivered" <%= order.status === "Delivered" ? "selected" : "" %>>Delivered</option>
           </select>
           <input type="hidden" name="orderid" value="<%= order.orderid %>"> <!-- Pass the order ID -->
           <button type="submit">Mark As</button>

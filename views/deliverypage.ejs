@@ -955,14 +955,14 @@ footer::before {
                 <p>
                   <%= order.User.name %> <br>
                   Mobile:
-                  <%= order.User.address[0].mobile %>
+                  <%= order.User.address[order.AddressIndex].mobile %>
                   <br>
-                  <%= order.User.address[0].address %> 
-                  <%= order.User.address[0].city %>
+                  <%= order.User.address[order.AddressIndex].address %> 
+                  <%= order.User.address[order.AddressIndex].city %>
                   <br>
-                  <%= order.User.address[0].state %>
-                  <%= order.User.address[0].pincode %>
-                  <%= order.User.address[0].country %>
+                  <%= order.User.address[order.AddressIndex].state %>
+                  <%= order.User.address[order.AddressIndex].pincode %>
+                  <%= order.User.address[order.AddressIndex].country %>
               
                   
                 </p>

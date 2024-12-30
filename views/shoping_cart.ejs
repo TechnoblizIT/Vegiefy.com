@@ -1246,9 +1246,9 @@ footer::before {
 
     <div class="address-container">
       <% if (user && user.address && user.address.length > 0) { %>
-      <% user.address.forEach((user) =>{ %>
+      <% user.address.forEach((user,index) =>{ %>
         <div class="address-item">
-            <input type="radio" id="address1" name="address" class="address-radio" checked>
+            <input type="radio" id="address1" name="address" value="<%=index%>" class="address-radio" checked>
             <label for="address1" class="address-label">
                 <div class="address-details">
                     <div class="name-tag">
@@ -1476,6 +1476,7 @@ function closePopup() {
 async function confirmOrder() {
   const userId = '<%= user._id %>'; // Pass the logged-in user ID
   const addressId = document.querySelector('input[name="address"]:checked')?.value;
+  console.log(addressId)
   const products = <%- JSON.stringify(
   user.cart
     .filter(item => item.product) // Exclude null/undefined products

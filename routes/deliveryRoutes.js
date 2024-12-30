@@ -51,8 +51,12 @@ router.get("/dashboard",isDeliverylogin,checkDelivery ,async function(req, res) 
     const user=req.user
     const neworder=await ordersModel.find({status:"Confirmed"}).populate("Products.product").populate("User")
     
-    const activeOrder = await ordersModel.find({
-      status:"Processing"}).populate("Products.product").populate("User");
+    const activeOrder = await ordersModel
+  .find({
+    status: { $in: ["Processing", "Out For Deliverey"] }, // Match multiple statuses
+  })
+  .populate("Products.product") // Populate related products
+  .populate("User")
    
     const orderhistory = await ordersModel.find({status:"Delivered"}).populate("Products.product").populate("User")
     res.render("order-detailspage",{googlemapapi,user,neworder,activeOrder,orderhistory}) 
@@ -97,6 +101,16 @@ router.post('/updateOrderStatus', (req, res) => {
 router.get("/logout",(req, res)=>{
     res.clearCookie("tokken");
     res.redirect("/delivery/login")
+})
+
+router.get("/deliverydetails/:id",isDeliverylogin,(req, res)=>{
+  const { id } = req.params;
+    ordersModel.findById(id).populate("User").populate("Products.product").then((order)=>{
+        res.render("new-delivery-detailspage",{order})
+    }).catch((err)=>{
+        console.error(err)
+        res.status(500).send("Error getting deliveryboy details")
+    })
 })
 
 

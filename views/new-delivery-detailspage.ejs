@@ -296,11 +296,11 @@
         <header class="fixed-header">
           <div class="header-back-time">
             <div class="back-icon">
-              <i id="back-to-main" class="fa-solid fa-chevron-left"></i>
+             <a href="/delivery/dashboard#new-link-content"><i id="back-to-main" class="fa-solid fa-chevron-left"></i></a>
             </div>
 
             <div class="order-id">
-              <span><strong>#OTB000145</strong></span>
+              <span><strong><%=order.orderId%></strong></span>
             </div>
             <br />
             <div class="delivery-time-section">
@@ -319,7 +319,7 @@
         <div class="delivery-info">
           <div class="info-item">
             <div class="delivery-name">
-              <h2>John Chambers</h2>
+              <h2><%=order.User.name%></h2>
             </div>
           </div>
 
@@ -328,8 +328,13 @@
             <div class="delivery-address">
               <h3 class="delivery-h3">Address</h3>
               <p class="delivery-p">
-                123 Main Street, Apartment 4B, CityMall, State 78722, United
-                States
+                <% if (order.User?.address && order.User.address.length > 0) { %>
+                  <%= order.User.address[order.AddressIndex].address %>, <%= order.User.address[order.AddressIndex].locality %>, 
+                  <%= order.User.address[order.AddressIndex].city %>, <%= order.User.address[order.AddressIndex].state %> 
+                  <%= order.User.address[order.AddressIndex].pincode %>
+                  <% } else { %>
+                    N/A
+                  <% } %>
               </p>
             </div>
           </div>
@@ -338,7 +343,7 @@
             <i class="fas fa-envelope"></i>
             <div class="delivery-email">
               <h3 class="delivery-h3">Email Id</h3>
-              <p class="delivery-p">johnchambers@gmail.com</p>
+              <p class="delivery-p"><%=order.User.email || NA%></p>
             </div>
           </div>
 
@@ -346,7 +351,7 @@
             <i class="fas fa-phone"></i>
             <div class="delivery-mobile">
               <h3 class="delivery-h3">Mobile</h3>
-              <p class="delivery-p">+91 1234567890</p>
+              <p class="delivery-p"><%=order.User.address[order.AddressIndex].mobile || NA%></p>
             </div>
           </div>
 
@@ -374,45 +379,34 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <img src="assest/products/crops/onions.jpg" alt="Onion" />
-              </td>
-              <td>Onion <br /><span style="color: #666">1kg</span></td>
-              <td>2</td>
-              <td>
-                ₹148 <br /><span
-                  style="color: #666; text-decoration: line-through"
-                  >₹198</span
-                >
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <img src="assest/products/crops/potatoes.jpg" alt="Corn" />
-              </td>
-              <td>Potato <br /><span style="color: #666">1kg</span></td>
-              <td>1</td>
-              <td>
-                ₹50<br /><span
-                  style="color: #666; text-decoration: line-through"
-                  >₹94</span
-                >
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <img src="assest/products/crops/cucumber.jpg" alt="Cucumber" />
-              </td>
-              <td>Cucumber <br /><span style="color: #666">1kg</span></td>
-              <td>1</td>
-              <td>
-                ₹31<br /><span
-                  style="color: #666; text-decoration: line-through"
-                  >₹40</span
-                >
-              </td>
-            </tr>
+            <% if (order.Products && order.Products.length > 0) { %>
+              <% order.Products.reverse().forEach((product) => { %>
+                <tr>
+                  <td>
+                    <% if (product.product?.image && product.product.image.file && product.product.image.imageType) { %>
+                      <img src="data:<%= product.product.image.imageType %>;base64,<%= product.product.image.file.toString('base64') %>" alt="<%= product.product.name || 'Product' %>">
+                    <% } else { %>
+                      <img src="/path/to/placeholder-image.jpg" alt="No Image Available">
+                    <% } %>
+                  </td>
+                  <td>
+                    <%= product.product?.name || 'Unknown Product' %> <br>
+                    <span style="color: #666;"><%= product.product?.description || 'No description' %></span>
+                  </td>
+                  <td><%= product.quantity || 0 %></td>
+                  <td>
+                    ₹<%= product.product?.price?.toFixed(2) || '0.00' %> <br>
+                    <span style="color: #666; text-decoration: line-through;">
+                      <%= product.product?.oldPrice ? product.product.oldPrice.toFixed(2) : '' %>
+                    </span>
+                  </td>
+                </tr>
+              <% }) %>
+            <% } else { %>
+              <tr>
+                <td colspan="4">No products available</td>
+              </tr>
+            <% } %>
           </tbody>
         </table>
 
@@ -424,13 +418,13 @@
           <!-- Item Total -->
           <div class="summary-row">
             <span>Item Total</span>
-            <h2 class="price"><span>₹407</span>&nbsp; ₹267</h2>
+            <h2 class="price">₹<%= order.TotalPrice || '0.00' %></h2>
           </div>
 
           <!-- Handling Charge -->
           <div class="summary-row">
             <span>Handling Charge</span>
-            <h2 class="price"><span>₹15</span>&nbsp;₹6.49</h2>
+            <h2 class="price"><span>₹15</span>&nbsp;₹0</h2>
           </div>
 
           <!-- Delivery Fee -->
@@ -442,7 +436,7 @@
           <!-- GST & Taxes -->
           <div class="summary-row bold">
             <span>GST & Taxes</span>
-            <h2 class="price"><span>₹299</span>&nbsp;₹1</h2>
+            <h2 class="price"><span>₹299</span>&nbsp;₹0</h2>
           </div>
 
           <hr />
@@ -450,14 +444,14 @@
           <!-- To Pay -->
           <div class="summary-row">
             <span style="font-weight: bold">To Pay</span>
-            <h2 class="total-price"><span>₹746</span>&nbsp;₹274.49</h2>
+            <h2 class="total-price">₹<%=order.TotalPrice%></h2>
           </div>
 
           <!-- Taxes and Savings -->
-          <div class="summary-row small">
+          <!-- <div class="summary-row small">
             <span>Incl. all taxes and charges</span>
             <span class="price green-bg">SAVING ₹471.51</span>
-          </div>
+          </div> -->
 
           <div class="call-map">
             <button class="call-btn">
