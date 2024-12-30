@@ -8,6 +8,7 @@ const orderMoel=require("../models/orders-model")
 const nodemailer=require("nodemailer");
 const queryModel=require("../models/user-query");
 const productModel = require('../models/product-model');
+const ordersModel = require('../models/orders-model');
 // Define the routes
 
 
@@ -177,7 +178,7 @@ router.get("/quantity/dec/:productid", isloggedin, checkuser, async (req, res)=>
       }));
   
       // Create the new order
-      const newOrder = new orderModel({
+      const newOrder = new ordersModel({
         orderid: `OD-VO${Date.now()}`,
         Date: new Date(),
         User: userId,
