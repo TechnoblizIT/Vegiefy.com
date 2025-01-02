@@ -57,13 +57,13 @@ router.post("/addproduct",upload.single("file"),async function(req, res){
 
 })
 router.post("/updateproduct",upload.single("productimage"),async function(req, res){
-  let { productid, productname, productdescription, productcategory, productexpiredate, productinstock } = req.body;
+  let { productid, productname, productdescription,productdescription2, productcategory, productexpiredate, productinstock } = req.body;
 
   if(req.file){
     const updatedProduct = await productModel.findByIdAndUpdate(productid, {
       name: productname,
       description: productdescription,
-  
+      description2:productdescription2,
       image:{
         file:req.file.buffer,
         imageType:req.file.mimetype,

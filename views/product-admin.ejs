@@ -1579,6 +1579,10 @@ margin-left: 50px;
         <textarea id="updatedescription" name="productdescription" rows="3" required></textarea>
       </div>
       <div class="form-group-account">
+        <label for="description2">Description 2:</label>
+        <textarea id="updatedescription2" name="productdescription2" rows="3" required></textarea>
+      </div>
+      <div class="form-group-account">
         <label for="category">Category:</label>
         <select id="updatecategory" name="praductcategory" required>
           <option value="" selected>Select Category</option>
@@ -2205,6 +2209,7 @@ boxUpdateBtns.forEach(boxUpdateBtn => {
         // Populate the update form with fetched data
         document.querySelector('#updateproductname').value = itemData.name || '';
         document.querySelector('#updatedescription').value = itemData.description || '';
+        document.querySelector('#updatedescription2').value = itemData.description2 || '';
         document.querySelector('#updatecategory').value = itemData.category || '';
         document.querySelector('#productid').value = itemData._id || '';
 

@@ -124,8 +124,19 @@ router.get("/not-available" ,isloggedin,checkuser ,async function(req, res) {
 })
 
 router.get("/productdetails/:productid",checkuser,async function(req, res) {
+  var cartcount=0
+  if (req.user){
+    const user = await userModel.findOne({ email: req.user.email })
+    .populate({
+      path: 'cart.product',  
+      model: 'Products'      
+    });
+  
+    user.cart = user.cart.filter(item => item.product !== null);
+    cartcount = user.cart.length;
+  }
   const product = await productModel.findById(req.params.productid)
-  res.render('single-product',{product,req})
+  res.render('single-product',{product,req,cartcount});
 })
 
 router.get('/cart', isloggedin, checkuser, async function (req, res) {

@@ -1441,7 +1441,14 @@ hr {
       <% orderhistory.reverse().forEach((order)=>{ %>
       <div class="box">
         <p class="history-name"><%=order.User.name%></p>
-        <p class="delivery-time">Delivery Time: <span> Jan 15, 2016, 12:34 PM</span></p>
+        <p class="delivery-time">Order Time: <span>  <%= new Date(order.Date).toLocaleString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: true
+        }) %></span></p>
         <table>
             <tr>
                 <td> <span >Order ID:</span> <br><%=order.orderid%></td>

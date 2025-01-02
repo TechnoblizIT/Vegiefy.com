@@ -677,7 +677,7 @@ footer::before {
         <h2><%= product.name %></h2>
         <p><%= product.description %></p>
         <p style="font-weight: bolder;">Price: ₹ <%=product.price%>/-</p> 
-        <!-- Quantity Dropdown -->
+      
         <form action="/user/addtocart/<%= product._id %>" method="POST">
           <select name="quantity" class="quantity-selecter">
             <option value="0.5">0.5kg</option>
@@ -689,8 +689,10 @@ footer::before {
           </select>
           <button type="submit">Add to Cart</button>
         </form>
+     
       </div>
-     </a>
+    </a>
+     
     <% }) %>
   </div>
 </main>
