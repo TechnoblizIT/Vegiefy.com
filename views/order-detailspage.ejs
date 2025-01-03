@@ -1105,7 +1105,11 @@ hr {
   <div class="content home">
     <div class="header">
       <div class="home-name"><%=user.name%></div>
+      <% if(user.isActive=="Online"){%>
       <div class="status">Active</div>
+      <% } else { %>
+      <div class="status">Inactive</div>
+      <% } %>
     </div>
 
     <div class="time-info">
@@ -1563,11 +1567,19 @@ hr {
     <div class="profile-info">
         <div class="info">
             <h2><%=user.name%></h2>
-            <div class="on_off_status">
-              <span>Offline</span>
+            <div class="on_off_status" data-user-id="<%= user._id %>">
+              <% if (user.isActive=="Online"){ %>
+              <span id="statusText" style="color: #2ab130;"><%=user.isActive%></span>
+              <%}else{%>
+                <span id="statusText" style="color: red;"><%=user.isActive%></span>
+              <%}%>
               &nbsp;
               <label class="toggle-switch">
-                <input type="checkbox" id="toggle-switch" />
+                <% if(user.isActive=="Online"){%>
+                <input type="checkbox" id="toggle-switch" onchange="updateStatus()" checked />
+                <%}else{%>
+                <input type="checkbox" id="toggle-switch" onchange="updateStatus()" />
+                <%}%>
                 <span class="slider"></span>
               </label>
             </div>
@@ -1872,6 +1884,32 @@ function calculateTime(orderDate) {
   const difference = Math.round((now - orderTime) / 60000); // Convert ms to minutes
   return difference;
 }
+function updateStatus() {
+    const toggleSwitch = document.getElementById('toggle-switch');
+    const statusText = document.getElementById('statusText');
+    const onOffStatusDiv = document.querySelector('.on_off_status');
+    const userId = onOffStatusDiv.getAttribute('data-user-id');
+    const status = toggleSwitch.checked ? 'Online' : 'Offline';
+
+    
+    statusText.textContent = status;
+
+   
+    fetch('/delivery/update-status', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId, status }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.message);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
 </script>
 </body>
 </html>

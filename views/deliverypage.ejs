@@ -693,35 +693,48 @@ footer::before {
 }
 
 .step-1 .order-confirm {
-  background-color: #4caf50;
+  background-color: lightgray; /* Default state */
+}
+
+.step-1 .order-confirm.active {
+  background-color: #4caf50; /* Completed state */
 }
 
 .step-2 .processing {
-  background-color: #4caf50;
+  background-color: lightgray; /* Default state */
 }
 
-.step-3 .out-for-delivery{
-  background-color: #ff9800;
+.step-2 .processing.active {
+  background-color: #4caf50; /* Completed state */
+}
+
+.step-3 .out-for-delivery {
+  background-color: lightgray; /* Default state */
+}
+
+.step-3 .out-for-delivery.active {
+  background-color: #4caf50; /* In-progress state */
 }
 
 .step-4 .delivered {
-  background-color: #ff9800;
+  background-color: lightgray; /* Default state */
 }
 
-.step-1::after {
-  background-color: #4caf50;
+.step-4 .delivered.active {
+  background-color: #4caf50; /* Delivered state */
 }
 
-.step-2::after {
-  background-color: #4caf50;
+/* For connecting lines between steps */
+.step-1::after, .step-2::after, .step-3::after, .step-4::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 4px;
+  background-color: lightgray; /* Default state */
 }
 
-.step-3::after {
-  background-color: #ff9800;
-}
-
-.step-4::after {
-  background-color: #ff9800;
+.step-1.active::after, .step-2.active::after, .step-3.active::after, .step-4.active::after {
+  background-color: #4caf50; /* Completed state */
 }
 
 
@@ -834,6 +847,7 @@ footer::before {
     padding: 5px 15px;
   }
 }
+
     </style>
 </head>
 <body>
@@ -924,9 +938,11 @@ footer::before {
             <div class="delivery-section">
               <div class="delivery-agent">
                 <img
-                  src="<%= order.DeliveryBoy?.image || '/default-image.jpg' %>"
-                  alt="Delivery Agent"
-                />
+  src="<%= order.DeliveryBoy && order.DeliveryBoy.profileimage && order.DeliveryBoy.profileimage.file 
+          ? `data:${order.DeliveryBoy.profileimage.imageType};base64,${order.DeliveryBoy.profileimage.file.toString('base64')}` 
+          : '../images/assest/defaultimage.jpeg' %>"
+  alt="Delivery Agent"
+/>
                 <div class="delivery-info">
                   <span class="name"><%= order.DeliveryBoy?.name || 'Not Assigned' %></span>
                 </div>
@@ -969,28 +985,24 @@ footer::before {
           <div class="order-track">
             <div class="order-tracking-block">
               <div class="order-step step-1">
-                <div class="order-confirm">1</div>
+                <div class="order-confirm <%= order.status === 'Confirmed' || order.status === 'Processing' || order.status === 'Out For Delivery' || order.status === 'Delivered' ? 'active' : '' %>">1</div>
                 <p>Order Confirm <span class="order-date"><%= order.Date.toDateString() %></span></p>
               </div>
               <div class="order-step step-2">
-                <div class="processing">2</div>
-                <p>Processing<span class="processing-date">Update dynamically</span></p>
+                <div class="processing <%= order.status === 'Processing' || order.status === 'Out For Delivery' || order.status === 'Delivered' ? 'active' : '' %>">2</div>
+                <p>Processing <span class="processing-date">Update dynamically</span></p>
               </div>
               <div class="order-step step-3">
-                <div class="out-for-delivery">3</div>
-                <p>Out For Delivery<span class="outfordeliverd-date">Update dynamically</span></p>
-            </div>
-            <div class="order-step step-4">
-                <div class="delivered">4</div>
-                <p>Delivered<span class="delivered-date">Update dynamically</span></p>
+                <div class="out-for-delivery <%= order.status === 'Out For Delivery' || order.status === 'Delivered' ? 'active' : '' %>">3</div>
+                <p>Out For Delivery <span class="outfordeliverd-date">Update dynamically</span></p>
               </div>
+              <div class="order-step step-4">
+                <div class="delivered <%= order.status === 'Delivered' ? 'active' : '' %>">4</div>
+                <p>Delivered <span class="delivered-date">Update dynamically</span></p>
+              </div>
+            </div>
           </div>
-  
-          <div class="order-details-button">
-            <button class="cancel-btn">Cancel</button>
-            <button class="for-help">Need Help?</button>
-          </div>
-        </div>
+          
       </div>
     </div>
     <% }) %>

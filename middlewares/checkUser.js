@@ -2,32 +2,38 @@ const jwt = require("jsonwebtoken");
 const userModel = require("../models/user-model");
 
 module.exports.checkuser = async function (req, res, next) {
-  let tokken = req.cookies.tokken;
+  try {
+    const token = req.cookies.token;
 
-  if (!tokken) {
-    req.user = null;
-    return next();
-  }
-
-  jwt.verify(tokken, process.env.JWT_SECRET, async (err, decodedToken) => {
-    if (err) {
-      req.user = null;
+    if (!token) {
+      req.user = null; 
       return next();
     }
 
-    try {
-      // Extract the email from the decoded token
-      const { user: email } = decodedToken;
+  
+    jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {
+      if (err) {
+        console.error("JWT verification error:", err.message);
+        req.user = null; 
+        return next();
+      }
 
-      // Find user in the database using the email
-      const userdetail = await userModel.findOne({ email }).select("-password");
+      const { user: email } = decodedToken; 
 
-      req.user = userdetail; // Attach user details to req.user
-    } catch (error) {
-      console.error("Error fetching user details:", error);
-      req.user = null;
-    }
+      try {
+    
+        const userDetail = await userModel.findOne({ email }).select("-password");
+        req.user = userDetail || null; 
+      } catch (dbError) {
+        console.error("Error fetching user details from DB:", dbError.message);
+        req.user = null; 
+      }
 
-    return next();
-  });
+      return next();
+    });
+  } catch (error) {
+    console.error("Unexpected error in checkuser middleware:", error.message);
+    req.user = null; 
+    next();
+  }
 };

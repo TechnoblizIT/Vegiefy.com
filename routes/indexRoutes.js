@@ -199,7 +199,7 @@ router.get('/auth/google/callback',
       const token = genrateToken(req.user)
 
       
-      res.cookie('tokken', token);
+      res.cookie('token', token);
 
       res.redirect('/');
     } catch (error) {

@@ -35,30 +35,40 @@ router.post('/login', async function(req, res) {
         const tokken = genrateTokenDelivery(deliveryboy);
         res.cookie("tokken", tokken);
     
-        
+        deliveryboy.isActive="Online";
+        await deliveryboy.save();
         return res.redirect("/delivery/dashboard");
       } catch (err) {
         console.error(err.message);
-        // Optionally handle error response here
+        
         res.status(500).send("Internal Server Error");
       }   
 
 });
-
+router.post("/update-status",async function(req, res){
+  const { userId, status } = req.body;
+  const deliveryboy =await deliveryboysModel.findById(userId);
+  deliveryboy.isActive=status;
+  await deliveryboy.save();
+  res.redirect("/delivery/dashboard")
+ 
+})
 
 router.get("/dashboard",isDeliverylogin,checkDelivery ,async function(req, res) {
     const googlemapapi=process.env.API_KEY
     const user=req.user
     const neworder=await ordersModel.find({status:"Confirmed"}).populate("Products.product").populate("User")
     
-    const activeOrder = await ordersModel
+  const activeOrder = await ordersModel
   .find({
-    status: { $in: ["Processing", "Out For Deliverey"] }, // Match multiple statuses
+    status: { $in: ["Processing", "Out For Deliverey"] },
+    DeliveryBoy : {$in:[user._id]}
   })
-  .populate("Products.product") // Populate related products
+  .populate("Products.product") 
   .populate("User")
    
-    const orderhistory = await ordersModel.find({status:"Delivered"}).populate("Products.product").populate("User")
+    const orderhistory = await ordersModel.find( {status: { $in: ["Delivered"] },
+      DeliveryBoy : {$in:[user._id]}}).populate("Products.product").populate("User")
     res.render("order-detailspage",{googlemapapi,user,neworder,activeOrder,orderhistory}) 
 })
 
@@ -97,6 +107,7 @@ router.post('/updateOrderStatus', (req, res) => {
       res.status(500).send(err);
     }
   });
+
 
 router.get("/logout",(req, res)=>{
     res.clearCookie("tokken");

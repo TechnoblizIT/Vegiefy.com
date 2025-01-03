@@ -20,7 +20,7 @@ const deliveryboySchema=mongoose.Schema({
          file:Buffer,
          filetype:String,
     },
-    isActive:Boolean,
+    isActive:String,
 
 })
 
