@@ -173,7 +173,7 @@
             <p>Enter your email to receive an OTP and reset your password.</p>
         </div>
 
-        <form action="#" method="POST" class="forgot-password-form" id="forgotPasswordForm">
+        <form action="/user/changepassword" method="POST" class="forgot-password-form" id="forgotPasswordForm">
             <div class="form-group">
                 <label for="email">Email Address</label>
                 <input type="email" id="email" name="email" placeholder="Enter your email" required>
@@ -193,7 +193,7 @@
 
             <div class="form-group">
                 <label for="confirm-password">Confirm Password</label>
-                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm new password" required disabled>
+                <input type="password" id="confirm-password" name="confirmpassword" placeholder="Confirm new password" required disabled>
             </div>
 
             <button type="submit" class="submit-btn" disabled>Reset Password</button>
@@ -219,7 +219,22 @@
 
         // sending OTP handle
         sendOtpBtn.addEventListener('click', () => {
-            alert('OTP sent to your email!');
+
+            fetch('/user/sendotp', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: emailInput.value
+                })
+            })
+               .then(response => response.json())
+               .then(data => {
+                    console.log(data);
+                    // Handle success or error
+                });
+            
             otpInput.disabled = false;
             passwordInput.disabled = false;
             confirmPasswordInput.disabled = false;

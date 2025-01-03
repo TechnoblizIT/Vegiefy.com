@@ -175,6 +175,10 @@ router.get('/cart', isloggedin, checkuser, async function (req, res) {
   }
 });
 
+router.get("/forgotpasswords", function(req, res) {
+  res.render('forgotpass');
+})
+
 
 router.get('/search', async (req, res) => {
   try {

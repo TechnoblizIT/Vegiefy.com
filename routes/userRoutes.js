@@ -356,5 +356,39 @@ router.post("/saveaddress",isloggedin,checkuser, async(req, res) => {
     res.redirect("/user/profile")
 
 })
+router.post("/sendotp", function(req, res) {
+  const {email}=req.body
+  const user = userModel.findOne({ email: email });
+  if (!user) {
+    return res.status(404).json({ success: false, message: 'User not found' });
+  }
+  const otp = Math.floor(1000 + Math.random() * 9000);
+  
+  const transporter = nodemailer.createTransport({
+    host: 'smtpout.secureserver.net', 
+    port: 587, 
+    secure: false, 
+    auth: {
+        user: 'support@vegiefy.com', 
+        pass: process.env.MAIL_PASS
+    }
+  });
+  const mailOptions = {
+    from: 'support@vegiefy.com',
+    to: email,
+    subject: 'OTP Verification',
+    text: `Your OTP is ${otp}. Please use this OTP to verify your email address.`,
+  };
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log('Error:', error);
+    } else {
+      console.log('Email sent: ', info.response);
+      res.status(200).json({ success: true, message: 'OTP sent successfully' });
+    }
+  });
+  
+  
+})
 
 module.exports = router;
