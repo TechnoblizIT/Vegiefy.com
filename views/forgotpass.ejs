@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <link href='https://fonts.googleapis.com/css?family=Afacad' rel='stylesheet'>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Afacad';
+            background: url('../images/assest/login-back2.jpg') no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+        }
+
+        .blur-bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            backdrop-filter: blur(5px);
+        }
+
+        .forgot-password-container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 24px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+            border: 0.5px solid white;
+            box-shadow: 0 0 25px #0f5256;
+            border-radius: 5px;
+        }
+
+        .back-to-home-link {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            font-size: 24px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .back-to-home-link:hover {
+            color: #ddd;
+        }
+
+        .form-header h2 {
+            font-size: 26px;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .form-header p {
+            font-size: 18px;
+            margin-bottom: 24px;
+            color: #ddd;
+        }
+
+        .forgot-password-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #bbb;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease, background 0.3s ease;
+        }
+
+        .form-group input:focus {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: #fff;
+        }
+
+        .submit-btn {
+            background: #0f5256;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 6px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s;
+        }
+
+        .submit-btn:hover {
+            background: #09343c;
+            transform: scale(1.05);
+        }
+
+        .send-otp-btn {
+            background: #0f5256;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 6px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s;
+            margin-top: 10px;
+        }
+
+        .send-otp-btn:hover {
+            background: #09343c;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 480px) {
+            .forgot-password-container {
+                padding: 20px;
+                width: 95%;
+            }
+
+            .form-header h2 {
+                font-size: 22px;
+            }
+
+            .form-header p {
+                font-size: 13px;
+            }
+
+            .submit-btn, .send-otp-btn {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="blur-bg-overlay"></div>
+    <div class="forgot-password-container">
+        <a href="/" class="back-to-home-link">
+            <img src="../images/assest/arrow.png" alt="" width="20px" height="20px">
+        </a>
+
+        <div class="form-header">
+            <h2>Forgot Password</h2>
+            <p>Enter your email to receive an OTP and reset your password.</p>
+        </div>
+
+        <form action="#" method="POST" class="forgot-password-form" id="forgotPasswordForm">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+
+            <button type="button" class="send-otp-btn" id="sendOtpBtn" style="display: none;">Send OTP</button>
+
+            <div class="form-group">
+                <label for="otp">OTP</label>
+                <input type="text" id="otp" name="otp" placeholder="Enter OTP" required disabled>
+            </div>
+
+            <div class="form-group">
+                <label for="password">New Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter new password" required disabled>
+            </div>
+
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm new password" required disabled>
+            </div>
+
+            <button type="submit" class="submit-btn" disabled>Reset Password</button>
+        </form>
+    </div>
+
+    <script>
+        const emailInput = document.getElementById('email');
+        const sendOtpBtn = document.getElementById('sendOtpBtn');
+        const otpInput = document.getElementById('otp');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirm-password');
+        const resetPasswordBtn = document.querySelector('.submit-btn');
+
+        // show Send OTP button once email is entered
+        emailInput.addEventListener('input', () => {
+            if (emailInput.value.trim() !== '') {
+                sendOtpBtn.style.display = 'block';
+            } else {
+                sendOtpBtn.style.display = 'none';
+            }
+        });
+
+        // sending OTP handle
+        sendOtpBtn.addEventListener('click', () => {
+            alert('OTP sent to your email!');
+            otpInput.disabled = false;
+            passwordInput.disabled = false;
+            confirmPasswordInput.disabled = false;
+            resetPasswordBtn.disabled = false;
+            sendOtpBtn.style.display = 'none'; // Hide the Send OTP button after clicking
+        });
+    </script>
+</body>
+</html>
