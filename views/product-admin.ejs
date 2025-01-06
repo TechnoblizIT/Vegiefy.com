@@ -1272,19 +1272,19 @@ margin-left: 50px;
       <div id="dashboard" class="page-content">
         <div class="dashboard-container">
           <div class="dashboard-block">
-            <div class="dashboard-value">0</div>
+            <div class="dashboard-value"><%=itemsold%></div>
             <div class="dashboard-text">Unit Sold</div>
           </div>
           <div class="dashboard-block">
-            <div class="dashboard-value">₹0</div>
+            <div class="dashboard-value">₹<%=totalprice%></div>
             <div class="dashboard-text">Sales</div>
           </div>
           <div class="dashboard-block">
-            <div class="dashboard-value">0</div>
+            <div class="dashboard-value"><%=orders.length || NA%></div>
             <div class="dashboard-text">New Orders</div>
           </div>
           <div class="dashboard-block">
-            <div class="dashboard-value">0</div>
+            <div class="dashboard-value"><%=activeorderscount || NA %></div>
             <div class="dashboard-text">Active Listings</div>
           </div>
         </div>
@@ -1677,39 +1677,39 @@ margin-left: 50px;
 
             
             <div class="form-column-right">
-              <form action="" class="form-details">
+              <form action="/admin/update-deliveryboy/<%=user._id%>" method="get" class="form-details">
                 <!-- First Row -->
                 <div class="form-group-details">
                   <label for="">User ID:</label>
-                   <input type="text" placeholder="Enter your ID" value="<%=user.username%>" class="input-field">
+                   <input type="text" placeholder="Enter your ID" value="<%=user.username%>" name="username" class="input-field">
                 </div>
                 <div class="form-group-details">
                   <label for="">Name:</label>
-                  <input type="text" placeholder="Enter your Name" value="<%=user.name%>" class="input-field">
+                  <input type="text" placeholder="Enter your Name" name="name" value="<%=user.name%>" class="input-field">
                 </div>
                 <!-- Second Row -->
                 <div class="form-group-details">
                   <label for="">Mobile No.</label>
-                  <input type="text" placeholder="Enter your Mobile No." value="<%=user.mobile%>" class="input-field">
+                  <input type="text" placeholder="Enter your Mobile No." name="mobile" value="<%=user.mobile%>" class="input-field">
                 </div>
                 <div class="form-group-details">
                   <label for="">Email id:</label>
-                  <input type="email" placeholder="Enter your Email ID" value="<%=user.email%>" class="input-field">
+                  <input type="email" placeholder="Enter your Email ID" name="email" value="<%=user.email%>" class="input-field">
                 </div>
                 <!-- Third Row -->
                 <div class="form-group-details">
                   <label for="">Password:</label>
-                  <input type="text" placeholder="Enter your Password" value="<%=user.password%>" class="input-field">
+                  <input type="text" placeholder="Enter your Password" name="password" value="<%=user.password%>" class="input-field">
                 </div>
                 <div class="form-group-details">
                   <label for="">Joining Date:</label>
-                  <input type="date"  placeholder="Enter your Joining Date" value="<%= user.joiningDate.toISOString().split('T')[0] %>" class="input-field">
+                  <input type="date"  placeholder="Enter your Joining Date" name="joiningDate" value="<%= user.joiningDate.toISOString().split('T')[0] %>" class="input-field">
                 </div>
                 
               </form>
             
             <div class="action-buttons">
-              <button id="update-btn" class="update-btn">Update</button>
+              <button id="update-btn" class="update-btn" type="submit">Update</button>
               <a href="/admin/delete-deliveryboy/<%=user._id%>"><button id="delete-btn" class="delete-btn">Delete</button></a>
             </div>
             </div>

@@ -9,7 +9,8 @@ const { isloggedin } = require('../middlewares/isloggedin');
 const {adminLogin}=require("../middlewares/isAdminlogin")
 const {isAdmin}=require("../middlewares/isAdmin")
 const nodemailer = require("nodemailer")
-const orderModel=require("../models/orders-model")
+const orderModel=require("../models/orders-model");
+const userModel = require('../models/user-model');
 router.get("/login", function(req, res){
     res.render("admin-login")
 })
@@ -23,12 +24,32 @@ router.get("/logout",(req, res)=>{
     res.clearCookie("tokken");
     res.redirect("/admin/login")
 })
-router.get("/dashboard",isAdmin,adminLogin,async function(req, res){
+router.get("/dashboard",isAdmin,adminLogin, async function(req, res){
     const products=await productModel.find()
     const deliveryBoys=await deliveryboyModel.find()
     const orders=await orderModel.find().populate("Products.product").populate("User").populate("DeliveryBoy")
-    res.render("product-admin",{products,deliveryBoys,orders})
-})
+    var totalprice=0
+    
+   
+  const activeOrder = await orderModel
+  .find({
+    status: { $in: ["Confirmed","Processing", "Out For Deliverey"] }
+  })
+  .populate("Products.product") 
+  .populate("User")
+   orders.forEach(item=>{
+    totalprice=totalprice+item.TotalPrice
+       })
+
+  var itemsold=0
+
+    const activeorderscount=activeOrder.length
+    products.forEach(product=>{
+       itemsold=itemsold+product.unitsold
+      
+    })
+    res.render("product-admin",{products,deliveryBoys,orders,activeorderscount,itemsold,totalprice})
+  })
 
 router.get("/addproduct",isloggedin,function(req, res){
     res.render("admin_addProduct")
@@ -88,6 +109,18 @@ router.delete('/products/delete', async (req, res) => {
   const { productIds } = req.body; 
   try {
       await productModel.deleteMany({ _id: { $in: productIds } });
+      await userModel.updateMany(
+        { 'cart.product': { $in: productIds } },
+        { $pull: { cart: { product: { $in: productIds } } } }
+      );
+      await deliveryboyModel.updateMany(
+        { 'orders.products.product': { $in: productIds } },
+        { $pull: { orders: { products: { product: { $in: productIds } } } } }
+      );
+      await orderModel.updateMany(
+        { 'products.product': { $in: productIds } },
+        { $pull: { products: { product: { $in: productIds } } } }
+      );
       res.status(200).send({ message: 'Selected products deleted successfully' });
   } catch (err) {
       res.status(500).send({ error: 'Failed to delete products' });
@@ -213,4 +246,20 @@ router.delete('/products/delete', async (req, res) => {
       res.status(500).json({ message: "Internal Server Error" });
     }
   })
-module.exports = router
+  router.get("/update-deliveryboy",async function (req, res) {
+    try {
+      const { username, name, mobile, email, joiningDate } = req.body;
+      const updatedDeliveryboy = await deliveryboyModel.findByIdAndUpdate(deliveryboyid, {
+        name: name,
+        mobile: mobile,
+        email: email,
+        joiningDate: joiningDate,
+        username: username,
+      }, { new: true });
+    }
+    catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  })
+module.exports = router;

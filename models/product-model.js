@@ -16,7 +16,7 @@ unitsold:{
 instock:Number,
 category:String,
 expirydate:Date,
-isActive:Boolean,
+isActive:String,
 })
 
 module.exports=mongoose.model("Products",productSchema)
