@@ -28,35 +28,42 @@
  });
  
  
- // js for hero slide
- let currentSlide = 0;
- const slides = document.querySelectorAll('.hero-slide');
- 
- function showSlide(index) {
-   slides.forEach((slide, i) => {
-     slide.classList.remove('active');
-     if (i === index) {
-       slide.classList.add('active');
-       slide.style.opacity = '1'; 
-     } else {
-       slide.style.opacity = '0'; 
-     }
-   });
- }
- 
- function nextSlide() {
-   currentSlide = (currentSlide + 1) % slides.length;
-   showSlide(currentSlide);
- }
- 
- function prevSlide() {
-   currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-   showSlide(currentSlide);
- }
- 
- setInterval(nextSlide, 4000);
- showSlide(currentSlide);
- 
+ // JS for Hero Slider
+let currentSlide = 0;
+const slides = document.querySelectorAll('.hero-slide');
+
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    if (i === index) {
+      slide.classList.add('active');
+      slide.style.opacity = '1'; 
+      slide.style.pointerEvents = 'auto'; 
+    } else {
+      slide.classList.remove('active');
+      slide.style.opacity = '0'; 
+      slide.style.pointerEvents = 'none'; 
+    }
+  });
+}
+
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % slides.length;
+  showSlide(currentSlide);
+}
+
+function prevSlide() {
+  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+  showSlide(currentSlide);
+}
+
+// Auto slide every 5 seconds
+setInterval(nextSlide, 5000);
+
+// Initial setup
+showSlide(currentSlide);
+
+
+
  //  js for product slider
  document.addEventListener("DOMContentLoaded", function () {
   var swiper = new Swiper('.product-slider', {
