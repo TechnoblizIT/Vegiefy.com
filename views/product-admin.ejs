@@ -145,25 +145,25 @@
   display: inline-block;
   text-decoration: none;
   color: #fff;
-  background-color: #ff6b6b; /* Light red background */
+  background-color: #ff6b6b; 
   padding: 8px 16px;
   font-size: 14px;
   font-weight: bold;
-  border-radius: 4px; /* Subtle rounded corners */
-  border: 2px solid #ff4d4d; /* Slightly darker border */
+  border-radius: 4px;
+  border: 2px solid #ff4d4d; 
   transition: all 0.3s ease;
   text-align: center;
 }
 
 .custom-logout-btn:hover {
-  background-color: #ff4d4d; /* Darker red on hover */
+  background-color: #ff4d4d; 
   color: #ffffff;
-  border-color: #e63946; /* More intense red border */
+  border-color: #e63946; 
 }
 
 .custom-logout-btn:active {
-  background-color: #e63946; /* Active state color */
-  transform: scale(0.96); /* Slight shrinking effect on click */
+  background-color: #e63946; 
+  transform: scale(0.96); 
 }
 
       /* css for dashboard============================================================================ */
@@ -268,14 +268,170 @@
         margin-top: 20px;
 
         /* Hides the scrollbar */
-        scrollbar-width: none; /* For Firefox */
+        scrollbar-width: none;
       }
 
       .tm-block-scroll::-webkit-scrollbar {
-        display: none; /* For Webkit browsers (Chrome, Safari, Edge) */
+        display: none; 
       }
 
-      /*end css for order list ============================================================== */
+      /* css for invoice page */
+      .print-btn{
+        background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 3px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 13px;
+      }
+   
+      .invoice-page {
+  padding: 15px;
+}
+
+.back-container {
+  text-align: left;
+}
+
+.back-to-orderlist {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 15px;
+  font-size: 14px; 
+  cursor: pointer;
+  border-radius: 5px;
+  position: relative;
+  margin-bottom: -20px;
+  left: 20px;
+}
+
+.invoice-container {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 350px;
+  margin: 0 auto;
+  line-height: none;
+}
+
+.delivery-address .address-box{
+  margin: 5px 0;
+  font-size: 10px; 
+  line-height: 1.5;
+  color: #11121a;
+}
+.top-details .COD{
+  background-color: #eee;
+  padding: 1px 3px;
+  font-size: 12px;
+  color: #11121a;
+}
+.address-qr-section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px; 
+}
+
+.qr-code img {
+  width: 150px; 
+  height: auto;
+}
+.courier-details {
+  background-color: #eee;
+  border-bottom: 1px solid #6666;
+  border-top: 1px solid #6666;
+  padding: 0px 2px;
+}
+
+.courier-row {
+  display: flex;
+  justify-content: space-between; 
+}
+
+.courier-row p {
+  margin: 0; 
+  font-size: 12px;
+  color: #11121a;
+}
+.soldby{
+  border-bottom: 1px solid #6666;
+  padding: 2px 0px;
+}
+.soldby p{
+  font-size: 10px;
+  color: #000; 
+}
+.gstin{
+  border-bottom: 1px solid #6666;
+  padding: 2px 0px;
+}
+.gstin p{
+  font-size: 12px;
+  color: #000;
+}
+.product-details {
+  margin-top: 5px;
+}
+
+.product-table {
+  width: 100%; 
+  border-collapse: collapse; 
+  text-align: left;
+}
+
+.product-table th,
+.product-table td {
+  border: 1px solid #6666; 
+  padding: 0px 2px; 
+  font-size: 10px;
+  color: #000;
+}
+
+.product-table th {
+  background-color: #f4f4f4; 
+  font-weight: bold; 
+}
+
+.product-table tfoot td {
+  font-weight: bold; 
+  background-color: #f9f9f9; 
+}
+
+.ids p {
+  font-size: 12px; 
+  margin: 5px 0;
+  color: #11121a;
+}
+
+.ids img {
+  display: block;
+  margin: 10px 0;
+  width: 150px;
+  height: auto;
+}
+.ordered{
+  text-align: right;
+  border-top: 1px solid #6666;
+  border-bottom: 1px solid #6666;
+}
+.ordered p{
+  font-size: 10px;
+  color: #000;
+}
+.ordered img{
+  width: 50px;
+}
+@media (max-width: 768px) {
+  .invoice-container{
+    margin-top: 50px;
+  }
+}
+/*end css for order list ============================================================== */
 
    
 
@@ -1292,7 +1448,8 @@ margin-left: 50px;
 
       <!-- Order-list page -->
       <div id="order-list" class="page-content" style="display: none">
-        <div class="col-xs-12 tm-block-col">
+        <div class="order-container">
+        <div class="col-xs-12 tm-block-col" id="order-box">
           <div
             class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll"
           >
@@ -1305,6 +1462,7 @@ margin-left: 50px;
                   <th scope="col">OPERATORS</th>
                   <th scope="col">ORDER TIME</th>
                   <th scope="col">DELIVERD TIME</th>
+                  <th scope="col">INVOICE</th>
                 </tr>
               </thead>
               <tbody style="background-color: #2c2f3d;">
@@ -1336,6 +1494,9 @@ margin-left: 50px;
                               hour12: true
                             }) : 'TBD' %>
                       </td>
+                      <td>
+                        <button class="print-btn">Print</button>
+                      </td>
                     </tr>
                   <% }) %>
                 <% } else { %>
@@ -1348,6 +1509,90 @@ margin-left: 50px;
             
           </div>
         </div>
+
+        <div class="invoice-page" id="invoice-page" style="display: none;">
+          <!-- Back Button -->
+          <div class="back-container">
+            <button id="back-to-orderlist" class="back-to-orderlist">&larr;</button>
+          </div>
+        
+          <!-- Invoice Container -->
+          <div class="invoice-container">
+            <div class="top-details">
+              <p class="COD"><strong>COD Collect Amount : </strong>Rs. 704.00</p>
+              <div class="address-qr-section">
+                <div class="delivery-address">
+                  <p class="address-box">
+                    <strong>Delivery Address :</strong><br>
+                    Rahul Vaidya <br>
+                    House No. 1234, Shri Nagar Colony, Near Murri Road,
+                    Opposite to Super Market, Murri Chawky,
+                    Gondia District, Maharashtra - <strong>441601</strong> ,
+                    India
+                  </p>
+                </div>
+                <div class="qr-code">
+                  <img src="../images/assest/qr-code.jpg" alt="QR Code" />
+                </div>
+              </div>
+            </div>
+        
+            <!-- Courier Section -->
+            <div class="courier-details">
+              <div class="courier-row">
+                <p><strong>Courier Name: </strong>VegieTrack Express</p>
+                <p><strong>HBD: </strong> 25-01</p>
+              </div>
+              <div class="courier-row">
+                <p><strong>Courier AWB:</strong> FMPC2494299924</p>
+                <p><strong>CPD:</strong> 29-01</p>
+              </div>
+            </div>
+            <div class="soldby">
+              <p><strong>Sold by : </strong>Vegiefy Organics Farming ,Gondia ,441601</p>
+            </div>
+            <div class="gstin">
+              <p><strong>GSTIN No : </strong>08BZ76876878H</p>
+            </div>
+            <!-- Product and Order Section -->
+            <div class="product-details">
+              <table class="product-table">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Qty</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Onion</td>
+                    <td>5</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td>Total</td>
+                    <td>5</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            
+            <div class="ids">
+              <p><strong>Tracking ID: </strong> FMPC2494299924</p>
+              <img src="../images/assest/barcode.jpg" alt="Barcode" />
+              <p><strong>Order ID: </strong> OD427148484802145100</p>
+              
+            </div>
+
+            <div class="ordered">
+              <p>Ordered Through</p>
+              <img src="../images/assest/vegiefy-logo.png" class="our-logo" alt="">
+            </div>
+          </div>
+        </div>
+        
+      </div>
       </div>
 
       <!--product page============================================ -->
@@ -2391,6 +2636,30 @@ document.querySelector('.delete-selected-btn').addEventListener('click', async (
         console.error('Failed to delete products', err);
     }
 });
+
+// ==================================================
+document.addEventListener("DOMContentLoaded", () => {
+    const printButtons = document.querySelectorAll(".print-btn");
+    const orderBox = document.getElementById("order-box");
+    const invoicePage = document.getElementById("invoice-page");
+    const backButton = document.getElementById("back-to-orderlist");
+
+    printButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        // Hide order box
+        orderBox.style.display = "none";
+        // Show invoice page
+        invoicePage.style.display = "block";
+      });
+    });
+
+    backButton.addEventListener("click", () => {
+      // Hide invoice page
+      invoicePage.style.display = "none";
+      // Show order box
+      orderBox.style.display = "block";
+    });
+  });
 
     </script>
   </body>
