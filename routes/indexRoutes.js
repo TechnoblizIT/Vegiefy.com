@@ -212,5 +212,8 @@ router.get('/auth/google/callback',
     }
   }
 );
+router.get("/terms&conditions",function (req, res) {
+  res.render('terms&conditions');
+})
 
 module.exports = router;
