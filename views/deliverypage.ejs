@@ -180,7 +180,6 @@ header {
   background-color: #09343c;
   padding: 10px 20px;
 }
-
 .helpline {
   color: #fff;
   font-size: 20px;
@@ -264,9 +263,7 @@ header {
   .hamburger-btn {
     display: block;
   }
-
- 
-  .nav-links {
+.nav-links {
     display: none;
     flex-direction: column;
     gap: 15px;
@@ -277,8 +274,6 @@ header {
     width: 100%;
     padding: 20px;
   }
-
- 
   .nav-links.show-menu {
     display: flex;
   }
@@ -737,7 +732,22 @@ footer::before {
   background-color: #4caf50; /* Completed state */
 }
 
-
+.print-invoice{
+  padding: 0px 10px;
+}
+.print-invoice button{
+  background-color: #007bff;
+  color: white;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+.print-invoice button:hover{
+  background-color: white;
+  color: #007bff;
+  border: 1px solid #007bff;
+}
 .order-details-button {
   display: flex;
   justify-content: space-around;
@@ -770,81 +780,218 @@ footer::before {
 .for-help:hover {
   background-color: #69ba6b;
 }
+
+/* Invoice Form Container */
+.invoice-form {
+  margin: auto;
+  margin-top: 150px;
+  max-width: 800px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.icon-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.back-btn {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: #f3f4f6;
+  color: #333;
+  padding: 10px 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.back-btn:hover {
+  background-color: #e5e7eb;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.logo-image {
+  width: 100px;
+}
+
+.header-invoice {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.header-invoice h1 {
+  padding-top: 5px;
+  font-size: 24px;
+  color: #333;
+  border-top: 1px solid #ddd;
+}
+
+/* Details Section */
+.details {
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #555;
+}
+
+.details p {
+  margin: 5px 0;
+}
+
+.details strong {
+  color: #333;
+}
+
+/* Tables */
+.billing-table,
+.tax-details {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.billing-table th,
+.tax-details th {
+  background-color: #f2f2f2;
+  color: #333;
+  text-align: left;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.billing-table td,
+.tax-details td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.billing-table th:nth-child(1),
+.billing-table td:nth-child(1),
+.tax-details th:nth-child(1),
+.tax-details td:nth-child(1) {
+  text-align: center;
+}
+
+.billing-table th:nth-child(4),
+.billing-table td:nth-child(4),
+.tax-details th:nth-child(2),
+.tax-details td:nth-child(2) {
+  text-align: center;
+}
+
+.billing-table th:nth-child(5),
+.billing-table td:nth-child(5),
+.billing-table th:nth-child(6),
+.billing-table td:nth-child(6),
+.tax-details th:nth-child(3),
+.tax-details td:nth-child(3) {
+  text-align: right;
+}
+
+/* Total Section */
+.total-section {
+  font-size: 16px;
+  color: #333;
+  text-align: right;
+  margin-top: 10px;
+}
+
+.total-section p {
+  margin: 5px 0;
+}
+
+.total-section span {
+  font-weight: bold;
+  color: #000;
+}
+
+/* Footer Section */
+.footer-invoice{
+  border-top: 1px solid #ccc;
+}
+.footer-invoice p {
+  margin-top: 5px;
+  font-size: 14px;
+  text-align: center;
+  color: #555;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-  .my-order {
-    margin-top: 190px;
-    padding: 10px;
-    width: 100%;
-    max-width: 100%;
+  .invoice-form {
+    padding: 15px;
   }
-  .my-order h1 {
+
+  .back-btn {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+
+  .header-invoice h1 {
+    font-size: 20px;
+  }
+
+  .details p {
+    font-size: 12px;
+  }
+
+  .billing-table th,
+  .billing-table td,
+  .tax-details th,
+  .tax-details td {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .total-section {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .invoice-form {
+    padding: 10px;
+  }
+
+  .back-btn {
+    font-size: 12px;
+    padding: 5px 8px;
+  }
+
+  .header-invoice h1 {
     font-size: 18px;
   }
 
-  .order-id h2 {
-    font-size: 16px;
+  .details p {
+    font-size: 10px;
   }
 
-  .details-heading,
-  .order-id h2,
-  .address-details h2 {
-    font-size: 16px;
+  .billing-table th,
+  .billing-table td,
+  .tax-details th,
+  .tax-details td {
+    padding: 6px;
+    font-size: 10px;
   }
 
-  .details {
-    padding: 5px;
-  }
-
-  .star-rating {
-    gap: 3px;
-  }
-
-  .star {
-    font-size: 16px;
-  }
-
-  .address-block .order-address {
+  .total-section {
     font-size: 12px;
-  }
-
-  .price {
-    padding: 0 10px;
-  }
-
-  .price span {
-    font-size: 16px;
-  }
-
-  .price h2 {
-    font-size: 16px;
-  }
-
-  .order-step p {
-    font-size: 12px;
-  }
-
-  .order-step::after {
-    height: 30px;
-  }
-
-  button {
-    padding: 8px 16px;
-    font-size: 12px;
-  }
-  .order-step{
-    margin-bottom: 10px;
-  }
-  .order-tracking-block{
-    padding: 10px 20px;
-  }
-  .order-details-button {
-    padding: 10px;
-  }
-  .order-id h2 {
-    padding: 0px 5px;
-  }
-  .address-block{
-    padding: 5px 15px;
   }
 }
 
@@ -925,7 +1072,7 @@ footer::before {
 
   <!-- html for delivery section -->
   <div class="orders-list">
-    <% orders.reverse().forEach(order => { %>
+    <% orders.forEach(order => { %>
       <div class="my-order">
         <div class="order-details">
           <h1>Order Details</h1>
@@ -938,21 +1085,19 @@ footer::before {
             <div class="delivery-section">
               <div class="delivery-agent">
                 <img
-  src="<%= order.DeliveryBoy && order.DeliveryBoy.profileimage && order.DeliveryBoy.profileimage.file 
-          ? `data:${order.DeliveryBoy.profileimage.imageType};base64,${order.DeliveryBoy.profileimage.file.toString('base64')}` 
-          : '../images/assest/defaultimage.jpeg' %>"
-  alt="Delivery Agent"
-/>
+                  src="<%= order.DeliveryBoy && order.DeliveryBoy.profileimage && order.DeliveryBoy.profileimage.file 
+                    ? `data:${order.DeliveryBoy.profileimage.imageType};base64,${order.DeliveryBoy.profileimage.file.toString('base64')}` 
+                    : '../images/assest/defaultimage.jpeg' %>"
+                  alt="Delivery Agent"
+                />
                 <div class="delivery-info">
                   <span class="name"><%= order.DeliveryBoy?.name || 'Not Assigned' %></span>
                 </div>
               </div>
-              <div class="delivery-time">
-   
-              </div>
+              <div class="delivery-time"></div>
             </div>
           </div>
-  
+
           <div class="address-details">
             <h2>Your Delivery Address</h2>
             <div class="address-block">
@@ -960,28 +1105,21 @@ footer::before {
               <div class="order-address">
                 <p>
                   <%= order.User.name %> <br>
-                  Mobile:
-                  <%= order.User.address[order.AddressIndex].mobile %>
-                  <br>
+                  Mobile: <%= order.User.address[order.AddressIndex].mobile %> <br>
                   <%= order.User.address[order.AddressIndex].address %> 
-                  <%= order.User.address[order.AddressIndex].city %>
-                  <br>
+                  <%= order.User.address[order.AddressIndex].city %><br>
                   <%= order.User.address[order.AddressIndex].state %>
                   <%= order.User.address[order.AddressIndex].pincode %>
                   <%= order.User.address[order.AddressIndex].country %>
-              
-                  
                 </p>
               </div>
             </div>
           </div>
-  
+
           <div class="price">
-            <h2>
-              Total Amount: <span>₹<%= order.TotalPrice %></span>
-            </h2>
+            <h2>Total Amount: <span>₹<%= order.TotalPrice %></span></h2>
           </div>
-  
+
           <div class="order-track">
             <div class="order-tracking-block">
               <div class="order-step step-1">
@@ -1003,9 +1141,117 @@ footer::before {
             </div>
           </div>
           
+          <div class="print-invoice" id="print-invoice">
+            <button onclick="showInvoiceForm()">Print Invoice</button>
+          </div>
+        </div>
       </div>
-    </div>
     <% }) %>
+  </div>
+<!-- Invoice Form Section -->
+
+<div class="invoice-form" id="invoice-form" style="display: none;">
+  <div class="icon-image">
+    <button class="back-btn" onclick="showOrdersList()">←</button>
+    <img class="logo-image" src="../images/assest/vegiefy-logo.png" alt="Vegiefy Logo">
+  </div>
+ 
+  <div class="invoice-container">
+    <div class="header-invoice">
+      <h1>TAX INVOICE</h1>
+    </div>
+
+    <div class="details">
+      <p><strong>Invoice To:</strong> [Customer Name]</p>
+      <p><strong>Delivery Address:</strong> [Customer Address]</p>
+      <p><strong>Order ID:</strong> 123456</p>
+      <p><strong>Date of Invoice:</strong> [Date]</p>
+      <p><strong>Place of Supply:</strong> [State]</p>
+    </div>
+
+    <table class="billing-table">
+      <thead>
+        <tr>
+          <th>Sr No</th>
+          <th>Product Name</th>
+          <th>Unit Of Measure</th>
+          <th>Quantity</th>
+          <th>Unit Price (₹)</th>
+          <th>Amount (₹)</th>
+          <th>Discount (₹)</th>
+          <th>Net Amount (₹)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Organic Tomatoes</td>
+          <td>kg</td>
+          <td>2</td>
+          <td>50.00</td>
+          <td>100.00</td>
+          <td>10.00</td>
+          <td>90.00</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Fresh Spinach</td>
+          <td>bundle</td>
+          <td>3</td>
+          <td>30.00</td>
+          <td>90.00</td>
+          <td>0.00</td>
+          <td>90.00</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="tax-details">
+      <thead>
+        <tr>
+          <th>Tax</th>
+          <th>Rate (%)</th>
+          <th>Amount (₹)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>CGST</td>
+          <td>2.5%</td>
+          <td>4.50</td>
+        </tr>
+        <tr>
+          <td>SGST</td>
+          <td>2.5%</td>
+          <td>4.50</td>
+        </tr>
+        <tr>
+          <td><strong>Total Taxes</strong></td>
+          <td></td>
+          <td><strong>9.00</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="total-section">
+      <p><strong>Subtotal:</strong> ₹180.00</p>
+      <p><strong>Taxes:</strong> ₹9.00</p>
+      <p><strong>Grand Total:</strong> ₹189.00</p>
+      <p><strong>Total in Words:</strong> <br>  One Hundred Eighty-Nine Rupees Only</p>
+    </div>
+
+    <div class="footer-invoice">
+      <p>Thank you for shopping with Vegiefy Organic Farming!</p>
+      <p><strong>Authorized Signature:</strong> Digitally Signed by Vegiefy</p>
+    </div>
+
+      
+  </div>
+</div>
+
+</div>
+
+    
   
 
      
@@ -1157,6 +1403,18 @@ function rate(stars) {
             });
         }
 
+
+         // Function to show the Invoice Form and hide the Orders List
+  function showInvoiceForm() {
+    document.getElementById('orders-list').style.display = 'none';
+    document.getElementById('invoice-form').style.display = 'block';
+  }
+
+  // Function to show the Orders List and hide the Invoice Form
+  function showOrdersList() {
+    document.getElementById('invoice-form').style.display = 'none';
+    document.getElementById('orders-list').style.display = 'block';
+  }
      </script>
 </body>
 </html>
