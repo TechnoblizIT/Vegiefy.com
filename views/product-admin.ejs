@@ -1495,7 +1495,7 @@ margin-left: 50px;
                             }) : 'TBD' %>
                       </td>
                       <td>
-                        <button class="print-btn">Print</button>
+                        <button class="print-btn" data-id="<%=order._id%>">Print</button>
                       </td>
                     </tr>
                   <% }) %>
@@ -2645,8 +2645,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const backButton = document.getElementById("back-to-orderlist");
 
     printButtons.forEach((button) => {
-      button.addEventListener("click", () => {
+      button.addEventListener("click", async() => {
         // Hide order box
+        const orderid=button.getAttribute("data-id");
+        try{
+          const response = await fetch(`/admin/getorder/${orderid}`,{
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          const orderData =await response.json();
+          if(response.ok){
+            
+          }
+          else{
+            console.log("Failed to fetch order");
+          }
+        }catch(error){
+          console.error("Error fetching order details:", error);
+        }
         orderBox.style.display = "none";
         // Show invoice page
         invoicePage.style.display = "block";

@@ -139,6 +139,24 @@ router.delete('/products/delete', async (req, res) => {
       res.status(500).json({ message: "Internal Server Error" });
     }
   })
+  router.get("/getorder/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      
+      const order = await orderModel.findById(id).populate("Products.product") 
+      .populate("User")
+     .populate("DeliveryBoy");
+     console.log(order)
+      if (!order) {
+        return res.status(404).json({ message: "Product not found" });
+      }
+      res.json(order);
+    } catch (e) {
+      console.error(e);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+
+  })
 
 
 
