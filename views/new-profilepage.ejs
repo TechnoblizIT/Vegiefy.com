@@ -1125,14 +1125,14 @@
                 <i class="fa-solid fa-cart-shopping"></i>
                 <span class="nav-text">Cart</span>
             </div></a>
-            <div class="nav-item">
+            <a href="/product" style="text-decoration: none;"> <div class="nav-item">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <span class="nav-text">Search</span>
-            </div>
-            <div class="nav-item">
+            </div></a>
+            <a href="/user/profile" style="text-decoration: none;"> <div class="nav-item">
                 <i class="fa-regular fa-user"></i>
                 <span class="nav-text">Profile</span>
-            </div>
+            </div></a>
         </div>
         
         <!-- Content -->
@@ -1338,7 +1338,7 @@
 </div>
 
 <!-- Address Page =================================================================================================-->
- <div class="address-page hidden" id="address">
+<div class="address-page hidden" id="address">
     <!-- Address Header -->
     <div class="address-header">
         <div class="back-button" onclick="goBack()">
@@ -1350,9 +1350,9 @@
     <!-- Address Form -->
      
     <div class="address-form" id="address-form">
-        <div class="location-block">
+        <!-- <div class="location-block">
             <i class="fa-solid fa-map-marker-alt"></i> Use my current location
-        </div>
+        </div> -->
         <form action="/user/saveaddress" method="post">
         <div class="input-row">
             <input type="text" name="name" placeholder="Name" class="input-field" id="name-input" required>
@@ -1413,7 +1413,7 @@
                         <div class="address-options">
                             <i class="fa fa-ellipsis-v" onclick="toggleOptions(this)"></i>
                             <div class="options-menu hidden">
-                                <button onclick="editAddress()">Edit</button>
+                                <button onclick="editAddress(<%= JSON.stringify(addr).replace(/'/g, "\\'") %>)">Edit</button>
                                 <button onclick="deleteAddress()">Delete</button>
                             </div>
                         </div>
@@ -1694,8 +1694,21 @@ function addNewAddress() {
     document.getElementById('saved-address').classList.add('hidden');
 }
 
-function editAddress() {
-    addNewAddress();
+function editAddress(addr) {
+    
+    document.getElementById('address-form').classList.remove('hidden');
+    document.getElementById('saved-address').classList.add('hidden');
+
+    console.log(addr);
+    // Fill in the form with the address data
+    
+    document.getElementById('address-form').querySelector('[name="name"]').value = addr.name;
+    document.getElementById('address-form').querySelector('[name="address"]').value = addr.address;
+    document.getElementById('address-form').querySelector('[name="locality"]').value = addr.locality;
+    document.getElementById('address-form').querySelector('[name="country"]').value = addr.country;
+    document.getElementById('address-form').querySelector('[name="postal-code"]').value = addr.pincode;
+    document.getElementById('address-form').querySelector('[name="mobile"]').value = addr.mobile;
+  
 }
 
 function deleteAddress() {
