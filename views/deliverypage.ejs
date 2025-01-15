@@ -840,19 +840,32 @@ footer::before {
   color: #333;
   border-top: 1px solid #ddd;
 }
-
+.main-container{
+  display: flex;
+  justify-content: space-between;
+}
 /* Details Section */
-.details {
+.custmer-details {
   margin-bottom: 20px;
   font-size: 14px;
   color: #555;
 }
-
-.details p {
+.company-info{
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #555;
+}
+.company-info p{
+  margin: 5px 0;
+}
+.company-info strong{
+  color: #333;
+}
+.custmer-details p {
   margin: 5px 0;
 }
 
-.details strong {
+.custmer-details strong {
   color: #333;
 }
 
@@ -947,7 +960,7 @@ footer::before {
     font-size: 20px;
   }
 
-  .details p {
+  .custmer-details p {
     font-size: 12px;
   }
 
@@ -978,7 +991,7 @@ footer::before {
     font-size: 18px;
   }
 
-  .details p {
+  .custmer-details p {
     font-size: 10px;
   }
 
@@ -1163,13 +1176,23 @@ footer::before {
       <h1>TAX INVOICE</h1>
     </div>
 
-    <div class="details">
-      <p><strong>Invoice To:</strong> [Customer Name]</p>
-      <p><strong>Delivery Address:</strong> [Customer Address]</p>
-      <p><strong>Order ID:</strong> 123456</p>
-      <p><strong>Date of Invoice:</strong> [Date]</p>
-      <p><strong>Place of Supply:</strong> [State]</p>
+    <div class="main-container">
+    <div class="custmer-details">
+      <p><strong>Invoice To:</strong><span class="invoicecustomer-name"></span> [Customer Name]</p>
+      <p><strong>Delivery Address:</strong> <span class="invoicecustomer-address"> [Customer Address]</span></p>
+      <p><strong>Order ID:</strong> <span class="invoiceorder-id"> 123456</span></p>
+      <p><strong>Date of Invoice:</strong><span class="invoice-date"> [Date]</span></p>
+      <p><strong>Place of Supply:</strong><span class="invoice-status"> [State]</span></p>
     </div>
+
+    <div class="company-info">
+      <p><strong>Invoice To:</strong><span class="invoicecustomer-name"></span> [Customer Name]</p>
+      <p><strong>Delivery Address:</strong> <span class="invoicecustomer-address"> [Customer Address]</span></p>
+      <p><strong>Order ID:</strong> <span class="invoiceorder-id"> 123456</span></p>
+      <p><strong>Date of Invoice:</strong><span class="invoice-date"> [Date]</span></p>
+      <p><strong>Place of Supply:</strong><span class="invoice-status"> [State]</span></p>
+    </div>
+  </div>
 
     <table class="billing-table">
       <thead>
@@ -1236,13 +1259,13 @@ footer::before {
     </table>
 
     <div class="total-section">
-      <p><strong>Subtotal:</strong> ₹180.00</p>
-      <p><strong>Taxes:</strong> ₹9.00</p>
-      <p><strong>Grand Total:</strong> ₹189.00</p>
-      <p><strong>Total in Words:</strong> <br>  One Hundred Eighty-Nine Rupees Only</p>
+      <p><strong>Subtotal:</strong> <span class="invoice-subtotal"> ₹180.00</span></p>
+      <p><strong>Taxes:</strong><span class="invoice-taxes"> ₹9.00</span></p>
+      <p><strong>Grand Total:</strong><span class="invoice-grandtotal"> ₹189.00</span></p>
+      <p><strong>Total in Words:</strong> <br> <span class="invoice-totalwords">  One Hundred Eighty-Nine Rupees Only</span></p>
     </div>
 
-    <div class="footer-invoice">
+    <div class="footer-invoice">-
       <p>Thank you for shopping with Vegiefy Organic Farming!</p>
       <p><strong>Authorized Signature:</strong> Digitally Signed by Vegiefy</p>
     </div>
