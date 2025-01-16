@@ -487,7 +487,7 @@ footer::before {
   margin-top: 150px;
 }
 .order-details{
-  padding: 10px;
+  padding: 5px;
 }
 .my-order h1 {
   margin: 0;
@@ -840,19 +840,32 @@ footer::before {
   color: #333;
   border-top: 1px solid #ddd;
 }
-
+.main-container{
+  display: flex;
+  justify-content: space-between;
+}
 /* Details Section */
-.details {
+.custmer-details {
   margin-bottom: 20px;
   font-size: 14px;
   color: #555;
 }
-
-.details p {
+.company-info{
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #555;
+}
+.company-info p{
+  margin: 5px 0;
+}
+.company-info strong{
+  color: #333;
+}
+.custmer-details p {
   margin: 5px 0;
 }
 
-.details strong {
+.custmer-details strong {
   color: #333;
 }
 
@@ -932,39 +945,52 @@ footer::before {
   color: #555;
 }
 
-/* Responsive Design */
+/* Responsive Design for Mobile */
 @media (max-width: 768px) {
   .invoice-form {
-    padding: 15px;
+    margin-top: 185px;
   }
-
+  .my-order{
+    margin-top: 185px;
+  }
+  .logo-image{
+    width: 60px;
+  }
   .back-btn {
-    font-size: 14px;
-    padding: 6px 10px;
+    gap: 3px; /* Smaller gap for icons and text */
   }
-
-  .header-invoice h1 {
-    font-size: 20px;
+  .header-invoice{
+   margin-top: 5px;
   }
-
-  .details p {
-    font-size: 12px;
-  }
-
   .billing-table th,
   .billing-table td,
   .tax-details th,
   .tax-details td {
-    padding: 8px;
-    font-size: 12px;
+    font-size: 10px; /* Minimized font size for table */
+    padding: 5px; /* Reduced padding */
+  }
+
+  .header-invoice h1 {
+    font-size: 18px; /* Reduced font size */
+  }
+
+  .custmer-details,
+  .company-info {
+    font-size: 10px; /* Minimized font size */
   }
 
   .total-section {
-    font-size: 14px;
+    font-size: 12px; /* Adjusted for mobile */
   }
+
+  .footer-invoice p {
+    font-size: 10px; /* Smaller footer text */
+  }
+ 
 }
 
 @media (max-width: 480px) {
+ 
   .invoice-form {
     padding: 10px;
   }
@@ -978,7 +1004,7 @@ footer::before {
     font-size: 18px;
   }
 
-  .details p {
+  .custmer-details p {
     font-size: 10px;
   }
 
@@ -1072,7 +1098,7 @@ footer::before {
 
   <!-- html for delivery section -->
   <div class="orders-list">
-    <% orders.reverse().forEach(order => { %>
+    <% orders.forEach(order => { %>
       <div class="my-order">
         <div class="order-details">
           <h1>Order Details</h1>
@@ -1161,13 +1187,26 @@ footer::before {
       <h1>TAX INVOICE</h1>
     </div>
 
-    <div class="details">
-      <p><strong>Invoice To:</strong> [Customer Name]</p>
-      <p><strong>Delivery Address:</strong> [Customer Address]</p>
-      <p><strong>Order ID:</strong> 123456</p>
-      <p><strong>Date of Invoice:</strong> [Date]</p>
-      <p><strong>Place of Supply:</strong> [State]</p>
+    <div class="main-container">
+    <div class="custmer-details">
+      <p><strong>Invoice To:</strong><span class="invoicecustomer-name">[Customer Name]</span> </p>
+      <p><strong>Delivery Address:</strong> <span class="invoicecustomer-address"> [Customer Address]</span></p>
+      <p><strong>Order ID:</strong> <span class="invoiceorder-id"> 123456</span></p>
+      <p><strong>Date of Invoice:</strong><span class="invoice-date"> [Date]</span></p>
+      <p><strong>Place of Supply:</strong><span class="invoice-status"> [State]</span></p>
     </div>
+
+    <div class="company-info">
+      <p><strong>Invoice issued by Vegiefy Limited (formerly known as Vegiegy Private Limited) on behalf of:</strong></p>
+      <p><strong>Company Name:</strong><span class="company-name"> Vegiefy Organic Farming</span></p>
+      <p><strong>Company GSTIN:</strong> <span class="company-gstin"> 09CSBPK2909RIZ6</span></p>
+      <p><strong>Company FSSAI License</strong> <span class="company-fssai"> 12345678798979</span></p>
+      <p><strong>Address:</strong><span class="company-address"> Chandrashekar Ward Gondia ,441601,Maharashtra</span></p>
+      <p><strong>State:</strong><span class="company-state">Maharashtra</span></p>
+      <p><strong>Category:</strong><span class="company-category">B2C</span></p>
+      <P><strong>Reserve Charges Applicable:</strong><span class="reserve-charges">No</span></P>
+    </div>
+  </div>
 
     <table class="billing-table">
       <thead>
@@ -1234,13 +1273,13 @@ footer::before {
     </table>
 
     <div class="total-section">
-      <p><strong>Subtotal:</strong> ₹180.00</p>
-      <p><strong>Taxes:</strong> ₹9.00</p>
-      <p><strong>Grand Total:</strong> ₹189.00</p>
-      <p><strong>Total in Words:</strong> <br>  One Hundred Eighty-Nine Rupees Only</p>
+      <p><strong>Subtotal:</strong> <span class="invoice-subtotal"> ₹180.00</span></p>
+      <p><strong>Taxes:</strong><span class="invoice-taxes"> ₹9.00</span></p>
+      <p><strong>Grand Total:</strong><span class="invoice-grandtotal"> ₹189.00</span></p>
+      <p><strong>Total in Words:</strong> <br> <span class="invoice-totalwords">  One Hundred Eighty-Nine Rupees Only</span></p>
     </div>
 
-    <div class="footer-invoice">
+    <div class="footer-invoice">-
       <p>Thank you for shopping with Vegiefy Organic Farming!</p>
       <p><strong>Authorized Signature:</strong> Digitally Signed by Vegiefy</p>
     </div>
@@ -1248,8 +1287,8 @@ footer::before {
       
   </div>
 </div>
-
 </div>
+
 
     
   
