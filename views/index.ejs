@@ -32,7 +32,7 @@
             onfocus="showDropdown()" 
             onkeyup="fetchProducts()" 
           >
-          <button><i class="fas fa-search"></i></button>
+          <button class="searchbtn"><i class="fas fa-search"></i></button>
           <div class="dropdown" id="dropdown" style="display: none;">
             <ul id="product-list">
               <!-- Dynamic search results will be inserted here -->
@@ -404,6 +404,23 @@ document.addEventListener('click', function(event) {
     dropdown.style.display = 'none';
   }
 });
+
+document.querySelector("searchbtn").addEventListener('click', async() => {
+  try{
+    const response=await fetch('/productsearch?q=',{
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        searchQuery: document.querySelector("search-input").value
+      }),
+    });
+
+  }catch (error){
+    console.error('Error in search button click event:', error);
+  }
+})
 
      </script>
    

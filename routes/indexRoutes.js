@@ -215,5 +215,11 @@ router.get('/auth/google/callback',
 router.get("/terms&conditions",function (req, res) {
   res.render('terms&conditions');
 })
+router.get("/productsearch?q=",function (req, res) {
+  
+  productModel.find({ name: { $regex: query, $options: 'i' } }, function (err, docs) {
+    res.json(docs);
+  });
+})
 
 module.exports = router;
