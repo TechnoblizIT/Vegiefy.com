@@ -559,14 +559,17 @@ hr {
   margin-bottom: 10px;
 }
 .checkout-form {
-    padding: 10px;
+  padding: 10px;
     background-color: #fff;
     border-radius: 10px;
     max-width: 400px;
-    margin: 20px auto;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     font-family: 'Poppins', sans-serif;
     border-left: 4px solid #0f5256;
+
+    /* Added styles for alignment */
+    margin-left: auto; /* Push to the right */
+    margin-right: 180px; /* Add a slight gap from the right edge */
 }
 .add-address {
     margin-bottom: 20px;
@@ -863,7 +866,10 @@ hr {
     .form-checkout{
       padding: 10px;
     }
-  
+    .checkout-form{
+      margin-right: 0px;
+    }
+   
    .popup-content {
         width: 90%;
         max-width: none;
