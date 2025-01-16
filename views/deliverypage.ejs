@@ -1171,7 +1171,7 @@ footer::before {
           </div>
           
           <div class="print-invoice" id="print-invoice">
-            <button onclick="showInvoiceForm()">Print Invoice</button>
+            <button data-id="<%=order._id%>" onclick="showInvoiceForm(event)">Print Invoice</button>
           </div>
         </div>
       </div>
@@ -1448,9 +1448,27 @@ function rate(stars) {
 
 
          // Function to show the Invoice Form and hide the Orders List
-  function showInvoiceForm() {
+async function showInvoiceForm(event) {
     document.getElementById('orders-list').style.display = 'none';
     document.getElementById('invoice-form').style.display = 'block';
+    const button = event.target;
+    const orderid=button.getAttribute("data-id");
+    try{
+      const response = await fetch(`/admin/getorder/${orderid}`,{
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          const orderData =await response.json();
+        
+          document.querySelector(".invoicecustomer-name").textContent = orderData.User.name;
+          document.querySelector(".invoicecustomer-address").textContent = `${orderData.User.address[orderData.AddressIndex].address}, ${orderData.User.address[orderData.AddressIndex].city}, ${orderData.User.address[orderData.AddressIndex].state}, ${orderData.User.address[orderData.AddressIndex].pincode}`;
+          document.querySelector(".invoiceorder-id").textContent = orderData.orderid
+          document.querySelector(".invoiceorder-date").textContent = orderData.Date.toDateString();
+
+    }catch(e) {}
+    
   }
 
   // Function to show the Orders List and hide the Invoice Form
