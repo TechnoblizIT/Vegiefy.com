@@ -2652,10 +2652,7 @@ document.addEventListener("DOMContentLoaded", () => {
             },
           });
           const orderData =await response.json();
-          try {
-    console.log(orderData);
-
-    // Update the COD amount
+        try {
     if (orderData && orderData.TotalPrice) {
         document.querySelector(".cod-amount").textContent = `Rs. ${orderData.TotalPrice}`;
     } else {
