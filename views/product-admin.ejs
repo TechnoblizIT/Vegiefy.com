@@ -1519,7 +1519,7 @@ margin-left: 50px;
           <!-- Invoice Container -->
           <div class="invoice-container">
             <div class="top-details">
-              <p class="COD"><strong>COD Collect Amount : </strong><span class="cod-amount"> Rs. 704.00</span></p>
+              <p class="COD"><strong>COD Collect Amount : </strong><span class="cod-amount"></span></p>
               <div class="address-qr-section">
                 <div class="delivery-address">
                   <p class="address-box">
@@ -2652,28 +2652,117 @@ document.addEventListener("DOMContentLoaded", () => {
             },
           });
           const orderData =await response.json();
-          console.log(orderData);
-          document.querySelector(".cod-amount").textContent = `Rs. ${orderData.TotalPrice}`;
-          document.querySelector(".customer-address").innerHTML=`${orderData.User.name}<br>
-                   ${orderData.User.address[orderData.AddressIndex].locality}
-                    ${orderData.User.address[orderData.AddressIndex].city}, ${orderData.User.address[orderData.AddressIndex].state}- <strong>${orderData.User.address[orderData.AddressIndex].pincode}</strong> ,
-                    India`
-          document.querySelector(".order-id").textContent = orderData.orderid;
-          document.querySelector(".Courier-name").textContent = orderData.DeliveryBoy.name;
-          const producttable=document.querySelector(".product-table tbody")
-        orderData.products.forEach((product,index)=>{
-          console.log(product);
-          const newRow = document.createElement("tr");
-          const productCell = document.createElement("td");
-          productCell.textContent = product.product.name || "Unknown"; 
-          const quantityCell = document.createElement("td");
-          quantityCell.textContent = product.quantity;
-          newRow.appendChild(productCell);
-          newRow.appendChild(quantityCell);
-         
-          producttable.appendChild(newRow);
+          try {
+    console.log(orderData);
 
-        });
+    // Update the COD amount
+    if (orderData && orderData.TotalPrice) {
+        document.querySelector(".cod-amount").textContent = `Rs. ${orderData.TotalPrice}`;
+    } else {
+        console.error("TotalPrice is missing in orderData");
+        document.querySelector(".cod-amount").textContent = "Rs. --";
+    }
+
+    // Update the customer address
+    if (orderData && orderData.User && orderData.User.address && orderData.AddressIndex !== undefined) {
+        const address = orderData.User.address[orderData.AddressIndex];
+        if (address) {
+            document.querySelector(".customer-address").innerHTML = `
+                ${orderData.User.name}<br>
+                ${address.locality} ${address.city}, ${address.state}- 
+                <strong>${address.pincode}</strong>, India
+            `;
+        } else {
+            console.error("Address not found at the specified AddressIndex");
+            document.querySelector(".customer-address").innerHTML = "Address information is incomplete.";
+        }
+    } else {
+        console.error("User or address data is missing in orderData");
+        document.querySelector(".customer-address").innerHTML = "Address information is unavailable.";
+    }
+
+    // Update the order ID
+    if (orderData && orderData.orderid) {
+        document.querySelector(".order-id").textContent = orderData.orderid;
+    } else {
+        console.error("Order ID is missing in orderData");
+        document.querySelector(".order-id").textContent = "--";
+    }
+
+    // Update the courier name
+    if (orderData && orderData.DeliveryBoy && orderData.DeliveryBoy.name) {
+        document.querySelector(".Courier-name").textContent = orderData.DeliveryBoy.name;
+    } else {
+        console.error("DeliveryBoy name is missing in orderData");
+        document.querySelector(".Courier-name").textContent = "Not assigned";
+    }
+} catch (error) {
+    console.error("An unexpected error occurred:", error);
+
+    // Optionally, provide user-friendly fallback text
+    document.querySelector(".cod-amount").textContent = "Rs. --";
+    document.querySelector(".customer-address").innerHTML = "Error fetching address.";
+    document.querySelector(".order-id").textContent = "--";
+    document.querySelector(".Courier-name").textContent = "Not assigned";
+}
+
+         
+try {
+    const productTableBody = document.querySelector(".product-table tbody");
+
+    // Ensure the table body exists
+    if (!productTableBody) {
+        throw new Error("Table body with selector '.product-table tbody' not found.");
+    }
+
+   
+    if (!orderData || !Array.isArray(orderData.Products)) {
+        throw new Error("Products data is missing or invalid.");
+    }
+
+    
+    productTableBody.innerHTML = "";
+
+   
+    orderData.Products.forEach((product, index) => {
+        if (!product || !product.product) {
+            console.error(`Product at index ${index} is invalid:`, product);
+            return; // Skip this product
+        }
+
+        // Create a new row and cells
+        const newRow = document.createElement("tr");
+
+        const productCell = document.createElement("td");
+        productCell.textContent = product.product.name || "Unknown";
+
+        const quantityCell = document.createElement("td");
+        quantityCell.textContent = product.quantity || "0";
+
+        // Append cells to the row
+        newRow.appendChild(productCell);
+        newRow.appendChild(quantityCell);
+
+        // Append the row to the table body
+        productTableBody.appendChild(newRow);
+    });
+
+    // Optionally update the total in the <tfoot>
+    const totalQuantity = orderData.Products.reduce((sum, product) => {
+        return sum + (product.quantity || 0);
+    }, 0);
+
+    const productTableFooter = document.querySelector(".product-table tfoot");
+    if (productTableFooter) {
+        const totalCell = productTableFooter.querySelector("td:nth-child(2)");
+        if (totalCell) {
+            totalCell.textContent = totalQuantity;
+        }
+    }
+} catch (error) {
+    console.error("Error populating product table:", error);
+}
+
          
         }catch(error){
           console.error("Error fetching order details:", error);
