@@ -475,7 +475,9 @@ footer::before {
  
 }
 
-
+.order-container{
+  margin-top: 150px;
+}
 .my-order {
   width: 90%;
   max-width: 400px;
@@ -484,7 +486,7 @@ footer::before {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   margin: auto;
-  margin-top: 150px;
+  margin-top: 20px;
 }
 .order-details{
   padding: 5px;
@@ -950,9 +952,9 @@ footer::before {
   .invoice-form {
     margin-top: 185px;
   }
-  .my-order{
-    margin-top: 185px;
-  }
+  .order-container{
+  margin-top: 180px;
+}
   .logo-image{
     width: 60px;
   }
@@ -1097,7 +1099,8 @@ footer::before {
   </header>
 
   <!-- html for delivery section -->
-  <div class="orders-list">
+   <div class="order-container">
+  <div class="orders-list" id="orders-list">
     <% orders.reverse().forEach(order => { %>
       <div class="my-order">
         <div class="order-details">
@@ -1174,6 +1177,7 @@ footer::before {
       </div>
     <% }) %>
   </div>
+
 <!-- Invoice Form Section -->
 
 <div class="invoice-form" id="invoice-form" style="display: none;">
