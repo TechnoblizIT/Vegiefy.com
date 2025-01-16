@@ -686,6 +686,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+    gap: 5px;
 }
 .save-btn, .cancel-btn {
     width: 48%;
@@ -709,6 +710,15 @@
     background-color: #005bb5;
 }
 .cancel-btn:hover {
+    background-color: #f3f1f1;
+}
+.manage-btn{
+    background-color: #ccc;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.manage-btn:hover{
     background-color: #e0e0e0;
 }
 .hidden {
@@ -1413,7 +1423,7 @@
                         <div class="address-options">
                             <i class="fa fa-ellipsis-v" onclick="toggleOptions(this)"></i>
                             <div class="options-menu hidden">
-                                <button onclick="editAddress(<%= JSON.stringify(addr).replace(/'/g, "\\'") %>)">Edit</button>
+                                <button onclick="editAddress()" (<%= JSON.stringify(addr).replace(/'/g, "\\'") %>)">Edit</button>
                                 <button onclick="deleteAddress()">Delete</button>
                             </div>
                         </div>
