@@ -1703,17 +1703,19 @@ function editAddress(addr) {
     // Fill in the form with the address data
     
     document.getElementById('address-form').querySelector('[name="name"]').value = addr.name;
+   document.getElementById('address-form').querySelector('[name="mobile"]').value = addr.mobile;
+    document.getElementById('address-form').querySelector('[name="pincode"]').value = addr.pincode;
     document.getElementById('address-form').querySelector('[name="address"]').value = addr.address;
     document.getElementById('address-form').querySelector('[name="locality"]').value = addr.locality;
-    document.getElementById('address-form').querySelector('[name="country"]').value = addr.country;
-    document.getElementById('address-form').querySelector('[name="postal-code"]').value = addr.pincode;
-    document.getElementById('address-form').querySelector('[name="mobile"]').value = addr.mobile;
-  
+    document.getElementById('address-form').querySelector('[name="city"]').value = addr.city;
+    document.getElementById('address-form').querySelector('[name="state"]').value = addr.state;
+    document.getElementById('address-form').querySelector('[name="landmark"]').value = addr.landmark;
 }
 
 function deleteAddress() {
     document.getElementById('saved-address').classList.add('hidden');
     document.getElementById('address-form').classList.remove('hidden');
+    
 }
 
 //js for payment mode page================================================================================

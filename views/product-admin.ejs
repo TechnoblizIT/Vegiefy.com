@@ -1524,11 +1524,7 @@ margin-left: 50px;
                 <div class="delivery-address">
                   <p class="address-box">
                     <strong>Delivery Address :</strong><br>
-                    <span class="customer-address"> Rahul Vaidya <br>
-                    House No. 1234, Shri Nagar Colony, Near Murri Road,
-                    Opposite to Super Market, Murri Chawky,
-                    Gondia District, Maharashtra - <strong>441601</strong> ,
-                    India</span>
+                    <span class="customer-address"></span>
                   </p>
                 </div>
                 <div class="qr-code">
@@ -1540,11 +1536,11 @@ margin-left: 50px;
             <!-- Courier Section -->
             <div class="courier-details">
               <div class="courier-row">
-                <p><strong>Courier Name: </strong><span class="Courier-name">VegieTrack Express</span> </p>
+                <p><strong>Courier Name: </strong><span class="Courier-name"></span> </p>
                 <p><strong>HBD: </strong> 25-01</p>
               </div>
               <div class="courier-row">
-                <p><strong>Courier AWB:</strong><span class="courier-AWB"> FMPC2494299924</span></p>
+                <p><strong>Courier AWB:</strong><span class="courier-AWB">FMPC2494299924</span></p>
                 <p><strong>CPD:</strong> 29-01</p>
               </div>
             </div>
@@ -1581,7 +1577,7 @@ margin-left: 50px;
             <div class="ids">
               <p><strong>Tracking ID: </strong><span class="trackig-id"> FMPC2494299924</span></p>
               <img src="../images/assest/barcode.jpg" alt="Barcode" />
-              <p><strong>Order ID: </strong><span class="order-id"> OD427148484802145100</span></p>
+              <p><strong>Order ID: </strong><span class="order-id"></span></p>
               
             </div>
 
@@ -2656,12 +2652,29 @@ document.addEventListener("DOMContentLoaded", () => {
             },
           });
           const orderData =await response.json();
-          if(response.ok){
-            
-          }
-          else{
-            console.log("Failed to fetch order");
-          }
+          console.log(orderData);
+          document.querySelector(".cod-amount").textContent = `Rs. ${orderData.TotalPrice}`;
+          document.querySelector(".customer-address").innerHTML=`${orderData.User.name}<br>
+                   ${orderData.User.address[orderData.AddressIndex].locality}
+                    ${orderData.User.address[orderData.AddressIndex].city}, ${orderData.User.address[orderData.AddressIndex].state}- <strong>${orderData.User.address[orderData.AddressIndex].pincode}</strong> ,
+                    India`
+          document.querySelector(".order-id").textContent = orderData.orderid;
+          document.querySelector(".Courier-name").textContent = orderData.DeliveryBoy.name;
+          const producttable=document.querySelector(".product-table tbody")
+        orderData.products.forEach((product,index)=>{
+          console.log(product);
+          const newRow = document.createElement("tr");
+          const productCell = document.createElement("td");
+          productCell.textContent = product.product.name || "Unknown"; 
+          const quantityCell = document.createElement("td");
+          quantityCell.textContent = product.quantity;
+          newRow.appendChild(productCell);
+          newRow.appendChild(quantityCell);
+         
+          producttable.appendChild(newRow);
+
+        });
+         
         }catch(error){
           console.error("Error fetching order details:", error);
         }
