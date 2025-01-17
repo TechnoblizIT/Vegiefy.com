@@ -1467,7 +1467,9 @@ async function showInvoiceForm(event) {
           document.querySelector(".invoiceorder-id").textContent = orderData.orderid
           document.querySelector(".invoiceorder-date").textContent = orderData.Date.toDateString();
 
-    }catch(e) {}
+    }catch(e) {
+      console.error("Error fetching order data:", e);
+    }
     
   }
 
