@@ -1448,10 +1448,9 @@ function rate(stars) {
 
 
 // Function to show the Invoice Form and hide the Orders List
-  function showInvoiceForm() {
+ async function showInvoiceForm() {
     document.getElementById('orders-list').style.display = 'none';
     document.getElementById('invoice-form').style.display = 'block';
-<<<<<<< HEAD
     const button = event.target;
     const orderid=button.getAttribute("data-id");
     try{
@@ -1467,13 +1466,13 @@ function rate(stars) {
           document.querySelector(".invoicecustomer-address").textContent = `${orderData.User.address[orderData.AddressIndex].address}, ${orderData.User.address[orderData.AddressIndex].city}, ${orderData.User.address[orderData.AddressIndex].state}, ${orderData.User.address[orderData.AddressIndex].pincode}`;
           document.querySelector(".invoiceorder-id").textContent = orderData.orderid
           document.querySelector(".invoiceorder-date").textContent = orderData.Date.toDateString();
+          document.querySelector(".invoice-status").textContent = orderData.User.address[orderData.AddressIndex].state;
 
     }catch(e) {
       console.error("Error fetching order data:", e);
     }
     
-=======
->>>>>>> d08e40abaadb0c27a462bc3af477f7359199611b
+
   }
 
   // Function to show the Orders List and hide the Invoice Form
