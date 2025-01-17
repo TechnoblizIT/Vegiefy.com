@@ -817,6 +817,65 @@
     display: block;
 }
 
+/* for edit address */
+.update-address-button{
+    display: flex;
+    justify-content: space-evenly;
+}
+.update-address-button .update-btn{
+    background-color: #0073e6;
+    padding: 10px 30px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+}
+.update-address-button .update-btn:hover{
+    background-color: #005bb5;
+}
+.update-address-button .cancl-btn{
+    background-color: #e63946;
+    padding: 10px 30px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+}
+.update-address-button .cancl-btn:hover{
+    background-color: #d62839;
+}
+.edit-input-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+.edit-input-field {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+.edit-input-block {
+    margin-bottom: 15px;
+}
+.edit-textarea-field {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+.edit-radio-group {
+    display: flex;
+    gap: 20px;
+    margin-top: 5px;
+}
+.edit-radio-group label {
+    font-size: 14px;
+    color: #666;
+}
 /*css for Payment Page===================================================================== */
 .payment-page {
     padding: 20px;
@@ -1109,6 +1168,15 @@
     .radio-group {
         gap: 10px;
     }
+    .manage-btn{
+        padding: 10px;
+    }
+    .edit-input-row {
+        flex-direction: column;
+    }
+    .edit-radio-group {
+        gap: 10px;
+    }
     /* media queries for payment */
     .payment-page {
         background: none;
@@ -1119,6 +1187,7 @@
     .payment-method{
         background-color: #fff;
     }
+    
         }
 
     </style>
@@ -1423,7 +1492,8 @@
                         <div class="address-options">
                             <i class="fa fa-ellipsis-v" onclick="toggleOptions(this)"></i>
                             <div class="options-menu hidden">
-                                <button onclick="editAddress()" (<%= JSON.stringify(addr).replace(/'/g, "\\'") %>)">Edit</button>
+                                <!-- <button onclick="editAddress()" (<%= JSON.stringify(addr).replace(/'/g, "\\'") %>)">Edit</button> -->
+                                 <button onclick="editAddress()">Edit</button>
                                 <button onclick="deleteAddress()">Delete</button>
                             </div>
                         </div>
@@ -1446,6 +1516,48 @@
             <p>No addresses found.</p>
         <% } %>
     </div>
+
+
+    <!-- html for Edit address -->
+    <div class="edit-address" id="edit-address" style="display: none;">
+       
+        <div class="edit-input-row">
+            <input type="text" placeholder="Name" class="edit-input-field" id="name-input">
+            <input type="text" placeholder="Mobile Number" class="edit-input-field" id="mobile-input">
+        </div>
+        
+        <div class="edit-input-row">
+            <input type="text" placeholder="Pin Code" class="edit-input-field" id="pincode-input">
+            <input type="text" placeholder="Locality" class="edit-input-field" id="locality-input">
+        </div>
+        
+        <div class="edit-input-block">
+            <textarea placeholder="Address (House No, Building, Street, Area)" class="edit-textarea-field" id="address-input"></textarea>
+        </div>
+        
+        <div class="edit-input-row">
+            <input type="text" placeholder="City/District/Town" class="edit-input-field" id="city-input">
+            <input type="text" placeholder="State" class="edit-input-field" id="state-input">
+        </div>
+        
+        <div class="edit-input-row">
+            <input type="text" placeholder="Landmark (Optional)" class="edit-input-field" id="landmark-input">
+            <input type="text" placeholder="Alternate Phone (Optional)" class="edit-input-field" id="alt-phone-input">
+        </div>
+        
+        <div class="edit-input-block">
+            <label>Address Type</label>
+            <div class="edit-radio-group">
+                <label><input type="radio" name="address-type" value="Home" checked> Home</label>
+                <label><input type="radio" name="address-type" value="Work"> Work</label>
+            </div>
+        </div>
+        
+        <div class="update-address-button">
+            <button class="update-btn">Update</button>
+            <button class="cancl-btn">Cancel</button>
+        </div>
+   </div>
 </div>
 
 <!-- Refer a friend page==========================================================================================-->
@@ -1704,29 +1816,32 @@ function addNewAddress() {
     document.getElementById('saved-address').classList.add('hidden');
 }
 
-function editAddress(addr) {
+// function editAddress(addr) {
     
-    document.getElementById('address-form').classList.remove('hidden');
-    document.getElementById('saved-address').classList.add('hidden');
+//     document.getElementById('saved-address').classList.remove('hidden');
+//     document.getElementById('edit-address').classList.add('hidden');
 
-    console.log(addr);
-    // Fill in the form with the address data
+//     console.log(addr);
+  
     
-    document.getElementById('address-form').querySelector('[name="name"]').value = addr.name;
-   document.getElementById('address-form').querySelector('[name="mobile"]').value = addr.mobile;
-    document.getElementById('address-form').querySelector('[name="pincode"]').value = addr.pincode;
-    document.getElementById('address-form').querySelector('[name="address"]').value = addr.address;
-    document.getElementById('address-form').querySelector('[name="locality"]').value = addr.locality;
-    document.getElementById('address-form').querySelector('[name="city"]').value = addr.city;
-    document.getElementById('address-form').querySelector('[name="state"]').value = addr.state;
-    document.getElementById('address-form').querySelector('[name="landmark"]').value = addr.landmark;
-}
-
-function deleteAddress() {
-    document.getElementById('saved-address').classList.add('hidden');
-    document.getElementById('address-form').classList.remove('hidden');
+//     document.getElementById('address-form').querySelector('[name="name"]').value = addr.name;
+//    document.getElementById('address-form').querySelector('[name="mobile"]').value = addr.mobile;
+//     document.getElementById('address-form').querySelector('[name="pincode"]').value = addr.pincode;
+//     document.getElementById('address-form').querySelector('[name="address"]').value = addr.address;
+//     document.getElementById('address-form').querySelector('[name="locality"]').value = addr.locality;
+//     document.getElementById('address-form').querySelector('[name="city"]').value = addr.city;
+//     document.getElementById('address-form').querySelector('[name="state"]').value = addr.state;
+//     document.getElementById('address-form').querySelector('[name="landmark"]').value = addr.landmark;
+// }
+function editAddress() {
+    document.getElementById('saved-address').style.display = 'none';
+    document.getElementById('edit-address').style.display = 'block';
+  }
+// function deleteAddress() {
+//     document.getElementById('saved-address').classList.add('hidden');
+//     document.getElementById('address-form').classList.remove('hidden');
     
-}
+// }
 
 //js for payment mode page================================================================================
 document.querySelectorAll('input[name="payment-method"]').forEach((input) => {
