@@ -13,8 +13,39 @@
 
     <link rel="stylesheet" href="../stylesheet/index.css">
 </head>
+<script>
+async  function searchproduct() {
+    const searchQuery = document.querySelector('#search-input').value.trim();
+  
+if (!searchQuery) {
+  alert('Please enter a search term!');
+  return;
+}
+
+try {
+  const response = await fetch(`/productsearch?q=${encodeURIComponent(searchQuery)}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  const data = await response.json();
+  console.log('Search Results:', data);
+
+  // Optionally populate the dropdown or navigate to results page
+} catch (error) {
+  console.error('Error in search button click event:', error);
+}
+    
+  }
+</script>
 <body>
-    <body>
+    <!-- <body> -->
       <!-- Header Section -->
 <header>
   <nav class="navbar">
@@ -32,7 +63,8 @@
             onfocus="showDropdown()" 
             onkeyup="fetchProducts()" 
           >
-          <button type="button" class="searchbtn"><i class="fas fa-search"></i></button>
+       
+          <button type="button" onclick="searchproduct()" class="searchbtn"><i class="fas fa-search"></i></button>
           <div class="dropdown" id="dropdown" style="display: none;">
             <ul id="product-list">
               <!-- Dynamic search results will be inserted here -->
@@ -80,7 +112,7 @@
               <li><a href="/product">Products</a></li>
               <li><a href="/cart">Cart</a></li>
               <li><a href="/delivery">My Orders</a></li>
-              <li><a href="/blog"  >Blog</a></li>
+           
               <li><a href="/contact">Contact</a></li>
       </ul>
     </div>
@@ -321,7 +353,7 @@
                 <ul>
                    <a href="/#about-us" ><li>About Us</li></a>
                     <a href="/product"><li>Products</li></a>
-                    <a  href="/blog"><li>Blog/News</li></a>
+                    
                     <a  href="/delivery"><li>Delivery</li></a>
                     <a href="/contact" ><li>Contact Us</li></a>
                     <a href="/#faq"><li>FAQs</li></a>
@@ -421,6 +453,7 @@ document.addEventListener('click', function (event) {
 
 // Search button click event
 document.querySelector('.searchbtn').addEventListener('click', async () => {
+  console.log("hello")
   const searchQuery = document.querySelector('#search-input').value.trim();
 
   if (!searchQuery) {
@@ -448,6 +481,10 @@ document.querySelector('.searchbtn').addEventListener('click', async () => {
     console.error('Error in search button click event:', error);
   }
 });
+
+function searchproduct() {
+  console.log('Search Products');
+}
 
 
      </script>
