@@ -32,7 +32,7 @@
             onfocus="showDropdown()" 
             onkeyup="fetchProducts()" 
           >
-          <button class="searchbtn"><i class="fas fa-search"></i></button>
+          <button type="button" class="searchbtn"><i class="fas fa-search"></i></button>
           <div class="dropdown" id="dropdown" style="display: none;">
             <ul id="product-list">
               <!-- Dynamic search results will be inserted here -->
@@ -351,53 +351,67 @@
 
 let fuse;
 
-async function fetchProducts() {
-  const input = document.getElementById('search-input').value.toLowerCase();
-
-  if (input.length === 0) {
-    document.getElementById('dropdown').style.display = 'none';
-    return; // Hide the dropdown if input is empty
-  } else {
-    document.getElementById('dropdown').style.display = 'block';
-  }
-
+// Initialize Fuse.js with all products on page load (if applicable)
+async function initializeFuse() {
   try {
-    // Fetch all products from the backend
     const response = await fetch('/search?q=');
     const products = await response.json();
 
-    
     fuse = new Fuse(products, {
-      keys: ['name'], 
-      threshold: 0.4, 
+      keys: ['name'], // Adjust based on product schema
+      threshold: 0.4,
     });
+  } catch (error) {
+    console.error('Error initializing Fuse.js:', error);
+  }
+}
 
-   
-    const result = fuse.search(input);
+initializeFuse();
+
+async function fetchProducts() {
+  const input = document.getElementById('search-input').value.toLowerCase();
+
+  if (input.trim().length === 0) {
+    document.getElementById('dropdown').style.display = 'none';
+    return;
+  }
+
+  document.getElementById('dropdown').style.display = 'block';
+
+  try {
+    let result;
+
+    if (fuse) {
+      // Use Fuse.js for client-side filtering
+      result = fuse.search(input);
+    } else {
+      // Fallback to server-side search if Fuse.js is not initialized
+      const response = await fetch(`/search?q=${encodeURIComponent(input)}`);
+      result = await response.json();
+    }
+
     const productList = document.getElementById('product-list');
     productList.innerHTML = '';
 
     if (result.length === 0) {
       productList.innerHTML = '<li>No products found</li>';
     } else {
-      
       result.forEach(({ item }) => {
         const li = document.createElement('li');
         li.textContent = item.name;
         li.addEventListener('click', () => {
-          window.location.href = `/productdetails/${item._id}`; 
+          window.location.href = `/productdetails/${item._id}`;
         });
         productList.appendChild(li);
       });
     }
-
   } catch (error) {
     console.error('Error fetching products:', error);
   }
 }
 
-// Hide dropdown when clicking outside (optional)
-document.addEventListener('click', function(event) {
+// Hide dropdown when clicking outside
+document.addEventListener('click', function (event) {
   const dropdown = document.getElementById('dropdown');
   const searchInput = document.getElementById('search-input');
   if (!dropdown.contains(event.target) && event.target !== searchInput) {
@@ -405,22 +419,36 @@ document.addEventListener('click', function(event) {
   }
 });
 
-document.querySelector("searchbtn").addEventListener('click', async() => {
-  try{
-    const response=await fetch('/productsearch?q=',{
+// Search button click event
+document.querySelector('.searchbtn').addEventListener('click', async () => {
+  const searchQuery = document.querySelector('#search-input').value.trim();
+
+  if (!searchQuery) {
+    alert('Please enter a search term!');
+    return;
+  }
+
+  try {
+    const response = await fetch(`/productsearch?q=${encodeURIComponent(searchQuery)}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        searchQuery: document.querySelector("search-input").value
-      }),
     });
 
-  }catch (error){
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log('Search Results:', data);
+
+    // Optionally populate the dropdown or navigate to results page
+  } catch (error) {
     console.error('Error in search button click event:', error);
   }
-})
+});
+
 
      </script>
    

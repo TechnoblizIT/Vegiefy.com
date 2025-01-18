@@ -390,5 +390,61 @@ router.post("/sendotp", function(req, res) {
   
   
 })
+router.delete('/delete-address/:userId/:addressId', async (req, res) => {
+  const { userId, addressId } = req.params;
 
+  try {
+     
+      const result = await userModel.updateOne(
+          { _id: userId }, // Match the user
+          { $pull: { address: { id: addressId } } } // Remove the address with the matching `id`
+      );
+
+      if (result.modifiedCount > 0) {
+          res.status(200).json({ success: true, message: "Address deleted successfully." });
+      } else {
+          res.status(404).json({ success: false, message: "Address not found or already deleted." });
+      }
+  } catch (error) {
+      console.error("Error deleting address:", error);
+      res.status(500).json({ success: false, message: "An error occurred while deleting the address." });
+  }
+});
+router.put("/edit-address/:addressId",checkuser,isloggedin, async (req, res) => {
+  const { addressId } = req.params;
+  const updatedAddressData = req.body;
+
+
+  const userId = req.user._id;
+  
+  try {
+      // Find the user by their ID
+      const user = await userModel.findById(userId);
+
+      if (!user) {
+          return res.status(404).json({ success: false, message: "User not found" });
+      }
+
+      // Find the specific address using addressId
+      const addressIndex = user.address.findIndex((addr) => addr.id === addressId);
+
+      if (addressIndex === -1) {
+          return res.status(404).json({ success: false, message: "Address not found" });
+      }
+
+      // Update the address at the found index
+      user.address[addressIndex] = {
+          ...user.address[addressIndex],  // Retain existing data
+          ...updatedAddressData,  // Update with new data from the request body
+      };
+
+      // Save the user document with the updated address
+      await user.save();
+
+      res.status(200).json({ success: true, message: "Address updated successfully" });
+  } catch (error) {
+      console.error("Error updating address:", error);
+      res.status(500).json({ success: false, message: "An error occurred" });
+  }
+});
 module.exports = router;
