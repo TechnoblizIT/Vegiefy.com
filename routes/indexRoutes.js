@@ -180,6 +180,7 @@ router.get("/forgotpasswords", function(req, res) {
 })
 
 
+
 router.get('/search', async (req, res) => {
   try {
     const query = req.query.q;
@@ -215,11 +216,25 @@ router.get('/auth/google/callback',
 router.get("/terms&conditions",function (req, res) {
   res.render('terms&conditions');
 })
-router.get("/productsearch?q=",function (req, res) {
+router.get("/productsearch",checkuser,async function(req, res) {
+    const query = req.query.q;
+    const products=await productModel.find({ name: { $regex: query, $options: 'i' }}).limit(20);
+    if (req.user){
+      const user = await userModel.findOne({ email: req.user.email })
+      .populate({
+        path: 'cart.product',  
+        model: 'Products'      
+      });
+      var cartcount=0
+      user.cart = user.cart.filter(item => item.product !== null);
+      cartcount = user.cart.length;
+      res.render('product',{products,req,cartcount})
+    }
+      else{
+      res.render('product',{products,req,cartcount})
   
-  productModel.find({ name: { $regex: query, $options: 'i' } }, function (err, docs) {
-    res.json(docs);
+      }
   });
-})
+
 
 module.exports = router;

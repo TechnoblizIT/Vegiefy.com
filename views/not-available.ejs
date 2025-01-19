@@ -557,6 +557,17 @@ footer::before {
 
     </style>
 </head>
+<script>
+  function searchproduct() {
+    const searchQuery = document.querySelector('#search-input').value.trim();
+  
+    if (!searchQuery) {
+      alert('Please enter a search term!');
+      return;
+    }
+    window.location.href = `/productsearch?q=${encodeURIComponent(searchQuery)}`;
+  }
+  </script>
 <body>
    <!-- Header Section -->
 <header>
@@ -569,7 +580,7 @@ footer::before {
           </a>
           <div class="search-bar">
             <input type="text" id="search-input" placeholder="Search for products..." onfocus="showDropdown()" onblur="hideDropdown()">
-            <button><i class="fas fa-search"></i></button>
+            <button onclick="searchproduct()"><i class="fas fa-search"></i></button>
             <div class="dropdown" id="dropdown">
                 <ul>
                     <li>Banana</li>

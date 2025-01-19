@@ -752,6 +752,17 @@ footer::before {
 
     </style>
 </head>
+<script>
+  function searchproduct() {
+    const searchQuery = document.querySelector('#search-input').value.trim();
+  
+    if (!searchQuery) {
+      alert('Please enter a search term!');
+      return;
+    }
+    window.location.href = `/productsearch?q=${encodeURIComponent(searchQuery)}`;
+  }
+  </script>
 <body>
    <!-- Header Section -->
 <header>
@@ -770,7 +781,7 @@ footer::before {
               onfocus="showDropdown()" 
               onkeyup="fetchProducts()" 
             >
-            <button><i class="fas fa-search"></i></button>
+            <button onclick="searchproduct()"><i class="fas fa-search"></i></button>
             <div class="dropdown" id="dropdown" style="display: none;">
               <ul id="product-list">
                 <!-- Dynamic search results will be inserted here -->

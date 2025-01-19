@@ -14,35 +14,15 @@
     <link rel="stylesheet" href="../stylesheet/index.css">
 </head>
 <script>
-async  function searchproduct() {
-    const searchQuery = document.querySelector('#search-input').value.trim();
-  
-if (!searchQuery) {
-  alert('Please enter a search term!');
-  return;
-}
+function searchproduct() {
+  const searchQuery = document.querySelector('#search-input').value.trim();
 
-try {
-  const response = await fetch(`/productsearch?q=${encodeURIComponent(searchQuery)}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
+  if (!searchQuery) {
+    alert('Please enter a search term!');
+    return;
   }
-
-  const data = await response.json();
-  console.log('Search Results:', data);
-
-  // Optionally populate the dropdown or navigate to results page
-} catch (error) {
-  console.error('Error in search button click event:', error);
+  window.location.href = `/productsearch?q=${encodeURIComponent(searchQuery)}`;
 }
-    
-  }
 </script>
 <body>
     <!-- <body> -->
@@ -402,6 +382,10 @@ initializeFuse();
 
 async function fetchProducts() {
   const input = document.getElementById('search-input').value.toLowerCase();
+  input.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      searchproduct();
+    }})
 
   if (input.trim().length === 0) {
     document.getElementById('dropdown').style.display = 'none';
