@@ -1325,8 +1325,8 @@
                     <input type="text" id="fullName" name="fullName" value="<%=req.user.name%>" placeholder="Enter your full name" readonly/>
         
                     <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" value="<%=req.user.mobile%>" placeholder="Enter your phone number"  />
-        
+                    <input type="tel" id="phone" name="phone" value="<%=req.user.mobile%>" placeholder="Enter your phone number" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);" />
+
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" value="<%=req.user.email%>" placeholder="Enter your email" readonly />
                 </form>

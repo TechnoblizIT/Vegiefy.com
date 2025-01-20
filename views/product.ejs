@@ -383,6 +383,7 @@ main {
     border: 1px solid #ccc;
     border-radius: 4px;
     color: #adabab;
+    cursor: pointer;
 }
 @media (max-width: 768px) {
             main {
@@ -684,12 +685,18 @@ footer::before {
   <div class="product-list" id="product-list">
     <% if(products.length>0){ %>
     <% products.forEach(product => { %>
-     <a style="text-decoration: none;" href="/productdetails/<%=product._id%>"><div class="product-box">
+     
+    <div class="product-box">
+      <a style="text-decoration: none;" href="/productdetails/<%=product._id%>">
+      <div class="uppr-box">
         <img src="data:<%= product.image.imageType %>;base64,<%= product.image.file.toString('base64') %>"  alt="product.name">
         <h2><%= product.name %></h2>
         <p><%= product.description %></p>
         <p style="font-weight: bolder;">Price: ₹ <%=product.price%>/-</p> 
-      
+    </div>
+    </a>
+   
+      <div class="lower box">
         <form action="/user/addtocart/<%= product._id %>" method="POST">
           <select name="quantity" class="quantity-selecter">
             <option value="0.5">0.5kg</option>
@@ -701,9 +708,10 @@ footer::before {
           </select>
           <button type="submit">Add to Cart</button>
         </form>
+      </div>
      
       </div>
-    </a>
+   
      
     <% }) %>
     <% }else{ %>
