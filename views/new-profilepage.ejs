@@ -693,7 +693,7 @@
     margin-top: 20px;
     gap: 5px;
 }
-.save-btn, .cancel-btn {
+.save-btn, .manage-btn{
     width: 48%;
     padding: 10px;
     font-size: 16px;
@@ -707,10 +707,10 @@
     background-color: #0073e6;
     color: #fff;
 }
-.cancel-btn {
+/* .cancel-btn {
     background-color: #f5f5f5;
     color: #333;
-}
+} */
 .save-btn:hover {
     background-color: #005bb5;
 }
@@ -1473,7 +1473,7 @@
             <button class="save-btn" type="submit">Save</button>
         </form>
         <button class="manage-btn" onclick="saveAddress()">Manage Address</button>
-            <button class="cancel-btn" onclick="cancelAddress()">Cancel</button>
+            <!-- <button class="cancel-btn" onclick="cancelAddress()">Cancel</button> -->
         </div>
     </div>
 
@@ -1559,7 +1559,7 @@
         
         <div class="update-address-button">
             <button class="update-btn" onclick="submitUpdate()">Update</button>
-            <button class="cancl-btn">Cancel</button>
+            <button class="cancl-btn" onclick="canceleditAddress()">Cancel</button>
         </div>
    </div>
 </div>
@@ -1796,13 +1796,32 @@ function confirmLogout() {
 }
 
 //js for address page =================================================================================
-function saveAddress() {
-    
-// hide the address form and show the saved address block
-    document.getElementById('address-form').classList.add('hidden');
-    document.getElementById('saved-address').classList.remove('hidden');
+
+function addNewAddress() {
+    // Show the address form
+    document.getElementById('address-form').style.display = 'block';
+    // Hide the saved address section
+    document.getElementById('saved-address').style.display = 'none';
+    // Hide the edit address section (if visible)
+    document.getElementById('edit-address').style.display = 'none';
 }
 
+function canceleditAddress() {
+    // Hide the address form
+    document.getElementById('address-form').style.display = 'none';
+    // Show the saved addresses section
+    document.getElementById('saved-address').style.display = 'block';
+    // Hide the edit address section (if visible)
+    document.getElementById('edit-address').style.display = 'none';
+}
+
+function saveAddress() {
+    // Show the saved addresses section
+    document.getElementById('saved-address').style.display = 'block';
+    // Hide the address form and edit form
+    document.getElementById('address-form').style.display = 'none';
+    document.getElementById('edit-address').style.display = 'none';
+}
 function cancelAddress() {
     // show the address form again and hide saved address view
     document.getElementById('address-form').classList.remove('hidden');
@@ -1814,11 +1833,6 @@ function toggleOptions(element) {
     optionsMenu.classList.toggle("show");
 }
 
-function addNewAddress() {
-    // Show the address form when "Add a new address" is clicked
-    document.getElementById('address-form').classList.remove('hidden');
-    document.getElementById('saved-address').classList.add('hidden');
-}
 
 // function editAddress(addr) {
     

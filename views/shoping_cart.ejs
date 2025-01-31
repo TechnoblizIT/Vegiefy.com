@@ -302,13 +302,7 @@ hr {
 
 
          /* css for shopping-page */
-         .product-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 80px;
-}
-.product-container .product-empty {
+         .product-container .product-empty {
     font-size: 30px;
     text-align: center;
     color: #0f5256;
@@ -326,9 +320,12 @@ hr {
     transform: scale(1.03);
     background-color: #edf7f8;
 }
-
-
-
+.product-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 80px;
+}
 /* Individual Product */
 .product {
     display: flex;
@@ -375,21 +372,28 @@ hr {
     font-size: 1.2rem;
     font-weight: bold;
     color: #333;
-    margin-right: 20px; 
+    width: 200px; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .product-price {
     font-size: 1rem;
     font-weight: bold;
     color: #888;
-    margin-right: 20px; 
+    width: 100px;
+    text-align: center;
 }
 
 .quantity-container {
     display: flex;
     align-items: center;
     gap: 5px;
+    width: 120px; 
+    justify-content: center;
 }
+
 
 .quantity-container button {
     width: 24px;
@@ -432,6 +436,8 @@ hr {
 /* Delete Icon */
 .delete-icon-container {
     margin-left: 20px;
+    width: 50px;
+    text-align: right;
 }
 
 .delete-btn {
@@ -853,12 +859,12 @@ hr {
     .delete-btn{
         font-size: 18px;
     }
+    .product {
+        width: 100%;
+    }
     .cart-summary {
         width: 100%;
         margin-top: 20px;
-    }
-    .product {
-        width: 100%;
     }
     .form-checkout{
       padding: 10px;
@@ -1164,7 +1170,7 @@ footer::before {
           </div>
           <ul class="nav-links">
             <li><a href="/">Home</a></li>
-            <li><a href="/#about-us">About</a></li>
+
             <li><a href="/product">Products</a></li>
             <li><a href="/cart" class="nav-active">Cart</a></li>
             <li><a href="/delivery">My Orders</a></li>
