@@ -1353,33 +1353,6 @@ color: #333;
     color: #d4d4d4;
   }
   
-  .contact-form .text-input {
-    width: 100%;
-    padding: 15px;
-    margin-bottom: 15px;
-    border: none;
-    border-radius: 5px;
-    outline: none;
-    font-size: 16px;
-    box-sizing: border-box;
-  }
-  
-  .contact-form .btn {
-    display: inline-block;
-    padding: 15px 30px;
-    background: #fff;
-    color: #0f5256;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: 0.3s, color 0.3s;
-  }
-  
-  .contact-form .btn:hover {
-    background: #0f5256;
-    color: #fff;
-  }
   
   .footer-bottom {
     text-align: center;
@@ -1390,7 +1363,6 @@ color: #333;
    
    
   }
-  
   
   /* Responsive Design */
   @media (max-width: 768px) {
@@ -1425,10 +1397,7 @@ color: #333;
         font-size: 14px;
     }
   
-    .contact-form .text-input, .contact-form .btn {
-        font-size: 14px;
-        padding: 10px;
-    }
+    
   
    
   }

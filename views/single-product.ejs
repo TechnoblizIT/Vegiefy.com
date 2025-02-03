@@ -674,35 +674,6 @@ footer::before {
   text-decoration: underline;
   color: #d4d4d4;
 }
-
-.contact-form .text-input {
-  width: 100%;
-  padding: 15px;
-  margin-bottom: 15px;
-  border: none;
-  border-radius: 5px;
-  outline: none;
-  font-size: 16px;
-  box-sizing: border-box;
-}
-
-.contact-form .btn {
-  display: inline-block;
-  padding: 15px 30px;
-  background: #fff;
-  color: #0f5256;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  text-transform: uppercase;
-  transition: 0.3s, color 0.3s;
-}
-
-.contact-form .btn:hover {
-  background: #0f5256;
-  color: #fff;
-}
-
 .footer-bottom {
   text-align: center;
   padding: 15px;
@@ -743,11 +714,6 @@ footer::before {
     font-size: 14px;
   }
 
-  .contact-form .text-input,
-  .contact-form .btn {
-    font-size: 14px;
-    padding: 10px;
-  }
 }
 
     </style>
@@ -935,17 +901,20 @@ footer::before {
                 <a href="/#faq"><li>FAQs</li></a>
             </ul>
         </div>
-        <div class="footer-section contact-form">
-            <h2>Contact Us</h2>
-            <form action="index.html" method="post">
-                <input type="email" name="email" class="text-input contact-input" placeholder="Your email address...">
-                <textarea name="message" class="text-input contact-input" placeholder="Your message..."></textarea>
-                <button type="submit" class="btn btn-big contact-btn">
-                    <i class="fas fa-envelope"></i>
-                    Send
-                </button>
-            </form>
-        </div>
+        <div class="footer-section map-box">
+          <h2>Our Location</h2>
+          <div class="map-container">
+              <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1909380.5776746294!2d78.303604875!3d20.821247652883144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a2ba91d8fba8849%3A0xf6e9c4ba29f50a7c!2sVEGIEFY%20ORGANIC%20FARMING!5e0!3m2!1sen!2sin!4v1738568525698!5m2!1sen!2sin" 
+                  width="100%" 
+                  height="300" 
+                  style="border:0;border-radius: 10px;" 
+                  allowfullscreen="" 
+                  loading="lazy" 
+                  referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+          </div>
+      </div>
     </div>
     <div class="footer-bottom">
         &copy; www.vegiefy.com 
