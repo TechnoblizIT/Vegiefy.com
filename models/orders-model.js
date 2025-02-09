@@ -10,6 +10,11 @@ const orderSchema = mongoose.Schema({
     type: Number,
     default: 0
   },
+  Address: {
+    type: String,
+    default:""
+  }
+  ,
   Date: {
     type: Date,
     default: Date.now

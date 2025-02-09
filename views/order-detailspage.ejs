@@ -1115,7 +1115,7 @@ hr {
     <div class="time-info">
       <div class="time-left">
         <p class="day">Today</p>
-        <p class="time">04 hours & 23 minutes</p>
+        <p class="time" id="loginTimeDisplay">Loading...</p>
       </div>
       <div class="new-orders">
         <button id="new-order-button">New Orders</button>
@@ -1624,7 +1624,7 @@ hr {
         </div>
         <div class="order-block completed-order">
           <h3>Completed Orders</h3>
-          <p class="order-count">0</p>
+          <p class="order-count"><%=orderhistory.length%></p>
         </div>
       </div>
   
@@ -1910,6 +1910,27 @@ function updateStatus() {
         console.error('Error:', error);
       });
   }
+  function getLoginDuration() {
+    // Get the token from cookies
+    const token = document.cookie.split('; ').find(row => row.startsWith('tokken='));
+    
+    if (token) {
+      const jwt = token.split('=')[1]; 
+      const payload = JSON.parse(atob(jwt.split('.')[1])); // Decode JWT payload
+      const loginTime = new Date(payload.iat * 1000); 
+      const currentTime = new Date();
+
+      // Calculate the difference in minutes
+      const diffInMinutes = Math.floor((currentTime - loginTime) / 60000);
+      const hours = Math.floor(diffInMinutes / 60);
+      const minutes = diffInMinutes % 60;
+
+      // Update the time display
+      document.getElementById('loginTimeDisplay').innerText = `${hours} hours & ${minutes} minutes`;
+    }
+  }
+
+  getLoginDuration(); // Run function on page load
 </script>
 </body>
 </html>

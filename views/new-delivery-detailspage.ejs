@@ -305,7 +305,12 @@
             <br />
             <div class="delivery-time-section">
               <span>Delivery Time</span><br />
-              <span class="time">09:20 AM</span>
+              <span class="time"><%= new Date(order.Date.getTime() + 25 * 60000).toLocaleString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true,
+                timeZone: 'Asia/Kolkata' // Replace with your desired time zone
+              })%></span>
             </div>
           </div>
         </header>

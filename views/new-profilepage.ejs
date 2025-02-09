@@ -1492,7 +1492,7 @@
             <% req.user.address.forEach((addr, index) => { %>
                 <div class="address-block">
                     <div class="address-header">
-                        <span class="address-type">Home</span>
+                        <span class="address-type"><%=addr.addressType%></span>
                         <div class="address-options">
                             <i class="fa fa-ellipsis-v" onclick="toggleOptions(this)"></i>
                             <div class="options-menu hidden">

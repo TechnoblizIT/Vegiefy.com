@@ -125,7 +125,8 @@ router.get("/quantity/dec/:productid", isloggedin, checkuser, async (req, res)=>
       // Validate request data
       if (!userId || !addressId || !products || products.length === 0 || !totalPrice) {
         return res.status(400).json({ success: false, message: 'Missing required fields' });
-      }
+      } 
+      console.log(addressId)
   
       // Check if the user exists
       const user = await userModel.findById(userId);
@@ -177,11 +178,13 @@ router.get("/quantity/dec/:productid", isloggedin, checkuser, async (req, res)=>
         quantity: item.quantity // quantity of the product
       }));
       
-  
+      const Address=`${user.address[addressId].address} ${user.address[addressId].locality} ${user.address[addressId].city} ${user.address[addressId].state} ${user.address[addressId].pincode}`;
+      console.log(Address);
       // Create the new order
       const newOrder = new ordersModel({
         orderid: `OD-VO${Date.now()}`,
         AddressIndex:addressId,
+        Address:Address,
         Date: new Date(),
         User: userId,
         Products: orderItems,
