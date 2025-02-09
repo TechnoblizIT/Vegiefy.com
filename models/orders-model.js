@@ -14,7 +14,6 @@ const orderSchema = mongoose.Schema({
     type: Date,
     default: Date.now
   },
-
   User: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',

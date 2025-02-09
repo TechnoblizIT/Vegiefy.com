@@ -132,7 +132,7 @@ router.get("/quantity/dec/:productid", isloggedin, checkuser, async (req, res)=>
       if (!user) {
         return res.status(404).json({ success: false, message: 'User not found' });
       }
-  
+      
       const validPincodes = [441601, 441614, 441801];
       let isValidPincode = false;
   
@@ -176,6 +176,7 @@ router.get("/quantity/dec/:productid", isloggedin, checkuser, async (req, res)=>
         product: item.product._id, // product ID
         quantity: item.quantity // quantity of the product
       }));
+      
   
       // Create the new order
       const newOrder = new ordersModel({

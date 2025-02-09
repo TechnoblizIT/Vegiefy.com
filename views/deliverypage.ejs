@@ -1146,15 +1146,15 @@ footer::before {
               </div>
               <div class="order-step step-2">
                 <div class="processing <%= order.status === 'Processing' || order.status === 'Out For Delivery' || order.status === 'Delivered' ? 'active' : '' %>">2</div>
-                <p>Processing <span class="processing-date">Update dynamically</span></p>
+                <p>Processing <span class="processing-date"></span></p>
               </div>
               <div class="order-step step-3">
                 <div class="out-for-delivery <%= order.status === 'Out For Delivery' || order.status === 'Delivered' ? 'active' : '' %>">3</div>
-                <p>Out For Delivery <span class="outfordeliverd-date">Update dynamically</span></p>
+                <p>Out For Delivery <span class="outfordeliverd-date"></span></p>
               </div>
               <div class="order-step step-4">
                 <div class="delivered <%= order.status === 'Delivered' ? 'active' : '' %>">4</div>
-                <p>Delivered <span class="delivered-date">Update dynamically</span></p>
+                <p>Delivered <span class="delivered-date"></span></p>
               </div>
             </div>
           </div>
@@ -1186,7 +1186,7 @@ footer::before {
       <p><strong>Delivery Address:</strong> <span class="invoicecustomer-address"> [Customer Address]</span></p>
       <p><strong>Order ID:</strong> <span class="invoiceorder-id"> 123456</span></p>
       <p><strong>Date of Invoice:</strong><span class="invoice-date"> [Date]</span></p>
-      <p><strong>Place of Supply:</strong><span class="invoice-status"> [State]</span></p>
+      <!-- <p><strong>Place of Supply:</strong><span class="invoice-status"> [State]</span></p> -->
     </div>
 
     <div class="company-info">
@@ -1238,7 +1238,7 @@ footer::before {
       </tbody>
     </table>
 
-    <table class="tax-details">
+    <!-- <table class="tax-details">
       <thead>
         <tr>
           <th>Tax</th>
@@ -1263,13 +1263,13 @@ footer::before {
           <td><strong>9.00</strong></td>
         </tr>
       </tbody>
-    </table>
+    </table> -->
 
     <div class="total-section">
       <p><strong>Subtotal:</strong> <span class="invoice-subtotal"> ₹180.00</span></p>
-      <p><strong>Taxes:</strong><span class="invoice-taxes"> ₹9.00</span></p>
+      <!-- <p><strong>Taxes:</strong><span class="invoice-taxes"> ₹9.00</span></p> -->
       <p><strong>Grand Total:</strong><span class="invoice-grandtotal"> ₹189.00</span></p>
-      <p><strong>Total in Words:</strong> <br> <span class="invoice-totalwords">  One Hundred Eighty-Nine Rupees Only</span></p>
+      <!-- <p><strong>Total in Words:</strong> <br> <span class="invoice-totalwords">  One Hundred Eighty-Nine Rupees Only</span></p> -->
     </div>
 
     <div class="footer-invoice">-
@@ -1457,8 +1457,30 @@ function rate(stars) {
           document.querySelector(".invoicecustomer-name").textContent = orderData.User.name;
           document.querySelector(".invoicecustomer-address").textContent = `${orderData.User.address[orderData.AddressIndex].address}, ${orderData.User.address[orderData.AddressIndex].city}, ${orderData.User.address[orderData.AddressIndex].state}, ${orderData.User.address[orderData.AddressIndex].pincode}`;
           document.querySelector(".invoiceorder-id").textContent = orderData.orderid
-          document.querySelector(".invoiceorder-date").textContent = orderData.Date.toDateString();
-          document.querySelector(".invoice-status").textContent = orderData.User.address[orderData.AddressIndex].state;
+          document.querySelector(".invoice-date").textContent = new Date(orderData.Date).toDateString();
+          // document.querySelector("invoice-status").textContent = `${orderData.User.address[orderData.AddressIndex].state}`;
+         
+          const tbody = document.querySelector(".billing-table tbody");
+        tbody.innerHTML = ""; // Clear existing rows
+        
+        orderData.Products.forEach((product, index) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${product.product.name}</td>
+                <td>KG</td>
+                <td>${product.quantity}</td>
+                <td>${product.product.price}</td>
+                <td>${(product.quantity * product.product.price)}</td>
+                <td>0</td>
+                <td>${((product.quantity * product.product.price))}</td>
+            `;
+            tbody.appendChild(row);
+        });
+      document.querySelector(".invoice-subtotal").textContent = `₹${orderData.TotalPrice}`;
+      document.querySelector(".invoice-grandtotal").textContent = `₹${orderData.TotalPrice}`;
+
+
 
     }catch(e) {
       console.error("Error fetching order data:", e);
