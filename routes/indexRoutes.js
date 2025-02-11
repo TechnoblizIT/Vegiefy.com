@@ -19,6 +19,7 @@ router.get('/',checkuser ,async function(req, res) {
      model: 'Products'      
    });
    user.cart = user.cart.filter(item => item.product !== null);
+   user.cart = user.cart.filter((item) => item.product && item.product.isActive)
    cartcount = user.cart.length;
    res.render('index',{req,products,cartcount})
    }else{
@@ -34,7 +35,7 @@ router.get('/login', function(req, res) {
  router.get('/product',checkuser ,async function(req, res) {
   try{ 
     var cartcount=0
-    const products=await productModel.find()
+    const products=await productModel.find({isActive: true })
     if (req.user){
    const user = await userModel.findOne({ email: req.user.email })
    .populate({
@@ -43,6 +44,7 @@ router.get('/login', function(req, res) {
    });
    var cartcount=0
    user.cart = user.cart.filter(item => item.product !== null);
+   user.cart = user.cart.filter((item) => item.product && item.product.isActive);
    cartcount = user.cart.length;
    res.render('product',{products,req,cartcount})}
    else{
@@ -62,6 +64,7 @@ router.get('/blog',checkuser ,async function(req, res) {
       model: 'Products'      
     });
     user.cart = user.cart.filter(item => item.product !== null);
+    user.cart = user.cart.filter((item) => item.product && item.product.isActive);
     cartcount = user.cart.length;
     res.render('blog',{req,cartcount})
     }else{
@@ -85,6 +88,7 @@ router.get('/blog',checkuser ,async function(req, res) {
    .populate('DeliveryBoy');
    var cartcount=0
    user.cart = user.cart.filter(item => item.product !== null);
+   user.cart = user.cart.filter((item) => item.product && item.product.isActive);
    cartcount = user.cart.length;
    res.render('deliverypage',{req,cartcount,orders})
   
@@ -99,7 +103,9 @@ router.get('/blog',checkuser ,async function(req, res) {
       path: 'cart.product',  
       model: 'Products'      
     });
+
     user.cart = user.cart.filter(item => item.product !== null);
+    user.cart = user.cart.filter((item) => item.product && item.product.isActive);
     cartcount = user.cart.length;
     res.render('contact',{req,cartcount})
     }else{
@@ -116,6 +122,7 @@ router.get("/not-available" ,isloggedin,checkuser ,async function(req, res) {
       model: 'Products'      
     });
     user.cart = user.cart.filter(item => item.product !== null);
+    user.cart = user.cart.filter((item) => item.product && item.product.isActive);
     cartcount = user.cart.length;
     res.render('not-available',{req,cartcount})
     }else{
@@ -133,6 +140,7 @@ router.get("/productdetails/:productid",checkuser,async function(req, res) {
     });
   
     user.cart = user.cart.filter(item => item.product !== null);
+    user.cart = user.cart.filter((item) => item.product && item.product.isActive);
     cartcount = user.cart.length;
   }
   const product = await productModel.findById(req.params.productid)
@@ -159,6 +167,7 @@ router.get('/cart', isloggedin, checkuser, async function (req, res) {
 
     let carttotal = 0;
     cartcount = 0;
+    user.cart = user.cart.filter((item) => item.product && item.product.isActive);
 
     user.cart.forEach((item) => {
       if (item.product && item.product.price) {
@@ -186,7 +195,8 @@ router.get('/search', async (req, res) => {
     const query = req.query.q;
    
     const products = await productModel.find({
-      name: { $regex: query, $options: 'i' }
+      name: { $regex: query, $options: 'i' },
+      isActive: true,
     }).limit(20); 
     res.json(products);
   } catch (err) {
@@ -218,7 +228,7 @@ router.get("/terms&conditions",function (req, res) {
 })
 router.get("/productsearch",checkuser,async function(req, res) {
     const query = req.query.q;
-    const products=await productModel.find({ name: { $regex: query, $options: 'i' }}).limit(20);
+    const products=await productModel.find({ name: { $regex: query, $options: 'i' },isActive:true}).limit(20);
     if (req.user){
       const user = await userModel.findOne({ email: req.user.email })
       .populate({
@@ -227,6 +237,7 @@ router.get("/productsearch",checkuser,async function(req, res) {
       });
       var cartcount=0
       user.cart = user.cart.filter(item => item.product !== null);
+      user.cart = user.cart.filter((item) => item.product && item.product.isActive);
       cartcount = user.cart.length;
       res.render('product',{products,req,cartcount})
     }

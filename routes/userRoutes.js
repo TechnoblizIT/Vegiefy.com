@@ -156,10 +156,8 @@ router.get("/quantity/dec/:productid", isloggedin, checkuser, async (req, res)=>
   
       // Validate all products and their stock
       for (const item of products) {
-        const product = await productModel.findById(item.productId);
-        if (!product) {
-          return res.status(404).json({ success: false, message: `Product not found for ID: ${item.productId}` });
-        }
+        const product = await productModel.findById(item.productId,);
+       
         if (product.instock < item.quantity) {
           return res.status(400).json({
             success: false,

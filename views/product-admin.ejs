@@ -1389,6 +1389,7 @@ margin-left: 50px;
       <!-- Dashboard Order-list page============================================================================== -->
       <div id="dashboard" class="page-content">
         <div class="dashboard-container">
+          <% if (orders.length > 0) { %>
           <div class="dashboard-block">
             <div class="dashboard-value"><%=itemsold%></div>
             <div class="dashboard-text">Unit Sold</div>
@@ -1405,6 +1406,25 @@ margin-left: 50px;
             <div class="dashboard-value"><%=activeorderscount || NA %></div>
             <div class="dashboard-text">Active Listings</div>
           </div>
+          <% } else { %>
+            <div class="dashboard-block">
+              <div class="dashboard-value">0</div>
+              <div class="dashboard-text">Unit Sold</div>
+            </div>
+            <div class="dashboard-block">
+              <div class="dashboard-value">₹0</div>
+              <div class="dashboard-text">Sales</div>
+            </div>
+            <div class="dashboard-block">
+              <div class="dashboard-value">0</div>
+              <div class="dashboard-text">New Orders</div>
+            </div>
+            <div class="dashboard-block">
+              <div class="dashboard-value">0</div>
+              <div class="dashboard-text">Active Listings</div>
+            </div>
+            <%}%>
+
         </div>
       </div>
 
@@ -1592,8 +1612,14 @@ margin-left: 50px;
                                 <%= product.expirydate ? new Date(product.expirydate).toDateString() : 'No Expiry' %>
                             </td>
                             <td>
-                              <button class="toggle-button" id="toggleButton"></button>
+                              <button class="toggle-button" 
+                                      data-product-id="<%= product._id %>" 
+                                      data-active="<%= product.isActive %>" 
+                                      style="background-color: <%= product.isActive ? 'green' : 'grey' %>; color: white; padding: 5px 10px; border: none; border-radius: 5px; cursor: pointer;">
+                                <%= product.isActive ? 'Active' : 'Inactive' %>
+                              </button>
                             </td>
+                            
                             <!-- <td class="delete-icon">
                                 <i class="far fa-trash-alt" data-id="<%= product._id %>"></i>
                             </td> -->
@@ -2741,11 +2767,24 @@ try {
 
 
   // js for toogle button product container
-  document.querySelectorAll(".toggle-button").forEach(button => {
-            button.addEventListener("click", function() {
-                this.classList.toggle("active");
-            });
-        });
+  document.querySelectorAll('.toggle-button').forEach(button => {
+    button.addEventListener('click', async function () {
+      const productId = this.getAttribute('data-product-id');
+      const isActive = this.getAttribute('data-active') === 'true';
+
+      const response = await fetch(`/admin/toggle-product/${productId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ isActive: !isActive })
+      });
+
+      if (response.ok) {
+        this.setAttribute('data-active', (!isActive).toString());
+        this.textContent = !isActive ? 'Active' : 'Inactive';
+        this.style.backgroundColor = !isActive ? 'green' : 'grey';
+      }
+    });
+  });
     </script>
   </body>
 </html>

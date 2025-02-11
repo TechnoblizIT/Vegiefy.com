@@ -280,4 +280,18 @@ router.delete('/products/delete', async (req, res) => {
       res.status(500).json({ message: "Internal Server Error" });
     }
   })
+  router.patch('/toggle-product/:id', async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { isActive } = req.body;
+  
+      const product = await productModel.findByIdAndUpdate(id, { isActive }, { new: true });
+  
+      if (!product) return res.status(404).json({ error: 'Product not found' });
+  
+      res.json({ message: 'Product updated successfully', product });
+    } catch (error) {
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
 module.exports = router;
