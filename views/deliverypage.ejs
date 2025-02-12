@@ -1156,8 +1156,14 @@ footer::before {
               </div>
               <div class="order-step step-4">
                 <div class="delivered <%= order.status === 'Delivered' ? 'active' : '' %>">4</div>
-                <p>Delivered <span class="delivered-date"><%= order.DeliveredDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>,  
-                  <%= order.DeliveredDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }) %></span></p>
+                <p>Delivered 
+                  <%if(order.DeliveredDate){ %>
+                  <span class="delivered-date"><%= order.DeliveredDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>,  
+                  <%= order.DeliveredDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }) %></span>
+                  <%}else{%>
+                    <span class="delivered-date"></span>
+                    <%}%>
+                </p>
               </div>
             </div>
           </div>
@@ -1180,7 +1186,7 @@ footer::before {
  
   <div class="invoice-container">
     <div class="header-invoice">
-      <h1>TAX INVOICE</h1>
+      <h1>INVOICE</h1>
     </div>
 
     <div class="main-container">
@@ -1195,8 +1201,8 @@ footer::before {
     <div class="company-info">
       <p><strong>Invoice issued by Vegiefy Limited (formerly known as Vegiegy Private Limited) on behalf of:</strong></p>
       <p><strong>Company Name:</strong><span class="company-name"> Vegiefy Organic Farming</span></p>
-      <p><strong>Company GSTIN:</strong> <span class="company-gstin"> 09CSBPK2909RIZ6</span></p>
-      <p><strong>Company FSSAI License</strong> <span class="company-fssai"> 12345678798979</span></p>
+      <p><strong>Company GSTIN:</strong> <span class="company-gstin"></span></p>
+      <p><strong>Company FSSAI License</strong> <span class="company-fssai"></span></p>
       <p><strong>Address:</strong><span class="company-address"> Chandrashekar Ward Gondia ,441601,Maharashtra</span></p>
       <p><strong>State:</strong><span class="company-state">Maharashtra</span></p>
       <p><strong>Category:</strong><span class="company-category">B2C</span></p>
