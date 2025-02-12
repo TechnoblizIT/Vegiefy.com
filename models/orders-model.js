@@ -10,6 +10,14 @@ const orderSchema = mongoose.Schema({
     type: Number,
     default: 0
   },
+  Addressname:{
+    type: String,
+    default:""
+  },
+  Addressmobile:{
+    type: String,
+    default:""
+  },
   Address: {
     type: String,
     default:""
@@ -44,10 +52,18 @@ const orderSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Deliveryboys'
   },
+  DeliveryBoyName:{
+    type: String,
+    default: ""
+  },
   status: {
     type: String,
     enum: ['Pending', 'Confirmed', 'Processing', 'Out For Deliverey', "Delivered" ,'Cancelled'],
     default: 'Pending'
+  },
+  DeliveredDate:{
+    type: Date,
+    default: null
   }
 });
 

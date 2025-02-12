@@ -1139,12 +1139,10 @@ hr {
         <div class="order-details-box">
         <div class="order-details">
           <div class="left">
-            <span class="name"><%= order.User?.name || 'Unknown User' %></span>
+            <span class="name"><%= order.Addressname|| 'Unknown User' %></span>
             <p class="address">
-              <% if (order.User?.address && order.User.address.length > 0) { %>
-                <%= order.User.address[order.AddressIndex].address %>, <%= order.User.address[order.AddressIndex].locality %>, 
-                <%= order.User.address[order.AddressIndex].city %>, <%= order.User.address[order.AddressIndex].state %> 
-                <%= order.User.address[order.AddressIndex].pincode %>
+              <% if (order.Address) { %>
+                <%=order.Address%>
               <% } else { %>
                 No address available
               <% } %>
@@ -1227,7 +1225,7 @@ hr {
     <% activeOrder.reverse().forEach((order)=>{ %>
     <div class="order-box">
       <div class="order-container" id="order-container">
-      <p class="order-name">order.User.name</p>
+      <p class="order-name"><%= order.Addressname %></p>
       <p class="order-delivery-time">Order Time: <span>  <%= new Date(order.Date).toLocaleString('en-US', {
         year: 'numeric',
         month: 'short',
@@ -1245,10 +1243,8 @@ hr {
             
       </table>
       <p class="order-address">
-        <i class="fas fa-map-marker-alt map-icon"></i> <% if (order.User?.address && order.User.address.length > 0) { %>
-          <%= order.User.address[order.AddressIndex].address %>, <%= order.User.address[order.AddressIndex].locality %>, 
-          <%= order.User.address[order.AddressIndex].city %>, <%= order.User.address[order.AddressIndex].state %> 
-          <%= order.User.address[order.AddressIndex].pincode %>
+        <i class="fas fa-map-marker-alt map-icon"></i> <% if (order.Address) { %>
+          <%=order.Address%>
         <% } else { %>
           No address available
         <% } %>
@@ -1444,7 +1440,7 @@ hr {
 
       <% orderhistory.reverse().forEach((order)=>{ %>
       <div class="box">
-        <p class="history-name"><%=order.User.name%></p>
+        <p class="history-name"><%=order.Addressname%></p>
         <p class="delivery-time">Order Time: <span>  <%= new Date(order.Date).toLocaleString('en-US', {
           year: 'numeric',
           month: 'short',
@@ -1485,7 +1481,7 @@ hr {
         <% activeOrder.reverse().forEach((order)=>{ %>
     <a href="/delivery/deliverydetails/<%=order._id%>" style="text-decoration: none;"> <div class="order-box">
         <div class="new-order-container" id="new-order-container">
-        <p class="order-name"><%=order.User.name%></p>
+        <p class="order-name"><%=order.Addressname%></p>
         <p class="order-delivery-time">Order Time: <span><%= new Date(order.Date).toLocaleString('en-US', {
           year: 'numeric',
           month: 'short',
@@ -1502,7 +1498,7 @@ hr {
               </tr>
         </table>
         <p class="order-address">
-          <i class="fas fa-map-marker-alt map-icon"></i><%= order.User.address && order.User.address.length > 0 ? `${order.User.address[order.AddressIndex].address}, ${order.User.address[order.AddressIndex].locality}, ${order.User.address[order.AddressIndex].city}, ${order.User.address[order.AddressIndex].state} ${order.User.address[order.AddressIndex].pincode}` : 'No address available' %>
+          <i class="fas fa-map-marker-alt map-icon"></i><%= order.Address ? `${order.Address}` : 'No address available' %>
         </p>
       </div>
     </a>
@@ -1514,7 +1510,7 @@ hr {
             <option value="Out For Deliverey" <%= order.status === "Out For Deliverey" ? "selected" : "" %>>Out For Deliverey</option>
             <option value="Delivered" <%= order.status === "Delivered" ? "selected" : "" %>>Delivered</option>
           </select>
-          <input type="hidden" name="orderid" value="<%= order.orderid %>"> <!-- Pass the order ID -->
+          <input type="hidden" name="orderid" value="<%= order.orderid %>"> 
           <button type="submit">Mark As</button>
         </form>
       </div>

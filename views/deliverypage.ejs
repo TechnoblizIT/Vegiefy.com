@@ -1124,13 +1124,10 @@ footer::before {
               <span>Home</span>
               <div class="order-address">
                 <p>
-                  <%= order.User.name %> <br>
-                  Mobile: <%= order.User.address[order.AddressIndex].mobile %> <br>
-                  <%= order.User.address[order.AddressIndex].address %> 
-                  <%= order.User.address[order.AddressIndex].city %><br>
-                  <%= order.User.address[order.AddressIndex].state %>
-                  <%= order.User.address[order.AddressIndex].pincode %>
-                  <%= order.User.address[order.AddressIndex].country %>
+                  <%= order.Addressname%> <br>
+                  Mobile: <%= order.Addressmobile %> <br>
+                  <%= order.Address%> 
+              
                 </p>
               </div>
             </div>
@@ -1144,7 +1141,10 @@ footer::before {
             <div class="order-tracking-block">
               <div class="order-step step-1">
                 <div class="order-confirm <%= order.status === 'Confirmed' || order.status === 'Processing' || order.status === 'Out For Delivery' || order.status === 'Delivered' ? 'active' : '' %>">1</div>
-                <p>Order Confirm <span class="order-date"><%= order.Date.toDateString() %></span></p>
+                <p>Order Confirm<span class="order-date">
+                  <%= order.Date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>,  
+                  <%= order.Date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }) %>
+                </span></p>
               </div>
               <div class="order-step step-2">
                 <div class="processing <%= order.status === 'Processing' || order.status === 'Out For Delivery' || order.status === 'Delivered' ? 'active' : '' %>">2</div>
@@ -1156,7 +1156,8 @@ footer::before {
               </div>
               <div class="order-step step-4">
                 <div class="delivered <%= order.status === 'Delivered' ? 'active' : '' %>">4</div>
-                <p>Delivered <span class="delivered-date"></span></p>
+                <p>Delivered <span class="delivered-date"><%= order.DeliveredDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>,  
+                  <%= order.DeliveredDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }) %></span></p>
               </div>
             </div>
           </div>
@@ -1188,7 +1189,7 @@ footer::before {
       <p><strong>Delivery Address:</strong> <span class="invoicecustomer-address"> [Customer Address]</span></p>
       <p><strong>Order ID:</strong> <span class="invoiceorder-id"> 123456</span></p>
       <p><strong>Date of Invoice:</strong><span class="invoice-date"> [Date]</span></p>
-      <!-- <p><strong>Place of Supply:</strong><span class="invoice-status"> [State]</span></p> -->
+      <!-- <p><strong>Mobile No.:</strong><span class="invoice-status"> [MObile]</span></p> -->
     </div>
 
     <div class="company-info">
@@ -1456,11 +1457,11 @@ function rate(stars) {
           });
           const orderData =await response.json();
         
-          document.querySelector(".invoicecustomer-name").textContent = orderData.User.name;
-          document.querySelector(".invoicecustomer-address").textContent = `${orderData.User.address[orderData.AddressIndex].address}, ${orderData.User.address[orderData.AddressIndex].city}, ${orderData.User.address[orderData.AddressIndex].state}, ${orderData.User.address[orderData.AddressIndex].pincode}`;
+          document.querySelector(".invoicecustomer-name").textContent = orderData.Addressname;
+          document.querySelector(".invoicecustomer-address").textContent = `${orderData.Address}`;
           document.querySelector(".invoiceorder-id").textContent = orderData.orderid
           document.querySelector(".invoice-date").textContent = new Date(orderData.Date).toDateString();
-          // document.querySelector("invoice-status").textContent = `${orderData.User.address[orderData.AddressIndex].state}`;
+          // document.querySelector("invoice-status").textContent = `${orderData.Addressmobile}`;
          
           const tbody = document.querySelector(".billing-table tbody");
         tbody.innerHTML = ""; // Clear existing rows

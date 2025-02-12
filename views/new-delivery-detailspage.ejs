@@ -305,13 +305,8 @@
             <br />
             <div class="delivery-time-section">
               <span>Delivery Time</span><br />
-              <span class="time"><%= new Date(order.Date.getTime() + 25 * 60000).toLocaleString('en-US', {
-                hour: '2-digit',
-                minute: '2-digit',
-                hour12: true,
-                timeZone: 'Asia/Kolkata' // Replace with your desired time zone
-              })%></span>
-            </div>
+              <span class="time" data-time="<%= order.Date.getTime() %>"></span>
+              <span class="countdown"></span>
           </div>
         </header>
 
@@ -324,7 +319,7 @@
         <div class="delivery-info">
           <div class="info-item">
             <div class="delivery-name">
-              <h2><%=order.User.name%></h2>
+              <h2><%=order.Addressname%></h2>
             </div>
           </div>
 
@@ -333,12 +328,10 @@
             <div class="delivery-address">
               <h3 class="delivery-h3">Address</h3>
               <p class="delivery-p">
-                <% if (order.User?.address && order.User.address.length > 0) { %>
-                  <%= order.User.address[order.AddressIndex].address %>, <%= order.User.address[order.AddressIndex].locality %>, 
-                  <%= order.User.address[order.AddressIndex].city %>, <%= order.User.address[order.AddressIndex].state %> 
-                  <%= order.User.address[order.AddressIndex].pincode %>
+                <% if (order.Address) { %>
+                  <%=order.Address%>
                   <% } else { %>
-                    N/A
+                  "  N/A"
                   <% } %>
               </p>
             </div>
@@ -348,7 +341,7 @@
             <i class="fas fa-envelope"></i>
             <div class="delivery-email">
               <h3 class="delivery-h3">Email Id</h3>
-              <p class="delivery-p"><%=order.User.email || NA%></p>
+              <p class="delivery-p"><%=order.User.email || "NA"%></p>
             </div>
           </div>
 
@@ -356,7 +349,7 @@
             <i class="fas fa-phone"></i>
             <div class="delivery-mobile">
               <h3 class="delivery-h3">Mobile</h3>
-              <p class="delivery-p"><%=order.User.address[order.AddressIndex].mobile || NA%></p>
+              <p class="delivery-p"><%=order.Addressmobile|| "NA"%></p>
             </div>
           </div>
 
@@ -459,7 +452,7 @@
           </div> -->
 
           <div class="call-map">
-            <button class="call-btn">
+            <button class="call-btn" onclick="window.location.href='tel:<%=order.Addressmobile%>'">
               <i class="fa-solid fa-phone"></i> &nbsp;Call
             </button>
             <button class="map-btn">
@@ -470,4 +463,30 @@
       </div>
     </div>
   </body>
+  <script> document.addEventListener("DOMContentLoaded", function () {
+    const timeElement = document.querySelector(".time");
+    const countdownElement = document.querySelector(".countdown");
+
+    if (timeElement) {
+      const orderTime = new Date(parseInt(timeElement.dataset.time)); 
+      const countdownEnd = new Date(orderTime.getTime() + 25 * 60000); 
+
+      function updateCountdown() {
+        const now = new Date();
+        const diff = countdownEnd - now;
+
+        if (diff > 0) {
+          const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+          countdownElement.innerText = `Time left: ${minutes}m ${seconds}s`;
+        } else {
+          countdownElement.innerText = "Time Over!";
+          clearInterval(timer);
+        }
+      }
+
+      updateCountdown(); // Initial call
+      const timer = setInterval(updateCountdown, 1000); // Update every second
+    }
+  });</script>
 </html>

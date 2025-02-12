@@ -72,14 +72,24 @@ router.get("/dashboard",isDeliverylogin,checkDelivery ,async function(req, res) 
     res.render("order-detailspage",{googlemapapi,user,neworder,activeOrder,orderhistory}) 
 })
 
-router.post('/updateOrderStatus', (req, res) => {
+router.post('/updateOrderStatus', async (req, res) => {
   const { status, orderid } = req.body;
-  
-  // Update the order status in your database
-  ordersModel.updateOne({ orderid: orderid }, { status: status })
-    .then(() => res.redirect('/delivery/dashboard#new-link-content')) // Redirect or respond as needed
-    .catch(err => res.status(500).send(err));
+
+  try {
+    const updateData = { status };
+
+    if (status === "Delivered") {
+      updateData.DeliveredDate = new Date(); 
+    }
+
+    await ordersModel.updateOne({ orderid }, updateData);
+    
+    res.redirect('/delivery/dashboard#new-link-content'); // Redirect or respond as needed
+  } catch (err) {
+    res.status(500).send(err);
+  }
 });
+
 
 
   router.get("/accept/:id", isDeliverylogin, checkDelivery, async function(req, res) {
@@ -88,7 +98,7 @@ router.post('/updateOrderStatus', (req, res) => {
     try {
           const updatedOrder = await ordersModel.findByIdAndUpdate(
         id, 
-        { status: "Processing", DeliveryBoy: req.user._id }, 
+        { status: "Processing", DeliveryBoy: req.user._id, DeliveryBoyName:req.user.name}, 
         { new: true }
       );
    

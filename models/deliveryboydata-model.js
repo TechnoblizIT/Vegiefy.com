@@ -21,7 +21,6 @@ const deliveryboySchema=mongoose.Schema({
          filetype:String,
     },
     isActive:String,
-    DeliveredTime:Date,
 
 })
 

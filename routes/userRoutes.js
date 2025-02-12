@@ -175,13 +175,16 @@ router.get("/quantity/dec/:productid", isloggedin, checkuser, async (req, res)=>
         product: item.product._id, // product ID
         quantity: item.quantity // quantity of the product
       }));
-      
+      const Addressname=`${user.address[addressId].name}`
+      const AddressMobile=`${user.address[addressId].mobile}`
       const Address=`${user.address[addressId].address} ${user.address[addressId].locality} ${user.address[addressId].city} ${user.address[addressId].state} ${user.address[addressId].pincode}`;
       console.log(Address);
       // Create the new order
       const newOrder = new ordersModel({
         orderid: `OD-VO${Date.now()}`,
         AddressIndex:addressId,
+        Addressname:Addressname,
+        Addressmobile:AddressMobile,
         Address:Address,
         Date: new Date(),
         User: userId,

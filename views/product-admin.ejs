@@ -1399,11 +1399,11 @@ margin-left: 50px;
             <div class="dashboard-text">Sales</div>
           </div>
           <div class="dashboard-block">
-            <div class="dashboard-value"><%=orders.length || NA%></div>
+            <div class="dashboard-value"><%=orders.length || "NA" %></div>
             <div class="dashboard-text">New Orders</div>
           </div>
           <div class="dashboard-block">
-            <div class="dashboard-value"><%=activeorderscount || NA %></div>
+            <div class="dashboard-value"><%=activeorderscount || "NA" %></div>
             <div class="dashboard-text">Active Listings</div>
           </div>
           <% } else { %>
@@ -1468,8 +1468,8 @@ margin-left: 50px;
                           timeZone: 'Asia/Kolkata' // Replace with your desired time zone
                         }) %>
                       </td>
-                      <td><%= order.estimatedDelivery ? 
-                            new Date(order.estimatedDelivery).toLocaleString('en-US', {
+                      <td><%= order.DeliveredDate ? 
+                            new Date(order.DeliveredDate).toLocaleString('en-US', {
                               year: 'numeric',
                               month: 'short',
                               day: '2-digit',
@@ -1540,7 +1540,7 @@ margin-left: 50px;
                 <thead>
                   <tr>
                     <th>Product</th>
-                    <th>Qty</th>
+                    <th>Qty (KG)</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -2674,8 +2674,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Update the courier name
-    if (orderData && orderData.DeliveryBoy && orderData.DeliveryBoy.name) {
-        document.querySelector(".Courier-name").textContent = orderData.DeliveryBoy.name;
+    if (orderData && orderData.DeliveryBoy && orderData.DeliveryBoyName) {
+        document.querySelector(".Courier-name").textContent = orderData.DeliveryBoyName;
     } else {
         console.error("DeliveryBoy name is missing in orderData");
         document.querySelector(".Courier-name").textContent = "Not assigned";
