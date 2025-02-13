@@ -664,6 +664,57 @@ table td span{
   font-size: 12px;
   text-align: left;
 }
+/* for rejected page */
+.rejected-box {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  margin-top: 10px;
+}
+
+.rejected-history-name{
+  margin: 5px 0;
+  font-weight: bold;
+  font-size: 15px;
+  text-align: left;
+}
+.map-icon{
+    color: #ffc107;
+}
+.rejected-time{
+ margin: 5px 0;
+  font-size: 13px;
+  text-align: left;
+  color: #666;
+}
+.rejected-time span{
+   color: black;
+   font-weight: bold; 
+}
+table {
+  width: 100%;
+  margin: 10px 0;
+  border-collapse: collapse;
+}
+
+table td {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 13px;
+  font-weight: bold;
+}
+table td span{
+    font-size: 11px;
+    color: #666;
+}
+.rejected-history-address {
+  margin-top: 10px;
+  color: #555;
+  font-size: 12px;
+  text-align: left;
+}
 
 /* css for order page=============================================================== */
 
@@ -1193,7 +1244,7 @@ hr {
                   </td>
                   <td>
                     <%= product.product?.name || 'Unknown Product' %> <br>
-                    <span style="color: #666;"><%= product.product?.description || 'No description' %></span>
+                    <!-- <span style="color: #666;"><%= product.product?.description || 'No description' %></span> -->
                   </td>
                   <td><%= product.quantity || 0 %></td>
                   <td>
@@ -1474,7 +1525,21 @@ hr {
     </div>
   
     <div id="rejected-content" class="box-container" style="display: none;">
-      <p>This is the rejected page.</p>
+     
+      <div class="rejected-box">
+        <p class="rejected-history-name">John Chamber</p>
+        <p class="rejected-time">Delivery Time: <span> Jan 15, 2016, 12:34 PM</span></p>
+        <table>
+            <tr>
+                <td> <span >Order ID:</span> <br>#OTB00234</td>
+                <td><span>Order Amount: </span><br>  458.75</td>
+                <td><span>Payment Type: </span><br> Online</td>
+              </tr>
+        </table>
+        <p class="rejected-history-address">
+          <i class="fas fa-map-marker-alt map-icon"></i> 2634 Crestview Terrace, New York, 78004, United States
+        </p>
+      </div>
     </div>
   </div>
   
