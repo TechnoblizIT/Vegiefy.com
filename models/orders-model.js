@@ -64,6 +64,14 @@ const orderSchema = mongoose.Schema({
   DeliveredDate:{
     type: Date,
     default: null
+  }, 
+  ProcessingDate:{
+    type: Date,
+    default: null
+  },
+  OutForDeliveryDate:{
+    type: Date,
+    default: null
   }
 });
 

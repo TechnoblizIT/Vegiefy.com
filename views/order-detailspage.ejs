@@ -1099,6 +1099,10 @@ hr {
 }
 </style>
 </head>
+<link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
 <body>
 
   <!-- Home Page Content -->
@@ -1119,6 +1123,7 @@ hr {
       </div>
       <div class="new-orders">
         <button id="new-order-button">New Orders(<%=neworder.length || "0" %>)</button>
+        <button id="refresh-button"><i class="ri-refresh-line"></i></button>
       </div>
     </div>
 
@@ -1927,6 +1932,9 @@ function updateStatus() {
   }
 
   getLoginDuration(); // Run function on page load
+  document.getElementById("refresh-button").addEventListener("click", function() {
+        location.reload(); // Reload the tab
+    });
 </script>
 </body>
 </html>
