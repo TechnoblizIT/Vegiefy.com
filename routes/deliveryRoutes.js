@@ -78,8 +78,13 @@ router.post('/updateOrderStatus', async (req, res) => {
   try {
     const updateData = { status };
 
-    if (status === "Delivered") {
-      updateData.DeliveredDate = new Date(); 
+    // Set timestamps based on status
+    if (status === "Processing") {
+      updateData.ProcessingDate = new Date();
+    } else if (status === "Out For Deliverey") {
+      updateData.OutForDeliveryDate = new Date();
+    } else if (status === "Delivered") {
+      updateData.DeliveredDate = new Date();
     }
 
     await ordersModel.updateOne({ orderid }, updateData);
@@ -91,14 +96,13 @@ router.post('/updateOrderStatus', async (req, res) => {
 });
 
 
-
   router.get("/accept/:id", isDeliverylogin, checkDelivery, async function(req, res) {
     const { id } = req.params;
   
     try {
           const updatedOrder = await ordersModel.findByIdAndUpdate(
         id, 
-        { status: "Processing", DeliveryBoy: req.user._id, DeliveryBoyName:req.user.name}, 
+        { status: "Processing", DeliveryBoy: req.user._id, DeliveryBoyName:req.user.name,ProcessingDate: new Date() }, 
         { new: true }
       );
    
@@ -117,6 +121,7 @@ router.post('/updateOrderStatus', async (req, res) => {
       res.status(500).send(err);
     }
   });
+  
 
 
 router.get("/logout",(req, res)=>{

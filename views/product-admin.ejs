@@ -1391,11 +1391,11 @@ margin-left: 50px;
         <div class="dashboard-container">
           <% if (orders.length > 0) { %>
           <div class="dashboard-block">
-            <div class="dashboard-value"><%=itemsold%></div>
+            <div class="dashboard-value"><%=itemsold  || "NA"%></div>
             <div class="dashboard-text">Unit Sold</div>
           </div>
           <div class="dashboard-block">
-            <div class="dashboard-value">₹<%=totalprice%></div>
+            <div class="dashboard-value">₹<%=totalprice  || "NA"%></div>
             <div class="dashboard-text">Sales</div>
           </div>
           <div class="dashboard-block">

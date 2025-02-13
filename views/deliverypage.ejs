@@ -1091,7 +1091,9 @@ footer::before {
    <div class="order-container">
   <div class="orders-list" id="orders-list">
    
-    
+    <% if(orders.length === 0) { %>
+      <h1 style="text-align: center;padding-top: 15%; padding-bottom: 15%;">No Orders History Found</h1>
+   <% } else { %>
     <% orders.reverse().forEach(order => { %>
       <div class="my-order">
         <div class="order-details">
@@ -1140,19 +1142,34 @@ footer::before {
           <div class="order-track">
             <div class="order-tracking-block">
               <div class="order-step step-1">
-                <div class="order-confirm <%= order.status === 'Confirmed' || order.status === 'Processing' || order.status === 'Out For Delivery' || order.status === 'Delivered' ? 'active' : '' %>">1</div>
+                <div class="order-confirm <%= order.status === 'Confirmed' || order.status === 'Processing' || order.status === 'Out For Deliverey' || order.status === 'Delivered' ? 'active' : '' %>">1</div>
                 <p>Order Confirm<span class="order-date">
                   <%= order.Date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>,  
                   <%= order.Date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }) %>
                 </span></p>
               </div>
               <div class="order-step step-2">
-                <div class="processing <%= order.status === 'Processing' || order.status === 'Out For Delivery' || order.status === 'Delivered' ? 'active' : '' %>">2</div>
-                <p>Processing <span class="processing-date"></span></p>
+                <div class="processing <%= order.status === 'Processing' || order.status === 'Out For Deliverey' || order.status === 'Delivered' ? 'active' : '' %>">2</div>
+                <p>Processing
+                  <%if(order.ProcessingDate){ %>
+                   <span class="processing-date"></span>
+                   <span class="processing-date"><%= order.ProcessingDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>,  
+                    <%= order.ProcessingDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }) %></span>
+                    <%}else{%>
+                    <span class="processing-date"></span>
+                    <%}%>
+                  </p>
               </div>
               <div class="order-step step-3">
-                <div class="out-for-delivery <%= order.status === 'Out For Delivery' || order.status === 'Delivered' ? 'active' : '' %>">3</div>
-                <p>Out For Delivery <span class="outfordeliverd-date"></span></p>
+                <div class="out-for-delivery <%= order.status === 'Out For Deliverey' || order.status === 'Delivered' ? 'active' : '' %>">3</div>
+                <p>Out For Delivery 
+                  <%if(order.OutForDeliveryDate){ %>
+                  <span class="outfordeliverd-date"><%= order.OutForDeliveryDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>,  
+                    <%= order.OutForDeliveryDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }) %></span>
+                  <%}else{%>
+                    <span class="outfordeliverd-date"></span>
+                    <%}%>
+                </p>
               </div>
               <div class="order-step step-4">
                 <div class="delivered <%= order.status === 'Delivered' ? 'active' : '' %>">4</div>
@@ -1174,6 +1191,7 @@ footer::before {
         </div>
       </div>
     <% }) %>
+    <% } %>
   </div>
 
 <!-- Invoice Form Section -->
