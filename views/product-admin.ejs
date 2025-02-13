@@ -963,7 +963,7 @@
           > ul {
             padding: 0;
             display: grid;
-            grid-auto-columns: 60px;
+            grid-auto-columns: 50px;
             grid-auto-flow: column;
             justify-content: space-around;
             align-items: center;
@@ -1401,6 +1401,66 @@ margin-left: 50px;
   margin-bottom: 60px;
 }
 }
+
+/* css for query page ================================================================================ */
+.query-box {
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    .query-box-container{
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .query-box-container h2 {
+        color: #ccc;
+        margin-bottom: 20px;
+    }
+
+    .query-box-forms form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: transparent;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(255, 255, 255, 0.6);
+    }
+
+    .query-box-forms input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    textarea{
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-sizing: border-box;
+    }
+
+   
+
+    .sub {
+        padding: 10px 20px;
+        background-color: #0f5256;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+   .sub:hover {
+    background-color: #09343c;
+    }
+    @media (max-width: 768px){
+      .query-box {
+        text-align: center;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+    }
+
     </style>
   </head>
   <body>
@@ -2056,7 +2116,21 @@ margin-left: 50px;
 
       <!-- Query page=============================================================================================== -->
        <div id="query" class="page-content" style="display: none;">
-        <h1>this is query page</h1>
+        <div class="query-box">
+          <div class="query-box-container">
+          <h2>Queries section</h2>
+              <div class="query-box-forms">
+                  <form>
+                      <input type="text" name="name" placeholder="Your Name" required>
+                      <input type="email" name="email" placeholder="Your Email" required>
+                      <input type="number" name="number" placeholder="Your Number" required>
+                      <input type="text" name="subject" placeholder="Subject" required>
+                      <textarea name="message" placeholder="Your Message" required></textarea>
+                  </form>
+                  
+              </div>
+          </div>
+        </div>
        </div>
       <!-- Account page================================================================================================ -->
       <div id="account" class="page-content" style="display: none">
