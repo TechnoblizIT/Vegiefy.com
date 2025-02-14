@@ -663,7 +663,7 @@ footer::before {
     </a>
    
       <div class="lower box">
-        <form action="/user/addtocart/<%= product._id %>" method="POST">
+        <form action="/user/addtocart/<%= product._id %>" method="POST" onsubmit="showAlert(event)">
           <select name="quantity" class="quantity-selecter">
             <option value="0.5">0.5kg</option>
             <option value="0.75">0.75kg</option>
@@ -822,6 +822,14 @@ document.addEventListener('click', function(event) {
                 alert('Your message has been sent!');
             });
         });
+
+
+        // alert message for add to cart====================
+        function showAlert(event) {
+    event.preventDefault(); 
+    alert("Product added to cart!");
+    event.target.submit();
+  }
     </script>
 </body>
 </html>
