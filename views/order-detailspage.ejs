@@ -1591,23 +1591,18 @@ hr {
       <div class="order-actions">
         <form action="/delivery/updateOrderStatus" method="POST">
           <p class="mark-as">Mark As:</p>
-          <select class="order-status-dropdown" name="status">
+          <select class="order-status-dropdown" name="status" id="order-status" onchange="toggleOptionsContainer()">
             <option value="Processing" <%= order.status === "Processing" ? "selected" : "" %>>Processing</option>
             <option value="Out For Deliverey" <%= order.status === "Out For Deliverey" ? "selected" : "" %>>Out For Deliverey</option>
             <option value="Delivered" <%= order.status === "Delivered" ? "selected" : "" %>>Delivered</option>
+            <option value="cancelled">Cancelled</option>
           </select>
           <input type="hidden" name="orderid" value="<%= order.orderid %>"> 
           <button type="submit">Mark As</button>
         </form>
       </div>
-      </div>
-      <% }) } else { %>
-        <p>No active orders found.</p>
-      <% } %>
-  
-    
-    <!-- Options Section -->
-    <!-- <div class="options-container" id="options-container">
+        <!-- Options Section -->
+    <div class="options-container" id="options-container" style="display: none;">
       <h5>Reason for cancellation</h5>
       <select id="cancel-options" onchange="showOtherInput()">
         <option value="">Select a reason...</option>
@@ -1624,14 +1619,21 @@ hr {
         <option value="technical-issue">Technical Issue</option>
         <option value="other">Other</option>
       </select>
-
-   
-      <div class="other-message" id="other-message">
+  
+      <!-- "Other" input section -->
+      <div class="other-message" id="other-message" style="display: none;">
         <h5>Mention it:</h5>
         <textarea name="message" placeholder="Type another reason..."></textarea>
       </div>
       <button type="submit" class="submit-reason">Submit</button>
-    </div> -->
+    </div>
+      </div>
+      <% }) } else { %>
+        <p>No active orders found.</p>
+      <% } %>
+  
+    
+   
 
  
   </div>
@@ -2016,6 +2018,30 @@ function updateStatus() {
   document.getElementById("refresh-button").addEventListener("click", function() {
         location.reload(); // Reload the tab
     });
+
+
+    // js for cancellled reason==================================================================
+function toggleOptionsContainer() {
+    var statusSelect = document.getElementById("order-status");
+    var optionsContainer = document.getElementById("options-container");
+
+    if (statusSelect.value === "cancelled") {
+      optionsContainer.style.display = "block";
+    } else {
+      optionsContainer.style.display = "none";
+    }
+  }
+
+  function showOtherInput() {
+    var cancelSelect = document.getElementById("cancel-options");
+    var otherMessage = document.getElementById("other-message");
+
+    if (cancelSelect.value === "other") {
+      otherMessage.style.display = "block";
+    } else {
+      otherMessage.style.display = "none";
+    }
+  }
 </script>
 </body>
 </html>

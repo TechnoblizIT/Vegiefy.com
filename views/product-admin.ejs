@@ -1402,63 +1402,68 @@ margin-left: 50px;
 }
 }
 
-/* css for query page ================================================================================ */
+/* css for query page============================================================================== */
 .query-box {
+        width: 60%;
+        margin: auto;
+        padding: 10px;
+        background: #f0f0f0;
+        border-radius: 8px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+    .query-heading {
         text-align: center;
-        margin-top: 50px;
+        font-size: 18px;
+        margin-bottom: 15px;
+        color: #000;
     }
-
-    .query-box-container{
-        max-width: 800px;
-        margin: 0 auto;
-    }
-
-    .query-box-container h2 {
-        color: #ccc;
-        margin-bottom: 20px;
-    }
-
-    .query-box-forms form {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: transparent;
-        border-radius: 5px;
-        box-shadow: 0 4px 8px rgba(255, 255, 255, 0.6);
-    }
-
-    .query-box-forms input[type="text"],
-    input[type="email"],
-    input[type="number"],
-    textarea{
-        width: 100%;
+    .query-container {
+        background: #fff;
         padding: 10px;
         margin-bottom: 15px;
-        border: 1px solid #ccc;
-        border-radius: 3px;
-        box-sizing: border-box;
+        border-radius: 6px;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
     }
-
-   
-
-    .sub {
-        padding: 10px 20px;
-        background-color: #0f5256;
+    .query-title {
+        background: #3498db;
         color: white;
-        border: none;
+        padding: 0px 3px;
         border-radius: 3px;
-        cursor: pointer;
+        font-size: 12px;
+        display: inline-block;
     }
-
-   .sub:hover {
-    background-color: #09343c;
+    .user-info {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+        font-size: 12px;
     }
-    @media (max-width: 768px){
-      .query-box {
-        text-align: center;
-        padding-right: 10px;
-        padding-left: 10px;
+    .user-info p{
+      color: #000;
     }
+    .query-subject{
+      color: #000;
+      font-size: 12px;
+    }
+    .query-message {
+        background: #e0e0e0;
+        padding: 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        color: #000;
+    }
+    @media (max-width: 480px) {
+        .user-info {
+            flex-direction: column;
+        }
+        .user-info p {
+            min-width: auto;
+        }
+        .query-box{
+          width: 80%;
+          margin-bottom: 50px;
+        }
     }
 
     </style>
@@ -2115,23 +2120,36 @@ margin-left: 50px;
       </div>
 
       <!-- Query page=============================================================================================== -->
-       <div id="query" class="page-content" style="display: none;">
+      <div id="query" class="page-content" style="display: none;">
         <div class="query-box">
-          <div class="query-box-container">
-          <h2>Queries section</h2>
-              <div class="query-box-forms">
-                  <form>
-                      <input type="text" name="name" placeholder="Your Name" required>
-                      <input type="email" name="email" placeholder="Your Email" required>
-                      <input type="number" name="number" placeholder="Your Number" required>
-                      <input type="text" name="subject" placeholder="Subject" required>
-                      <textarea name="message" placeholder="Your Message" required></textarea>
-                  </form>
-                  
-              </div>
-          </div>
+            <h1 class="query-heading">User Query</h1>
+            
+            <!-- Query 1 -->
+            <div class="query-container">
+                <h2 class="query-title">Query 1</h2>
+                <div class="user-info">
+                  <p><strong>User Name:</strong><span class="user-name">Aman Verma</span> </p>
+                  <p><strong>User Mobile:</strong> <span class="user-num">9123456789</span></p>
+                  <p><strong>User Email:</strong> <span class="user-email">aman.verma@example.com</span></p>
+                </div>
+                <p class="query-subject"><strong>Query Subject:</strong> <span class="query-sub">Bulk Order Inquiry</span></p>
+                <div class="query-message"><strong>Query message:</strong><p class="query-msg">Looking for organic fertilizers suitable for hydroponics. Please share details.</p></div>
+            </div>
+            
+            <!-- Query 2 -->
+            <div class="query-container">
+                <h2 class="query-title">Query 2</h2>
+                <div class="user-info">
+                  <p><strong>User Name:</strong><span class="user-name">Aman Verma</span> </p>
+                  <p><strong>User Mobile:</strong> <span class="user-num">9123456789</span></p>
+                  <p><strong>User Email:</strong> <span class="user-email">aman.verma@example.com</span></p>
+                </div>
+                <p class="query-subject"><strong>Query Subject:</strong> <span class="query-sub">Bulk Order Inquiry</span></p>
+                <div class="query-message"><strong>Query message:</strong><p class="query-msg">I want to place a bulk order for fresh organic vegetables. Kindly provide pricing.</p></div>
+            </div>
+
         </div>
-       </div>
+    </div>
       <!-- Account page================================================================================================ -->
       <div id="account" class="page-content" style="display: none">
         <div class="container-block" id="container-block">
