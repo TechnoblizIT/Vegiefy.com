@@ -57,8 +57,17 @@ router.post("/update-status",async function(req, res){
 router.get("/dashboard",isDeliverylogin,checkDelivery ,async function(req, res) {
     const googlemapapi=process.env.API_KEY
     const user=req.user
-    const neworder=await ordersModel.find({status:"Confirmed"}).populate("Products.product").populate("User")
-    
+    const neworder = await ordersModel
+    .find({
+      status: "Confirmed",
+      RejectedBy: { $nin: [req.user._id] } // Exclude orders rejected by this delivery boy
+    })
+    .populate("Products.product")
+    .populate("User");
+  
+  const rejectedorder=await ordersModel
+  .find({RejectedBy: { $in: [req.user._id] }}).populate("Products.product") 
+  .populate("User")
   const activeOrder = await ordersModel
   .find({
     status: { $in: ["Processing", "Out For Deliverey"] },
@@ -69,7 +78,7 @@ router.get("/dashboard",isDeliverylogin,checkDelivery ,async function(req, res) 
    
     const orderhistory = await ordersModel.find( {status: { $in: ["Delivered"] },
       DeliveryBoy : {$in:[user._id]}}).populate("Products.product").populate("User")
-    res.render("order-detailspage",{googlemapapi,user,neworder,activeOrder,orderhistory}) 
+    res.render("order-detailspage",{googlemapapi,user,neworder,activeOrder,orderhistory,rejectedorder}) 
 })
 
 router.post('/updateOrderStatus', async (req, res) => {
@@ -122,6 +131,16 @@ router.post('/updateOrderStatus', async (req, res) => {
     }
   });
   
+  router.get("/reject/:id", isDeliverylogin, checkDelivery, async function(req, res) {
+    const { id } = req.params;
+  
+    try {
+      await ordersModel.findByIdAndUpdate(id, { RejectedBy:req.user._id}, { new: true });
+      res.redirect("/delivery/dashboard");
+  }
+  catch (err) {
+      res.status(500).send(err);
+    }})
 
 
 router.get("/logout",(req, res)=>{

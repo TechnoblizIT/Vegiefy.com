@@ -58,7 +58,7 @@ const orderSchema = mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['Pending', 'Confirmed', 'Processing', 'Out For Deliverey', "Delivered" ,'Cancelled',''],
+    enum: ['Pending', 'Confirmed', 'Processing', 'Out For Deliverey', "Delivered" ,'Cancelled','Rejected'],
     default: 'Pending'
   },
   DeliveredDate:{
@@ -72,7 +72,20 @@ const orderSchema = mongoose.Schema({
   OutForDeliveryDate:{
     type: Date,
     default: null
-  }
+  },
+  CancelledDate:{
+    type: Date,
+    default: null
+  },
+  CancelledReason:{
+    type: String,
+    default: ""
+  },
+  RejectedBy:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Deliveryboys',
+    default: null
+  }]
 });
 
 module.exports = mongoose.model('Orders', orderSchema);

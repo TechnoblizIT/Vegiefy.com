@@ -1248,7 +1248,7 @@ hr {
                   </td>
                   <td><%= product.quantity || 0 %></td>
                   <td>
-                    ₹<%= product.product?.price?.toFixed(2) || '0.00' %> <br>
+                    ₹<%= product.product?.price?.toFixed(2) * product.quantity || '0.00' %> <br>
                     <span style="color: #666; text-decoration: line-through;">
                       <%= product.product?.oldPrice ? product.product.oldPrice.toFixed(2) : '' %>
                     </span>
@@ -1265,7 +1265,7 @@ hr {
     
         <div class="order-buttons">
           <a href="/delivery/accept/<%= order._id || '' %>"><button class="accept-btn">Accept</button></a>
-          <a href="/delivery/decline/<%= order._id || '' %>"><button class="reject-btn">Reject</button></a>
+          <a href="/delivery/reject/<%= order._id || '' %>"><button class="reject-btn">Reject</button></a>
         </div>
         </div>
       <% }) %>
@@ -1288,7 +1288,8 @@ hr {
         day: '2-digit',
         hour: '2-digit',
         minute: '2-digit',
-        hour12: true
+        hour12: true,
+        timeZone: 'Asia/Kolkata'
       }) %></span></p>
       <table>
           <tr>
@@ -1504,6 +1505,7 @@ hr {
           hour: '2-digit',
           minute: '2-digit',
           hour12: true
+
         }) %></span></p>
         <table>
             <tr>
@@ -1525,21 +1527,34 @@ hr {
     </div>
   
     <div id="rejected-content" class="box-container" style="display: none;">
-     
+      <!-- Box 1 -->
+      <% if(rejectedorder.length>0){ %>
+        <% rejectedorder.reverse().forEach((order)=>{ %>
       <div class="rejected-box">
-        <p class="rejected-history-name">John Chamber</p>
-        <p class="rejected-time">Delivery Time: <span> Jan 15, 2016, 12:34 PM</span></p>
+        <p class="rejected-history-name"><%=order.Addressname%></p>
+        <p class="rejected-time">Delivery Time: <span> <%= new Date(order.Date).toLocaleString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: true,
+          timeZone: 'Asia/Kolkata'
+        }) %></span></p>
         <table>
             <tr>
-                <td> <span >Order ID:</span> <br>#OTB00234</td>
-                <td><span>Order Amount: </span><br>  458.75</td>
-                <td><span>Payment Type: </span><br> Online</td>
+                <td> <span >Order ID:</span> <br>#<%=order.orderid%></td>
+                <td><span>Order Amount: </span><br>₹<%=order.TotalPrice%></td>
+                <td><span>Payment Type: </span><br>Offline</td>
               </tr>
         </table>
         <p class="rejected-history-address">
-          <i class="fas fa-map-marker-alt map-icon"></i> 2634 Crestview Terrace, New York, 78004, United States
+          <i class="fas fa-map-marker-alt map-icon"></i> <%= order.Address ? `${order.Address}` : 'No address available' %>
         </p>
       </div>
+      <% }) } else { %>
+        <p>No rejected orders found.</p>
+      <% } %>
     </div>
   </div>
   
@@ -1558,7 +1573,8 @@ hr {
           day: '2-digit',
           hour: '2-digit',
           minute: '2-digit',
-          hour12: true
+          hour12: true,
+          timeZone: 'Asia/Kolkata'
         }) %></span></p>
         <table>
             <tr>
@@ -1686,7 +1702,7 @@ hr {
       <div class="order-blocks">
         <div class="order-block total-order">
           <h3>Total Orders</h3>
-          <p class="order-count">0</p>
+          <p class="order-count"><%=orderhistory.length+rejectedorder.length%></p>
         </div>
         <div class="order-block completed-order">
           <h3>Completed Orders</h3>
