@@ -237,8 +237,12 @@ color: black;
   }
   .helpline{
     margin: auto;
+    display: none;
   }
-  
+  .bottom-nav{
+    background-color: transparent;
+    padding: 0px;
+  }
   .nav-icons {
     display: flex;
     justify-content: space-between;
@@ -473,7 +477,7 @@ hr {
 @media (max-width: 768px) {
   .hero-slider {
     height: 400px; 
-    margin-top: 200px;
+    margin-top: 145px;
   }
   
   .hero-slide .hero-text h1 {
