@@ -304,42 +304,99 @@ hr {
 
 
 /* css for product */
-main {
+/* css for product============================================================ */
+.active {
+    background-color: #69ba6b !important;
+    font-weight: bold;
+}
+/* Sidebar for Larger Screens */
+.sidebar {
+    width: 175px;
+    background: #0f5256;
+    color: white;
     padding: 20px;
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
+    position: fixed;
+    height: 100%;
+    overflow-y: auto;
 }
-
-.product-list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    grid-auto-rows: auto;
-    gap: 1rem;
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.category-buttons button {
+    display: block;
     width: 100%;
-    max-width: 1000px;
-    justify-items: center; 
+    padding: 5px 10px;
+    margin: 15px 0;
+    border: none;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    text-align: left;
+    border-radius: 5px;
+    font-size: 14px;
+}
+.category-buttons button:hover {
+    background-color: #69ba6b;
 }
 
-/* Animation for product box */
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
+/* Fixed Mobile Menu */
+.mobile-menu {
+    display: none;
+    background: #fff;
+    color: #000;
+    padding: 5px;
+    text-align: center;
+    position: fixed;  
+    top: 165px;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+.menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+    position: absolute;
+    left: 15px;
+    top: 5px;
 }
 
+/* Mobile Category Buttons (Dropdown) */
+.mobile-category-buttons {
+    display: none;
+    position: fixed; 
+    top: 205px; 
+    left: 10px;
+    width: 220px;
+    background: #34495e;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1001;
+}
+.mobile-category-buttons button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: none;
+    /* background-color: #2c3e50;
+    color: white; */
+    cursor: pointer;
+    text-align: left;
+    border-radius: 5px;
+    font-size: 14px;
+}
+.mobile-category-buttons button:hover {
+    background-color: #1abc9c;
+}
 .product-box {
     background-color: #fff;
     border: 1px solid #ddd; 
     border-radius: 5px; 
     padding: 10px; 
-     /* margin: 10px; */
-    width: 280px; 
+    width: 260px; 
+    height: 450px;
     text-align: left; 
     box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
     animation: fadeIn 0.6s ease-in-out; 
@@ -381,38 +438,86 @@ main {
 .product-box button:hover {
     background-color: #09343c;
 }
-.quantity-selecter{
-  padding: 5px;
+
+.quantity-selecter {
+    padding: 5px;
     font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 4px;
     color: #adabab;
     cursor: pointer;
 }
+
+/* Main Content */
+.main-content {
+    margin-top: 100px;
+    margin-left: 170px;
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+}
+.product-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 3 products per row */
+    gap: 20px;
+    justify-content: center;
+    padding: 10px;
+
+}
+
+.category-buttons button, 
+.mobile-category-buttons button {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+
+.category-icon {
+    width: 25px;  
+    height: 25px;
+}
+/* Responsive Styles */
 @media (max-width: 768px) {
-            main {
-                padding: 20px;
-                margin-top: 170px;
-            }
-
-            .product-list {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            }
-            .product-box{
-               
-                width: 100%;
-            }
-         
-        }
-
-        @media (max-width: 480px) {
-          
-            .product-list {
-                grid-template-columns: 1fr;
-            }
-          
-        }
-
+    .sidebar {
+        display: none;
+    }
+    .mobile-menu {
+        display: block;
+    }
+    .main-content {
+        margin-left: 0;
+        margin-top: 220px; 
+    }
+    .product-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;  
+        padding: 0px;
+    }
+    .product-box {
+        width: calc(50% - 10px); 
+        height: 370px;
+        padding: 5px;
+    }
+    .main-content{
+        padding: 5px;
+    }
+    .product-box p{
+        font-size: 14px;
+    }
+    .product-box h2 {
+        font-size: 20px;
+    }
+    .product-box button{
+        padding: 5px 10px;
+        margin-top: 5px;
+        
+    }
+}
 
       /* css for footer */
 footer {
@@ -564,6 +669,7 @@ footer::before {
   }
 
 }
+
        
     </style>
 </head>
@@ -651,45 +757,65 @@ footer::before {
   </nav>
 </header>
 
-<main style="padding-top: 7%;"> 
-  <div class="product-list" id="product-list">
-    <% if(products.length>0){ %>
-    <% products.forEach(product => { %>
-     
-    <div class="product-box">
-      <a style="text-decoration: none;" href="/productdetails/<%=product._id%>">
-      <div class="uppr-box">
-        <img src="data:<%= product.image.imageType %>;base64,<%= product.image.file.toString('base64') %>"  alt="product.name">
-        <h2><%= product.name %></h2>
-        <p><%= product.description %></p>
-        <p style="font-weight: bolder;">Price: ₹ <%=product.price%>/-</p> 
-    </div>
-    </a>
-   
-      <div class="lower box">
-        <form action="/user/addtocart/<%= product._id %>" method="POST" onsubmit="showAlert(event)">
-          <select name="quantity" class="quantity-selecter">
-            <option value="0.5">0.5kg</option>
-            <option value="0.75">0.75kg</option>
-            <option value="1" selected >1kg</option>
-            <option value="2">2kg</option>
-            <option value="3">3kg</option>
-            <option value="5">5kg</option>
-          </select>
-          <button type="submit">Add to Cart</button>
-        </form>
-      </div>
-     
-      </div>
-   
-     
-    <% }) %>
-    <% }else{ %>
-      <h2>No products found</h2>
-    <% } %>
+<!-- category of product  -->
+<!-- Mobile Menu (For Small Screens) -->
+<div class="mobile-menu">
+  <span class="menu-icon" onclick="toggleMenu()"><i class="fa-solid fa-ellipsis-vertical"></i></span>
+  <h2>Categories</h2>
+  <div class="mobile-category-buttons" id="mobileCategories">
+      <button onclick="showCategory('all')">  <img src="assest/products/fruits/chikoos.jpg" alt="All" class="category-icon"> All</button> 
+      <button onclick="showCategory('fruits')"><img src="assest/products/fruits/mango.jpg" alt="Fruits" class="category-icon">Fruits</button>
+      <button onclick="showCategory('vegetables')"><img src="assest/products/leafy-green/cabbage.jpg" alt="vegetables" class="category-icon">Vegetables</button>
+      <button onclick="showCategory('crops')"><img src="assest/products/crops/onions.jpg" alt="crops" class="category-icon">Crops</button>
+      <button onclick="showCategory('leafy-greens')"><img src="assest/products/leafy-green/spinach.png" alt="leafy-greens" class="category-icon">Leafy Greens</button>
   </div>
-</main>
+</div>
 
+<!-- Sidebar (For Larger Screens) -->
+<div class="sidebar">
+  <h2>Categories</h2>
+  <div class="category-buttons">
+      <button class="active" onclick="showCategory('all')"> <img src="assest/products/fruits/chikoos.jpg" alt="All" class="category-icon">All</button> 
+      <button onclick="showCategory('fruits')"><img src="assest/products/fruits/mango.jpg" alt="Fruits" class="category-icon">Fruits</button>
+      <button onclick="showCategory('vegetables')"><img src="assest/products/leafy-green/cabbage.jpg" alt="vegetables" class="category-icon">Vegetables</button>
+      <button onclick="showCategory('crops')"><img src="assest/products/crops/onions.jpg" alt="crops" class="category-icon">Crops</button>
+      <button onclick="showCategory('leafy-greens')"><img src="assest/products/leafy-green/spinach.png" alt="leafy-greens" class="category-icon">Leafy Greens</button>
+  </div>
+</div>
+
+<!-- Main Content Area -->
+<div class="main-content">
+
+  <div id="product-list" class="product-container" id="product-list">
+    <% products.forEach((product)=>{ %>
+      <div class="product-box" data-category="crops">
+          <a style="text-decoration: none;" href="/productdetails/<%= product._id %>">
+              <div class="uppr-box">
+                  <img src="data:<%= product.image.imageType %>;base64,<%= product.image.file.toString('base64') %>" alt="product.name">
+                  <h2><%=product.name%></h2>
+                  <p><%=product.description%></p>
+                  <p style="font-weight: bolder;">Price: ₹<%=product.price%>/-</p>
+              </div>
+          </a>
+      
+          <div class="lower-box">
+              <form action="/user/addtocart/<%= product._id %>" method="POST" onsubmit="showAlert(event)">
+                  <select name="quantity" class="quantity-selecter">
+                      <option value="0.5">0.5kg</option>
+                      <option value="0.75">0.75kg</option>
+                      <option value="1" selected>1kg</option>
+                      <option value="2">2kg</option>
+                      <option value="3">3kg</option>
+                      <option value="5">5kg</option>
+                  </select>
+                  <button type="submit">Add to Cart</button>
+              </form>
+          </div>
+      </div>
+      <%})%>
+     
+    </div>
+</div>
      <!-- footer section -->
      <footer>
         <div class="footer-content">
@@ -834,6 +960,45 @@ document.addEventListener('click', function(event) {
     alert("Product added to cart!");
     event.target.submit();
   }
+// category 
+//   js for product page=============================================================================
+document.addEventListener("DOMContentLoaded", function () {
+    //"All" as the default active category on page load
+    showCategory('all');
+});
+
+function showCategory(category) {
+    let products = document.querySelectorAll(".product-box"); 
+    let buttons = document.querySelectorAll(".category-buttons button, .mobile-category-buttons button");
+
+   
+    products.forEach(product => {
+        product.style.display = category === "all" || product.getAttribute("data-category") === category ? "block" : "none";
+    });
+
+    // Remove active class from all buttons
+    buttons.forEach(button => button.classList.remove("active"));
+
+    // Add active class to the clicked button
+    buttons.forEach(button => {
+        if (button.innerText.toLowerCase() === category || (category === "all" && button.innerText === "All")) {
+            button.classList.add("active");
+        }
+    });
+
+    // Hide mobile category menu after selection
+    hideMenu();
+}
+
+function toggleMenu() {
+    let menu = document.getElementById("mobileCategories");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+function hideMenu() {
+    document.getElementById("mobileCategories").style.display = "none";
+}
+
     </script>
 </body>
 </html>
