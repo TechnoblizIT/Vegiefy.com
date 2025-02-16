@@ -1402,6 +1402,68 @@ margin-left: 50px;
 }
 }
 
+/*css for  Category Form */
+
+#add-category-form {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #2c2f3d;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(255, 253, 253, 0.2);
+}
+.category-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  width: 300px;
+}
+.icon-container {
+  width: 100%;
+  text-align: left; 
+  margin-bottom: 10px;
+}
+.form-content label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  display: block;
+  margin-bottom: 8px;
+}
+.form-content input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #007bff;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #f9f9f9;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.form-content input:focus {
+  border-color: #0056b3;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+}
+.form-content button {
+  width: 80px; 
+  padding: 8px;
+  background: #007bff;
+  color: white;
+  font-size: 14px; 
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.form-content button:hover {
+  background: #0056b3;
+}
+
 /* css for query page============================================================================== */
 .query-box {
         width: 60%;
@@ -1871,7 +1933,7 @@ margin-left: 50px;
           
           <!-- Right Block -->
           <div class="product-right-block" id="right-block">
-            <button class="add-category-btn">Add New Category</button>
+            <button class="add-category-btn" id="add-category-btn">Add New Category</button>
             <hr>
             <h2>Product Categories</h2>
             <div class="product-right">
@@ -2103,6 +2165,20 @@ margin-left: 50px;
       <button type="submit" class="btn btn-success">Update Product Now</button>
     </div>
   </form>
+</div>
+
+<!-- Add Category form ========================================================== -->
+<div class="category-form" id="add-category-form" style="display: none;">
+  <div class="category-container">
+    <div class="icon-container">
+      <i id="back-icon" class="fas fa-arrow-left back-icon"></i>
+    </div>
+    <div class="form-content">
+      <label for="category-name">Category Name:</label>
+      <input type="text" id="category-name" name="category-name" required />
+      <button>Add</button>
+    </div>
+  </div>
 </div>
 
         </div>
@@ -2502,9 +2578,26 @@ margin-left: 50px;
   
   const addProductForm = document.getElementById('add-product-form');
   const backIcons = document.querySelectorAll('.back-icon');
+  const addCategoryBtn = document.getElementById('add-category-btn');
+  const addCategoryForm = document.getElementById('add-category-form');
 
   
+// Show the category form and hide the blocks
+addCategoryBtn.addEventListener('click', () => {
+    leftBlock.style.display = 'none';
+    rightBlock.style.display = 'none';
+    addCategoryForm.style.display = 'block';
+  });
 
+  // back icon to hide category form
+  backIcons.forEach((icon) => {
+  icon.addEventListener('click', () => {
+    // Example: Show or hide specific blocks
+    leftBlock.style.display = 'block';
+    rightBlock.style.display = 'block';
+    addCategoryForm.style.display = 'none';
+  });
+});
 // Show the form and hide the blocks
 addProductBtn.addEventListener('click', () => {
   leftBlock.style.display = 'none';
