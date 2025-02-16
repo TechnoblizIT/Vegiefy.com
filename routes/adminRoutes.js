@@ -11,6 +11,7 @@ const {isAdmin}=require("../middlewares/isAdmin")
 const nodemailer = require("nodemailer")
 const orderModel=require("../models/orders-model");
 const userModel = require('../models/user-model');
+const quantityModel = require("../models/user-query")
 router.get("/login", function(req, res){
     res.render("admin-login")
 })
@@ -28,6 +29,7 @@ router.get("/dashboard",isAdmin,adminLogin, async function(req, res){
     const products=await productModel.find()
     const deliveryBoys=await deliveryboyModel.find()
     const orders=await orderModel.find().populate("Products.product").populate("User").populate("DeliveryBoy")
+    const queries=await quantityModel.find()
     var totalprice=0
     
    
@@ -48,7 +50,7 @@ router.get("/dashboard",isAdmin,adminLogin, async function(req, res){
        itemsold=itemsold+product.unitsold
       
     })
-    res.render("product-admin",{products,deliveryBoys,orders,activeorderscount,itemsold,totalprice})
+    res.render("product-admin",{products,deliveryBoys,orders,activeorderscount,itemsold,totalprice,queries})
   })
 
 router.get("/addproduct",isloggedin,function(req, res){

@@ -2123,30 +2123,24 @@ margin-left: 50px;
       <div id="query" class="page-content" style="display: none;">
         <div class="query-box">
             <h1 class="query-heading">User Query</h1>
-            
-            <!-- Query 1 -->
+            <% if(queries.length>0){ %>
+             <% queries.forEach((query,index)=>{ %>
             <div class="query-container">
-                <h2 class="query-title">Query 1</h2>
+                <h2 class="query-title">Query <%=index+1%></h2>
                 <div class="user-info">
-                  <p><strong>User Name:</strong><span class="user-name">Aman Verma</span> </p>
-                  <p><strong>User Mobile:</strong> <span class="user-num">9123456789</span></p>
-                  <p><strong>User Email:</strong> <span class="user-email">aman.verma@example.com</span></p>
+                  <p><strong>User Name:</strong><span class="user-name"><%=query.name%></span> </p>
+                  <!-- <p><strong>User Mobile:</strong> <span class="user-num">9123456789</span></p> -->
+                  <p><strong>User Email:</strong> <span class="user-email"><%=query.email%></span></p>
                 </div>
-                <p class="query-subject"><strong>Query Subject:</strong> <span class="query-sub">Bulk Order Inquiry</span></p>
-                <div class="query-message"><strong>Query message:</strong><p class="query-msg">Looking for organic fertilizers suitable for hydroponics. Please share details.</p></div>
+                <p class="query-subject"><strong>Query Subject:</strong> <span class="query-sub"><%=query.subject%></span></p>
+                <div class="query-message"><strong>Query message:</strong><p class="query-msg"><%=query.message%></p></div>
             </div>
+            <% }) %>
+            <% }else{ %>
+            <p>No queries found.</p>
+            <% } %>
             
-            <!-- Query 2 -->
-            <div class="query-container">
-                <h2 class="query-title">Query 2</h2>
-                <div class="user-info">
-                  <p><strong>User Name:</strong><span class="user-name">Aman Verma</span> </p>
-                  <p><strong>User Mobile:</strong> <span class="user-num">9123456789</span></p>
-                  <p><strong>User Email:</strong> <span class="user-email">aman.verma@example.com</span></p>
-                </div>
-                <p class="query-subject"><strong>Query Subject:</strong> <span class="query-sub">Bulk Order Inquiry</span></p>
-                <div class="query-message"><strong>Query message:</strong><p class="query-msg">I want to place a bulk order for fresh organic vegetables. Kindly provide pricing.</p></div>
-            </div>
+          
 
         </div>
     </div>
