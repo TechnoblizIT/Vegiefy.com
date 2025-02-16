@@ -1940,60 +1940,20 @@ margin-left: 50px;
               <table class="category-table">
                 <tbody>
                   <!-- Sample Categories -->
+                   <% if(category.length>0){ %>
+                    <% category.forEach((category)=>{ %>
                   <tr>
-                    <td>Product Category 1</td>
+                    <td><%=category.name%></td>
                     <td class="delete-icon">
                       <i class="far fa-trash-alt"></i>
                     </td>
                   </tr>
-                  <tr>
-                    <td>Product Category 2</td>
-                    <td class="delete-icon">
-                      <i class="far fa-trash-alt"></i>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Product Category 2</td>
-                    <td class="delete-icon">
-                      <i class="far fa-trash-alt"></i>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Product Category 2</td>
-                    <td class="delete-icon">
-                      <i class="far fa-trash-alt"></i>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Product Category 2</td>
-                    <td class="delete-icon">
-                      <i class="far fa-trash-alt"></i>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Product Category 2</td>
-                    <td class="delete-icon">
-                      <i class="far fa-trash-alt"></i>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Product Category 2</td>
-                    <td class="delete-icon">
-                      <i class="far fa-trash-alt"></i>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Product Category 2</td>
-                    <td class="delete-icon">
-                      <i class="far fa-trash-alt"></i>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Product Category 2</td>
-                    <td class="delete-icon">
-                      <i class="far fa-trash-alt"></i>
-                    </td>
-                  </tr>
+                  <% }); } else{ %>
+                    <tr>
+                        <td colspan="2">No categories found</td>
+                    </tr>
+                  <% } %>
+                
                   <!-- Add more rows as needed -->
                 </tbody>
               </table>
@@ -2025,10 +1985,14 @@ margin-left: 50px;
       <div class="form-group-account">
         <label for="category">Category:</label>
         <select id="category" name="category" required>
+          <% if(category.length>0){ %>
+            <% category.forEach((category)=>{ %>
           <option value="" selected>Select Category</option>
-          <option value="new-arrival">New Arrival</option>
-          <option value="most-popular">Most Popular</option>
-          <option value="trending">Trending</option>
+          <option value="<%= category._id %>"><%= category.name %></option>
+          <% }); } else{ %>
+            <option value="" selected>No categories found</option>
+          <% } %>
+      
         </select>
       </div>
       <div class="form-row">
@@ -3003,6 +2967,49 @@ try {
       }
     });
   });
+  // category api send 
+  document.addEventListener("DOMContentLoaded", function () {
+    const categoryForm = document.getElementById("add-category-form");
+    const addCategoryBtn = document.querySelector(".form-content button");
+    
+    addCategoryBtn.addEventListener("click", async function (event) {
+        event.preventDefault();
+        
+        const categoryName = document.getElementById("category-name").value;
+        console.log(categoryName);
+        if (!categoryName.trim()) {
+            alert("Category name cannot be empty");
+            return;
+        }
+
+        const categoryData = {
+            name: categoryName
+        };
+
+        try {
+            const response = await fetch("/admin/add-category", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(categoryData)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                alert("Category added successfully!");
+                document.getElementById("category-name").value = ""; // Clear input field
+            } else {
+                alert(result.error || "Failed to add category");
+            }
+        } catch (error) {
+            console.error("Error adding category:", error);
+            alert("Error adding category");
+        }
+    });
+});
+
     </script>
   </body>
 </html>

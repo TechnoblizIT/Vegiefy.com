@@ -11,7 +11,8 @@ const {isAdmin}=require("../middlewares/isAdmin")
 const nodemailer = require("nodemailer")
 const orderModel=require("../models/orders-model");
 const userModel = require('../models/user-model');
-const quantityModel = require("../models/user-query")
+const quantityModel = require("../models/user-query");
+const CategoryModel = require('../models/Category-model');
 router.get("/login", function(req, res){
     res.render("admin-login")
 })
@@ -26,6 +27,8 @@ router.get("/logout",(req, res)=>{
     res.redirect("/admin/login")
 })
 router.get("/dashboard",isAdmin,adminLogin, async function(req, res){
+  const category=await CategoryModel.find()
+  console.log(category)
     const products=await productModel.find()
     const deliveryBoys=await deliveryboyModel.find()
     const orders=await orderModel.find().populate("Products.product").populate("User").populate("DeliveryBoy")
@@ -50,7 +53,7 @@ router.get("/dashboard",isAdmin,adminLogin, async function(req, res){
        itemsold=itemsold+product.unitsold
       
     })
-    res.render("product-admin",{products,deliveryBoys,orders,activeorderscount,itemsold,totalprice,queries})
+    res.render("product-admin",{products,deliveryBoys,orders,activeorderscount,itemsold,totalprice,queries,category})
   })
 
 router.get("/addproduct",isloggedin,function(req, res){
@@ -311,4 +314,21 @@ router.delete('/products/delete', async (req, res) => {
       console.error(error);
       res.status(500).json({ message: "Internal Server Error" });
     }})
+
+    router.post("/add-category", async (req, res) => {
+      try {
+          const { name, description } = req.body;
+  
+          if (!name) {
+              return res.status(400).json({ error: "Category name is required" });
+          }
+  
+          const newCategory = new CategoryModel({ name, description });
+          await newCategory.save();
+  
+          res.status(201).json({ message: "Category added successfully", category: newCategory });
+      } catch (error) {
+          res.status(500).json({ error: "Internal Server Error", details: error.message });
+      }
+  });
 module.exports = router;
