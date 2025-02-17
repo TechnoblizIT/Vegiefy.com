@@ -1985,9 +1985,9 @@ margin-left: 50px;
       <div class="form-group-account">
         <label for="category">Category:</label>
         <select id="category" name="category" required>
+          <option value="" selected>Select Category</option>
           <% if(category.length>0){ %>
             <% category.forEach((category)=>{ %>
-          <option value="" selected>Select Category</option>
           <option value="<%= category._id %>"><%= category.name %></option>
           <% }); } else{ %>
             <option value="" selected>No categories found</option>

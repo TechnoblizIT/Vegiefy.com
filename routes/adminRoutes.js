@@ -60,28 +60,42 @@ router.get("/addproduct",isloggedin,function(req, res){
     res.render("admin_addProduct")
 })
 
-router.post("/addproduct",upload.single("file"),async function(req, res){
-    let {productname, description, price ,category,expiredate,instock,description2} = req.body;
+
+router.post("/addproduct", upload.single("file"), async function (req, res) {
+  try {
+    let { productname, description, price, category, expiredate, instock, description2 } = req.body;
+
+    // Create and save the new product
     const newProduct = new productModel({
-      name:productname,
+      name: productname,
       description,
       description2,
       price,
-      image:{
-        file:req.file.buffer,
-        imageType:req.file.mimetype,
+      image: {
+        file: req.file.buffer,
+        imageType: req.file.mimetype,
       },
       category,
-      expirydate:new Date(expiredate),
+      expirydate: new Date(expiredate),
       instock,
-      
-    }
-    )
-  
-    await newProduct.save();
-   res.redirect("/admin/dashboard")
+    });
 
-})
+    const savedProduct = await newProduct.save();
+
+   
+    await CategoryModel.findOneAndUpdate(
+      { _id: category },
+      { $push: { product: savedProduct._id } },
+      { new: true, useFindAndModify: false }
+    );
+
+    res.redirect("/admin/dashboard");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 router.post("/updateproduct",upload.single("productimage"),async function(req, res){
   let { productid, productname, productdescription,productdescription2, productcategory, productexpiredate, productinstock } = req.body;
 
@@ -125,6 +139,10 @@ router.delete('/products/delete', async (req, res) => {
       await orderModel.updateMany(
         { 'products.product': { $in: productIds } },
         { $pull: { products: { product: { $in: productIds } } } }
+      );
+      await CategoryModel.updateMany(
+        { product: { $in: productIds } },
+        { $pull: { product: { $in: productIds } } }
       );
       res.status(200).send({ message: 'Selected products deleted successfully' });
   } catch (err) {

@@ -3,10 +3,12 @@ const router=express.Router();
 const {isloggedin}= require("../middlewares/isloggedin")
 const {checkuser}=require("../middlewares/checkUser")
 const productModel=require("../models/product-model")
+const categoryModel=require("../models/Category-model")
 const userModel=require("../models/user-model")
 const passport=require("passport")
 const GoogleStrategy = require('passport-google-oauth20');
 const {genrateToken} = require("../utils/generateToken")
+
 // Define the routes
 
 router.get('/',checkuser ,async function(req, res) {
@@ -36,6 +38,7 @@ router.get('/login', function(req, res) {
   try{ 
     var cartcount=0
     const products=await productModel.find({isActive: true })
+    const category=await categoryModel.find();
     if (req.user){
    const user = await userModel.findOne({ email: req.user.email })
    .populate({
@@ -46,9 +49,9 @@ router.get('/login', function(req, res) {
    user.cart = user.cart.filter(item => item.product !== null);
    user.cart = user.cart.filter((item) => item.product && item.product.isActive);
    cartcount = user.cart.length;
-   res.render('product',{products,req,cartcount})}
+   res.render('product',{products,req,cartcount,category})}
    else{
-    res.render('product',{products,req,cartcount})
+    res.render('product',{products,req,cartcount,category})
 
    }
   
@@ -205,6 +208,7 @@ router.get('/search', async (req, res) => {
 });
 const jwt = require('jsonwebtoken');
 const ordersModel = require('../models/orders-model');
+const CategoryModel = require('../models/Category-model');
 router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
 
 router.get('/auth/google/callback', 
@@ -246,6 +250,24 @@ router.get("/productsearch",checkuser,async function(req, res) {
   
       }
   });
+  router.get("/products/:category", async (req, res) => {
+    try {
+      const { category } = req.params;
+      let products;
+  
+      if (category === "all") {
+        products = await productModel.find({});
+      } else {
+        products = await productModel.find({ category: category });
+      }
+      res.json(products);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  });
+  
+  module.exports = router;
 
 
 module.exports = router;

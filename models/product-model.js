@@ -14,7 +14,11 @@ unitsold:{
     default:0,
 },
 instock:Number,
-category:String,
+category:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category',
+    required: true,
+},
 expirydate:Date,
 isActive:{
     type:Boolean,
