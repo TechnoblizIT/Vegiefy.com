@@ -450,7 +450,7 @@ hr {
 
 /* Main Content */
 .main-content {
-    margin-top: 100px;
+    margin-top: 110px;
     margin-left: 170px;
     padding: 20px;
     flex-grow: 1;
@@ -772,17 +772,20 @@ footer::before {
 
 <!-- category of product  -->
 <!-- Mobile Menu (For Small Screens) -->
-<!-- <div class="mobile-menu">
+<div class="mobile-menu">
   <span class="menu-icon" onclick="toggleMenu()"><i class="fa-solid fa-ellipsis-vertical"></i></span>
   <h2>Categories</h2>
   <div class="mobile-category-buttons" id="mobileCategories">
-      <button onclick="showCategory('all')">  <img src="assest/products/fruits/chikoos.jpg" alt="All" class="category-icon"> All</button> 
-      <button onclick="showCategory('fruits')"><img src="assest/products/fruits/mango.jpg" alt="Fruits" class="category-icon">Fruits</button>
-      <button onclick="showCategory('vegetables')"><img src="assest/products/leafy-green/cabbage.jpg" alt="vegetables" class="category-icon">Vegetables</button>
-      <button onclick="showCategory('crops')"><img src="assest/products/crops/onions.jpg" alt="crops" class="category-icon">Crops</button>
-      <button onclick="showCategory('leafy-greens')"><img src="assest/products/leafy-green/spinach.png" alt="leafy-greens" class="category-icon">Leafy Greens</button>
+      <button onclick="showCategory('all')">All</button> 
+      <% if(category.length>0){ %>
+        <% category.forEach((category)=>{ %>
+          <button onclick="showCategory('<%=category._id%>')"><%=category.name%></button>
+      <% }) %>
+      <% }else{ %>
+        <p>No products found in this category.</p>
+      <% } %>
   </div>
-</div> -->
+</div>
 
 <!-- Sidebar (For Larger Screens) -->
 <div class="sidebar">
