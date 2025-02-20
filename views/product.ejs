@@ -772,7 +772,7 @@ footer::before {
 
 <!-- category of product  -->
 <!-- Mobile Menu (For Small Screens) -->
-<div class="mobile-menu">
+<!-- <div class="mobile-menu">
   <span class="menu-icon" onclick="toggleMenu()"><i class="fa-solid fa-ellipsis-vertical"></i></span>
   <h2>Categories</h2>
   <div class="mobile-category-buttons" id="mobileCategories">
@@ -782,7 +782,7 @@ footer::before {
       <button onclick="showCategory('crops')"><img src="assest/products/crops/onions.jpg" alt="crops" class="category-icon">Crops</button>
       <button onclick="showCategory('leafy-greens')"><img src="assest/products/leafy-green/spinach.png" alt="leafy-greens" class="category-icon">Leafy Greens</button>
   </div>
-</div>
+</div> -->
 
 <!-- Sidebar (For Larger Screens) -->
 <div class="sidebar">
@@ -804,40 +804,9 @@ footer::before {
 <!-- Main Content Area -->
 
 <div class="main-content">
-
   <div id="product-list" class="product-container">
-    <% if (products.length > 0) { %>
-      <% products.forEach((product) => { %>
-        <div class="product-box" data-category="<%= product.category %>">
-            <a style="text-decoration: none;" href="/productdetails/<%= product._id %>">
-                <div class="uppr-box">
-                    <img src="data:<%= product.image.imageType %>;base64,<%= product.image.file.toString('base64') %>" alt="<%= product.name %>">
-                    <h2><%= product.name %></h2>
-                    <p><%= product.description %></p>
-                    <p style="font-weight: bolder;">Price: ₹<%= product.price %>/-</p>
-                </div>
-            </a>
-        
-            <div class="lower-box">
-                <form action="/user/addtocart/<%= product._id %>" method="POST" onsubmit="showAlert(event)">
-                    <select name="quantity" class="quantity-selecter">
-                        <option value="0.5">0.5kg</option>
-                        <option value="0.75">0.75kg</option>
-                        <option value="1" selected>1kg</option>
-                        <option value="2">2kg</option>
-                        <option value="3">3kg</option>
-                        <option value="5">5kg</option>
-                    </select>
-                    <button type="submit">Add to Cart</button>
-                </form>
-            </div>
-        </div>
-      <% }) %>
-    <% } else { %>
-      <p class="no-products">No products found in this category.</p>
-    <% } %>
+    <!-- Products will be dynamically inserted here -->
   </div>
-  
 </div>
 
      <!-- footer section -->
@@ -988,71 +957,94 @@ document.addEventListener('click', function(event) {
   }
 // category 
 //   js for product page=============================================================================
+let isFetching = false;
 
 async function showCategory(category) {
-    let buttons = document.querySelectorAll(".category-buttons button");
-    let productContainer = document.querySelector(".product-container");// Product container
-    console.log(productContainer);
+    if (isFetching) return; // Prevent multiple calls
+    isFetching = true; // Set fetching flag
 
-    // Remove active class from all buttons
-    buttons.forEach(button => button.classList.remove("active"));
-
-    // Add active class to the clicked button
-    buttons.forEach(button => {
-        if (button.innerText.toLowerCase() === category.toLowerCase() || (category === "all" && button.innerText === "All")) {
-            button.classList.add("active");
-        }
-    });
-
-    // Fetch products from backend
     try {
+        console.log(`Fetching products for category: ${category}`);
+        
+        // Fetch products from backend
         let response = await fetch(`/products/${category}`);
         let products = await response.json();
-        console.log(products);
-        // Clear previous products
-        productContainer.innerHTML = "";
+        console.log("✅ Products fetched:", products);
 
-        // Render fetched products dynamically
-        if (products.length === 0) {
-            productContainer.innerHTML = `<p class="no-products">No products found in this category.</p>`;
+        let productContainer = document.querySelector(".product-container");
+        if (!productContainer) {
+            console.error("❌ Product container not found!");
             return;
         }
 
-        products.forEach(product => {
-            let productBox = document.createElement("div");
-            productBox.classList.add("product-box");
-            productBox.setAttribute("data-category", product.category);
-            productBox.innerHTML = `
-                <a style="text-decoration: none;" href="/productdetails/${product._id}">
-                    <div class="uppr-box">
-                        <img src="data:${product.image.imageType};base64,${btoa(String.fromCharCode(...new Uint8Array(product.image.file.data)))}" alt="${product.name}">
-                        <h2>${product.name}</h2>
-                        <p>${product.description}</p>
-                        <p style="font-weight: bolder;">Price: ₹${product.price}/-</p>
+        productContainer.innerHTML = ""; // Clear previous products
+
+        if (products.length === 0) {
+            productContainer.innerHTML = `<p class="no-products">No products found in this category.</p>`;
+        } else {
+            products.forEach(product => {
+                let productBox = document.createElement("div");
+                productBox.classList.add("product-box");
+                productBox.setAttribute("data-category", product.category);
+
+                // Convert image data safely
+                let base64String = product.image?.file?.data 
+                    ? `data:${product.image.imageType};base64,${arrayBufferToBase64(product.image.file.data)}`
+                    : "placeholder.jpg"; // Use a placeholder if image is missing
+                
+                productBox.innerHTML = `
+                    <a style="text-decoration: none;" href="/productdetails/${product._id}">
+                        <div class="uppr-box">
+                            <img src="${base64String}" alt="${product.name}">
+                            <h2>${product.name}</h2>
+                            <p>${product.description}</p>
+                            <p style="font-weight: bolder;">Price: ₹${product.price}/-</p>
+                        </div>
+                    </a>
+                    <div class="lower-box">
+                        <form action="/user/addtocart/${product._id}" method="POST" onsubmit="showAlert(event)">
+                            <select name="quantity" class="quantity-selecter">
+                                <option value="0.5">0.5kg</option>
+                                <option value="0.75">0.75kg</option>
+                                <option value="1" selected>1kg</option>
+                                <option value="2">2kg</option>
+                                <option value="3">3kg</option>
+                                <option value="5">5kg</option>
+                            </select>
+                            <button type="submit">Add to Cart</button>
+                        </form>
                     </div>
-                </a>
-
-                <div class="lower-box">
-                    <form action="/user/addtocart/${product._id}" method="POST" onsubmit="showAlert(event)">
-                        <select name="quantity" class="quantity-selecter">
-                            <option value="0.5">0.5kg</option>
-                            <option value="0.75">0.75kg</option>
-                            <option value="1" selected>1kg</option>
-                            <option value="2">2kg</option>
-                            <option value="3">3kg</option>
-                            <option value="5">5kg</option>
-                        </select>
-                        <button type="submit">Add to Cart</button>
-                    </form>
-                </div>
-            `;
-            productContainer.appendChild(productBox);
-        });
-
+                `;
+                productContainer.appendChild(productBox);
+            });
+        }
     } catch (error) {
-        console.error("Error fetching products:", error);
+        console.error("❌ Error fetching products:", error);
+    } finally {
+        setTimeout(() => { isFetching = false; }, 500); // Reset fetching flag after 500ms
     }
 }
+
+// Helper function to convert ArrayBuffer to Base64
+function arrayBufferToBase64(buffer) {
+    let binary = '';
+    let bytes = new Uint8Array(buffer);
+    bytes.forEach(byte => binary += String.fromCharCode(byte));
+    return btoa(binary);
+}
+
+// Ensure event listeners are not duplicated
+document.querySelectorAll(".category-buttons button").forEach(button => {
+    button.removeEventListener("click", handleCategoryClick); // Prevent multiple event listeners
+    button.addEventListener("click", handleCategoryClick);
+});
+
+function handleCategoryClick(event) {
+    event.preventDefault();
+    let category = event.target.innerText.toLowerCase();
+    showCategory(category);
+}
+
 
 function toggleMenu() {
     let menu = document.getElementById("mobileCategories");
