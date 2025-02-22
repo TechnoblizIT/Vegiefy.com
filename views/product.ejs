@@ -327,7 +327,7 @@ hr {
     display: block;
     width: 100%;
     padding: 5px 10px;
-    margin: 15px 0;
+    margin: 5px 0;
     border: none;
     background-color: transparent;
     color: white;
@@ -348,10 +348,10 @@ hr {
     padding: 5px;
     text-align: center;
     position: fixed;  
-    top: 165px;
+    top: 135px;
     left: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 1;
 }
 .menu-icon {
     font-size: 24px;
@@ -365,14 +365,14 @@ hr {
 .mobile-category-buttons {
     display: none;
     position: fixed; 
-    top: 205px; 
+    top: 180px; 
     left: 10px;
     width: 220px;
     background: #34495e;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 10px;
+    padding: 5px;
     border-radius: 5px;
-    z-index: 1001;
+    z-index: 1000;
 }
 .mobile-category-buttons button {
     display: block;
@@ -458,10 +458,16 @@ hr {
     flex-wrap: wrap;
     justify-content: center;
     position: relative;
+    max-height: calc(100vh - 100px); 
+    overflow-y: auto;
+    padding-bottom: 20px;
+}
+.main-content::-webkit-scrollbar {
+    display: none;
 }
 .product-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 3 products per row */
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     justify-content: center;
     padding: 10px;
@@ -489,7 +495,11 @@ hr {
     }
     .main-content {
         margin-left: 0;
-        margin-top: 220px; 
+        margin-top: 180px; 
+        overflow-y: hidden;
+        padding: 5px;
+        height: auto;
+        max-height: none; 
     }
     .product-container {
         display: flex;
@@ -503,14 +513,14 @@ hr {
         height: 370px;
         padding: 5px;
     }
-    .main-content{
-        padding: 5px;
-    }
+   
     .product-box p{
         font-size: 14px;
+        margin: 5px 0px;
     }
     .product-box h2 {
-        font-size: 20px;
+        font-size: 18px;
+        margin: 0px;
     }
     .product-box button{
         padding: 5px 10px;
@@ -975,6 +985,7 @@ async function showCategory(category) {
         console.log("✅ Products fetched:", products);
 
         let productContainer = document.querySelector(".product-container");
+        
         if (!productContainer) {
             console.error("❌ Product container not found!");
             return;
@@ -1021,6 +1032,8 @@ async function showCategory(category) {
                 productContainer.appendChild(productBox);
             });
         }
+           // Hide mobile category menu after selection (Mobile Screens)
+           hideMenu();
     } catch (error) {
         console.error("❌ Error fetching products:", error);
     } finally {
@@ -1057,6 +1070,8 @@ function toggleMenu() {
 function hideMenu() {
     document.getElementById("mobileCategories").style.display = "none";
 }
+
+
 
     </script>
 </body>
