@@ -121,7 +121,7 @@ color: black;
   background-color: red;
   color: white;
   border-radius: 50%;
-  padding: 3px 6px;
+  padding: 0px 7px;
   font-size: 0.8rem;
 }
 
@@ -460,10 +460,10 @@ hr {
 }
 
 .arrow {
-  font-size: 30px; 
+  font-size: 20px; 
   color: white;
   background: rgba(0, 0, 0, 0.5); 
-  padding: 8px; 
+  padding: 2px 12px; 
   border-radius: 50%;
   cursor: pointer;
   transition: background 0.3s;
