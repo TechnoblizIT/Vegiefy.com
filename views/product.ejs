@@ -302,8 +302,6 @@ hr {
 
 }
 
-
-/* css for product */
 /* css for product============================================================ */
 .active {
     background-color: #69ba6b !important;
@@ -834,7 +832,7 @@ footer::before {
     <a href="https://www.instagram.com" target="_blank"><i class="fa-brands fa-square-instagram"></i></i></a>
     <!-- <a href="https://www.linkedin.com" target="_blank"><i class="fa-brands fa-linkedin"></i></a> -->
     <i class="fa-solid fa-phone"></i><span>+91-8698105221</span>
-      </div>
+    </div>
 
      <!-- Navigation Links -->
       <ul class="nav-links">
@@ -842,7 +840,6 @@ footer::before {
               <li><a href="/product"  class="nav-active">Products</a></li>
               <li><a href="/cart">Cart</a></li>
               <li><a href="/delivery">My Orders</a></li>
-             
               <li><a href="/contact">Contact</a></li>
       </ul>
     </div>
@@ -855,7 +852,7 @@ footer::before {
   <span class="menu-icon" onclick="toggleMenu()"><i class="fa-solid fa-ellipsis-vertical"></i></span>
   <h2>Categories</h2>
   <div class="mobile-category-buttons" id="mobileCategories">
-      <button onclick="showCategory('all',this)">All</button> 
+      <button class="active" onclick="showCategory('all',this)">All</button> 
       <% if(category.length>0){ %>
         <% category.forEach((category)=>{ %>
           <button class="categorybtn" onclick="showCategory('<%=category._id%>',this)"><%=category.name%></button>
@@ -1020,7 +1017,6 @@ async function fetchProducts() {
         productList.appendChild(li);
       });
     }
-
   } catch (error) {
     console.error('Error fetching products:', error);
   }
@@ -1055,6 +1051,8 @@ document.addEventListener('click', function(event) {
   }
 // category 
 //   js for product page=============================================================================
+
+
 let isFetching = false;
 
 async function showCategory(category , element) {
@@ -1064,7 +1062,21 @@ async function showCategory(category , element) {
      // Set active class for clicked element 
     try {
         console.log(`Fetching products for category: ${category}`);
-        
+
+
+          // Remove active class from all buttons except "All" if it's selected
+    document.querySelectorAll(".category-buttons button, .mobile-category-buttons button").forEach(btn => {
+        if (category === "all" && btn.innerText === "All") {
+            btn.classList.add("active"); // Keep "All" button active
+        } else {
+            btn.classList.remove("active");
+        }
+    });
+
+    if (element) {
+        element.classList.add("active");
+    }
+        // =========================================================
         // Fetch products from backend
         let response = await fetch(`/products/${category}`);
         let products = await response.json();
@@ -1156,6 +1168,7 @@ function toggleMenu() {
 function hideMenu() {
     document.getElementById("mobileCategories").style.display = "none";
 }
+
 
 
 
