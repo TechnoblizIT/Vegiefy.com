@@ -349,4 +349,14 @@ router.delete('/products/delete', async (req, res) => {
           res.status(500).json({ error: "Internal Server Error", details: error.message });
       }
   });
+  router.post('/delete-category/:id', async (req, res) => {
+    try {
+        const categoryId = req.params.id;
+        await CategoryModel.findByIdAndDelete(categoryId);
+        res.json({ success: true, message: 'Category deleted successfully' });
+    } catch (error) {
+        res.json({ success: false, message: 'Error deleting category' });
+    }
+});
+
 module.exports = router;

@@ -855,10 +855,10 @@ footer::before {
   <span class="menu-icon" onclick="toggleMenu()"><i class="fa-solid fa-ellipsis-vertical"></i></span>
   <h2>Categories</h2>
   <div class="mobile-category-buttons" id="mobileCategories">
-      <button onclick="showCategory('all')">All</button> 
+      <button onclick="showCategory('all',this)">All</button> 
       <% if(category.length>0){ %>
         <% category.forEach((category)=>{ %>
-          <button onclick="showCategory('<%=category._id%>')"><%=category.name%></button>
+          <button class="categorybtn" onclick="showCategory('<%=category._id%>',this)"><%=category.name%></button>
       <% }) %>
       <% }else{ %>
         <p>No products found in this category.</p>
@@ -871,11 +871,11 @@ footer::before {
   <h2>Categories</h2>
   <div class="category-buttons">
     
-    <button class="active" onclick="showCategory('all')">All</button> 
+    <button class="active" onclick="showCategory('all',this)">All</button> 
       <% if(category.length>0){ %>
         <% category.forEach((category)=>{ %>
 
-      <button onclick="showCategory('<%=category._id%>')"><%=category.name%></button>
+      <button onclick="showCategory('<%=category._id%>',this)"><%=category.name%></button>
       <% }) %>
       <% }else{ %>
         <p>No products found in this category.</p>
@@ -1057,17 +1057,18 @@ document.addEventListener('click', function(event) {
 //   js for product page=============================================================================
 let isFetching = false;
 
-async function showCategory(category) {
+async function showCategory(category , element) {
+  
     if (isFetching) return; // Prevent multiple calls
     isFetching = true; // Set fetching flag
-
+     // Set active class for clicked element 
     try {
         console.log(`Fetching products for category: ${category}`);
         
         // Fetch products from backend
         let response = await fetch(`/products/${category}`);
         let products = await response.json();
-        console.log("✅ Products fetched:", products);
+        // console.log("✅ Products fetched:", products);
 
         let productContainer = document.querySelector(".product-container");
         
@@ -1077,10 +1078,10 @@ async function showCategory(category) {
         }
 
         productContainer.innerHTML = ""; // Clear previous products
-
         if (products.length === 0) {
             productContainer.innerHTML = `<p class="no-products">No products found in this category.</p>`;
         } else {
+
             products.forEach(product => {
                 let productBox = document.createElement("div");
                 productBox.classList.add("product-box");

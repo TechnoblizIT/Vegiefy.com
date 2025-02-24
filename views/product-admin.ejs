@@ -1940,19 +1940,21 @@ margin-left: 50px;
               <table class="category-table">
                 <tbody>
                   <!-- Sample Categories -->
-                   <% if(category.length>0){ %>
-                    <% category.forEach((category)=>{ %>
-                  <tr>
-                    <td><%=category.name%></td>
-                    <td class="delete-icon-btn">
-                      <i class="far fa-trash-alt"></i>
-                    </td>
-                  </tr>
-                  <% }); } else{ %>
+                  <% if(category.length > 0) { %>
+                    <% category.forEach((category) => { %>
+                        <tr>
+                            <td><%= category.name %></td>
+                            <td class="delete-icon-btn" data-id="<%= category._id %>">
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
                     <tr>
                         <td colspan="2">No categories found</td>
                     </tr>
-                  <% } %>
+                <% } %>
+                
                 
                   <!-- Add more rows as needed -->
                 </tbody>
@@ -3009,6 +3011,30 @@ try {
         }
     });
 });
+document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".delete-icon-btn").forEach(button => {
+            button.addEventListener("click", async function () {
+                const categoryId = this.getAttribute("data-id");
+
+                const confirmDelete = confirm("Are you sure you want to delete this category?");
+                if (!confirmDelete) return;
+
+                const response = await fetch(`/admin/delete-category/${categoryId}`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" }
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert(result.message);
+                    window.location.reload(); // Refresh the page
+                } else {
+                    alert(result.message);
+                }
+            });
+        });
+    });
 
     </script>
   </body>
