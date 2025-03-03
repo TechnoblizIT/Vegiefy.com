@@ -20,6 +20,12 @@ category:{
     required: true,
 },
 expirydate:Date,
+
+quantitySelector:{
+    type: String,
+    default: "Kg",
+},
+
 isActive:{
     type:Boolean,
     default:true,

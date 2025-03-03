@@ -1103,7 +1103,7 @@ async function showCategory(category , element) {
                 let base64String = product.image?.file?.data 
                     ? `data:${product.image.imageType};base64,${arrayBufferToBase64(product.image.file.data)}`
                     : "placeholder.jpg"; // Use a placeholder if image is missing
-                
+                if(product.quantitySelector==="Kg"){
                 productBox.innerHTML = `
                     <a style="text-decoration: none;" href="/productdetails/${product._id}">
                         <div class="uppr-box">
@@ -1128,6 +1128,30 @@ async function showCategory(category , element) {
                     </div>
                 `;
                 productContainer.appendChild(productBox);
+                  }else{
+                    productBox.innerHTML = `
+                    <a style="text-decoration: none;" href="/productdetails/${product._id}">
+                        <div class="uppr-box">
+                            <img src="${base64String}" alt="${product.name}">
+                            <h2>${product.name}</h2>
+                            <p>${product.description}</p>
+                            <p style="font-weight: bolder;">Price: ₹${product.price}/-</p>
+                        </div>
+                    </a>
+                    <div class="lower-box">
+                        <form action="/user/addtocart/${product._id}" method="POST" onsubmit="showAlert(event)">
+                            <select name="quantity" class="quantity-selecter">
+                                <option value="1" selected>1Pc</option>
+                                <option value="2">2Pc</option>
+                                <option value="3">3Pc</option>
+                                <option value="5">5Pc</option>
+                            </select>
+                            <button type="submit">Add to Cart</button>
+                        </form>
+                    </div>
+                `;
+                productContainer.appendChild(productBox);
+                  }
             });
         }
            // Hide mobile category menu after selection (Mobile Screens)

@@ -64,6 +64,7 @@ router.get("/quantity/inc/:productid", isloggedin, checkuser, async (req, res)=>
   console.log(user);
 
  user.cart.forEach((item)=>{
+
    if(item.product._id.toString()===req.params.productid){
    
     if(item.quantity===0.5){
@@ -86,6 +87,7 @@ router.get("/quantity/inc/:productid", isloggedin, checkuser, async (req, res)=>
  await user.save()
 
  res.redirect("/cart")
+ 
 })
 router.get("/quantity/dec/:productid", isloggedin, checkuser, async (req, res)=>{
     const user = await userModel.findOne({ email: req.user.email }).populate({
@@ -94,6 +96,7 @@ router.get("/quantity/dec/:productid", isloggedin, checkuser, async (req, res)=>
      });
    
     user.cart.forEach((item)=>{
+      if(item.product.quantitySelector==="Kg"){
       if(item.product._id.toString()===req.params.productid){
        if(item.quantity===0.5){
         req.flash("limit","Minimum quantity is 0.5 Kg")
@@ -111,6 +114,26 @@ router.get("/quantity/dec/:productid", isloggedin, checkuser, async (req, res)=>
            item.product.price=item.quantity*item.product.price
        }
       }
+    }
+    else{
+      if(item.product._id.toString()===req.params.productid){
+       if(item.quantity===1){
+        req.flash("limit","Minimum quantity is 1 Pc")
+       }
+       if(item.quantity===2){
+           item.quantity=1
+           item.product.price=item.quantity*item.product.price
+       }
+       if(item.quantity===3){
+        item.quantity=2
+           item.product.price=item.quantity*item.product.price
+       }
+       if(item.quantity===4 || item.quantity===5 || item.quantity===6 || item.quantity===7){
+           item.quantity-=1
+           item.product.price=item.quantity*item.product.price
+       }
+      }
+    }
     })
     await user.save()
    

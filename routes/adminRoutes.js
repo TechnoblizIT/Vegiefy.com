@@ -63,7 +63,7 @@ router.get("/addproduct",isloggedin,function(req, res){
 
 router.post("/addproduct", upload.single("file"), async function (req, res) {
   try {
-    let { productname, description, price, category, expiredate, instock, description2 } = req.body;
+    let { productname, description, price, category, expiredate, instock, description2 ,quantityselector} = req.body;
 
     // Create and save the new product
     const newProduct = new productModel({
@@ -75,6 +75,7 @@ router.post("/addproduct", upload.single("file"), async function (req, res) {
         file: req.file.buffer,
         imageType: req.file.mimetype,
       },
+      quantitySelector:quantityselector,
       category,
       expirydate: new Date(expiredate),
       instock,

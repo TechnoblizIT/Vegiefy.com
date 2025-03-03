@@ -1175,7 +1175,7 @@ footer::before {
                     <a href="/user/quantity/dec/<%= items.product._id %>" style="text-decoration: none;">
                       <button class="decrease-btn">-</button>
                     </a>
-                    <input type="number" class="quantity-input" value="<%= items.quantity || 0 %>" max="5" readonly><p>Kg</p>
+                    <input type="number" class="quantity-input" value="<%= items.quantity || 0 %>" max="5" readonly><p><%=items.product.quantitySelector%></p>
                     <a href="/user/quantity/inc/<%= items.product._id %>" style="text-decoration: none;">
                       <button class="increase-btn">+</button>
                     </a>

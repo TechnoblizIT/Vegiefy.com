@@ -1246,7 +1246,7 @@ hr {
                     <%= product.product?.name || 'Unknown Product' %> <br>
                     <!-- <span style="color: #666;"><%= product.product?.description || 'No description' %></span> -->
                   </td>
-                  <td><%= product.quantity || 0 %></td>
+                  <td><%= product.quantity || 0 %> <%=product.quantitySelector%></td>
                   <td>
                     ₹<%= product.product?.price?.toFixed(2) * product.quantity || '0.00' %> <br>
                     <span style="color: #666; text-decoration: line-through;">
