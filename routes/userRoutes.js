@@ -8,6 +8,8 @@ const orderMoel=require("../models/orders-model")
 const nodemailer=require("nodemailer");
 const queryModel=require("../models/user-query");
 const productModel = require('../models/product-model');
+const { body, validationResult } = require("express-validator");
+const axios = require("axios");
 const ordersModel = require('../models/orders-model');
 // Define the routes
 
@@ -288,67 +290,105 @@ router.get("/quantity/dec/:productid", isloggedin, checkuser, async (req, res)=>
   });
   
 
-router.post("/contactus", async function(req, res){
-    console.log("heelp")
-    const newQuery = new queryModel({
-        name: req.body.name,
-        email: req.body.email,
-        subject: req.body.subject,
-        message: req.body.message,
-        date: Date.now()
-    })
-   await newQuery.save()
-   let transporter = nodemailer.createTransport({
-    host: 'smtpout.secureserver.net', 
-    port: 587, 
-    secure: false, 
-    auth: {
-        user: 'support@vegiefy.com', 
-        pass: process.env.MAIL_PASS
+  router.post(
+    "/contactus",
+    [
+      body("name").notEmpty().withMessage("Name is required"),
+      body("email").isEmail().withMessage("Valid email is required"),
+      body("subject").notEmpty().withMessage("Subject is required"),
+      body("message").notEmpty().withMessage("Message is required"),
+      body("g-recaptcha-response").notEmpty().withMessage("reCAPTCHA verification is required"),
+    ],
+    async function (req, res) {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.render("contact", { errors: errors.array() });
+      }
+  
+      try {
+        const { name, email, subject, message, "g-recaptcha-response": recaptchaToken } = req.body;
+  
+        // Verify reCAPTCHA with Google
+        const secretKey = process.env.RECAPTCHA_SECRET_KEY; // Store in .env
+        const verificationURL = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptchaToken}`;
+  
+        const response = await axios.post(verificationURL);
+        if (!response.data.success) {
+          return res.render("contact", { errors: [{ msg: "reCAPTCHA verification failed. Please try again." }] });
+        }
+  
+        // Save query to database
+        const newQuery = new queryModel({
+          name,
+          email,
+          subject,
+          message,
+          date: Date.now(),
+        });
+        await newQuery.save();
+  
+        // Setup Nodemailer
+        let transporter = nodemailer.createTransport({
+          host: "smtpout.secureserver.net",
+          port: 587,
+          secure: false,
+          auth: {
+            user: "support@vegiefy.com",
+            pass: process.env.MAIL_PASS,
+          },
+        });
+  
+        // Email to user
+        let mailOptionsUser = {
+          from: "support@vegiefy.com",
+          to: email,
+          subject: "Vegiefy Organics Farming - Query Received",
+          html: `
+          <p>Dear <strong>${name}</strong>,</p>
+          <p>Thank you for reaching out to <strong>Vegiefy Organics Farming</strong>. We have received your query and will get back to you within <strong>24-48 hours</strong>.</p>
+          <p>Here are the details of your query:</p>
+          <ul>
+            <li><strong>Name:</strong> ${name}</li>
+            <li><strong>Email:</strong> ${email}</li>
+            <li><strong>Subject:</strong> ${subject}</li>
+            <li><strong>Message:</strong> ${message}</li>
+          </ul>
+          <p>In the meantime, feel free to explore our <a href="https://vegiefy.com">website</a> for the latest updates.</p>
+          <p>Best regards,<br><strong>Vegiefy Organics Farming Support Team</strong></p>
+          `,
+        };
+  
+        // Email to support team
+        let mailOptionsSupport = {
+          from: "support@vegiefy.com",
+          to: "support@vegiefy.com",
+          subject: "New Query Received - Vegiefy Organics Farming",
+          html: `
+          <p><strong>New Customer Query Received:</strong></p>
+          <ul>
+            <li><strong>Name:</strong> ${name}</li>
+            <li><strong>Email:</strong> ${email}</li>
+            <li><strong>Subject:</strong> ${subject}</li>
+            <li><strong>Message:</strong> ${message}</li>
+          </ul>
+          <p>Please review and respond accordingly.</p>
+          `,
+        };
+  
+        // Send Emails
+        await transporter.sendMail(mailOptionsUser);
+        await transporter.sendMail(mailOptionsSupport);
+  
+        console.log("Emails sent successfully!");
+  
+        res.redirect("/");
+      } catch (error) {
+        console.error("Error:", error);
+        res.status(500).send("Server Error");
+      }
     }
-});
-
-let mailOptions = {
-    from: 'support@vegiefy.com',
-    to: req.body.email, 
-    subject: 'Vegiefy Organics Farming - Query Received',
-    text: `Dear ${req.body.name},
-
-Thank you for reaching out to Vegiefy Organics Farming. We have received your query and will get back to you shortly.`
-}
-let mailOptions2 = {
-    from: 'support@vegiefy.com',
-    to: "support@vegiefy.com", 
-    subject: 'Vegiefy Organics Farming - Query',
-    text: `New Query Received:
-
-Name: ${req.body.name}
-Email: ${req.body.email}
-Subject: ${req.body.subject}
-Message: ${req.body.message}
-
-Please check our website for updates on our products and services.`
-}
-
-
-transporter.sendMail(mailOptions, function(error, info){
-    if (error) {
-        console.log('Error:', error);
-    } else {
-        console.log('Email sent: ', info.response);
-    }
-    
-})
-transporter.sendMail(mailOptions2, function(error, info){
-    if (error) {
-        console.log('Error:', error);
-    } else {
-        console.log('Support Email sent: ', info.response);
-    }
-
-})
-res.redirect("/")
-})
+  );
+  
 
 router.post('/update-profile',isloggedin,checkuser, async(req, res) => {
 const { fullname, phone, email } = req.body;

@@ -630,49 +630,57 @@ footer::before {
   
 
 
-     <section class="contact">
-        <div class="contact-container">
-            <h2>We're here for you. How can we help <span class="question-mark">?</span></h2>
-            <p>Feel free to reach out to us with any questions, feedback, or inquiries. We'll get back to you as soon as possible.</p>
-            <div class="contact-forms">
-                <% if (!req.user) {%>
-                <form action="/user/contactus" method="post">
-                    <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Your Email" required>
-                    <input type="text" name="subject" placeholder="Subject" required>
-                    <textarea name="message" placeholder="Your Message" required></textarea>
-                    <select name="country" required>
-                        <option value="" disabled selected>How did you hear about Vegiefy organic farming?</option>
-                        <option value="India">Social media</option>
-                        <option value="USA">search engine</option>
-                        <option value="UK">Publication</option>
-                        <option value="Canada">Freind or family member</option>
-                        
-                    </select>
-                    <button type="submit" class="sub">Send Message</button>
-                </form>
-                <%}else{ %>
-                  <form action="/user/contactus" method="post">
-                    <input type="text" name="name" placeholder="Your Name" required value=<%=req.user.name %>>
-                    <input type="email" name="email" placeholder="Your Email" required value=<%=req.user.email %>>
-                    <input type="text" name="subject" placeholder="Subject" required>
-                    <textarea name="message" placeholder="Your Message" required></textarea>
-                    <select name="country" required>
-                        <option value="" disabled selected>How did you hear about Vegiefy organic farming?</option>
-                        <option value="India">Social media</option>
-                        <option value="USA">Search engine</option>
-                        <option value="UK">Publication</option>
-                        <option value="Canada">Friend or family member</option>
-                        
-                    </select>
-                    <button type="submit" class="sub">Send Message</button>
-                </form>
-                <%}%>
+<section class="contact">
+  <div class="contact-container">
+      <h2>We're here for you. How can we help <span class="question-mark">?</span></h2>
+      <p>Feel free to reach out to us with any questions, feedback, or inquiries. We'll get back to you as soon as possible.</p>
+      <div class="contact-forms">
+          <% if (!req.user) { %>
+          <form action="/user/contactus" method="post">
+              <input type="text" name="name" placeholder="Your Name" required>
+              <input type="email" name="email" placeholder="Your Email" required>
+              <input type="text" name="subject" placeholder="Subject" required>
+              <textarea name="message" placeholder="Your Message" required></textarea>
+              <select name="country" required>
+                  <option value="" disabled selected>How did you hear about Vegiefy Organics Farming?</option>
+                  <option value="Social Media">Social Media</option>
+                  <option value="Search Engine">Search Engine</option>
+                  <option value="Publication">Publication</option>
+                  <option value="Friend or Family">Friend or Family Member</option>
+              </select>
 
-                
-            </div>
-        </div>
-    </section>
+              <!-- Google reCAPTCHA -->
+              <div class="g-recaptcha" data-sitekey="6LcAav8qAAAAACYzjp1D55UkShP1t3jVu9-ARzWm"></div>
+
+              <button type="submit" class="sub">Send Message</button>
+          </form>
+          <% } else { %>
+          <form action="/user/contactus" method="post">
+              <input type="text" name="name" placeholder="Your Name" required value="<%= req.user.name %>">
+              <input type="email" name="email" placeholder="Your Email" required value="<%= req.user.email %>">
+              <input type="text" name="subject" placeholder="Subject" required>
+              <textarea name="message" placeholder="Your Message" required></textarea>
+              <select name="country" required>
+                  <option value="" disabled selected>How did you hear about Vegiefy Organics Farming?</option>
+                  <option value="Social Media">Social Media</option>
+                  <option value="Search Engine">Search Engine</option>
+                  <option value="Publication">Publication</option>
+                  <option value="Friend or Family">Friend or Family Member</option>
+              </select>
+
+              <!-- Google reCAPTCHA -->
+              <div class="g-recaptcha" data-sitekey="6LcAav8qAAAAACYzjp1D55UkShP1t3jVu9-ARzWm"></div>
+
+              <button type="submit" class="sub">Send Message</button>
+          </form>
+          <% } %>
+      </div>
+  </div>
+</section>
+
+<!-- Load reCAPTCHA script -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 
     <!-- footer section -->
     <footer>
