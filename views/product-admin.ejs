@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Product Admin</title>
+    <!-- Toastify CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+<!-- Toastify JS -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -1333,18 +1339,29 @@ textarea {
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+  position: relative;
+}
+
+.product-img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 8px;
 }
 
 .tm-upload-icon {
   font-size: 3rem;
   color: #888;
   cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .custom-file .btn {
- margin-top: 15px;
+  margin-top: 15px;
   width: 75%;
-margin-left: 50px;
+  margin-left: 50px;
   padding: 0.6rem;
   background-color: #007bff;
   color: #fff;
@@ -1356,6 +1373,7 @@ margin-left: 50px;
 .custom-file .btn:hover {
   background-color: #0056b3;
 }
+
 
 .form-actions {
   width: 100%;
@@ -1826,11 +1844,9 @@ margin-left: 50px;
             <div class="courier-details">
               <div class="courier-row">
                 <p><strong>Courier Name: </strong><span class="Courier-name"></span> </p>
-                <p><strong>HBD: </strong> 25-01</p>
               </div>
               <div class="courier-row">
-                <p><strong>Courier AWB:</strong><span class="courier-AWB">FMPC2494299924</span></p>
-                <p><strong>CPD:</strong> 29-01</p>
+                <p><strong>Order Date:</strong> <span class="order-date">17-Apr-2025</span></p>
               </div>
             </div>
             <div class="soldby">
@@ -1910,7 +1926,7 @@ margin-left: 50px;
                             <td><input type="checkbox" /></td>
                             <td><%= product.name %></td>
                             <td> 
-                                <%= product.unitsold || 'N/A' %> 
+                                <%= product.unitsold || 0 %> 
                             </td>
                             <td contenteditable="true"><%= product.instock %></td>
                             <td>
@@ -1976,95 +1992,84 @@ margin-left: 50px;
            
           </div>
    <!-- Form Block -->
-<div id="add-product-form" style="display: none;">
-  <h2 class="form-heading">
-    <!-- Back Icon -->
-    <i id="back-icon" class="fas fa-arrow-left back-icon"></i>
-    Add Product
-  </h2>
-  <form class="form-container" action="/admin/addproduct" method="post" enctype="multipart/form-data">
-    <div class="left-form-block">
-      <!-- Left Side Block -->
-      <div class="form-group-account">
-        <label for="product-name">Product Name:</label>
-        <input type="text" id="product-name" name="productname" required />
-      </div>
-      <div class="form-group-account">
-        <label for="description">Description:</label>
-        <textarea id="description" name="description" rows="3" required></textarea>
-      </div>
-      <div class="form-group-account">
-        <label for="description">Description 2:</label>
-        <textarea id="description" name="description2" rows="3" required></textarea>
-      </div>
-      <div class="form-group-account">
-        <label for="category">Category:</label>
-        <select id="category" name="category" required>
-          <option value="" selected>Select Category</option>
-          <% if(category.length>0){ %>
-            <% category.forEach((category)=>{ %>
-          <option value="<%= category._id %>"><%= category.name %></option>
-          <% }); } else{ %>
-            <option value="" selected>No categories found</option>
-          <% } %>
-      
-        </select>
-      </div>
-      <div class="form-group-account">
-        <label for="quantity-selecter">Select product quantity:</label>
-        <select name="quantityselector" id="quantityselector">
-          <option value="" selected>Select Quantity</option>
-          <option value="Kg">Kg</option>
-          <option value="Pc">Pc</option>
-        </select>
-      </div>
-      <div class="form-row">
+   <div id="add-product-form" style="display: none;">
+    <h2 class="form-heading">
+      <i id="back-icon" class="fas fa-arrow-left back-icon"></i>
+      Add Product
+    </h2>
+  
+    <form class="form-container" action="/admin/addproduct" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+      <div class="left-form-block">
         <div class="form-group-account">
-          <label for="expire-date">Expire Date:</label>
-          <input type="date" id="expire-date" name="expiredate" required />
+          <label for="product-name">Product Name:</label>
+          <input type="text" id="product-name" name="productname" required />
         </div>
-        <!-- <div class="form-group-account">
-          <label for="in-stock">Price(₹):</label>
-          <input type="number" id="in-stock" name="price" required />
-        </div> -->
         <div class="form-group-account">
-          <label for="in-stock">Units in Stock:</label>
-          <input type="number" id="in-stock" name="instock" required />
+          <label for="description">Description:</label>
+          <textarea id="description" name="description" rows="3" required></textarea>
         </div>
-      </div>
-      <div class="form-row">
         <div class="form-group-account">
-          <label for="in-stock">Price(₹):</label>
-          <input type="number" id="in-stock" name="price" required />
+          <label for="description2">Description 2:</label>
+          <textarea id="description2" name="description2" rows="3" required></textarea>
         </div>
+        <div class="form-group-account">
+          <label for="category">Category:</label>
+          <select id="category" name="category" required>
+            <option value="" selected>Select Category</option>
+            <% if(category.length > 0){ %>
+              <% category.forEach((category) => { %>
+                <option value="<%= category._id %>"><%= category.name %></option>
+              <% }) %>
+            <% } else { %>
+              <option value="" selected>No categories found</option>
+            <% } %>
+          </select>
         </div>
-    </div>
-
-    <!-- Right Side Block -->
-    <div class="right-form-block">
-      <div class="tm-product-img-dummy mx-auto">
-        <i
-          class="fas fa-cloud-upload-alt tm-upload-icon"
-          onclick="document.getElementById('fileInput').click();"
-        ></i>
+        <div class="form-group-account">
+          <label for="quantityselector">Select product quantity:</label>
+          <select name="quantityselector" id="quantityselector">
+            <option value="" selected>Select Quantity</option>
+            <option value="Kg">Kg</option>
+            <option value="Pc">Pc</option>
+          </select>
+        </div>
+  
+        <div class="form-row">
+          <div class="form-group-account">
+            <label for="expire-date">Expire Date:</label>
+            <input type="date" id="expire-date" name="expiredate" required />
+          </div>
+          <div class="form-group-account">
+            <label for="in-stock">Units in Stock:</label>
+            <input type="number" id="in-stock" name="instock" required min="0" step="1"  />
+          </div>
+        </div>
+  
+        <div class="form-row">
+          <div class="form-group-account">
+            <label for="price">Price(₹):</label>
+            <input type="number" id="price" name="price" required min="0" step="1" />
+          </div>
+        </div>
       </div>
-      <div class="custom-file mt-3 mb-3">
-        <input id="fileInput" type="file" name="file" style="display:none;" />
-        <input
-          type="button"
-          class="btn btn-primary btn-block mx-auto"
-          value="UPLOAD PRODUCT IMAGE"
-          onclick="document.getElementById('fileInput').click();"
-        />
+  
+      <!-- Right Form Block -->
+      <div class="right-form-block">
+        <div class="tm-product-img-dummy mx-auto">
+          <span id="product-text" style="color: #000;">No Image Available</span>
+          <img id="product-image" src="" alt="Product Image" class="product-img" style="display: none;" />
+        </div>
+        <div class="custom-file mt-3 mb-3">
+          <input id="fileInput" type="file" name="file" style="display: none;" onchange="previewImage()" />
+          <input type="button" class="btn btn-primary btn-block mx-auto" value="UPLOAD PRODUCT IMAGE" onclick="document.getElementById('fileInput').click();" />
+        </div>
       </div>
-    </div>
-
-    <!-- Add Product Now Button (inside the form block) -->
-    <div class="form-actions">
-      <button type="submit" class="btn btn-success">Add Product Now</button>
-    </div>
-  </form>
-</div>
+  
+      <div class="form-actions">
+        <button type="submit" class="btn btn-success">Add Product Now</button>
+      </div>
+    </form>
+  </div>
 
 <!-- update form -->
 <div id="update-product-form" style="display: none;">
@@ -3056,6 +3061,45 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     });
+
+
+
+    // ======================================================
+    // Function to preview the selected image
+    function previewImage() {
+    const fileInput = document.getElementById("fileInput");
+    const image = document.getElementById("product-image");
+    const text = document.getElementById("product-text");
+
+    const file = fileInput.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        image.src = e.target.result;
+        image.style.display = "block";
+        text.style.display = "none";
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  function validateForm() {
+    const fileInput = document.getElementById("fileInput");
+
+    if (fileInput.files.length === 0) {
+      Toastify({
+        text: "Please upload an image",
+        duration: 2000,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "#f44336",
+        stopOnFocus: true,
+      }).showToast();
+      return false;
+    }
+
+    return true;
+  }
 
     </script>
   </body>
