@@ -7,7 +7,6 @@ const userRouter = require('./routes/userRoutes')
 const userModel=require("./models/user-model")
 const adminRouter = require('./routes/adminRoutes')
 const deliveryRouter = require('./routes/deliveryRoutes')
-const checkUser=require("./middlewares/checkUser")
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const dbConnect = require('./configs/mongoose-connection')

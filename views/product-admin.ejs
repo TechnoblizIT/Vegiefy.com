@@ -1683,20 +1683,24 @@ margin-left: 50px;
         <div class="dashboard-container">
           <% if (orders.length > 0) { %>
           <div class="dashboard-block">
-            <div class="dashboard-value"><%=itemsold  || "NA"%></div>
+            <div class="dashboard-value"><%=itemsold  || "0"%></div>
             <div class="dashboard-text">Unit Sold</div>
           </div>
           <div class="dashboard-block">
             <div class="dashboard-value">₹<%=totalprice  || "NA"%></div>
-            <div class="dashboard-text">Sales</div>
+            <div class="dashboard-text">Total Sales</div>
           </div>
           <div class="dashboard-block">
             <div class="dashboard-value"><%=orders.length || "NA" %></div>
-            <div class="dashboard-text">New Orders</div>
+            <div class="dashboard-text">Total Orders</div>
           </div>
           <div class="dashboard-block">
-            <div class="dashboard-value"><%=activeorderscount || "NA" %></div>
+            <div class="dashboard-value"><%=activeorderscount || "0" %></div>
             <div class="dashboard-text">Active Listings</div>
+          </div>
+          <div class="dashboard-block">
+            <div class="dashboard-value"><%=totalCustomers || "0" %></div>
+            <div class="dashboard-text">Total Customer</div>
           </div>
           <% } else { %>
             <div class="dashboard-block">
@@ -1710,6 +1714,10 @@ margin-left: 50px;
             <div class="dashboard-block">
               <div class="dashboard-value">0</div>
               <div class="dashboard-text">New Orders</div>
+            </div>
+            <div class="dashboard-block">
+              <div class="dashboard-value">0</div>
+              <div class="dashboard-text">Active Listings</div>
             </div>
             <div class="dashboard-block">
               <div class="dashboard-value">0</div>
@@ -1732,6 +1740,7 @@ margin-left: 50px;
               <thead>
                 <tr style="background-color: #007bff; color: #ffffff">
                   <th scope="col">ORDER NO.</th>
+                  <th scope="col">CUSTOMER NAME</th>
                   <th scope="col">STATUS</th>
                   <th scope="col">OPERATORS</th>
                   <th scope="col">ORDER TIME</th>
@@ -1744,6 +1753,10 @@ margin-left: 50px;
                   <% orders.reverse().forEach(order => { %>
                     <tr>
                       <th scope="row"><b>#<%= order.orderid %></b></th>
+                      <td>
+                        <div></div>
+                        <%= order.User? order.User.name : 'Loading..' %>
+                      </td>
                       <td>
                         <div class="tm-status-circle <%= order.status.toLowerCase() %>"></div>
                         <%= order.status %>

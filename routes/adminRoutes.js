@@ -28,11 +28,11 @@ router.get("/logout",(req, res)=>{
 })
 router.get("/dashboard",isAdmin,adminLogin, async function(req, res){
   const category=await CategoryModel.find()
-  console.log(category)
     const products=await productModel.find()
     const deliveryBoys=await deliveryboyModel.find()
     const orders=await orderModel.find().populate("Products.product").populate("User").populate("DeliveryBoy")
     const queries=await quantityModel.find()
+    const totalCustomers=await userModel.countDocuments()
     var totalprice=0
     
    
@@ -53,7 +53,7 @@ router.get("/dashboard",isAdmin,adminLogin, async function(req, res){
        itemsold=itemsold+product.unitsold
       
     })
-    res.render("product-admin",{products,deliveryBoys,orders,activeorderscount,itemsold,totalprice,queries,category})
+    res.render("product-admin",{products,deliveryBoys,orders,activeorderscount,itemsold,totalprice,queries,category,totalCustomers})
   })
 
 router.get("/addproduct",isloggedin,function(req, res){
