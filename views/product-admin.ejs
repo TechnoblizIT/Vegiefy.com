@@ -1252,7 +1252,6 @@
     padding: 8px;
     font-size: 14px;
   }
-
   /* Adjust scrollbar width */
   .product-left-block div::-webkit-scrollbar,
   .product-right-block div::-webkit-scrollbar {
@@ -1519,7 +1518,7 @@ textarea {
         font-size: 12px;
         display: inline-block;
     }
-    .user-info {
+    .user-info{
         display: flex;
         justify-content: space-between;
         padding: 5px 0;
@@ -1539,6 +1538,7 @@ textarea {
         font-size: 12px;
         color: #000;
     }
+    
     @media (max-width: 480px) {
         .user-info {
             flex-direction: column;
@@ -2006,7 +2006,7 @@ textarea {
                         <tr>
                             <td><%= category.name %></td>
                             <td class="delete-icon-btn" data-id="<%= category._id %>">
-                                <i class="far fa-trash-alt"></i>
+                                <i class="far fa-trash-alt" style="cursor: pointer;"></i>
                             </td>
                         </tr>
                     <% }); %>
@@ -2232,9 +2232,10 @@ textarea {
                 <h2 class="query-title">Query <%=index+1%></h2>
                 <div class="user-info">
                   <p><strong>User Name:</strong><span class="user-name"><%=query.name%></span> </p>
-                  <!-- <p><strong>User Mobile:</strong> <span class="user-num">9123456789</span></p> -->
                   <p><strong>User Email:</strong> <span class="user-email"><%=query.email%></span></p>
+                  <p><strong>Posted on:</strong><span class="user-date">17/04/2025 11:00AM</span> </p>
                 </div>
+               
                 <p class="query-subject"><strong>Query Subject:</strong> <span class="query-sub"><%=query.subject%></span></p>
                 <div class="query-message"><strong>Query message:</strong><p class="query-msg"><%=query.message%></p></div>
             </div>
@@ -2332,18 +2333,19 @@ textarea {
                   <h2 class="block-title">Profile</h2>
                   <div class="avatar-container">
                     <img
+                      id="avatarPreview"
                       class="avatar-image"
-                      src="assest/new-page/p-4.jpg"
+                      src="../images/assest/defaultimage.jpeg"
                       alt="Avatar"
                     />
-                    <a href="#" class="avatar-delete-icon">
+                    <a href="#" class="avatar-delete-icon" id="deleteAvatar">
                       <i class="far fa-trash-alt"></i>
                     </a>
                   </div>
-                  <input type="file" name="profile" id="uploadBtn" />
+                
+                  <input type="file" name="profile" id="uploadBtn" accept="image/*" />
                   <label for="uploadBtn" class="button-upload">Upload Image</label>
                 </div>
-        
                 <!-- Block 3: Account Settings -->
                 <div class="block-column-right">
                   <h2 class="block-title">Account Settings</h2>
@@ -2355,6 +2357,7 @@ textarea {
                       name="name"
                       type="text"
                       class="form-control"
+                      required
                     />
                   </div>
                   <div class="form-group">
@@ -2364,6 +2367,7 @@ textarea {
                       name="username"
                       type="text"
                       class="form-control"
+                      required
                     />
                   </div>
                   <div class="form-group">
@@ -2373,6 +2377,7 @@ textarea {
                       name="email"
                       type="email"
                       class="form-control"
+                      required
                     />
                   </div>
                   <!-- Second Row -->
@@ -2383,17 +2388,20 @@ textarea {
                       name="password"
                       type="password"
                       class="form-control"
+                      required
                     />
                   </div>
                   <div class="form-group">
-                    <label for="password2">Re-enter Password</label>
+                    <label for="password2">Confirm Password</label>
                     <input
                       id="password2"
                       name="password2"
                       type="password"
                       class="form-control"
+                      required
                     />
                   </div>
+                  <small id="password-error" style="color: red; display: none; margin-top: 4px;">🔒 Passwords do not match!</small>
                   <!-- Third Row -->
                   <div class="form-group">
                     <label for="phone">Phone</label>
@@ -2402,6 +2410,7 @@ textarea {
                       name="phone"
                       type="tel"
                       class="form-control"
+                      required
                     />
                   </div>
         
@@ -2413,12 +2422,13 @@ textarea {
                       name="joindate"
                       placeholder="Enter your Joining Date"
                       class="form-control"
+                      required
                     />
                     </div>
                   <!-- Fifth Row -->
                   <div class="form-group">
                     <button type="submit" class="btn-danger">
-                      Add Your Account
+                      Add Account
                     </button>
                   </div>
                 </div>
@@ -2451,7 +2461,7 @@ textarea {
                   <div class="update-avatar-container">
                     <img
                       class="avatar-image"
-                      src="assest/new-page/p-4.jpg"
+                      src="../images/assest/defaultimage.jpeg"
                       alt="Avatar"
                     />
                     <a href="#" class="avatar-delete-icon">
@@ -2460,6 +2470,8 @@ textarea {
                   </div>
                   <input type="file" name="profile" id="uploadBtn" />
                   <label for="uploadBtn" class="update-button-upload">Upload Image</label>
+
+                  <p id="fileNameDisplay" style="font-size: 14px; color: #444; margin-top: 8px;"></p>
                 </div>
         
                 <!-- Block 3: Account Settings -->
@@ -2495,7 +2507,7 @@ textarea {
                     />
                   </div>
                   <div class="update-form-group">
-                    <label for="updatepassword2">Re-enter Password</label>
+                    <label for="updatepassword2">Confirm Password</label>
                     <input
                       id="password2"
                       name="password2"
@@ -2528,7 +2540,7 @@ textarea {
                 <!-- Fifth Row -->
                 <div class="update-form-group">
                   <button type="submit" class="update-btn-danger">
-                    Update Your Account
+                    Update Account
                   </button>
                 </div>
                 </form>
@@ -3100,7 +3112,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // ======================================================
-    // Function to preview the selected image
+    // for add product form image 
     function previewImage() {
     const fileInput = document.getElementById("fileInput");
     const image = document.getElementById("product-image");
@@ -3118,6 +3130,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // toastify code for upload an image in add-product-form
   function validateForm() {
     const fileInput = document.getElementById("fileInput");
 
@@ -3136,6 +3149,90 @@ document.addEventListener("DOMContentLoaded", () => {
     return true;
   }
 
+
+  // --------------------------------------------------------------------
+  // toastify code for update product button
+  document.addEventListener("DOMContentLoaded", function () {
+    const updateForm = document.querySelector('#update-product-form form');
+
+    updateForm.addEventListener("submit", function () {
+    
+      Toastify({
+        text: "Product has been updated successfully!",
+        duration: 3000,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "#28a745",
+        close: true,
+      }).showToast();
+
+    });
+  });
+
+
+  // for upload image for add new account form ----------------------------------------------------------
+  const uploadBtn = document.getElementById('uploadBtn');
+  const avatarPreview = document.getElementById('avatarPreview');
+  const deleteAvatar = document.getElementById('deleteAvatar');
+
+  uploadBtn.addEventListener('change', function (event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        avatarPreview.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  deleteAvatar.addEventListener('click', function (event) {
+    event.preventDefault(); 
+    avatarPreview.src = '../images/assest/defaultimage.jpeg';
+    uploadBtn.value = ''; 
+  });
+
+  // if image is not upload
+  const form = document.querySelector(".form");
+  const uploadInput = document.getElementById("uploadBtn");
+
+  form.addEventListener("submit", function (e) {
+    const file = uploadInput.files[0];
+
+    if (!file) {
+      e.preventDefault(); 
+
+      Toastify({
+        text: "Please upload profile picture",
+        duration: 3000,
+        gravity: "top", 
+        position: "center", 
+        backgroundColor: "#ff4d4d",
+        stopOnFocus: true
+      }).showToast();
+    }
+  });
+
+
+  // confirm password validation
+  const password = document.getElementById('password');
+  const confirmPassword = document.getElementById('password2');
+  const errorMsg = document.getElementById('password-error');
+
+  form.addEventListener('submit', function (e) {
+    if (password.value !== confirmPassword.value) {
+      e.preventDefault(); 
+
+      // Show error message and red border
+      errorMsg.style.display = 'block';
+      confirmPassword.style.border = '2px solid red';
+      confirmPassword.focus();
+    } else {
+      // Reset styles if matched
+      errorMsg.style.display = 'none';
+      confirmPassword.style.border = '';
+    }
+  });
     </script>
   </body>
 </html>
