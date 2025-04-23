@@ -2117,8 +2117,8 @@ textarea {
                             <td><input type="checkbox" /></td>
                             <td>
                               <img 
-                                src="../images/assest/products/crops/tomatoes.jpg" 
-                                alt="Tomatoes" 
+                                src="data:<%= product.image.imageType %>;base64,<%= product.image.file.toString('base64') %>" 
+                                alt="Product Image" 
                                 style="width: 30px; height: 30px; border-radius: 2px; transition: transform 0.3s ease-in-out;" 
                                 onmouseover="this.style.transform='scale(2)'; this.style.zIndex=10;" 
                                 onmouseout="this.style.transform='scale(1)'; this.style.zIndex=1;">

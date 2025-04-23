@@ -50,5 +50,17 @@ app.use("/user",userRouter)
 app.use("/admin",adminRouter)
 app.use("/delivery", deliveryRouter)
 
+app.use((req, res, next) => {
+  const err = new Error('Page Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// 🔴 Global error handler middleware
+app.use((err, req, res, next) => {
+  res.status(err.status || 500);
+  res.render('error');
+});
+
 
 app.listen(process.env.PORT)

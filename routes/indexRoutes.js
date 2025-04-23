@@ -196,12 +196,13 @@ router.get("/forgotpasswords", function(req, res) {
 router.get('/search', async (req, res) => {
   try {
     const query = req.query.q;
-   
+   console.log(query)
     const products = await productModel.find({
       name: { $regex: query, $options: 'i' },
       isActive: true,
     }).limit(20); 
-    res.json(products);
+    const category = await categoryModel.find();
+    res.json(products,category);
   } catch (err) {
     res.status(500).send('Server error');
   }
@@ -209,6 +210,11 @@ router.get('/search', async (req, res) => {
 const jwt = require('jsonwebtoken');
 const ordersModel = require('../models/orders-model');
 const CategoryModel = require('../models/Category-model');
+
+
+
+
+
 router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
 
 router.get('/auth/google/callback', 
@@ -232,7 +238,9 @@ router.get("/terms&conditions",function (req, res) {
 })
 router.get("/productsearch",checkuser,async function(req, res) {
     const query = req.query.q;
-    const products=await productModel.find({ name: { $regex: query, $options: 'i' },isActive:true}).limit(20);
+    
+    const products=await productModel.find({ name: { $regex: query, $options: 'i' },isActive:true}).limit(2);
+    const category=await categoryModel.find();
     if (req.user){
       const user = await userModel.findOne({ email: req.user.email })
       .populate({
@@ -243,10 +251,11 @@ router.get("/productsearch",checkuser,async function(req, res) {
       user.cart = user.cart.filter(item => item.product !== null);
       user.cart = user.cart.filter((item) => item.product && item.product.isActive);
       cartcount = user.cart.length;
-      res.render('product',{products,req,cartcount})
+      
+      res.render('product',{products,req,cartcount,category})
     }
       else{
-      res.render('product',{products,req,cartcount})
+      res.render('product',{products,req,cartcount,category})
   
       }
   });
@@ -270,4 +279,3 @@ router.get("/productsearch",checkuser,async function(req, res) {
   module.exports = router;
 
 
-module.exports = router;
