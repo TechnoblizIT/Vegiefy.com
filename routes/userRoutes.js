@@ -11,6 +11,7 @@ const productModel = require('../models/product-model');
 const { body, validationResult } = require("express-validator");
 const axios = require("axios");
 const ordersModel = require('../models/orders-model');
+const counterModel = require('../models/counter-model');
 // Define the routes
 
 
@@ -203,10 +204,21 @@ router.get("/quantity/dec/:productid", isloggedin, checkuser, async (req, res)=>
       const Addressname=`${user.address[addressId].name}`
       const AddressMobile=`${user.address[addressId].mobile}`
       const Address=`${user.address[addressId].address} ${user.address[addressId].locality} ${user.address[addressId].city} ${user.address[addressId].state} ${user.address[addressId].pincode}`;
-      console.log(Address);
+      
+      var counter=await counterModel.findOne({id:"orderid"})
+      if (!counter) {
+  
+        counter = await counterModel.create({ id: 'orderId', seq: 499 });
+      }
+      counter = await counterModel.findOneAndUpdate(
+        { id: 'orderId' },
+        { $inc: { seq: 1 } },
+        { new: true }
+      );
+
       // Create the new order
       const newOrder = new ordersModel({
-        orderid: `OD-VO${Date.now()}`,
+        orderid: `#OD-VO-${counter.seq}`,
         AddressIndex:addressId,
         Addressname:Addressname,
         Addressmobile:AddressMobile,
