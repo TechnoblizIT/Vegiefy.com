@@ -2097,7 +2097,7 @@ textarea {
               </div>
               <div class="courier-row">
                 <p><strong>Invoice Number:</strong> <span class="invoice-no">>INV-2025</span></p>
-                <p><strong>Order Time:</strong> <span class="order-time">11:00 AM</span></p>
+                <p style="margin-right: 25px;"><strong>Order Time:</strong> <span class="order-time">11:00 AM</span></p>
               </div>
               
             </div>
@@ -2624,6 +2624,8 @@ textarea {
                   <div class="user-info">
                     <p><strong>User Name:</strong><span class="user-name"><%= query.name %></span></p>
                     <p><strong>User Email:</strong><span class="user-email"><%= query.email %></span></p>
+                  </div>
+                  <div class="user-info">
                     <p><strong>Posted on:</strong><span class="user-date">17/04/2025 11:00AM</span> </p>
                   </div>
                   <p class="query-subject"><strong>Query Subject:</strong> <span class="query-sub"><%= query.subject %></span></p>
@@ -3687,7 +3689,7 @@ function printTable(tableId) {
 }
 
 
-// pegination for report page--------------------------------------------------------------
+// pgination for report page--------------------------------------------------------------
 function setupPagination(tableId) {
   const table = document.getElementById(tableId);
   const rows = table.querySelectorAll('.data-row');

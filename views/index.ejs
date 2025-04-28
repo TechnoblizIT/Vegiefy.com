@@ -127,7 +127,7 @@ function searchproduct() {
                 <h1>Eco-Friendly</h1>
                 <span>Hydroponic Techniques</span>
                 <p>Grow sustainably with our eco-conscious farming practices!</p>
-                <a href="/product" class="cta">Learn More</a>
+                <a href="/product" class="cta">See products</a>
               </div>
             </div>
                 
@@ -175,7 +175,7 @@ function searchproduct() {
 </section>
 
  <!-- html for delivery section -->
- <section class="delivery">
+ <section class="delivery" id="delivery-page">
   <div class="delivery-container">
       <div class="title">
       <h2>Direct farm-to-table Delivery</h2>
@@ -310,53 +310,59 @@ function searchproduct() {
        </section>
     
        <!-- footer section -->
-       <footer>
+       <footer> 
         <div class="footer-content">
             <div class="footer-section about">
                 <h2 class="logo-text">Vegiefy Organics Farming</h2>
-                <p>Sustainable and fresh hydroponically grown produce delivered straight to your table.</p>
-                <div class="contact">
-                    <span><i class="fas fa-phone"></i> &nbsp; +91-8698105221</span>
-                    <span><i class="fas fa-envelope"></i> &nbsp; support@vegiefy.com</span>
+                <div class="contacts">
                     <span><i class="fas fa-map-marker-alt"></i> &nbsp; Chandrashekar Ward Gondia</span>
+                    <span><i class="fas fa-envelope"></i> &nbsp; support@vegiefy.com</span>
+                    <span><i class="fas fa-phone"></i> &nbsp; +91-8698105221</span>
                 </div>
                 <div class="socials">
-                    <a href="#"><i class="fab fa-facebook"></i>&nbsp; Facebook</a>
-                    <a href="https://x.com/VegiefyOrganic"><i class="fab fa-twitter"></i>&nbsp; Twitter</a>
-                    <a href="https://www.instagram.com/vegiefy_india/"><i class="fab fa-instagram"></i>&nbsp; Instagram</a>
-                    <a href="https://www.linkedin.com/company/vegiefy-organic-farming/about/"><i class="fab fa-linkedin"></i>&nbsp; Linkedin</a>
+                    <div class="social-row">
+                        <a href="#"><i class="fab fa-facebook"></i>&nbsp; Facebook</a>
+                        <a href="https://x.com/VegiefyOrganic"><i class="fab fa-twitter"></i>&nbsp; Twitter</a>
+                    </div>
+                    <div class="social-row">
+                        <a href="https://www.instagram.com/vegiefy_india/"><i class="fab fa-instagram"></i>&nbsp; Instagram</a>
+                        <a href="https://www.linkedin.com/company/vegiefy-organic-farming/about/"><i class="fab fa-linkedin"></i>&nbsp; Linkedin</a>
+                    </div>
                 </div>
             </div>
+    
             <div class="footer-section links">
                 <h2>Quick Links</h2>
                 <ul>
-                   <a href="/#about-us" ><li>About Us</li></a>
+                    <a href="/#about-us"><li>About Us</li></a>
                     <a href="/product"><li>Products</li></a>
-                    
-                    <a  href="/delivery"><li>Delivery</li></a>
-                    <a href="/contact" ><li>Contact Us</li></a>
+                    <a href="/#delivery-page"><li>Delivery</li></a>
+                    <a href="/contact"><li>Contact Us</li></a>
                     <a href="/#faq"><li>FAQs</li></a>
                 </ul>
             </div>
+    
             <div class="footer-section map-box">
-              <h2>Our Location</h2>
-              <div class="map-container">
-                  <iframe 
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1909380.5776746294!2d78.303604875!3d20.821247652883144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a2ba91d8fba8849%3A0xf6e9c4ba29f50a7c!2sVEGIEFY%20ORGANIC%20FARMING!5e0!3m2!1sen!2sin!4v1738568525698!5m2!1sen!2sin" 
-                      width="100%" 
-                      height="300" 
-                      style="border:0;border-radius: 10px;" 
-                      allowfullscreen="" 
-                      loading="lazy" 
-                      referrerpolicy="no-referrer-when-downgrade">
-                  </iframe>
-              </div>
-          </div>
+                <h2>Our Location</h2>
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1909380.5776746294!2d78.303604875!3d20.821247652883144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a2ba91d8fba8849%3A0xf6e9c4ba29f50a7c!2sVEGIEFY%20ORGANIC%20FARMING!5e0!3m2!1sen!2sin!4v1738568525698!5m2!1sen!2sin" 
+                        width="100%" 
+                        height="175" 
+                        style="border:0;border-radius: 10px;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
         </div>
+    
         <div class="footer-bottom">
-            &copy; www.vegiefy.com 
+            &copy; www.vegiefy.com
         </div>
     </footer>
+    
 <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
     
     <script src="../javascripts/index.js"></script>

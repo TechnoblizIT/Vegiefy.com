@@ -14,7 +14,7 @@
         }
 
         body {
-        background-color: #f4f4f9;
+        background-color: #f7fafa;
         display: flex;
         min-height: 100vh;
         flex-direction: column;
@@ -23,63 +23,75 @@
         display: flex;
         width: 100%;
     }
-    .nav-sidebar {
-        background-color: #4e73df;
-        color: white;
-        width: 200px;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding-top: 140px;
-        border-radius: 0 20px 20px 0;
-        position: fixed;
-        top: 0;
-        left: 0;
-    }
-    .nav-item {
-        text-align: center;
-        margin: 20px 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        cursor: pointer;
-    }
-    .nav-item i {
-        font-size: 28px;
-        margin-bottom: 6px;
-        color: #ffffff;
-        transition: color 0.3s ease;
-    }
-    .nav-item .nav-text {
-        font-size: 14px;
-        color: #ffffff;
-        transition: color 0.3s ease;
-    }
-    .nav-item:hover i {
-        color: #f39c12;
-    }
+    .back-to-home {
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
 
-    .nav-item:hover .nav-text {
-        color: #f39c12;
+.back-to-home a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #69ba6b;
+    border-radius: 12px;
+    padding: 10px;
+    width: 80px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background-color: transparent;
+}
+
+.back-to-home i {
+    font-size: 22px;
+    color: #69ba6b;
+    margin-bottom: 5px;
+    transition: color 0.3s ease;
+}
+
+.home-text {
+    font-size: 12px;
+    color: #69ba6b;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.back-to-home a:hover {
+    background-color: #69ba6b;
+    transform: translateY(-3px);
+}
+
+.back-to-home a:hover i,
+.back-to-home a:hover .home-text {
+    color: #ffffff;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .back-to-home a {
+        width: 65px;
+        padding: 10px;
     }
-    .profile-nav i{
-    color: #f39c12;
+    .back-to-home i {
+        font-size: 18px;
+    }
+    .home-text {
+        font-size: 10px;
+    }
 }
-.profile-nav .nav-text{
-    color: #f39c12;
-}
+
+  
     /* Main Content================================================================================== */
     .content {
         padding-bottom: 35px;
         width: 100%;
-        margin-left: 200px;
-        margin-top: 30px;
+        margin-top: 100px;
 
     }
     .content h2{
             font-size: 22px;
-            color: #34495e;
+            color: #0f5256;
             margin-top: 40px;
             font-weight: 600;
         }
@@ -93,6 +105,7 @@
     .settings-left, .settings-right {
         width: 40%;
         padding: 15px;
+        border-left: 2px solid #09343c;
         background: #fff;
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -109,7 +122,7 @@
 
     .setting-row i {
         font-size: 24px; 
-        color: #3498db;
+        color: #69ba6b;
         margin-right: 15px; 
         flex: 0 0 40px;
     }
@@ -121,7 +134,7 @@
 
     .setting-text h3 {
         font-size: 18px;
-        color: #2c3e50;
+        color: #000;
         margin-bottom: 5px;
         font-weight: 600;
         letter-spacing: 0.5px;
@@ -146,7 +159,7 @@
     .settings-left h2,
     .settings-right h2 {
         font-size: 20px; 
-        color: #2c3e50;
+        color: #000;
         font-weight: bold;
         margin-bottom: 20px;
         text-transform: uppercase;
@@ -161,7 +174,7 @@
         .back-button {
             cursor: pointer;
             font-size: 18px;
-            color: #3498db;
+            color: #69ba6b;
             display: flex;
             align-items: center;
             text-decoration: none;
@@ -191,7 +204,7 @@
 
         .profile-header h2 {
             font-size: 24px;
-            color: #34495e;
+            color: #333;
             margin: 0;
             font-weight: 600;
             display: flex;
@@ -199,7 +212,7 @@
         }
         .save-text {
             font-size: 16px;
-            color: #3498db;
+            color: #69ba6b;
             cursor: pointer;
         }
 
@@ -322,71 +335,6 @@
             transform: translateX(26px);
         }
 
-
-/* css for refer a friend page========================================================================== */
-       
-.refer-container {
-    background-color: #fff;
-    width: 100%;
-    max-width: 800px;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: auto;
-    margin-top: 100px;
-}
-.refer-header {
-    display: flex;
-    margin-bottom: 20px;
-}
-.refer-title {
-    font-size: 20px;
-    color: #2c3e50;
-    font-weight: bold;
-    margin: auto;
-}
-.refer-content {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-}
-
-.refer-left {
-    flex: 1;
-}
-
-.large-heading {
-    font-size: 24px;
-    color: #2c3e50;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.refer-description {
-    font-size: 16px;
-    color: #7f8c8d;
-    margin-bottom: 20px;
-}
-
-.share-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #f39c12;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.refer-right {
-    flex-shrink: 0;
-}
-
-.refer-image {
-    width: 200px;
-    height: auto;
-    border-radius: 8px;
-}
 
 /*css or rate-us page============================================================================ */
 .rate-us-container {
@@ -538,7 +486,7 @@
             line-height: 1.6;
             display: none;
             padding: 10px 12px;
-            border-left: 3px solid #f39c12;
+            border-left: 3px solid #0f5256;
             background-color: #f9f9ff;
             margin-bottom: 15px;
             border-radius: 0 0 8px 8px;
@@ -638,14 +586,14 @@
 
 .address-form input:focus,
 .address-form textarea:focus {
-    border-color: #3498db;
+    border-color: #69ba6b;
 }
 .location-block {
     display: flex;
     align-items: center;
     padding: 10px;
     font-size: 16px;
-    color: #0073e6;
+    color: #69ba6b;
     cursor: pointer;
     background-color: #e8f4fd;
     margin-bottom: 20px;
@@ -704,7 +652,7 @@
     transition: background-color 0.3s;
 }
 .save-btn {
-    background-color: #0073e6;
+    background-color: #0f5256;
     color: #fff;
 }
 /* .cancel-btn {
@@ -712,7 +660,7 @@
     color: #333;
 } */
 .save-btn:hover {
-    background-color: #005bb5;
+    background-color: #09343c;
 }
 .cancel-btn:hover {
     background-color: #f3f1f1;
@@ -732,7 +680,7 @@
 .add-new-address {
     display: flex;
     align-items: center;
-    color: #3498db;
+    color: #69ba6b;
     cursor: pointer;
     font-size: 16px;
     padding: 10px 0;
@@ -787,7 +735,7 @@
     font-size: 14px;
 }
 .options-menu button:hover {
-    color: #005bb5;
+    color: #69ba6b;
 }
 .address-content {
     margin-top: 10px;
@@ -828,7 +776,7 @@
     justify-content: space-evenly;
 }
 .update-address-button .update-btn{
-    background-color: #0073e6;
+    background-color: #0f5256;
     padding: 10px 30px;
     cursor: pointer;
     border: none;
@@ -836,7 +784,7 @@
     color: #fff;
 }
 .update-address-button .update-btn:hover{
-    background-color: #005bb5;
+    background-color: #09343c;
 }
 .update-address-button .cancl-btn{
     background-color: #e63946;
@@ -1000,26 +948,11 @@
 }
 /* Responsive Styles */
 @media (max-width: 768px) {
-/* Sidebar at the bottom for mobile */
-         .nav-sidebar {
-            width: 100%;
-            height: 60px;
-            flex-direction: row;
-            justify-content: space-around;
-            padding-top: 0;
-            position: fixed;
-            bottom: 0;
-            top: auto;
-            border-radius: 0;
-            z-index: 1000;
+
+        .container{
+            display: block;
         }
-        .nav-item {
-            margin: 0;
-        }
-        .nav-item i {
-            font-size: 18px;
-        }
-        /* media queries for content */
+     
         .content{
             margin-top: 0;
             margin-left: 0;
@@ -1037,7 +970,6 @@
                 width: 100%;
                 margin-bottom: 20px;
                 background: none;
-                box-shadow: none;
             }
 
             .settings-left h2, .settings-right h2 {
@@ -1174,6 +1106,7 @@
         gap: 10px;
     }
     .manage-btn{
+        width: 100%;
         padding: 10px;
     }
     .edit-input-row {
@@ -1199,25 +1132,12 @@
 </head>
 <body>
     <div class="container">
-        <!-- Sidebar -->
-        <div class="nav-sidebar">
-            <a href="/" style="text-decoration: none;"><div class="nav-item">
-                <i class="fa-solid fa-house"></i>
-                <span class="nav-text">Home</span>
-            </div></a>
-            <a href="/cart" style="text-decoration: none;"><div class="nav-item">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <span class="nav-text">Cart</span>
-            </div></a>
-            <a href="/product" style="text-decoration: none;"> <div class="nav-item">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <span class="nav-text">Search</span>
-            </div></a>
-            <a href="/user/profile" style="text-decoration: none;"> <div class="nav-item profile-nav">
-                <i class="fa-solid fa-user"></i>
-                <span class="nav-text">Profile</span>
-            </div></a>
-        </div>
+        <div class="back-to-home">
+            <a href="/" style="text-decoration: none; color: inherit; text-align: center;">
+              <i class="fa-solid fa-house"></i>
+              <div class="home-text">Back</div>
+            </a>
+          </div>
         
         <!-- Content -->
         <div class="content">
@@ -1257,14 +1177,14 @@
                     </div>
         
                     <!-- Refer a Friend -->
-                    <div class="setting-row">
+                    <!-- <div class="setting-row">
                         <i class="fa-solid fa-share-nodes"></i>
                         <div class="setting-text">
                             <h3>Refer a Friend</h3>
                             <p>Invite your friends to join</p>
                         </div>
                         <img src="../images/assest/new-profile/icons8-forward-24.png"  alt="" data-section="refer">
-                    </div>
+                    </div> -->
         
                     <!-- Notifications -->
                     <div class="setting-row">
@@ -1337,88 +1257,7 @@
                 </form>
             </div>
 
-<!-- Payment Mode Page ======================================================================================= -->
-<!-- <div id="payment" class="payment-page hidden">
-   
-<div class="payment-header">
-    <a class="back-button" onclick="goBack()">
-        <i class="fa-solid fa-chevron-left"></i>
-    </a>
-    <h2>Choose Payment Mode</h2>
-</div>
 
-    <div class="payment-methods">
-       
-        <div class="payment-method">
-            <label>
-                <input type="radio" name="payment-method" value="credit-card">
-                <div class="method-title">
-                    <h4>Credit Card</h4>
-                    <img src="../images/assest/new-profile/credit or debit card.png" alt="Credit Card Icon">
-                </div>
-            </label>
-            <div class="method-details hidden" id="credit-card-details">
-                <input type="text" placeholder="Card Number" class="payment-input">
-                <input type="text" placeholder="Cardholder Name" class="payment-input">
-                <div class="payment-row">
-                    <input type="text" placeholder="Expiry (MM/YY)" class="payment-input">
-                    <input type="text" placeholder="CVV" class="payment-input">
-                </div>
-            </div>
-        </div>
-
-       
-        <div class="payment-method">
-            <label>
-                <input type="radio" name="payment-method" value="debit-card">
-                <div class="method-title">
-                    <h4>Debit Card</h4>
-                    <img src="../images/assest/new-profile/credit or debit card.png" alt="">
-                    
-                </div>
-            </label>
-            <div class="method-details hidden" id="debit-card-details">
-                <input type="text" placeholder="Card Number" class="payment-input">
-                <input type="text" placeholder="Cardholder Name" class="payment-input">
-                <div class="payment-row">
-                    <input type="text" placeholder="Expiry (MM/YY)" class="payment-input">
-                    <input type="text" placeholder="CVV" class="payment-input">
-                </div>
-            </div>
-        </div>
-
-       
-        <div class="payment-method">
-            <label>
-                <input type="radio" name="payment-method" value="upi">
-                <div class="method-title">
-                    <h4>UPI</h4>
-                    <img src="../images/assest/new-profile/upi-logo.png" alt="">
-                   
-                </div>
-            </label>
-            <div class="method-details hidden" id="upi-details">
-                <input type="text" placeholder="Enter UPI ID" class="payment-input">
-            </div>
-        </div>
-
-        
-        <div class="payment-method">
-            <label>
-                <input type="radio" name="payment-method" value="cod">
-                <div class="method-title">
-                    <h4>Cash on Delivery</h4>
-                    <img src="../images/assest/new-profile/cod.png" alt="">
-                    
-                </div>
-            </label>
-        </div>
-    </div>
-
-    <div class="button-group">
-        <button class="proceed-btn">Proceed to Pay</button>
-    </div>
-</div> -->
 
 <!-- Address Page =================================================================================================-->
 <div class="address-page hidden" id="address">
@@ -1565,7 +1404,7 @@
 </div>
 
 <!-- Refer a friend page==========================================================================================-->
-<div class="refer-container hidden" id="refer">
+<!-- <div class="refer-container hidden" id="refer">
                 
                 <div class="refer-header">
                     <div class="back-button" onclick="goBack()">
@@ -1588,7 +1427,7 @@
                         <img src="../images/assest/new-profile/money-576443_1920.png" alt="Refer a Friend" class="refer-image">
                     </div>
                 </div>
-            </div>
+            </div> -->
 
 <!-- Notification page ====================================================================================== -->
 <div class="notification-container hidden" id="notification">
@@ -1628,8 +1467,7 @@
         </label>
     </div>
 </div>
-
-            
+           
 <!-- Rate-us page =========================================================================================-->
 <div class="rate-us-container hidden" id="rate-us">
     <div class="back-button" onclick="goBack()">
