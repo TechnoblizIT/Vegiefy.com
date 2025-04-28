@@ -59,89 +59,79 @@ router.get("/removeitem/:productid", isloggedin, checkuser, async (req, res) => 
     await user.save();
     res.redirect("/cart");
 });
-router.get("/quantity/inc/:productid", isloggedin, checkuser, async (req, res)=>{
- const user = await userModel.findOne({ email: req.user.email }).populate({
-    path: 'cart.product',  
-    model: 'Products'      
-  });
-  console.log(user);
-
- user.cart.forEach((item)=>{
-
-   if(item.product._id.toString()===req.params.productid){
-   
-    if(item.quantity===0.5){
-        item.quantity=0.75
-        item.product.price=item.quantity*item.product.price
-    }
-    if(item.quantity===0.75){
-        item.quantity=1
-        item.product.price=item.quantity*item.product.price
-    }
-    if(item.quantity===1||item.quantity===2 || item.quantity===3 || item.quantity===4){
-        item.quantity+=1
-        item.product.price=item.quantity*item.product.price
-    }
-    if(item.quantity===5){
-        req.flash("limit","Maximum quantity is 5 Kg")
-    }
-   }
- })
- await user.save()
-
- res.redirect("/cart")
- 
-})
-router.get("/quantity/dec/:productid", isloggedin, checkuser, async (req, res)=>{
+router.get("/quantity/inc/:cartItemId", isloggedin, checkuser, async (req, res) => {
+  try {
     const user = await userModel.findOne({ email: req.user.email }).populate({
-       path: 'cart.product',  
-       model: 'Products'      
-     });
-   
-    user.cart.forEach((item)=>{
-      if(item.product.quantitySelector==="Kg"){
-      if(item.product._id.toString()===req.params.productid){
-       if(item.quantity===0.5){
-        req.flash("limit","Minimum quantity is 0.5 Kg")
-       }
-       if(item.quantity===0.75){
-           item.quantity=0.5
-           item.product.price=item.quantity*item.product.price
-       }
-       if(item.quantity===1){
-        item.quantity=0.75
-           item.product.price=item.quantity*item.product.price
-       }
-       if(item.quantity===2 || item.quantity===3 || item.quantity===4 || item.quantity===5){
-           item.quantity-=1
-           item.product.price=item.quantity*item.product.price
-       }
+      path: 'cart.product',
+      model: 'Products'
+    });
+
+    const cartItem = user.cart.id(req.params.cartItemId); // find cart item by cartItemId directly
+
+    if (cartItem) {
+      if (cartItem.quantity === 0.5) {
+        cartItem.quantity = 0.75;
+      } else if (cartItem.quantity === 0.75) {
+        cartItem.quantity = 1;
+      } else if (cartItem.quantity >= 1 && cartItem.quantity < 5) {
+        cartItem.quantity += 1;
+      } else if (cartItem.quantity === 5) {
+        req.flash("limit", "Maximum quantity is 5 Kg");
       }
+      await user.save();
     }
-    else{
-      if(item.product._id.toString()===req.params.productid){
-       if(item.quantity===1){
-        req.flash("limit","Minimum quantity is 1 Pc")
-       }
-       if(item.quantity===2){
-           item.quantity=1
-           item.product.price=item.quantity*item.product.price
-       }
-       if(item.quantity===3){
-        item.quantity=2
-           item.product.price=item.quantity*item.product.price
-       }
-       if(item.quantity===4 || item.quantity===5 || item.quantity===6 || item.quantity===7){
-           item.quantity-=1
-           item.product.price=item.quantity*item.product.price
-       }
+
+    res.redirect("/cart");
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+router.get("/quantity/dec/:cartItemId", isloggedin, checkuser, async (req, res) => {
+  try {
+    const user = await userModel.findOne({ email: req.user.email }).populate({
+      path: 'cart.product',
+      model: 'Products'
+    });
+
+    const cartItem = user.cart.id(req.params.cartItemId); // find by cart item's own ID
+
+    if (cartItem) {
+      if (cartItem.product.quantitySelector === "Kg") {
+        if (cartItem.quantity === 0.5) {
+          req.flash("limit", "Minimum quantity is 0.5 Kg");
+        } else if (cartItem.quantity === 0.75) {
+          cartItem.quantity = 0.5;
+        } else if (cartItem.quantity === 1) {
+          cartItem.quantity = 0.75;
+        } else if ([2, 3, 4, 5].includes(cartItem.quantity)) {
+          cartItem.quantity -= 1;
+        }
+      } else { // for Pc (piece)
+        if (cartItem.quantity === 1) {
+          req.flash("limit", "Minimum quantity is 1 Pc");
+        } else if (cartItem.quantity === 2) {
+          cartItem.quantity = 1;
+        } else if (cartItem.quantity === 3) {
+          cartItem.quantity = 2;
+        } else if ([4, 5, 6, 7].includes(cartItem.quantity)) {
+          cartItem.quantity -= 1;
+        }
       }
+
+      await user.save();
     }
-    })
-    await user.save()
-   
-    res.redirect("/cart")
-   })
+
+    res.redirect("/cart");
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
    
 
    router.post("/order/confirm", async function (req, res) {
