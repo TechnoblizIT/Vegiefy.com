@@ -96,7 +96,7 @@ router.get("/quantity/dec/:cartItemId", isloggedin, checkuser, async (req, res) 
       model: 'Products'
     });
 
-    const cartItem = user.cart.id(req.params.cartItemId); // find by cart item's own ID
+    const cartItem = user.cart.id(req.params.cartItemId);
 
     if (cartItem) {
       if (cartItem.product.quantitySelector === "Kg") {
