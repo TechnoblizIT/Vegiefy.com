@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0">
     <link href='https://fonts.googleapis.com/css?family=Afacad' rel='stylesheet'>
+    <!-- Toastify CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+<!-- Toastify JS -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
     <style>
      * {
   margin: 0;
@@ -1095,9 +1101,20 @@ document.addEventListener('click', function(event) {
         // alert message for add to cart====================
         function showAlert(event) {
     event.preventDefault(); 
-    alert("Product added to cart!");
+
+    Toastify({
+        text: "Product added to cart!",
+        duration: 3000,
+        gravity: "top",       // "top" means toast will appear from the top
+        position: "center",   // "center" will align it horizontally
+        backgroundColor: "#28a745", // green color
+        close: true
+    }).showToast();
+
     event.target.submit();
-  }
+}
+
+
 // category 
 //   js for product page=============================================================================
 
