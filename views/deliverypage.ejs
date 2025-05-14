@@ -455,6 +455,8 @@ footer::before {
 
 }
 
+
+/* css for my-orders==================================== */
 .order-container{
   margin-top: 150px;
 }
@@ -487,7 +489,7 @@ footer::before {
   color: black;
   text-align: left;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 15px;
 }
 
 .details {
@@ -500,7 +502,7 @@ footer::before {
 .details-heading {
   color: black;
   text-align: left;
-  font-size: 18px;
+  font-size: 15px;
 }
 
 .delivery-section {
@@ -526,7 +528,7 @@ footer::before {
   align-items: center;
 }
 
-.delivery-info .name {
+.delivery-info .name,.mobile {
   font-weight: bold;
 }
 
@@ -564,7 +566,7 @@ footer::before {
 .address-details h2 {
   color: black;
   text-align: left;
-  font-size: 18px;
+  font-size: 15px;
   margin-bottom: 5px;
 }
 
@@ -600,7 +602,7 @@ footer::before {
 }
 
 .price h2 {
-  font-size: 18px;
+  font-size: 15px;
 }
 
 .order-track {
@@ -1130,6 +1132,7 @@ footer::before {
                 />
                 <div class="delivery-info">
                   <span class="name"><%= order.DeliveryBoy?.name || 'Not Assigned' %></span>
+                  <span class="mobile">+91 8978676756</span>
                 </div>
               </div>
               <div class="delivery-time"></div>
@@ -1233,14 +1236,11 @@ footer::before {
     </div>
 
     <div class="company-info">
-      <p><strong>Invoice issued by Vegiefy Limited (formerly known as Vegiegy Private Limited) on behalf of:</strong></p>
-      <p><strong>Company Name:</strong><span class="company-name"> Vegiefy Organic Farming</span></p>
-      <p><strong>Company GSTIN:</strong> <span class="company-gstin"></span></p>
-      <p><strong>Company FSSAI License</strong> <span class="company-fssai"></span></p>
+      <p><strong>Invoice Issued by: Vegiefy Organic</strong></p>
       <p><strong>Address:</strong><span class="company-address"> Chandrashekar Ward Gondia ,441601,Maharashtra</span></p>
       <p><strong>State:</strong><span class="company-state">Maharashtra</span></p>
-      <p><strong>Category:</strong><span class="company-category">B2C</span></p>
-      <P><strong>Reserve Charges Applicable:</strong><span class="reserve-charges">No</span></P>
+      <p><strong>GSTIN:</strong> <span class="company-gstin"></span></p>
+      <p><strong>FSSAI License:</strong> <span class="company-fssai"></span></p>
     </div>
   </div>
 

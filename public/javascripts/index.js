@@ -166,3 +166,39 @@ if (!dropdown.contains(event.target) && event.target !== searchInput) {
   dropdown.style.display = 'none';
 }
 });
+
+
+// js for gallery section
+// function openLightbox(el) {
+//   document.getElementById('lightbox-img').src = el.querySelector('img').src;
+//   document.getElementById('lightbox').style.display = 'flex';
+// }
+// function closeLightbox() {
+//   document.getElementById('lightbox').style.display = 'none';
+// }
+
+// Scroll-reveal fade-in & untwist
+// document.addEventListener('DOMContentLoaded', () => {
+//   const items = document.querySelectorAll('.item');
+//   const obs = new IntersectionObserver(entries => {
+//     entries.forEach(e => {
+//       if (e.isIntersecting) {
+//         e.target.classList.add('visible');
+//         obs.unobserve(e.target);
+//       }
+//     });
+//   }, { threshold: 0.2 });
+//   items.forEach(i => obs.observe(i));
+// });
+
+
+  function openLightbox(icon) {
+    const img = icon.previousElementSibling;
+    document.getElementById("lightboxImage").src = img.src;
+    document.getElementById("lightboxModal").classList.add("show");
+  }
+
+  function closeLightbox() {
+    document.getElementById("lightboxModal").classList.remove("show");
+  }
+

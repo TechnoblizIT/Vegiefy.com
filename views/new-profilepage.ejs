@@ -66,6 +66,13 @@
 .back-to-home a:hover .home-text {
     color: #ffffff;
 }
+.top-nav-buttons {
+  display: flex;
+  position: absolute; 
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+}
 
 /* Responsive */
 @media (max-width: 480px) {
@@ -78,6 +85,10 @@
     }
     .home-text {
         font-size: 10px;
+    }
+    .top-nav-buttons{
+        top: 0px;
+  left: 0px;
     }
 }
 
@@ -103,7 +114,7 @@
         margin-top: 40px;
     }
     .settings-left, .settings-right {
-        width: 40%;
+        width: 35%;
         padding: 15px;
         border-left: 2px solid #09343c;
         background: #fff;
@@ -192,7 +203,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: left;
             margin: auto;
-            margin-top: 100px;
+            margin-top: 70px;
         }
 
         .profile-header {
@@ -250,7 +261,7 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin: auto;
-            margin-top: 100px;
+            margin-top: 70px;
         }
         .notification-header {
             display: flex;
@@ -345,7 +356,6 @@
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: auto;
-    margin-top: 50px;
     text-align: center;
     font-family: Arial, sans-serif;
 }
@@ -560,7 +570,6 @@
 }
 .address-header {
     display: flex;
-    margin-bottom: 20px;
 }
 .address-title{
     font-size: 24px;
@@ -573,7 +582,6 @@
 .address-form {
     display: flex;
     flex-direction: column;
-    margin-top: 40px;
 }
 .address-form input[type="text"],
 .address-form input[type="tel"],
@@ -963,7 +971,7 @@
         .content-sections {
                 flex-direction: column;
                 padding: 10px;
-                margin-top: 0;
+                margin-top: 100px;
             }
 
             .settings-left, .settings-right {
@@ -990,16 +998,15 @@
 
             /* media query for profile page */
             .profile-container{
-                background: none;
                 box-shadow: none;
-                margin-top: 0;
+                padding: 10px;
+                margin-top: 100px;
             }
 
             /* media queries for notification page */
             .notification-container{
-                background: none;
                 box-shadow: none;
-                margin-top: 0;
+                margin-top: 100px;
             }
 
              /* media queries for notification page */
@@ -1042,24 +1049,21 @@
 
     /* media queries for rate-us========================= */
     .rate-us-container{
-        background: none;
         box-shadow: none;
-        margin-top: 0;
+        margin-top: 100px;
     }
 
     /* media queries for FAQ */
     .faq-section{
-        background: none;
         box-shadow: none;
-        margin-top: 0;
+        margin-top: 100px;
     }
 
     /* media queries for logout */
     .logout-container{
-        background: none;
         box-shadow: none;
         border: none;
-        margin: 0px auto;
+        margin: 100px auto;
     }
      
     /* media queries for address*/
@@ -1067,7 +1071,7 @@
         max-width: 100%;
         margin: 10px;
         padding: 15px;
-        background: none;
+        margin-top: 100px;
         box-shadow: none;
         border: none;
     }
@@ -1132,12 +1136,21 @@
 </head>
 <body>
     <div class="container">
-        <div class="back-to-home">
-            <a href="/" style="text-decoration: none; color: inherit; text-align: center;">
-              <i class="fa-solid fa-house"></i>
-              <div class="home-text">Back</div>
-            </a>
+        <div class="top-nav-buttons">
+            <div class="back-to-home">
+              <a href="/home">
+                <i class="fa-solid fa-house"></i>
+                <span class="home-text">Back</span>
+              </a>
+            </div>
+            <div class="back-to-home">
+              <a href="/cart">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="home-text">Cart</span>
+              </a>
+            </div>
           </div>
+          
         
         <!-- Content -->
         <div class="content">
@@ -1266,15 +1279,12 @@
         <div class="back-button" onclick="goBack()">
             <i class="fa-solid fa-chevron-left"></i>
         </div>
-        <span class="address-title">Manage Your Address</span>
+       
     </div>
 
-    <!-- Address Form -->
-     
-    <div class="address-form" id="address-form">
-        <!-- <div class="location-block">
-            <i class="fa-solid fa-map-marker-alt"></i> Use my current location
-        </div> -->
+    <!-- Address Form (Initially Hidden)-->
+    <div class="address-form hidden" id="address-form">
+        <h1 style="text-align: center;font-size: 25px;padding: 10px;color: #333;">Add New Address</h1>
         <form action="/user/saveaddress" method="post">
         <div class="input-row">
             <input type="text" name="name" placeholder="Name" class="input-field" id="name-input" required>
@@ -1317,9 +1327,9 @@
     </div>
 
 
-    <!-- saved adrress (Initially Hidden) -->
-    <div class="saved-address hidden" id="saved-address">
-       
+    <!-- saved adrress  -->
+    <div class="saved-address " id="saved-address">
+        <h1 style="text-align: center;font-size: 25px;color: #333;">Manage Address</h1>
         <div class="add-new-address" onclick="addNewAddress()">
             <i class="fa fa-plus-circle"></i>
             <span>Add a new address</span>

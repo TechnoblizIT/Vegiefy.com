@@ -622,7 +622,7 @@ header {
 
 /* Start CSS for product-swiper */
 
-.product-swiper {
+/* .product-swiper {
   width: 85%;
   margin: auto;
   margin-top: 50px;
@@ -728,16 +728,286 @@ header {
 .swiper-button-prev::after,
 .swiper-button-next::after {
   font-size: 18px;
-}
+} */
 
 /* Responsive */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .product-swiper {
     width: 95%;
   }
-}
+} */
 
 /* end css for product-swiper */
+
+
+/* start css for gallery section */
+.timeline {
+  padding: 0px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #e7ffe9, #f2fff6);
+}
+.timeline h2 {
+  font-size: 40px;
+  color: rgb(51, 51, 51);
+  margin-bottom: 20px;
+}
+
+.steps {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+  position: relative;
+  flex-wrap: wrap;
+}
+
+.step {
+  flex: 1 1 180px;
+  max-width: 200px;
+  margin: 0 10px;
+  position: relative;
+}
+.step .circle {
+  width: 200px;
+  height: 200px;
+  border: 4px solid;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: auto;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.step .circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.step .connector {
+  position: relative;
+  width: 6px;
+  height: 50px;
+  margin: 12px auto;
+  background: linear-gradient(
+    to bottom,
+    currentColor 0%,
+    currentColor 40%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  border-radius: 3px;
+  box-shadow: 0 0 8px currentColor;
+}
+
+.step .connector::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background: currentColor;
+  border-radius: 50%;
+  box-shadow: 0 0 6px currentColor;
+  animation: pulse 1.5s ease-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(-50%) scale(1.3);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
+}
+
+.step .arrow {
+  display: inline-block;
+  padding: 8px 20px;
+  background: currentColor;
+  color: white;
+  font-weight: bold;
+  border-radius: 4px 0 0 4px;
+  clip-path: polygon(
+    0% 0%,
+    85% 0%,
+    100% 50%,
+    85% 100%,
+    0% 100%
+  );
+}
+.step .arrow::after {
+  display: none;
+}
+
+.step1 .circle { border-color: #2E7D32; }
+.step1 .connector,
+.step1 .arrow { background-color: #2E7D32; color: #fff; }
+
+.step2 .circle { border-color: #0277BD; }
+.step2 .connector,
+.step2 .arrow { background-color: #0277BD; color: #fff; }
+
+.step3 .circle { border-color: #6A1B9A; }
+.step3 .connector,
+.step3 .arrow { background-color: #6A1B9A; color: #fff; }
+
+.step4 .circle { border-color: #FF8F00; }
+.step4 .connector,
+.step4 .arrow { background-color: #FF8F00; color: #fff; }
+
+.step5 .circle { border-color: #C62828; }
+.step5 .connector,
+.step5 .arrow { background-color: #C62828; color: #fff; }
+
+
+
+/* ------------ Responsive ------------ */
+@media (max-width: 800px) {
+  .steps {
+    flex-direction: column;
+    align-items: center;
+  }
+  .step {
+    margin: 20px 0;
+  }
+}
+/* end css for gallery section */
+/* =================================================================== */
+.triple-gallery {
+  display: flex;
+  gap: 18px;
+  max-width: 1300px;
+  margin: 20px auto;
+  padding: 0 16px;
+}
+.gallery-title{
+  text-align: center;
+  font-size: 40px;
+  color: rgb(51, 51, 51);
+}
+.frame {
+  flex: 1;
+}
+.frame h3 {
+  text-align: center;
+  margin-bottom: 8px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #2e7d32;
+}
+
+.column-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px; /* 3px vertical and horizontal gap */
+}
+
+.img-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.img-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  transition: transform 0.3s ease;
+}
+
+/* Overlay with centered camera icon */
+.lightbox-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 123, 255, 0.5);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  cursor: pointer;
+}
+
+.lightbox-overlay i {
+  color: white;
+  font-size: 30px;
+  transform: translateY(30px);
+  transition: transform 0.4s ease;
+}
+
+.img-wrapper:hover .lightbox-overlay {
+  opacity: 1;
+}
+
+.img-wrapper:hover .lightbox-overlay i {
+  transform: translateY(0);
+}
+
+
+/* Lightbox Modal */
+.lightbox-modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.lightbox-modal.show {
+  display: flex;
+}
+
+.lightbox-content {
+  max-width: 90%;
+  max-height: 85%;
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(255,255,255,0.3);
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 40px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 10000;
+}
+
+/* split each frame into 3 columns */
+@media (min-width: 0) {
+  .frame:nth-child(1) .column-gallery,
+  .frame:nth-child(2) .column-gallery,
+  .frame:nth-child(3) .column-gallery {
+    column-count: 3;
+  }
+}
+
+/* smaller screens: 2 columns */
+@media (max-width: 900px) {
+  .frame .column-gallery {
+    column-count: 2;
+  }
+}
+
+/* mobile: 1 column */
+@media (max-width: 600px) {
+  .triple-gallery { flex-direction: column; }
+  .frame .column-gallery { column-count: 1; }
+}
 
 /* style for grow section */
 
