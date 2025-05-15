@@ -338,7 +338,22 @@ body {
   transform: translateY(-3px);
   box-shadow: 0 8px 12px rgba(231, 76, 60, 0.4);
 }
+.no-orders-container {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+  }
 
+  .no-orders-heading {
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+
+  .no-orders-message {
+    color: #666;
+    font-size: 16px;
+  }
 /* css for profile page=================================================================== */
 
 .profile {
@@ -434,14 +449,14 @@ input:checked + .slider:before {
 }
 
 
-.email, .phone {
+.email, .phone, .user {
   font-size: 18px;
   color: #666;
   text-align: left;
   margin: 10px 0;
 }
 
-.email span, .phone span {
+.email span, .phone span,.user span {
   font-weight: bold;
   color: #333;
 }
@@ -1270,8 +1285,14 @@ hr {
         </div>
       <% }) %>
     <% } else { %>
-      <h2>No New Orders</h2>
-      <p>You have no new orders at the moment.</p>
+      <!-- <h2>No New Orders</h2>
+      <p>You have no new orders at the moment.</p> -->
+      <div class="no-orders-container">
+        <h1 class="no-orders-heading">No Active Orders</h1>
+        <p class="no-orders-message">You have no new orders at the moment.</p>
+      </div>
+      
+      
     <% } %>
     
  <!-- Orders Page Content======================================================================= -->
@@ -1487,7 +1508,7 @@ hr {
       <h1>Order History</h1>
       <div class="links">
         <button id="delivered-btn" class="active">Delivered</button>
-      <button id="rejected-btn">Rejected</button>
+      <button id="rejected-btn">Cancelled</button>
       </div>
     </div>
     
@@ -1669,7 +1690,7 @@ hr {
             </div>
           </div>
           
-  
+      <p class="user">User ID:- <span><%=user.id%></span></p>
       <p class="email">Email ID:- <span><%=user.email%></span></p>
       <p class="phone">Phone no.:- <span><%=user.mobile%></span></p>
   
@@ -1719,25 +1740,20 @@ hr {
 
   <!-- Bottom Navigation Bar -->
   <div class="bottom-nav">
-    <a href="#home" class="nav-link active" id="home-link">
+    <a href="#home" class="nav-link" id="home-link">
         <i class="fas fa-home"></i> Home
       </a>
-      <a href="#orders" class="nav-link" id="orders-link">
-        <i class="fas fa-box"></i> Orders
+      <a href="#new-link-content" class="nav-link" id="new-link">
+        <i class="fas fa-history"></i> Active
       </a>
       <a href="#history" class="nav-link" id="history-link">
         <i class="fas fa-history"></i> History
       </a>
-      <a href="#new-link-content" class="nav-link" id="new-link">
-        <i class="fas fa-history"></i> New
-      </a>
+      
       <a href="#profile" class="nav-link" id="profile-link">
         <i class="fas fa-user"></i> Profile
       </a>
-      
-      
-      
-  </div>
+</div>
   <script
   src="https://maps.googleapis.com/maps/api/js?key=<%=googlemapapi%>"
   async
@@ -1746,7 +1762,6 @@ hr {
 <script>
 
 const home = document.querySelector(".home");
-const orders = document.querySelector(".orders");
 const history = document.querySelector(".history");
 const profile = document.querySelector(".profile");
 const newpage = document.querySelector(".newpage");
@@ -1754,7 +1769,6 @@ const newOrderContent = document.querySelector(".new-orders-content");
 
 
 const homeLink = document.getElementById("home-link");
-const ordersLink = document.getElementById("orders-link");
 const historyLink = document.getElementById("history-link");
 const profileLink = document.getElementById("profile-link");
 const newLink = document.getElementById("new-link");
@@ -1762,25 +1776,40 @@ const newLink = document.getElementById("new-link");
 
 function hideAllContent() {
   home.classList.remove("active");
-  orders.classList.remove("active");
   history.classList.remove("active");
   profile.classList.remove("active");
   newpage.classList.remove("active");
 
   newOrderContent.classList.remove("active");
 
-  homeLink.classList.remove("active");
-  ordersLink.classList.remove("active");
-  historyLink.classList.remove("active");
-  profileLink.classList.remove("active");
-  newLink.classList.remove("active");
 }
 
+// This script manages the "active" state of navigation links in the bottom nav.
+document.addEventListener('DOMContentLoaded', () => {
+    const navLinks = document.querySelectorAll('.bottom-nav .nav-link');
+
+    function setActiveLink(hash) {
+      navLinks.forEach(link => {
+        if (link.getAttribute('href') === hash) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    }
+
+    setActiveLink(window.location.hash || '#home');
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        setActiveLink(link.getAttribute('href'));
+      });
+    });
+  });
 // Show the selected section and add active class to the link
 function showContent(content, link) {
   hideAllContent();
   content.classList.add("active");
-  link.classList.add("active");
 }
 
 // Set initial content to be displayed
@@ -1788,7 +1817,6 @@ showContent(home, homeLink);
 
 // Add event listeners to the navigation links
 homeLink.addEventListener("click", () => showContent(home, homeLink));
-ordersLink.addEventListener("click", () => showContent(orders, ordersLink));
 historyLink.addEventListener("click", () => showContent(history, historyLink));
 profileLink.addEventListener("click", () => showContent(profile, profileLink));
 newLink.addEventListener("click", () => showContent(newpage, newLink));
