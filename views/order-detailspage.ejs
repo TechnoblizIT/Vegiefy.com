@@ -457,6 +457,7 @@ input:checked + .slider:before {
 }
 
 .email span, .phone span,.user span {
+  font-size: 15px;
   font-weight: bold;
   color: #333;
 }
@@ -826,15 +827,7 @@ table td span{
      border: 1px solid #007bff;
      outline: 0;
     }
-    .submit-reason{
-      background-color: #007bff; 
-      color: white; 
-      padding: 5px 10px; 
-      font-size: 16px;
-      border: none; 
-      border-radius: 5px; 
-      cursor: pointer; 
-   }
+  
 
    /* css for delivery-details page============================================ */
    .new-delivery-details {
@@ -1178,7 +1171,7 @@ hr {
       <% if(user.isActive=="Online"){%>
       <div class="status">Active</div>
       <% } else { %>
-      <div class="status">Inactive</div>
+      <div class="status" style="color: red;">Inactive</div>
       <% } %>
     </div>
 
@@ -1508,7 +1501,7 @@ hr {
       <h1>Order History</h1>
       <div class="links">
         <button id="delivered-btn" class="active">Delivered</button>
-      <button id="rejected-btn">Cancelled</button>
+      <button id="rejected-btn">Rejected</button>
       </div>
     </div>
     
@@ -1529,11 +1522,20 @@ hr {
 
         }) %></span></p>
         <table>
-            <tr>
-                <td> <span >Order ID:</span> <br><%=order.orderid%></td>
-                <td><span>Order Amount: </span><br> ₹<%= order.TotalPrice.toFixed(2) %></td>
-                <td><span>Payment Type: </span><br> Offline</td>
-              </tr>
+             <tr>
+    <td><span>Order ID:</span></td>
+    <td><span>Order Amount:</span></td>
+    <td><span>Payment Type:</span></td>
+    <td><span>Status:</span></td>
+  </tr>
+
+  <!-- Second Row: Corresponding Values -->
+  <tr>
+    <td><%= order.orderid %></td>
+    <td>₹<%= order.TotalPrice.toFixed(2) %></td>
+    <td>Offline</td>
+    <td>Delivered</td>
+  </tr>
         </table>
         <p class="history-address">
               <%= order.User.address && order.User.address.length > 0 ? `${order.User.address[order.AddressIndex].address}, ${order.User.address[order.AddressIndex].locality}, ${order.User.address[0].city}, ${order.User.address[0].state} ${order.User.address[0].pincode}` : 'No address available' %>
@@ -1541,11 +1543,10 @@ hr {
         </p>
       </div>
       <% }) }else { %>
-        <p>No delivered orders found.</p>
+        <p style="color: #000; font-size: 18px; text-align: center; margin-top: 20px;">
+          No delivered orders found.</p>
       <% } %>
-      
-      
-    </div>
+      </div>
   
     <div id="rejected-content" class="box-container" style="display: none;">
       <!-- Box 1 -->
@@ -1563,11 +1564,21 @@ hr {
           timeZone: 'Asia/Kolkata'
         }) %></span></p>
         <table>
-            <tr>
-                <td> <span >Order ID:</span> <br>#<%=order.orderid%></td>
-                <td><span>Order Amount: </span><br>₹<%=order.TotalPrice%></td>
-                <td><span>Payment Type: </span><br>Offline</td>
-              </tr>
+         
+  <tr>
+    <td><span>Order ID:</span></td>
+    <td><span>Order Amount:</span></td>
+    <td><span>Payment Type:</span></td>
+    <td><span>Status:</span></td>
+  </tr>
+
+  
+  <tr>
+    <td>#<%= order.orderid %></td>
+    <td>₹<%= order.TotalPrice %></td>
+    <td>Offline</td>
+    <td>Cancelled</td>
+  </tr>
         </table>
         <p class="rejected-history-address">
           <i class="fas fa-map-marker-alt map-icon"></i> <%= order.Address ? `${order.Address}` : 'No address available' %>
@@ -1646,11 +1657,13 @@ hr {
         <h5>Mention it:</h5>
         <textarea name="message" placeholder="Type another reason..."></textarea>
       </div>
-      <button type="submit" class="submit-reason">Submit</button>
     </div>
       </div>
       <% }) } else { %>
-        <p>No active orders found.</p>
+        <p style="color: #000; font-size: 18px; text-align: center; margin-top: 20px;">
+          No active orders found.
+        </p>
+        
       <% } %>
   
     
@@ -1798,12 +1811,28 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    setActiveLink(window.location.hash || '#home');
+    // Force hash to #home and update active link
+    if (!performance.navigation || performance.navigation.type === 1) {
+      // For most modern browsers
+      window.location.hash = '#home';
+      setActiveLink('#home');
+    } else {
+      // Fallback
+      setActiveLink('#home');
+    }
 
+    // Handle navigation clicks
     navLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        setActiveLink(link.getAttribute('href'));
+      link.addEventListener('click', () => {
+        const hash = link.getAttribute('href');
+        window.location.hash = hash;
+        setActiveLink(hash);
       });
+    });
+
+    // Optional: if user presses browser back/forward
+    window.addEventListener('hashchange', () => {
+      setActiveLink(window.location.hash);
     });
   });
 // Show the selected section and add active class to the link
